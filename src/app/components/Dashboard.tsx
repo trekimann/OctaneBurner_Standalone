@@ -1,11 +1,5 @@
-import * as React from "react";
 import { ipcRenderer } from "electron";
-
-const menuStyle = {
-'-ms-overflow-style': 'scrollbar',
-'-webkit-app-region': 'drag',
-'min-width': '100%',
-};
+import * as React from "react";
 
 interface IState {
   message: string;
@@ -25,7 +19,8 @@ export class Dashboard extends React.Component<{}, IState> {
   }
 
   public render(): React.ReactNode {
-    return <header style={menuStyle}>{this.state.message}</header>;
+    
+    return <header>{this.state.message}</header>;
   }
 
   private onMessage = (event: any, message: string) => {
