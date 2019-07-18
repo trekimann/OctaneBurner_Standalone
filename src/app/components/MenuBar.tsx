@@ -35,9 +35,6 @@ export class MenuBar extends React.Component {
     remote.BrowserWindow.getFocusedWindow().minimize();
   }
 
-  // constructor(props) {
-  //   super(props);
-  // }
   public render(): React.ReactNode {
     return (<header style={menuStyle}>Octane Burner
       <nav style={navStyle}>
@@ -47,8 +44,4 @@ export class MenuBar extends React.Component {
       </nav>
     </header>);
   }
-
-  // private onMessage = (event: any, message: string) => {
-  //   this.setState({ message: message });
-  // };
 }

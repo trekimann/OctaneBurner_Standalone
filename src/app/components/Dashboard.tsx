@@ -19,11 +19,10 @@ export class Dashboard extends React.Component<{}, IState> {
   }
 
   public render(): React.ReactNode {
-    
     return <header>{this.state.message}</header>;
   }
 
   private onMessage = (event: any, message: string) => {
     this.setState({ message: message });
-  };
+  }
 }

@@ -27,7 +27,7 @@ const config = {
                 use: {
                     loader: "file-loader",
                     options: {
-                        name: "./assets/[hash].[ext]",
+                        name: "./assets/[name].[ext]",
                     },
                 },
             },
