@@ -18,16 +18,10 @@ export class OctaneLogin extends React.Component {
         const octaneUrl = "https://login.software.microfocus.com/msg/actions/showLogin";
         return (
             <div>{this.state.loading ? (
-                // <Spinner
-                //     className="loading text-center"
-                //     name="three-bounce"
-                //     color="white"
-                //     fadeIn="none"
-                // />
                 <div>Loading</div>
             ) : null}
-            <iframe src = {octaneUrl}
-            onLoad={this.hideSpinner}></iframe>
+                <iframe src={octaneUrl}
+                    onLoad={this.hideSpinner}></iframe>
             </div>
         );
     }

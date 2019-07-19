@@ -7,7 +7,7 @@ interface IState {
 
 export class Dashboard extends React.Component<{}, IState> {
   public state: IState = {
-    message: ""
+    message: "",
   };
 
   public componentDidMount(): void {
