@@ -30,16 +30,20 @@ const navStyle = {
 
 export class MenuBar extends React.Component {
   private buttons = [
-    {
-      click: this.minWindow, src: minIcon,  buttonStyle:
+    { buttonStyle:
       {
         "-webkit-app-region": "no-drag",
         "height": "15px",
         "padding-right": "12px",
         "padding-top": "2px",
       },
+      click: this.closeWindow,
+      src: minIcon,
     },
-    { src: minIcon, click: this.closeWindow },
+    {
+      click: this.minWindow,
+      src: minIcon,
+    },
   ];
 
   public minWindow() {
