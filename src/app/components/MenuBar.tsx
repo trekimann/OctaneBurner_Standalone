@@ -2,6 +2,7 @@ import * as Electron from "electron";
 import * as React from "react";
 import { MenuIcon } from "./MenuIcon";
 import minIcon from "./../assets/minimise.png"
+import octIcon from "./../assets/octaneIcon.png"
 
 const menuStyle = {
   "-webkit-app-region": "drag",
@@ -43,6 +44,10 @@ export class MenuBar extends React.Component {
     {
       click: this.minWindow,
       src: minIcon,
+    },
+    {
+      click: () => {window.open("https://login.software.microfocus.com/msg/actions/showLogin", "_blank");},
+      src: octIcon,
     },
   ];
 

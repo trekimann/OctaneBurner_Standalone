@@ -56,6 +56,12 @@ const createTray = () => {
       app.quit();
     },
   },
+  {
+    label: "iconpath",
+    click() {
+      balloon("iconpath", iconpath);
+    },
+  },
   ]);
 
   appIcon.setContextMenu(contextMenu);

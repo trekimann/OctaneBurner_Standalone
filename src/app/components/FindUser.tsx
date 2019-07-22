@@ -6,7 +6,7 @@ export class FindUser extends React.Component{
 
     public render() {
         return <div>
-            <TextInput/><Button/>
+            <TextInput Placeholder = "Enter Username"/><Button Text = "Search"/>
         </div>;
     }
 }
