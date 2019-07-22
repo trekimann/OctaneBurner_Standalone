@@ -6,7 +6,7 @@ let liStyle = {
 const buttonStyle = {
     "padding-right": "2px",
     "padding-top": "2px",
-    "height": "15px",
+    "height": "20px",
     "-webkit-app-region": "no-drag",
 };
 

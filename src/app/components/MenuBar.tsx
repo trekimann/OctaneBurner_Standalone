@@ -1,7 +1,9 @@
 import * as Electron from "electron";
 import * as React from "react";
 import { MenuIcon } from "./MenuIcon";
-import minIcon from "./../assets/minimise.png"
+import minIcon from "./../assets/minimise2.png"
+import maxIcon from "./../assets/maximise.png"
+import closeIcon from "./../assets/close.png"
 import octIcon from "./../assets/octaneIcon.png"
 
 const menuStyle = {
@@ -15,6 +17,7 @@ const menuStyle = {
   "top": 0,
   "padding-left": "10px",
   "padding-top": "2px",
+  "font-size": "20px",
 };
 
 const ulStyle = {
@@ -31,22 +34,28 @@ const navStyle = {
 
 export class MenuBar extends React.Component {
   private buttons = [
-    { buttonStyle:
+    {
+      buttonStyle:
       {
         "-webkit-app-region": "no-drag",
-        "height": "15px",
+        "height": "20px",
         "padding-right": "12px",
         "padding-top": "2px",
       },
       click: this.closeWindow,
-      src: minIcon,
+      src: closeIcon,
     },
+    {
+      click: this.maxWindow,
+      src: maxIcon,
+    },
+    ,
     {
       click: this.minWindow,
       src: minIcon,
     },
     {
-      click: () => {window.open("https://login.software.microfocus.com/msg/actions/showLogin", "_blank");},
+      click: () => { window.open("https://login.software.microfocus.com/msg/actions/showLogin", "_blank"); },
       src: octIcon,
     },
   ];
@@ -61,6 +70,13 @@ export class MenuBar extends React.Component {
   public closeWindow() {
     const { remote } = require("electron");
     remote.BrowserWindow.getFocusedWindow().close();
+  }
+
+  public maxWindow() {
+    const { remote } = require("electron");
+    const window = remote.BrowserWindow.getFocusedWindow();
+    let full = window.isMaximized();
+    full ? window.restore() : window.maximize();
   }
 
   public render(): React.ReactNode {

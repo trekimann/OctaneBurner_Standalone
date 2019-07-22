@@ -28,9 +28,9 @@ export class TopOptions extends React.Component {
             "left": "0px",
             "cursor": "pointer",
             "padding": "18px",
-            // "border": "none",
-            // "outline": "none",
             "font-size": "15px",
+            "color": "#eee",
+            "background-color": "#2767b0",
         };
 
         return <div>
