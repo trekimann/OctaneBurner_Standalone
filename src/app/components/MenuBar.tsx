@@ -1,23 +1,25 @@
 import * as Electron from "electron";
+import { BrowserWindow, ipcRenderer } from "electron";
 import * as React from "react";
 import { MenuIcon } from "./MenuIcon";
-import minIcon from "./../assets/minimise2.png"
-import maxIcon from "./../assets/maximise.png"
 import closeIcon from "./../assets/close.png"
+import maxIcon from "./../assets/maximise.png"
+import minIcon from "./../assets/minimise2.png"
 import octIcon from "./../assets/octaneIcon.png"
+
 
 const menuStyle = {
   "-webkit-app-region": "drag",
   "background-color": "rgb(65, 64, 64)",
   "color": "white",
+  "font-size": "20px",
   "left": 0,
   "min-width": "100%",
   "ms-overflow-style": "scrollbar",
-  "position": "fixed",
-  "top": 0,
   "padding-left": "10px",
   "padding-top": "2px",
-  "font-size": "20px",
+  "position": "fixed",
+  "top": 0,
 };
 
 const ulStyle = {
@@ -27,8 +29,8 @@ const ulStyle = {
 };
 
 const navStyle = {
-  "justify-self": "right",
   "float": "right",
+  "justify-self": "right",
 };
 
 
@@ -56,9 +58,18 @@ export class MenuBar extends React.Component {
     },
     {
       click: () => { window.open("https://login.software.microfocus.com/msg/actions/showLogin", "_blank"); },
+      // click: this.loginWindow,
       src: octIcon,
     },
   ];
+
+  public loginWindow() {
+    var bw = new BrowserWindow({
+      frame: true,
+    });
+
+    bw.loadURL("https://login.software.microfocus.com/msg/actions/showLogin");
+  }
 
   public minWindow() {
     const { remote } = require("electron");
@@ -69,14 +80,14 @@ export class MenuBar extends React.Component {
   }
   public closeWindow() {
     const { remote } = require("electron");
-    remote.BrowserWindow.getFocusedWindow().close();
+    remote.BrowserWindow.getFocusedWindow().hide();
+    ipcRenderer.send("balloon", { title: "Notificaiton", contents: "Still Running" });
   }
 
   public maxWindow() {
     const { remote } = require("electron");
     const window = remote.BrowserWindow.getFocusedWindow();
-    let full = window.isMaximized();
-    full ? window.restore() : window.maximize();
+    window.isMaximized() ? window.restore() : window.maximize();
   }
 
   public render(): React.ReactNode {
