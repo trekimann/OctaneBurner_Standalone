@@ -1,5 +1,5 @@
 import * as Electron from "electron";
-import { BrowserWindow, ipcRenderer } from "electron";
+import { BrowserWindow, ipcRenderer, remote } from "electron";
 import * as React from "react";
 import { MenuIcon } from "./MenuIcon";
 import closeIcon from "./../assets/close.png"
@@ -57,35 +57,33 @@ export class MenuBar extends React.Component {
       src: minIcon,
     },
     {
-      click: () => { window.open("https://login.software.microfocus.com/msg/actions/showLogin", "_blank"); },
+      click: () => {
+        window.open("https://login.software.microfocus.com/msg/actions/showLogin", "_blank");
+        remote.BrowserWindow.getFocusedWindow().maximize();
+      },
       // click: this.loginWindow,
       src: octIcon,
     },
   ];
 
   public loginWindow() {
-    var bw = new BrowserWindow({
-      frame: true,
-    });
-
-    bw.loadURL("https://login.software.microfocus.com/msg/actions/showLogin");
+    window.open("https://login.software.microfocus.com/msg/actions/showLogin", "_blank");
+    const loginWindow = remote.BrowserWindow.getFocusedWindow();
+    loginWindow.webContents.executeJavaScript("$('document').ready(function(){style = document.getElementById('federateLoginName').style;style.border = 'cyan'; style.borderStyle = 'dotted';})");
   }
 
   public minWindow() {
-    const { remote } = require("electron");
     remote.BrowserWindow.getFocusedWindow().minimize();
   }
   public alarm() {
     alert("clicked");
   }
   public closeWindow() {
-    const { remote } = require("electron");
     remote.BrowserWindow.getFocusedWindow().hide();
     ipcRenderer.send("balloon", { title: "Notificaiton", contents: "Still Running" });
   }
 
   public maxWindow() {
-    const { remote } = require("electron");
     const window = remote.BrowserWindow.getFocusedWindow();
     window.isMaximized() ? window.restore() : window.maximize();
   }
