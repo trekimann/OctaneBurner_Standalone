@@ -11,6 +11,7 @@ namespace Core
         {
             string logPath = Directory.GetCurrentDirectory() + @"\sharpError.log";
             var octaneApi = new octaneApi();
+            var deatils = new details();
             var connection = new ConnectionBuilder()
                 .WithLogging(logPath)
                 .Build();
@@ -19,10 +20,36 @@ namespace Core
 
             connection.On<dynamic, dynamic>("octaneApi", data => octaneApi.route(data));
 
+            connection.On<dynamic, dynamic>("details", details => details.update(details));
+
             connection.Listen();
         }
     }
 
+    class details
+    {
+        public string Username { get; private set; }
+        public string WorkspaceId { get; private set; }
+        public string TaskInProgress { get; private set; }
+
+        public dynamic update(dynamic details)
+        {
+            // check what property to update
+            string property = details.property;
+            // update it - use reflection for this properly, for now just using an if
+            if(property == "Username") {
+                Username = details.value;
+            }else if (property == "WorkspaceId"){
+                WorkspaceId = details.value;
+            }else if (property == "TaskInProgress"){
+                TaskInProgress = details.value;
+            }
+
+
+            return null;
+        }
+
+    }
     class octaneApi
     {
         public string route(dynamic data)

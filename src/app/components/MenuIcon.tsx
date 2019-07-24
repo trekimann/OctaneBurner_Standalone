@@ -1,12 +1,12 @@
 import * as React from "react";
 
 let liStyle = {
-    "float": "right",
+    float: "right",
 };
 const buttonStyle = {
-    "padding-right": "2px",
-    "padding-top": "2px",
-    "height": "20px",
+    height: "20px",
+    paddingRight: "2px",
+    paddingTop: "2px",
     "-webkit-app-region": "no-drag",
 };
 

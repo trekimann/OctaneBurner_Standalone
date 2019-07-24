@@ -1,36 +1,35 @@
-import * as Electron from "electron";
-import { BrowserWindow, ipcRenderer, remote } from "electron";
+import { ipcRenderer, remote } from "electron";
 import * as React from "react";
+import closeIcon from "./../assets/close.png";
+import maxIcon from "./../assets/maximise.png";
+import minIcon from "./../assets/minimise2.png";
+import octIcon from "./../assets/octaneIcon.png";
 import { MenuIcon } from "./MenuIcon";
-import closeIcon from "./../assets/close.png"
-import maxIcon from "./../assets/maximise.png"
-import minIcon from "./../assets/minimise2.png"
-import octIcon from "./../assets/octaneIcon.png"
 
 
 const menuStyle = {
   "-webkit-app-region": "drag",
-  "background-color": "rgb(65, 64, 64)",
-  "color": "white",
-  "font-size": "20px",
-  "left": 0,
-  "min-width": "100%",
+  backgroundColor: "rgb(65, 64, 64)",
+  color: "white",
+  fontSize: "20px",
+  left: 0,
+  minWidth: "100%",
   "ms-overflow-style": "scrollbar",
-  "padding-left": "10px",
-  "padding-top": "2px",
-  "position": "fixed",
-  "top": 0,
+  paddingLeft: "10px",
+  paddingTop: "2px",
+  position: "fixed",
+  top: 0,
 };
 
 const ulStyle = {
-  "list-style-type": "none",
-  "margin": 0,
-  "padding": 0,
+  listStyleType: "none",
+  margin: 0,
+  padding: 0,
 };
 
 const navStyle = {
-  "float": "right",
-  "justify-self": "right",
+  float: "right",
+  justifySelf: "right",
 };
 
 
@@ -40,9 +39,9 @@ export class MenuBar extends React.Component {
       buttonStyle:
       {
         "-webkit-app-region": "no-drag",
-        "height": "20px",
-        "padding-right": "12px",
-        "padding-top": "2px",
+        height: "20px",
+        paddingRight: "12px",
+        paddingTop: "2px",
       },
       click: this.closeWindow,
       src: closeIcon,
@@ -68,8 +67,6 @@ export class MenuBar extends React.Component {
 
   public loginWindow() {
     window.open("https://login.software.microfocus.com/msg/actions/showLogin", "_blank");
-    const loginWindow = remote.BrowserWindow.getFocusedWindow();
-    loginWindow.webContents.executeJavaScript("$('document').ready(function(){style = document.getElementById('federateLoginName').style;style.border = 'cyan'; style.borderStyle = 'dotted';})");
   }
 
   public minWindow() {
