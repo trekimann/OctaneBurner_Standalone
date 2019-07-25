@@ -1,11 +1,11 @@
 import { ipcRenderer, remote } from "electron";
 import * as React from "react";
+import { ApiUtil } from "./../ApiUtil";
 import { Button } from "./Button";
 import { TextInput } from "./TextInput";
-import { ApiUtil } from "../ApiUtil";
-
 
 export class OctaneLogin extends React.Component {
+
     public tbStyle = {
         border: "none",
         fontSize: "18px",
@@ -72,28 +72,38 @@ export class OctaneLogin extends React.Component {
             this.wait(1000);
             loginWindow.webContents.executeJavaScript(passclick);
             this.wait(3000);
-            loginWindow.close();
+            loginWindow.show();
             ipcRenderer.send("balloon", { "title": "Success", "contents": "Logged in" });
             this.props.LoggingIn(false, true);
+            ApiUtil.getWorkspaceId(null);
+            ApiUtil.updateUsername(this.state.userName);
             // TODO: Make this actually check the success of the login
         });
-        ApiUtil.getWorkspaceId();
-        ApiUtil.updateUsername(this.state.userName);
+    }
 
+    public componentDidMount(): void {
+        ipcRenderer.on("usernameRetrieve", this.onRetrieve);
+        ipcRenderer.send("cSharp", { source: "usernameRetrieve", target: "retrieve", data: { target: "USERNAME" } });
+    }
+
+    public componentWillUnmount(): void{
+        ipcRenderer.removeAllListeners("usernameRetrieve");
     }
 
     public render() {
         const ph = "Email@hastingsdirect.com";
         const pw = "password";
         return <div style={this.allStyle}>
-            <TextInput Style={this.tbStyle} Placeholder={ph} Change={this.username} />
-            <br />
+            <TextInput Style={this.tbStyle} Placeholder={ph} Change={this.username} Text={this.state.userName} />
             <TextInput Style={this.tbStyle} Placeholder={pw} Type={pw} Change={this.pass} />
             {this.state.password !== "" && this.state.userName !== "" ?
                 <Button onClick={this.openWindow} Text="Log in" Style={this.bStyle} /> : null}
         </div >;
     }
 
+    private onRetrieve = (event: any, value: string) => {
+        this.setState({ userName: value });
+    }
     private wait(ms) {
         const start = Date.now();
         let diff = 0;

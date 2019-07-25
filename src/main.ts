@@ -40,7 +40,7 @@ const createWindow = () => {
   createTray();
 };
 
-export let appIcon: Tray = null;
+let appIcon: Tray = null;
 const createTray = () => {
   appIcon = new Tray(nativeImage.createFromPath(iconpath).resize({ width: 16, height: 16 }));
 
@@ -66,8 +66,12 @@ const createTray = () => {
   appIcon.setHighlightMode("always");
 };
 
-export function balloon(displayTitle: string, contents: any) {
-  appIcon.displayBalloon({ title: displayTitle, content: contents });
+function balloon(displayTitle: string, contents: string) {
+  try {
+    appIcon.displayBalloon({ title: displayTitle, content: contents });
+  } catch (Exception) {
+    appIcon.displayBalloon({ title: "Exception", content: Exception });
+  }
 }
 
 let connection = new ConnectionBuilder()
@@ -111,15 +115,12 @@ ipcMain.on("balloon", (event, arg) => {
 
 // Handle requests from React for the c# stuff
 ipcMain.on("cSharp", (event, arg) => {
-  if (arg.target === "octaneApi") {
-    connection.send("octaneApi", arg.data, (response: any) => {
-      balloon("From sharp", response);
+  connection.send(arg.target, arg.data, (response: any) => {
+    // balloon("From sharp", response);
+    if (arg.source !== undefined && arg.source !== null) {
       window.webContents.send(arg.source, response);
-    });
-  }
-
+    }
+  });
 });
 
-// connection.send("octaneApi", 1, (response: any) => {
-//   balloon("notificaiton", response);
-// });
+// -------------------------------------- Util Class ------------------------------------

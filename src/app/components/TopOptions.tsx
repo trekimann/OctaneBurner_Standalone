@@ -3,6 +3,7 @@ import * as React from "react";
 import { Button } from "./Button";
 import { OctaneLogin } from "./OctaneLoading";
 import { Spinner } from "./spinner";
+import { Tasks } from "./Tasks";
 
 export class TopOptions extends React.Component {
 
@@ -33,7 +34,7 @@ export class TopOptions extends React.Component {
         };
 
         return <div>
-            {this.state.loggedIn ? null : <div>
+            {this.state.loggedIn ? <Tasks/> : <div>
                 {this.state.loggingIn ? <Spinner /> : <OctaneLogin LoggingIn={this.LoggingIn} />}
             </div>}
         </div>;
