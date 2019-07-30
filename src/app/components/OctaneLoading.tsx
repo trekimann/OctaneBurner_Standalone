@@ -72,7 +72,7 @@ export class OctaneLogin extends React.Component {
             this.wait(1000);
             loginWindow.webContents.executeJavaScript(passclick);
             this.wait(3000);
-            loginWindow.show();
+            loginWindow.close();
             ipcRenderer.send("balloon", { "title": "Success", "contents": "Logged in" });
             this.props.LoggingIn(false, true);
             ApiUtil.getWorkspaceId(null);

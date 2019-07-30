@@ -81,13 +81,15 @@ let connection = new ConnectionBuilder()
 connection.onDisconnect = () => {
   // tslint:disable-next-line: no-console
   console.log("c# conection lost, retrying connection");
+  balloon("Warning", "c# conection lost, retrying connection");
   connectToSharp();
 };
 function connectToSharp() {
   connection = new ConnectionBuilder()
     .connectTo("dotnet", "run", "--project", "./core/Core")
     .build();
-  console.log("reconnected");
+  balloon("Notification", "Reconnected");
+  console.log("Reconnected");
 }
 
 connection.send("greeting", "Mom from C#", (response: any) => {

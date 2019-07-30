@@ -10,6 +10,7 @@ export class TopOptions extends React.Component {
     constructor(props: any) {
         super(props);
         this.state = {
+            UserId: null,
             loggedIn: false,
             loggingIn: false,
         };
@@ -18,6 +19,10 @@ export class TopOptions extends React.Component {
     public LoggingIn = (pending: boolean, LIN: boolean) => {
         this.setState({ loggingIn: pending });
         this.setState({ loggedIn: LIN });
+    }
+
+    public loggedIn = (id: string) => {
+        this.setState({UserId: id});
     }
 
     public render() {
@@ -34,8 +39,8 @@ export class TopOptions extends React.Component {
         };
 
         return <div>
-            {this.state.loggedIn ? <Tasks/> : <div>
-                {this.state.loggingIn ? <Spinner /> : <OctaneLogin LoggingIn={this.LoggingIn} />}
+            {this.state.loggedIn ? <Tasks UserId={this.state.UserId} /> : <div>
+                {this.state.loggingIn ? <Spinner /> : <OctaneLogin LoggedIn ={this.loggedIn} LoggingIn={this.LoggingIn} />}
             </div>}
         </div>;
     }

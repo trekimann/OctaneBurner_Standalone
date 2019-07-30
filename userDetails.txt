@@ -1,2 +1,3 @@
 USERNAME:nicholasmann@hastingsdirect.com,
-WORKSPACEID:,
+WORKSPACEID:1002,
+USERID:4008,

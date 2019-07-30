@@ -3,13 +3,14 @@ import { BrowserWindow, ipcRenderer } from "electron";
 import * as React from "react";
 
 const { ConnectionBuilder } = require("electron-cgi");
-const urlStart = "https://almoctane-eur.saas.microfocus.com/api/shared_spaces/146003/workspaces";
+const urlStart = "https://almoctane-eur.saas.microfocus.com/api/shared_spaces/146003/workspaces/";
 
 let state = {
     workspaceId: "",
 };
 
 export class ApiUtil {
+
     // -----------------------------get octane details ------------------------------
     public static getWorkspaceId(response: any) {
         const url = urlStart;
@@ -23,16 +24,39 @@ export class ApiUtil {
         }
     }
 
-    public static getTasks(response: any) {
-        // get all the tasks but just with owner details
-        const url = urlStart + "/" + state.workspaceId + "/tasks?fields=owner&limit=20000";
+    public static getUserId(response: any, listener: string) {
+        const url = urlStart + "1002/workspace_users";
         if (response === undefined || response === null) {
-            ApiUtil.Get(url, ApiUtil.getTasks, null);
+            ApiUtil.Get(url, ApiUtil.getUserId, null);
         } else {
-            // pass response to c# to pull out the desired tasks
-            ipcRenderer.send("cSharp", {source: "userTasks", target: "task", data: response });
+            // pass response to c# to pull out the desired ID
+            const Data = { target: "findUserId", data: response.responseText };
+            ipcRenderer.send("cSharp", {source: listener, target: "user", data: Data });
         }
+    }
 
+    public static getAllTasks(userId: string, response: any, offset: string) {
+        // get all the tasks but just with owner details
+        let url = urlStart + "1002/tasks?fields=owner&limit=20000";
+        if (offset !== undefined && offset !== null) {
+            url += "&offset=" + offset;
+        }
+        if (response === undefined || response === null) {
+            ApiUtil.Get(url, ApiUtil.getAllTasks, null);
+        } else {
+            // Pull out all the tasks with the user as the owner.
+            // pass that info the c# and then start getting full details for each task
+            // pass the full details to C# where it can save them.
+            // fetch each task detail from C#
+            const Data = { target: "filterOwnerTasks", data: response.responseText };
+            ipcRenderer.send("cSharp", { source: "userTasks", target: "task", data: Data });
+            // need to run the API call again and offset the results by 20000 to get the next set of tasks
+            const responseObject = JSON.parse(response.responseText);
+            const totalNumberOfTasks = responseObject.total_count;
+            if ((Number(totalNumberOfTasks) > 20000)) {
+                ApiUtil.getAllTasks(userId, null, "20000");
+            }
+        }
     }
     // -----------------------------get octane details ------------------------------
 
@@ -57,13 +81,13 @@ export class ApiUtil {
 
 
     // -----------------------------get things from store ------------------------------
-    public static retrieve(property: string, source: string) {
-        // ipcRenderer.on("retrieveFromStore", this.returnToSender(source,));
+    public static retrieve(property: string, RequestSource: string) {
+        ipcRenderer.on("retrieveFromStore", this.returnToSender);
         ipcRenderer.send("cSharp", { source: "retrieveFromStore", target: "retrieve", data: { target: property } });
     }
 
-    private static returnToSender(sender: string, toReturn: string, localListener: string) {
-
+    private static returnToSender = (event: any, value: any) => {
+        const whatCameBack = value;
     }
     // -----------------------------get things from store ------------------------------
 

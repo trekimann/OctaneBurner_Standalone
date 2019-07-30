@@ -1,80 +1,34 @@
-14:30:14.8352677	--	--------------Starting new process--------------
-14:30:14.8512677	--	loadFromFile: starting
-14:30:14.8582677	--	loadFromFile: Username - nicholasmann@hastingsdirect.com
-14:30:14.8582677	--	loadFromFile: Finished
-14:30:15.0732677	--	retrieve values: Starting
-14:30:15.0892677	--	retrieve values: retrieved username - nicholasmann@hastingsdirect.com
-14:30:15.0892677	--	retrieve values: finished
-14:30:51.0712677	--	retrieve values: Starting
-14:30:51.0712677	--	retrieve values: retrieved username - nicholasmann@hastingsdirect.com
-14:30:51.0722677	--	retrieve values: finished
-14:31:07.1692677	--	updating values: Starting
-14:31:07.1722677	--	updating values: Username - nicholasmann@hastingsdirect.com
-14:31:07.1722677	--	SaveDetails: starting
-14:31:07.1742677	--	loadFromFile: Finished
-14:31:07.1742677	--	updating values: Finished
-14:31:09.0672677	--	updating values: Starting
-14:31:09.0682677	--	updating values: WorkspaceId - 1002
-14:31:09.0752677	--	SaveDetails: starting
-14:31:09.0782677	--	loadFromFile: Finished
-14:31:09.0792677	--	updating values: Finished
-14:59:37.4083731	--	--------------Starting new process--------------
-14:59:37.4213744	--	loadFromFile: starting
-14:59:37.4273750	--	loadFromFile: Username - nicholasmann@hastingsdirect.com
-14:59:37.4273750	--	loadFromFile: Finished
-14:59:37.6563979	--	retrieve values: Starting
-14:59:37.6774000	--	retrieve values: retrieved username - nicholasmann@hastingsdirect.com
-14:59:37.6774000	--	retrieve values: finished
-14:59:55.8652186	--	retrieve values: Starting
-14:59:55.8672188	--	retrieve values: retrieved username - nicholasmann@hastingsdirect.com
-14:59:55.8682189	--	retrieve values: finished
-14:59:55.8762197	--	updating values: Starting
-14:59:55.8852206	--	updating values: Username- nicholasmann@hastingsdirect.com
-14:59:55.8882209	--	SaveDetails: starting
-14:59:55.8902211	--	loadFromFile: Finished
-14:59:55.8912212	--	updating values: Finished
-15:00:01.9068227	--	updating values: Starting
-15:00:01.9068227	--	updating values: Username- nicholasmann@hastingsdirect.com
-15:00:01.9078228	--	SaveDetails: starting
-15:00:01.9098230	--	loadFromFile: Finished
-15:00:01.9098230	--	updating values: Finished
-15:00:07.9334253	--	updating values: Starting
-15:00:07.9344254	--	updating values: Username- nicholasmann@hastingsdirect.com
-15:00:07.9344254	--	SaveDetails: starting
-15:00:07.9364256	--	loadFromFile: Finished
-15:00:07.9364256	--	updating values: Finished
-15:00:32.0788396	--	--------------Starting new process--------------
-15:00:32.0928410	--	loadFromFile: starting
-15:00:32.0968414	--	loadFromFile: Username - nicholasmann@hastingsdirect.com
-15:00:32.0978415	--	loadFromFile: Finished
-15:00:32.2878605	--	retrieve values: Starting
-15:00:32.3028620	--	retrieve values: retrieved username - nicholasmann@hastingsdirect.com
-15:00:32.3038621	--	retrieve values: finished
-15:00:48.7395055	--	retrieve values: Starting
-15:00:48.7415057	--	retrieve values: retrieved username - nicholasmann@hastingsdirect.com
-15:00:48.7425058	--	retrieve values: finished
-15:00:48.7445060	--	updating values: Starting
-15:00:48.7525068	--	updating values: Username- nicholasmann@hastingsdirect.com
-15:00:48.7535069	--	SaveDetails: starting
-15:00:48.7575073	--	loadFromFile: Finished
-15:00:48.7575073	--	updating values: Finished
-15:01:00.4726787	--	updating values: Starting
-15:01:00.4736788	--	updating values: WorkspaceId- 1002
-15:01:00.4756790	--	SaveDetails: starting
-15:01:00.4776792	--	loadFromFile: Finished
-15:01:00.4776792	--	updating values: Finished
-15:01:59.8276136	--	--------------Starting new process--------------
-15:01:59.8446153	--	loadFromFile: starting
-15:01:59.8506159	--	loadFromFile: Username - nicholasmann@hastingsdirect.com
-15:01:59.8516160	--	loadFromFile: Finished
-15:02:00.0576366	--	retrieve values: Starting
-15:02:00.0736382	--	retrieve values: retrieved username - nicholasmann@hastingsdirect.com
-15:02:00.0746383	--	retrieve values: finished
-15:03:04.4540756	--	retrieve values: Starting
-15:03:04.4560758	--	retrieve values: retrieved username - nicholasmann@hastingsdirect.com
-15:03:04.4600762	--	retrieve values: finished
-15:03:04.4690771	--	updating values: Starting
-15:03:04.4800782	--	updating values: Username- nicholasmann@hastingsdirect.com
-15:03:04.4810783	--	SaveDetails: starting
-15:03:04.4840786	--	loadFromFile: Finished
-15:03:04.4850787	--	updating values: Finished
+12:19:10.2700394	--	--------------Starting new process--------------
+12:19:10.2890128	--	loadFromFile: Starting
+12:19:10.2970016	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+12:19:10.2999974	--	loadFromFile: 
+WORKSPACEID - 1002
+12:19:10.3029932	--	loadFromFile: 
+USERID - 4008
+12:19:10.3339498	--	loadFromFile: Finished
+12:19:10.5426572	--	retrieve values: Starting
+12:19:10.5566376	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+12:19:57.6614974	--	retrieve values: Starting
+12:19:59.6267422	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+12:20:04.2175036	--	updating values: Starting
+12:20:05.4987074	--	updating values: Starting
+12:20:07.4609564	--	updating values:	WorkspaceId - 1002
+12:20:07.4649508	--	updating values:	Username - nicholasmann@hastingsdirect.com
+12:20:08.3277412	--	SaveDetails: starting
+12:20:11.8238398	--	loadFromFile: Finished
+12:20:12.8693740	--	updating values: Finished
+12:20:13.6872274	--	loadFromFile: Finished
+12:20:14.8945348	--	updating values: Finished
+12:20:26.1996854	--	updating values: Starting
+12:20:30.7756593	--	updating values:	UserId - 4008
+12:20:30.7776587	--	SaveDetails: starting
+12:20:30.7836569	--	loadFromFile: Finished
+12:20:30.7886554	--	updating values: Finished
+12:20:33.0179864	--	updating values: Starting
+12:20:33.0209855	--	updating values:	UserList - System.Collections.Generic.Dictionary`2[System.String,System.Object]
+12:20:33.0249843	--	SaveDetails: starting
+12:20:33.0299828	--	loadFromFile: Finished
+12:20:33.0339816	--	updating values: Finished
+12:20:58.1434465	--	retrieve values: Starting
+12:21:08.0114852	--	retrieve values: retrieved USERID - 4008
+12:21:40.1058540	--	Task Route: filterOwnerTasks

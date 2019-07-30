@@ -7,9 +7,10 @@ export class Tasks extends React.Component {
     // use that data to request task specifics for each one
     // create a task object for each one.
 
-    public componentDidUpdate(): void {
+    public componentDidMount(): void {
         ipcRenderer.on("userTasks", this.taskDetails);
-        ApiUtil.getTasks(null);
+        ApiUtil.getUserId(null, "userTasks");
+        // ipcRenderer.send("balloon", { title: "Tasks", contents: "Mounted" });
     }
 
     public componentWillUnmount(): void {
@@ -17,9 +18,11 @@ export class Tasks extends React.Component {
     }
 
     public render() {
+
         return <div id="tasksContainer">Tasks go here</div>;
     }
     private taskDetails = (event: any, value: any) => {
         // this should be all the details for the tasks in JSON form
+        ApiUtil.getAllTasks(value, null, null);
     }
 }
