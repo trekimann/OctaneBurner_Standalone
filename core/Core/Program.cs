@@ -114,6 +114,8 @@ namespace Core {
                 case "filterOwnerTasks":
                     filterOwnerTasks (task.data);
                     break;
+                case "returnTaskList":
+                    return taskList;
                 default:
                     Log.Log ("tasks: no route found for " + target);
                     break;
@@ -121,7 +123,7 @@ namespace Core {
             return null;
         }
 
-        private dynamic filterOwnerTasks (dynamic RawTasks) {
+        private void filterOwnerTasks (dynamic RawTasks) {
             // create an object for each task, check if the userID is the one we want.
             dynamic taskInfo = JsonConvert.DeserializeObject<ExpandoObject> (RawTasks.Value.ToString ());
             // if (allTasks == null) {
@@ -133,16 +135,18 @@ namespace Core {
 
             foreach (var task in taskInfo.data) {
                 var owner = task.owner;
-                allTasks.Add(task.id,task);
+                if (!allTasks.ContainsKey (task.id)) {
+                    allTasks.Add (task.id, task);
+                }
                 if (owner != null) {
                     var ownerId = owner.id;
-                    if (ownerId == userId) {
+                    if ((ownerId == userId) && !taskList.Contains(task.id) && (task.phase.id != "phase.task.completed")) {
                         taskList.Add (task.id);
                     }
                 }
             }
             // Log.Log ("Filter owner tasks: " + taskInfo.GetType ());
-            return null;
+            //return taskList;
         }
     }
 

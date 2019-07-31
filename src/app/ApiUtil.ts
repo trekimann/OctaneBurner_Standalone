@@ -5,10 +5,6 @@ import * as React from "react";
 const { ConnectionBuilder } = require("electron-cgi");
 const urlStart = "https://almoctane-eur.saas.microfocus.com/api/shared_spaces/146003/workspaces/";
 
-let state = {
-    workspaceId: "",
-};
-
 export class ApiUtil {
 
     // -----------------------------get octane details ------------------------------
@@ -20,7 +16,6 @@ export class ApiUtil {
             // pull out id
             const id = JSON.parse(response.responseText).data[0].id;
             ipcRenderer.send("cSharp", { target: "details", data: { property: "WorkspaceId", value: id } });
-            state.workspaceId = id;
         }
     }
 
@@ -36,8 +31,8 @@ export class ApiUtil {
     }
 
     public static getAllTasks(response: any, userId?: string, offset?: string) {
-        // get all the tasks but just with owner details
-        let url = urlStart + "1002/tasks?fields=owner&limit=20000";
+        // get all the tasks but just with owner details and phase
+        let url = urlStart + "1002/tasks?fields=owner,phase&limit=9000";
         if (offset !== undefined && offset !== null) {
             url = url + "&offset=" + offset;
         }
@@ -54,20 +49,33 @@ export class ApiUtil {
                 ipcRenderer.send("cSharp", { source: "userTasks", target: "task", data: Data });
                 // need to run the API call again and offset the results by 20000 to get the next set of tasks
                 const totalNumberOfTasks = responseObject.total_count;
-                if (Number(totalNumberOfTasks) > (Number(offset) + responseObject.data.length)) {
-                    if (offset === undefined || offset === null) {
-                        offset = "0";
-                    }
-                    offset = String(Number(offset) + 20000);
-
-                    ApiUtil.getAllTasks(null, userId, offset);
+                if (offset === undefined || offset === null) {
+                    offset = "0";
                 }
+                if (Number(totalNumberOfTasks) > (Number(offset) + responseObject.data.length)) {
+                    offset = String(Number(offset) + 9000);
+                    ApiUtil.getAllTasks(null, userId, offset);
+                } else {
+                    // all tasks have been loaded so signal that here
+                    ipcRenderer.send("balloon", { "title": "Tasks", "contents": totalNumberOfTasks + " Retrieved" });
+                    // get the list of active tasks 
+
+
+                }
+
             }
         }
     }
 
     public static getTaskDetails(response: any, taskId: string) {
+        let url = urlStart + "/1002/tasks/" + taskId;
+        if (response === null || response === undefined) {
+            ApiUtil.Get(url, this.getTaskDetails);
+        } else {
+            // pull out task details in this api then pass the details to c# for storage. To save on rendering time
+            const taskToAdd = JSON.parse(response.responseText);
 
+        }
     }
     // -----------------------------get octane details ------------------------------
 
