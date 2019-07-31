@@ -99,9 +99,9 @@ namespace Core {
         private Logger Log { get; set; }
         private Details Dets { get; set; }
 
-        private dynamic allTasks { get; set; }
+        private Dictionary<string, dynamic> allTasks { get; set; } = new Dictionary<string, dynamic> ();
         private Dictionary<string, dynamic> userTasks { get; set; } = new Dictionary<string, dynamic> ();
-        public List<string> taskList {get; private set;} = new List<string>();
+        public List<string> taskList { get; private set; } = new List<string> ();
         public Tasks (Logger log, Details dets) {
             this.Log = log;
             this.Dets = dets;
@@ -124,18 +124,20 @@ namespace Core {
         private dynamic filterOwnerTasks (dynamic RawTasks) {
             // create an object for each task, check if the userID is the one we want.
             dynamic taskInfo = JsonConvert.DeserializeObject<ExpandoObject> (RawTasks.Value.ToString ());
-            if(allTasks == null){
-                allTasks = taskInfo.data;
-            }else {
-                allTasks = allTasks+taskInfo.data;
-            }
+            // if (allTasks == null) {
+            //     allTasks = taskInfo.data;
+            // } else {
+            //     allTasks.add(taskInfo.data);
+            // }
             string userId = Dets.UserId;
 
-            foreach (var task in allTasks) {
-                var ownerId = task.owner;
-                if(ownerId != null){
-                    if(ownerId == userId){
-                        taskList.Add(task.id);
+            foreach (var task in taskInfo.data) {
+                var owner = task.owner;
+                allTasks.Add(task.id,task);
+                if (owner != null) {
+                    var ownerId = owner.id;
+                    if (ownerId == userId) {
+                        taskList.Add (task.id);
                     }
                 }
             }

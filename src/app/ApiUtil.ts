@@ -15,7 +15,7 @@ export class ApiUtil {
     public static getWorkspaceId(response: any) {
         const url = urlStart;
         if (response === undefined || response === null) {
-            ApiUtil.Get(url, ApiUtil.getWorkspaceId, null);
+            ApiUtil.Get(url, ApiUtil.getWorkspaceId);
         } else {
             // pull out id
             const id = JSON.parse(response.responseText).data[0].id;
@@ -27,36 +27,47 @@ export class ApiUtil {
     public static getUserId(response: any, listener: string) {
         const url = urlStart + "1002/workspace_users";
         if (response === undefined || response === null) {
-            ApiUtil.Get(url, ApiUtil.getUserId, null);
+            ApiUtil.Get(url, ApiUtil.getUserId, listener);
         } else {
             // pass response to c# to pull out the desired ID
             const Data = { target: "findUserId", data: response.responseText };
-            ipcRenderer.send("cSharp", {source: listener, target: "user", data: Data });
+            ipcRenderer.send("cSharp", { source: listener, target: "user", data: Data });
         }
     }
 
-    public static getAllTasks(userId: string, response: any, offset: string) {
+    public static getAllTasks(response: any, userId?: string, offset?: string) {
         // get all the tasks but just with owner details
         let url = urlStart + "1002/tasks?fields=owner&limit=20000";
         if (offset !== undefined && offset !== null) {
-            url += "&offset=" + offset;
+            url = url + "&offset=" + offset;
         }
         if (response === undefined || response === null) {
-            ApiUtil.Get(url, ApiUtil.getAllTasks, null);
+            ApiUtil.Get(url, ApiUtil.getAllTasks, userId, offset);
         } else {
             // Pull out all the tasks with the user as the owner.
             // pass that info the c# and then start getting full details for each task
             // pass the full details to C# where it can save them.
             // fetch each task detail from C#
-            const Data = { target: "filterOwnerTasks", data: response.responseText };
-            ipcRenderer.send("cSharp", { source: "userTasks", target: "task", data: Data });
-            // need to run the API call again and offset the results by 20000 to get the next set of tasks
             const responseObject = JSON.parse(response.responseText);
-            const totalNumberOfTasks = responseObject.total_count;
-            if ((Number(totalNumberOfTasks) > 20000)) {
-                ApiUtil.getAllTasks(userId, null, "20000");
+            if (responseObject.data != null) {
+                const Data = { target: "filterOwnerTasks", data: response.responseText };
+                ipcRenderer.send("cSharp", { source: "userTasks", target: "task", data: Data });
+                // need to run the API call again and offset the results by 20000 to get the next set of tasks
+                const totalNumberOfTasks = responseObject.total_count;
+                if (Number(totalNumberOfTasks) > (Number(offset) + responseObject.data.length)) {
+                    if (offset === undefined || offset === null) {
+                        offset = "0";
+                    }
+                    offset = String(Number(offset) + 20000);
+
+                    ApiUtil.getAllTasks(null, userId, offset);
+                }
             }
         }
+    }
+
+    public static getTaskDetails(response: any, taskId: string) {
+
     }
     // -----------------------------get octane details ------------------------------
 
@@ -93,17 +104,18 @@ export class ApiUtil {
 
 
     // -----------------------------HTTP methods------------------------------
-    public static Get(url: string, after: any, extra: any) {
+
+    private static Get(url: string, after: any, extra?: any, extra2?: any) {
         const xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = () => {
             if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-                after(xmlHttp, extra);
+                after(xmlHttp, extra, extra2);
             }
         };
         xmlHttp.open("GET", url, true); // true for asynchronous
         xmlHttp.send(null);
     }
-    public static Put(url: string, data: any) {
+    private static Put(url: string, data: any) {
         let answer = null;
         Axios.default.put(url, data).then((response) => {
             answer = response.data;

@@ -1,0 +1,28 @@
+2019-07-30 15:53:20.957 +01:00 [ERR] 
+ElectronCgi.DotNet.HandlerFailedException: Request handler for request of type 'task' failed. ---> Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: Operator '==' cannot be applied to operands of type 'System.Dynamic.ExpandoObject' and 'string'
+   at CallSite.Target(Closure , CallSite , Object , String )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
+   at Core.Tasks.filterOwnerTasks(Object RawTasks) in C:\Users\MANNN\source\Electron\react-csharp\core\Core\Program.cs:line 137
+   at CallSite.Target(Closure , CallSite , Tasks , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecuteVoid2[T0,T1](CallSite site, T0 arg0, T1 arg1)
+   at Core.Tasks.route(Object task) in C:\Users\MANNN\source\Electron\react-csharp\core\Core\Program.cs:line 115
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
+   at Core.Program.<>c__DisplayClass0_0.<Main>b__5(Object task) in C:\Users\MANNN\source\Electron\react-csharp\core\Core\Program.cs:line 36
+   at ElectronCgi.DotNet.Connection.<>c__DisplayClass16_0`2.<On>b__0(TIn args)
+   at ElectronCgi.DotNet.RequestHandler`2.HandleRequestAsync(Guid id, Object arguments)
+   at ElectronCgi.DotNet.RequestExecutor.<>c__DisplayClass5_0.<<ExecuteAsync>b__0>d.MoveNext()
+   --- End of inner exception stack trace ---
+   at ElectronCgi.DotNet.ResponseDispatcher.<>c__DisplayClass3_0.<<StartAsync>b__0>d.MoveNext()
+2019-07-31 10:14:29.022 +01:00 [ERR] 
+ElectronCgi.DotNet.HandlerFailedException: Request handler for request of type 'task' failed. ---> Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: Operator '+' cannot be applied to operands of type 'System.Collections.Generic.List<object>' and 'System.Collections.Generic.List<object>'
+   at CallSite.Target(Closure , CallSite , Object , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
+   at Core.Tasks.filterOwnerTasks(Object RawTasks) in C:\Users\MANNN\source\Electron\react-csharp\core\Core\Program.cs:line 130
+   at CallSite.Target(Closure , CallSite , Tasks , Object )
+   at Core.Tasks.route(Object task) in C:\Users\MANNN\source\Electron\react-csharp\core\Core\Program.cs:line 115
+   at Core.Program.<>c__DisplayClass0_0.<Main>b__5(Object task) in C:\Users\MANNN\source\Electron\react-csharp\core\Core\Program.cs:line 36
+   at ElectronCgi.DotNet.Connection.<>c__DisplayClass16_0`2.<On>b__0(TIn args)
+   at ElectronCgi.DotNet.RequestHandler`2.HandleRequestAsync(Guid id, Object arguments)
+   at ElectronCgi.DotNet.RequestExecutor.<>c__DisplayClass5_0.<<ExecuteAsync>b__0>d.MoveNext()
+   --- End of inner exception stack trace ---
+   at ElectronCgi.DotNet.ResponseDispatcher.<>c__DisplayClass3_0.<<StartAsync>b__0>d.MoveNext()

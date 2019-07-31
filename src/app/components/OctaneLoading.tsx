@@ -86,7 +86,7 @@ export class OctaneLogin extends React.Component {
         ipcRenderer.send("cSharp", { source: "usernameRetrieve", target: "retrieve", data: { target: "USERNAME" } });
     }
 
-    public componentWillUnmount(): void{
+    public componentWillUnmount(): void {
         ipcRenderer.removeAllListeners("usernameRetrieve");
     }
 

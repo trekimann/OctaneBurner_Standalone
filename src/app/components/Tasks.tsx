@@ -18,11 +18,12 @@ export class Tasks extends React.Component {
     }
 
     public render() {
-
         return <div id="tasksContainer">Tasks go here</div>;
     }
+
     private taskDetails = (event: any, value: any) => {
         // this should be all the details for the tasks in JSON form
-        ApiUtil.getAllTasks(value, null, null);
+        // ipcRenderer.send("balloon", { "title": "Tasks", "contents": "Fetching" })
+        ApiUtil.getAllTasks(null, value);
     }
 }
