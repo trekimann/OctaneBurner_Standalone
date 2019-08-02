@@ -41,6 +41,7 @@ const createWindow = () => {
 };
 
 let appIcon: Tray = null;
+let lastBalloonMessage = "";
 const createTray = () => {
   appIcon = new Tray(nativeImage.createFromPath(iconpath).resize({ width: 16, height: 16 }));
 
@@ -57,6 +58,12 @@ const createTray = () => {
       app.quit();
     },
   },
+  {
+    label: "Last message",
+    click() {
+      balloon("Last message", lastBalloonMessage);
+    }
+  },
   ]);
 
   appIcon.setContextMenu(contextMenu);
@@ -69,6 +76,7 @@ const createTray = () => {
 function balloon(displayTitle: string, contents: string) {
   try {
     appIcon.displayBalloon({ title: displayTitle, content: contents });
+    lastBalloonMessage = contents;
   } catch (Exception) {
     appIcon.displayBalloon({ title: "Exception", content: Exception });
   }

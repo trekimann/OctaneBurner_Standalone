@@ -1,5 +1,4 @@
 import * as React from "react";
-import { any } from "prop-types";
 
 export class Button extends React.Component<
 { Style?: any, onClick?: any, Text?: string, MouseUp?: any, Src?: any, MouseDown?: any }> {

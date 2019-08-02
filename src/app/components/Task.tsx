@@ -1,9 +1,10 @@
+import { ipcRenderer, remote } from "electron";
 import * as React from "react";
+import { ApiUtil } from "./../ApiUtil";
 import { Button } from "./Button";
 import { Story } from "./Story";
 import { TextInput } from "./TextInput";
-import { ipcRenderer, remote } from "electron";
-import { ApiUtil } from "./../ApiUtil";
+import { Timer } from "./Timer";
 
 export class Task extends React.Component<{ Details: any }, { ShowStory: boolean, ShowTask: boolean }>{
     public bsStyle = {
@@ -62,6 +63,7 @@ export class Task extends React.Component<{ Details: any }, { ShowStory: boolean
                 <div>Invested Hours:    {this.task.invested_hours}</div>
                 <div>Remaining hours:   {this.task.remaining_hours}</div>
                 <div>Task Phase: {this.status}</div>
+                <Timer/>
             </div>
                 : null}
         </div>;

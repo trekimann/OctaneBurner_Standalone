@@ -45,8 +45,8 @@ export class Tasks extends React.Component<{}, { TaskRequested: boolean, TasksLo
         } else {
             // if value is not null then it should be the list of user tasks
             if (value !== null && value !== undefined) {
-                // ipcRenderer.send("balloon", { "title": "Tasks", "contents": "Getting " + value + " Task Details" });
                 // retrieve list of active tasks for the user
+                value.sort();
                 for (const taskId of value) {
                     ApiUtil.getTaskDetails(null, taskId);
                 }
