@@ -44,11 +44,17 @@ export class ApiUtil {
             // pass the full details to C# where it can save them.
             // fetch each task detail from C#
             const responseObject = JSON.parse(response.responseText);
+            const totalNumberOfTasks = responseObject.total_count;
+            // pass the number of tasks to C# so it can signal when its done
+            if (offset === null || offset === undefined) {// so its only sends on the first call.
+                const Data = { target: "totalNumberOfTasks", data: totalNumberOfTasks };
+                ipcRenderer.send("cSharp", { source: "allTasks", target: "task", data: Data });
+            }
+
             if (responseObject.data != null) {
                 const Data = { target: "filterOwnerTasks", data: response.responseText };
-                ipcRenderer.send("cSharp", { source: "userTasks", target: "task", data: Data });
-                // need to run the API call again and offset the results by 20000 to get the next set of tasks
-                const totalNumberOfTasks = responseObject.total_count;
+                ipcRenderer.send("cSharp", { source: "allTasks", target: "task", data: Data });
+                // need to run the API call again and offset the results by 9000 to get the next set of tasks
                 if (offset === undefined || offset === null) {
                     offset = "0";
                 }
@@ -57,33 +63,35 @@ export class ApiUtil {
                     ApiUtil.getAllTasks(null, userId, offset);
                 } else {
                     // all tasks have been loaded so signal that here
-                    ipcRenderer.send("balloon", { "title": "Tasks", "contents": totalNumberOfTasks + " Retrieved" });
-                    // get the list of active tasks 
-
-
+                    ipcRenderer.send("balloon",
+                        { "title": "Tasks", "contents": totalNumberOfTasks + " Retrieved\nGetting details" });
                 }
-
             }
         }
     }
 
     public static getTaskDetails(response: any, taskId: string) {
-        let url = urlStart + "/1002/tasks/" + taskId;
+        let url = urlStart + "1002/tasks/" + taskId;
         if (response === null || response === undefined) {
-            ApiUtil.Get(url, this.getTaskDetails);
+            ApiUtil.Get(url, this.getTaskDetails, taskId);
         } else {
             // pull out task details in this api then pass the details to c# for storage. To save on rendering time
             const taskToAdd = JSON.parse(response.responseText);
-
+            // "userTaskDetails" <- this is the thing that the tasks component is listening for to make a task component
+            const data = { source: "userTaskDetails", data: taskToAdd };
+            ipcRenderer.send("internal", data);
+            // send details to C# for storage
+            const Data = { target: "taskDetails", data: taskToAdd };
+            ipcRenderer.send("cSharp", { target: "task", data: Data });
         }
     }
     // -----------------------------get octane details ------------------------------
 
     // -----------------------------put things into octane ------------------------------
     public static updateTask(update: any) {
-        const task = update.taskId;
-        const url = urlStart + state.workspaceId + "/tasks/" + task;
-        ApiUtil.Put(url, update.data);
+        // const task = update.taskId;
+        // const url = urlStart + state.workspaceId + "/tasks/" + task;
+        // ApiUtil.Put(url, update.data);
     }
     // -----------------------------put things into octane ------------------------------
 

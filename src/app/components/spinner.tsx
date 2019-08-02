@@ -15,6 +15,7 @@ const rotate = keyframes`
 const Rotate = styled.div`
   animation: ${rotate} 3s linear infinite;
   width: 50%;
+  max-width: 400px;
   position: absolute;
   top: 30%;
   left: 25%;

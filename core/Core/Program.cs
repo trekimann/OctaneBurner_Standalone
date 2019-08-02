@@ -106,16 +106,21 @@ namespace Core {
             this.Log = log;
             this.Dets = dets;
         }
+        public int NumberOfTasks { get; private set; } = 0;
         public dynamic route (dynamic task) {
             // find which task task to do
             var target = task.target.ToString ();
             Log.Log ("Task Route: " + target);
             switch (target) {
                 case "filterOwnerTasks":
-                    filterOwnerTasks (task.data);
-                    break;
+                    return filterOwnerTasks (task.data);
                 case "returnTaskList":
                     return taskList;
+                case "totalNumberOfTasks":
+                    NumberOfTasks = Convert.ToInt32(task.data.ToString ());
+                    break;
+                case "taskDetails":
+                    return taskDetails(task.data);
                 default:
                     Log.Log ("tasks: no route found for " + target);
                     break;
@@ -123,7 +128,13 @@ namespace Core {
             return null;
         }
 
-        private void filterOwnerTasks (dynamic RawTasks) {
+        private dynamic taskDetails(dynamic taskDetails){
+            userTasks.Add(taskDetails.id.ToString(),taskDetails);
+            
+            return null;
+        }
+
+        private dynamic filterOwnerTasks (dynamic RawTasks) {
             // create an object for each task, check if the userID is the one we want.
             dynamic taskInfo = JsonConvert.DeserializeObject<ExpandoObject> (RawTasks.Value.ToString ());
             // if (allTasks == null) {
@@ -140,13 +151,15 @@ namespace Core {
                 }
                 if (owner != null) {
                     var ownerId = owner.id;
-                    if ((ownerId == userId) && !taskList.Contains(task.id) && (task.phase.id != "phase.task.completed")) {
+                    if ((ownerId == userId) && !taskList.Contains (task.id) && (task.phase.id != "phase.task.completed")) {
                         taskList.Add (task.id);
                     }
                 }
             }
-            // Log.Log ("Filter owner tasks: " + taskInfo.GetType ());
-            //return taskList;
+            if(allTasks.Count >= NumberOfTasks){
+                return taskList;
+            }
+            return null;
         }
     }
 

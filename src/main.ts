@@ -110,19 +110,24 @@ app.on("activate", () => {
   }
 });
 
-ipcMain.on("balloon", (event, arg) => {
+ipcMain.on("balloon", (event: any, arg: any) => {
   balloon(arg.title, arg.contents);
 });
 
 
 // Handle requests from React for the c# stuff
-ipcMain.on("cSharp", (event, arg) => {
+ipcMain.on("cSharp", (event: any, arg: any) => {
   connection.send(arg.target, arg.data, (response: any) => {
     // balloon("From sharp", response);
     if (arg.source !== undefined && arg.source !== null) {
       window.webContents.send(arg.source, response);
     }
   });
+});
+
+// handle requests from react to react
+ipcMain.on("internal", (event: any, arg: any) => {
+  window.webContents.send(arg.source, arg.data);
 });
 
 // -------------------------------------- Util Class ------------------------------------

@@ -77,7 +77,7 @@ export class OctaneLogin extends React.Component {
             this.props.LoggingIn(false, true);
             ApiUtil.getWorkspaceId(null);
             ApiUtil.updateUsername(this.state.userName);
-            // TODO: Make this actually check the success of the login
+            // TODO: Make this check the success of the login. Could use workspaceId check to look for a 401 error
         });
     }
 

@@ -26,3 +26,16 @@ ElectronCgi.DotNet.HandlerFailedException: Request handler for request of type '
    at ElectronCgi.DotNet.RequestExecutor.<>c__DisplayClass5_0.<<ExecuteAsync>b__0>d.MoveNext()
    --- End of inner exception stack trace ---
    at ElectronCgi.DotNet.ResponseDispatcher.<>c__DisplayClass3_0.<<StartAsync>b__0>d.MoveNext()
+2019-08-02 10:53:39.304 +01:00 [ERR] 
+ElectronCgi.DotNet.HandlerFailedException: Request handler for request of type 'task' failed. ---> Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: The best overloaded method match for 'System.Collections.Generic.Dictionary<string,object>.Add(string, object)' has some invalid arguments
+   at CallSite.Target(Closure , CallSite , Dictionary`2 , Object , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecuteVoid3[T0,T1,T2](CallSite site, T0 arg0, T1 arg1, T2 arg2)
+   at Core.Tasks.taskDetails(Object taskDetails) in C:\Users\MANNN\source\Electron\react-csharp\core\Core\Program.cs:line 132
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
+   at Core.Tasks.route(Object task) in C:\Users\MANNN\source\Electron\react-csharp\core\Core\Program.cs:line 123
+   at Core.Program.<>c__DisplayClass0_0.<Main>b__5(Object task) in C:\Users\MANNN\source\Electron\react-csharp\core\Core\Program.cs:line 36
+   at ElectronCgi.DotNet.Connection.<>c__DisplayClass16_0`2.<On>b__0(TIn args)
+   at ElectronCgi.DotNet.RequestHandler`2.HandleRequestAsync(Guid id, Object arguments)
+   at ElectronCgi.DotNet.RequestExecutor.<>c__DisplayClass5_0.<<ExecuteAsync>b__0>d.MoveNext()
+   --- End of inner exception stack trace ---
+   at ElectronCgi.DotNet.ResponseDispatcher.<>c__DisplayClass3_0.<<StartAsync>b__0>d.MoveNext()
