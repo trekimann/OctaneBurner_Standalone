@@ -1,6 +1,6 @@
+import { ipcRenderer } from "electron";
 import * as React from "react";
 import { Button } from "./Button";
-import { ipcRenderer } from "electron";
 import { TextInput } from "./TextInput";
 
 export class FindUser extends React.Component {

@@ -137,11 +137,6 @@ namespace Core {
         private dynamic filterOwnerTasks (dynamic RawTasks) {
             // create an object for each task, check if the userID is the one we want.
             dynamic taskInfo = JsonConvert.DeserializeObject<ExpandoObject> (RawTasks.Value.ToString ());
-            // if (allTasks == null) {
-            //     allTasks = taskInfo.data;
-            // } else {
-            //     allTasks.add(taskInfo.data);
-            // }
             string userId = Dets.UserId;
 
             foreach (var task in taskInfo.data) {

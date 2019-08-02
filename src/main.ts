@@ -92,9 +92,9 @@ function connectToSharp() {
   console.log("Reconnected");
 }
 
-connection.send("greeting", "Mom from C#", (response: any) => {
-  window.webContents.send("greeting", response);
-});
+// connection.send("greeting", "Mom from C#", (response: any) => {
+//   window.webContents.send("greeting", response);
+// });
 
 app.on("ready", createWindow);
 
