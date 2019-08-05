@@ -15,6 +15,10 @@ export class Task extends React.Component<{
     ShowStory: boolean,
     ShowTask: boolean,
 }> {
+    public tStyle = {
+        backgroundColor: "rgba(0, 125, 255, 0.1)",
+    };
+
     public bsStyle = {
         backgroundColor: "#2767b0",
         border: "none",
@@ -79,7 +83,7 @@ export class Task extends React.Component<{
         const taskText = this.id + ": " + this.task.name;
         return <div>
             <Button onClick={this.showTask} Style={this.btStyle} Text={taskText} />
-            <div style={this.state.ShowTask ? null : { display: "none" }}>
+            <div style={this.state.ShowTask ? this.tStyle : { display: "none" }}>
                 <Button onClick={this.showStory} Style={this.bsStyle} Text={linkedStory} />
                 <div style={this.state.ShowStory ? null : { display: "none" }}>
                     <Story />

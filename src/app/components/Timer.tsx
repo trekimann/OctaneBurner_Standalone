@@ -2,6 +2,35 @@ import { ipcRenderer } from "electron";
 import * as React from "react";
 import { Button } from "./Button";
 
+const startStyle = {
+    backgroundColor: "#2c85aa",
+    border: "none",
+    color: "#eee",
+    cursor: "pointer",
+    fontFamily: "inherit",
+    fontSize: "16px",
+    marginBottom: "2px",
+    marginTop: "2px",
+    padding: "2px",
+};
+
+const stopStyle = {
+    backgroundColor: "#de2253",
+    border: "none",
+    color: "#eee",
+    cursor: "pointer",
+    fontFamily: "inherit",
+    fontSize: "16px",
+    marginBottom: "2px",
+    marginTop: "2px",
+    padding: "2px",
+};
+
+const containterStyle = {
+    display: "flex",
+    justifyContent: "center",
+};
+
 export class Timer extends React.Component<{
     updateActualHours: any,
     TaskUpdate: any,
@@ -48,8 +77,9 @@ export class Timer extends React.Component<{
     }
 
     public render() {
-        return <div>
-            <Button Text={this.state.buttonText} onClick={this.state.buttonAction} />
+        return <div style ={containterStyle}>
+            <Button Style={this.state.buttonText.includes("Start") ? startStyle : stopStyle}
+                Text={this.state.buttonText} onClick={this.state.buttonAction} />
         </div>;
     }
 }
