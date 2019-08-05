@@ -1,17 +1,16 @@
 import { ipcRenderer } from "electron";
 import * as React from "react";
-import { ApiUtil } from "../ApiUtil";
 import { Button } from "./Button";
 
 export class Timer extends React.Component<{
-    taskInProgress: string,
     updateActualHours: any,
+    TaskUpdate: any,
+    AssociatedTask: string,
 },
     {
-        buttonText: string,
         buttonAction: any,
+        buttonText: string,
         startTime: number,
-        taskInProgress: string,
     }> {
     constructor(props: any) {
         super(props);
@@ -19,20 +18,21 @@ export class Timer extends React.Component<{
             buttonAction: this.startTimer,
             buttonText: "Start Tracking",
             startTime: null,
-            taskInProgress: this.props.taskInProgress,
         };
     }
 
     public startTimer = () => {
-        if (this.state.taskInProgress !== "none") {
+        if (this.props.TaskUpdate() === "none") {
             this.setState({ startTime: Date.now() });
             this.setState({ buttonText: "Stop Tracking" });
             this.setState({ buttonAction: this.stopTimer });
+            this.props.TaskUpdate(this.props.AssociatedTask);
         } else {
             ipcRenderer.send("balloon",
                 {
                     "title": "Tasks",
-                    "contents": "A task is already being tracked: " + this.state.taskInProgress });
+                    "contents": "A task is already being tracked: " + this.props.TaskUpdate(),
+                });
         }
     }
 
@@ -40,6 +40,7 @@ export class Timer extends React.Component<{
         const endTime = Date.now();
         this.setState({ buttonText: "Start Tracking" });
         this.setState({ buttonAction: this.startTimer });
+        this.props.TaskUpdate("none");
 
         let difference = (endTime - this.state.startTime) / 3600000; // in ms. need to change to hour.
         difference = Number(difference.toFixed(1)); // to within 6 min

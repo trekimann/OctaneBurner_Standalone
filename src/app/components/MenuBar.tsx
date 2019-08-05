@@ -9,16 +9,16 @@ import { MenuIcon } from "./MenuIcon";
 
 const menuStyle = {
   "-webkit-app-region": "drag",
-  backgroundColor: "rgb(65, 64, 64)",
-  color: "white",
-  fontSize: "20px",
-  left: 0,
-  minWidth: "100%",
+  "backgroundColor": "rgb(65, 64, 64)",
+  "color": "white",
+  "fontSize": "20px",
+  "left": 0,
+  "minWidth": "100%",
   "ms-overflow-style": "scrollbar",
-  paddingLeft: "10px",
-  paddingTop: "2px",
-  position: "fixed",
-  top: 0,
+  "paddingLeft": "10px",
+  "paddingTop": "2px",
+  "position": "fixed",
+  "top": 0,
 };
 
 const ulStyle = {
@@ -36,26 +36,30 @@ const navStyle = {
 export class MenuBar extends React.Component {
   private buttons = [
     {
+      alt: "Close",
       buttonStyle:
       {
         "-webkit-app-region": "no-drag",
-        height: "20px",
-        paddingRight: "12px",
-        paddingTop: "2px",
+        "height": "20px",
+        "paddingRight": "12px",
+        "paddingTop": "2px",
       },
       click: this.closeWindow,
       src: closeIcon,
     },
     {
+      alt: "Maximize",
       click: this.maxWindow,
       src: maxIcon,
     },
     ,
     {
+      alt: "Minimize",
       click: this.minWindow,
       src: minIcon,
     },
     {
+      alt: "Octane Login",
       click: () => {
         window.open("https://login.software.microfocus.com/msg/actions/showLogin", "_blank");
         remote.BrowserWindow.getFocusedWindow().maximize();
@@ -72,9 +76,7 @@ export class MenuBar extends React.Component {
   public minWindow() {
     remote.BrowserWindow.getFocusedWindow().minimize();
   }
-  public alarm() {
-    alert("clicked");
-  }
+
   public closeWindow() {
     remote.BrowserWindow.getFocusedWindow().hide();
     ipcRenderer.send("balloon", { title: "Notificaiton", contents: "Still Running" });
@@ -90,7 +92,9 @@ export class MenuBar extends React.Component {
       <nav style={navStyle}>
         <ul style={ulStyle}>
           {this.buttons.map((value, index) => {
-            return <MenuIcon imgSrc={value.src} onClick={() => value.click()} liStyle={value.liStyle} buttonStyle={value.buttonStyle} />;
+            return <MenuIcon key={value.alt} imgSrc={value.src}
+              onClick={() => value.click()} liStyle={value.liStyle}
+              buttonStyle={value.buttonStyle} altText={value.alt} />;
           })}
         </ul>
       </nav>

@@ -8,7 +8,7 @@ export class Tasks extends React.Component<{}, {
     TaskRequested: boolean,
     TaskInProgress: string,
     TasksLoaded: boolean,
-    UserTasksDetails: []
+    UserTasksDetails: [],
 }> {
     // send api request to get all tasks with only owner details
     // use that data to request task specifics for each one
@@ -34,14 +34,18 @@ export class Tasks extends React.Component<{}, {
         ipcRenderer.removeAllListeners("userTaskDetails");
     }
 
-    public taskTracking = (isTracking: string) => {
-        this.setState({TaskInProgress: isTracking });
+    public updateTimedTask = (task: string) => {
+        if (task === undefined || task === null) {
+            return this.state.TaskInProgress;
+        } else {
+            this.setState({ TaskInProgress: task });
+        }
     }
 
     public render() {
         return <div id="tasksContainer">
             {this.state.TasksLoaded ? <div>{(this.state.UserTasksDetails || []).map((value) => {
-                return <Task key={value.id} Details={value} />;
+                return <Task key={value.id} Details={value} TaskUpdate={this.updateTimedTask} />;
             })}</div> : <Spinner />}
         </div>;
     }

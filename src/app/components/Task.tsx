@@ -5,16 +5,16 @@ import { Button } from "./Button";
 import { Story } from "./Story";
 import { TextInput } from "./TextInput";
 import { Timer } from "./Timer";
-import { number } from "prop-types";
+import { any } from "prop-types";
 
 export class Task extends React.Component<{
     Details: any,
+    TaskUpdate: any,
 }, {
     ActualHours: number,
     ShowStory: boolean,
     ShowTask: boolean,
-    TaskInProgress: string,
-}>{
+}> {
     public bsStyle = {
         backgroundColor: "#2767b0",
         border: "none",
@@ -46,7 +46,6 @@ export class Task extends React.Component<{
             ActualHours: Number(this.task.invested_hours),
             ShowStory: false,
             ShowTask: false,
-            TaskInProgress: "none",
         };
     }
 
@@ -70,7 +69,7 @@ export class Task extends React.Component<{
             ipcRenderer.send("balloon",
                 {
                     "title": "Tasks",
-                    "contents": "Less than 6 minutes was tracked so the task was not updated",
+                    "contents": "Less than 6 minutes was tracked, the task was not updated",
                 });
         }
     }
@@ -80,17 +79,21 @@ export class Task extends React.Component<{
         const taskText = this.id + ": " + this.task.name;
         return <div>
             <Button onClick={this.showTask} Style={this.btStyle} Text={taskText} />
-            {this.state.ShowTask ? <div> <Button onClick={this.showStory} Style={this.bsStyle} Text={linkedStory} />
-                {this.state.ShowStory ? <Story /> : null}
+            <div style={this.state.ShowTask ? null : { display: "none" }}>
+                <Button onClick={this.showStory} Style={this.bsStyle} Text={linkedStory} />
+                <div style={this.state.ShowStory ? null : { display: "none" }}>
+                    <Story />
+                </div>
                 <div>Item Type: {this.task.story.type} </div>
                 <div>Task Name: {this.task.name}</div>
                 <div>Estimated hours:   {this.task.estimated_hours}</div>
                 <div>Invested Hours:    {this.state.ActualHours}</div>
                 <div>Remaining hours:   {this.task.remaining_hours}</div>
                 <div>Task Phase: {this.status}</div>
-                <Timer taskInProgress={this.state.TaskInProgress} updateActualHours={this.updateTask} />
+                <Timer updateActualHours={this.updateTask}
+                    TaskUpdate={this.props.TaskUpdate}
+                    AssociatedTask={this.id} />
             </div>
-                : null}
         </div>;
     }
 }
