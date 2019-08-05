@@ -6,7 +6,7 @@ import { Task } from "./Task";
 
 export class Tasks extends React.Component<{}, {
     TaskRequested: boolean,
-    TaskInProgress: boolean
+    TaskInProgress: string,
     TasksLoaded: boolean,
     UserTasksDetails: []
 }> {
@@ -16,7 +16,7 @@ export class Tasks extends React.Component<{}, {
     constructor(props: any) {
         super(props);
         this.state = {
-            TaskInProgress: false,
+            TaskInProgress: "none",
             TaskRequested: false,
             TasksLoaded: false,
             UserTasksDetails: [],
@@ -34,7 +34,7 @@ export class Tasks extends React.Component<{}, {
         ipcRenderer.removeAllListeners("userTaskDetails");
     }
 
-    public taskTracking = (isTracking: boolean) => {
+    public taskTracking = (isTracking: string) => {
         this.setState({TaskInProgress: isTracking });
     }
 

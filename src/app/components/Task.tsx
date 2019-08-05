@@ -5,12 +5,16 @@ import { Button } from "./Button";
 import { Story } from "./Story";
 import { TextInput } from "./TextInput";
 import { Timer } from "./Timer";
+import { number } from "prop-types";
 
 export class Task extends React.Component<{
-    Details: any }, {
+    Details: any,
+}, {
+    ActualHours: number,
     ShowStory: boolean,
     ShowTask: boolean,
-    taskInProgress: boolean }>{
+    TaskInProgress: string,
+}>{
     public bsStyle = {
         backgroundColor: "#2767b0",
         border: "none",
@@ -39,8 +43,10 @@ export class Task extends React.Component<{
     constructor(props: any) {
         super(props);
         this.state = {
+            ActualHours: Number(this.task.invested_hours),
             ShowStory: false,
             ShowTask: false,
+            TaskInProgress: "none",
         };
     }
 
@@ -54,6 +60,21 @@ export class Task extends React.Component<{
         this.setState({ ShowTask: ChangeTo });
     }
 
+    public updateTask = (updated: number) => {
+        // make API call here and update values in c#
+        if (updated > 0) {
+            const newTotal = this.state.ActualHours + updated;
+            this.setState({ ActualHours: newTotal });
+
+        } else {
+            ipcRenderer.send("balloon",
+                {
+                    "title": "Tasks",
+                    "contents": "Less than 6 minutes was tracked so the task was not updated",
+                });
+        }
+    }
+
     public render() {
         const linkedStory = "Associated Item: " + this.task.story.id;
         const taskText = this.id + ": " + this.task.name;
@@ -64,10 +85,10 @@ export class Task extends React.Component<{
                 <div>Item Type: {this.task.story.type} </div>
                 <div>Task Name: {this.task.name}</div>
                 <div>Estimated hours:   {this.task.estimated_hours}</div>
-                <div>Invested Hours:    {this.task.invested_hours}</div>
+                <div>Invested Hours:    {this.state.ActualHours}</div>
                 <div>Remaining hours:   {this.task.remaining_hours}</div>
                 <div>Task Phase: {this.status}</div>
-                <Timer />
+                <Timer taskInProgress={this.state.TaskInProgress} updateActualHours={this.updateTask} />
             </div>
                 : null}
         </div>;
