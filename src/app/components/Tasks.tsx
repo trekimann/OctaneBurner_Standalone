@@ -4,13 +4,19 @@ import { ApiUtil } from "./../ApiUtil";
 import { Spinner } from "./spinner";
 import { Task } from "./Task";
 
-export class Tasks extends React.Component<{}, { TaskRequested: boolean, TasksLoaded: boolean, UserTasksDetails: [] }> {
+export class Tasks extends React.Component<{}, {
+    TaskRequested: boolean,
+    TaskInProgress: boolean
+    TasksLoaded: boolean,
+    UserTasksDetails: []
+}> {
     // send api request to get all tasks with only owner details
     // use that data to request task specifics for each one
     // create a task object for each one.
     constructor(props: any) {
         super(props);
         this.state = {
+            TaskInProgress: false,
             TaskRequested: false,
             TasksLoaded: false,
             UserTasksDetails: [],
@@ -28,9 +34,13 @@ export class Tasks extends React.Component<{}, { TaskRequested: boolean, TasksLo
         ipcRenderer.removeAllListeners("userTaskDetails");
     }
 
+    public taskTracking = (isTracking: boolean) => {
+        this.setState({TaskInProgress: isTracking });
+    }
+
     public render() {
         return <div id="tasksContainer">
-            {this.state.TasksLoaded ? <div>{(this.state.UserTasksDetails || []).map(value => {
+            {this.state.TasksLoaded ? <div>{(this.state.UserTasksDetails || []).map((value) => {
                 return <Task key={value.id} Details={value} />;
             })}</div> : <Spinner />}
         </div>;
@@ -59,6 +69,7 @@ export class Tasks extends React.Component<{}, { TaskRequested: boolean, TasksLo
         // Use this to make a new task component and add it to the array.
         // Could arrange tasks here by number so the new ones are at the top
         this.setState((state) => {
+            // cant mutate state so need to replace it
             const UserTasksDetails = state.UserTasksDetails.concat(value);
             return { UserTasksDetails };
         });

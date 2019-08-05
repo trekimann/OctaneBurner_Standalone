@@ -6,7 +6,11 @@ import { Story } from "./Story";
 import { TextInput } from "./TextInput";
 import { Timer } from "./Timer";
 
-export class Task extends React.Component<{ Details: any }, { ShowStory: boolean, ShowTask: boolean }>{
+export class Task extends React.Component<{
+    Details: any }, {
+    ShowStory: boolean,
+    ShowTask: boolean,
+    taskInProgress: boolean }>{
     public bsStyle = {
         backgroundColor: "#2767b0",
         border: "none",
@@ -63,7 +67,7 @@ export class Task extends React.Component<{ Details: any }, { ShowStory: boolean
                 <div>Invested Hours:    {this.task.invested_hours}</div>
                 <div>Remaining hours:   {this.task.remaining_hours}</div>
                 <div>Task Phase: {this.status}</div>
-                <Timer/>
+                <Timer />
             </div>
                 : null}
         </div>;
