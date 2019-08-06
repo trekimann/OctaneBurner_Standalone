@@ -75,11 +75,13 @@ export class MenuBar extends React.Component {
 
   public minWindow() {
     remote.BrowserWindow.getFocusedWindow().minimize();
+    ipcRenderer.send("balloon", { title: "Notificaiton", contents: "Still Running in system tray" });
   }
 
   public closeWindow() {
     remote.BrowserWindow.getFocusedWindow().hide();
-    ipcRenderer.send("balloon", { title: "Notificaiton", contents: "Still Running" });
+    ipcRenderer.send("balloon",
+    { title: "Notificaiton", contents: "Still Running. To close fully right click and select quit" });
   }
 
   public maxWindow() {

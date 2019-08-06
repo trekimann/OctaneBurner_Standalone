@@ -5,30 +5,19 @@ import { Button } from "./Button";
 import { Story } from "./Story";
 import { TextInput } from "./TextInput";
 import { Timer } from "./Timer";
-import { any } from "prop-types";
 
 export class Task extends React.Component<{
     Details: any,
     TaskUpdate: any,
 }, {
     ActualHours: number,
-    ShowStory: boolean,
+    RemainingHours: number,
     ShowTask: boolean,
 }> {
     public tStyle = {
         backgroundColor: "rgba(0, 125, 255, 0.1)",
     };
 
-    public bsStyle = {
-        backgroundColor: "#2767b0",
-        border: "none",
-        color: "#eee",
-        cursor: "pointer",
-        marginBottom: "2px",
-        marginTop: "2px",
-        padding: "2px",
-        width: "100%",
-    };
     public btStyle = {
         backgroundColor: "#2767b0",
         border: "none",
@@ -48,14 +37,9 @@ export class Task extends React.Component<{
         super(props);
         this.state = {
             ActualHours: Number(this.task.invested_hours),
-            ShowStory: false,
+            RemainingHours: Number(this.task.remaining_hours),
             ShowTask: false,
         };
-    }
-
-    public showStory = () => {
-        const ChangeTo = !this.state.ShowStory;
-        this.setState({ ShowStory: ChangeTo });
     }
 
     public showTask = () => {
@@ -67,37 +51,51 @@ export class Task extends React.Component<{
         // make API call here and update values in c#
         if (updated > 0) {
             const newTotal = this.state.ActualHours + updated;
-            this.setState({ ActualHours: newTotal });
-
+            let newRemaining = this.state.RemainingHours - updated;
+            if (newRemaining <= 0) {
+                newRemaining = 0;
+            }
+            this.setState({
+                ActualHours: newTotal,
+                RemainingHours: newRemaining,
+            });
+            const changes = { invested_hours: newTotal, remaining_hours: newRemaining  };
+            const toSend = JSON.stringify(changes);
+            const update = { taskId: this.id, data: toSend, after: this.taskUpdated };
+            ApiUtil.updateTask(update);
         } else {
-            ipcRenderer.send("balloon",
-                {
-                    "title": "Tasks",
-                    "contents": "Less than 6 minutes was tracked, the task was not updated",
-                });
+            this.balloon("Tasks", "Less than 6 minutes was tracked, the task was not updated");
         }
     }
 
+    public taskUpdated = (update: any) => {
+        this.balloon("Tasks", "Hours updated");
+    }
+
     public render() {
-        const linkedStory = "Associated Item: " + this.task.story.id;
         const taskText = this.id + ": " + this.task.name;
         return <div>
             <Button onClick={this.showTask} Style={this.btStyle} Text={taskText} />
             <div style={this.state.ShowTask ? this.tStyle : { display: "none" }}>
-                <Button onClick={this.showStory} Style={this.bsStyle} Text={linkedStory} />
-                <div style={this.state.ShowStory ? null : { display: "none" }}>
-                    <Story />
-                </div>
-                <div>Item Type: {this.task.story.type} </div>
+                <Story StoryId={this.task.story.id} StoryType={this.task.story.type} />
+                {/* <div>Item Type: {this.task.story.type} </div> */}
                 <div>Task Name: {this.task.name}</div>
                 <div>Estimated hours:   {this.task.estimated_hours}</div>
                 <div>Invested Hours:    {this.state.ActualHours}</div>
-                <div>Remaining hours:   {this.task.remaining_hours}</div>
+                <div>Remaining hours:   {this.state.RemainingHours}</div>
                 <div>Task Phase: {this.status}</div>
                 <Timer updateActualHours={this.updateTask}
                     TaskUpdate={this.props.TaskUpdate}
                     AssociatedTask={this.id} />
             </div>
         </div>;
+    }
+
+    private balloon(title: string, contents: string) {
+        ipcRenderer.send("balloon",
+            {
+                "title": title,
+                "contents": contents,
+            });
     }
 }

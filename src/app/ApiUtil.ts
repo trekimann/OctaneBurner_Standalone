@@ -89,9 +89,10 @@ export class ApiUtil {
 
     // -----------------------------put things into octane ------------------------------
     public static updateTask(update: any) {
-        // const task = update.taskId;
-        // const url = urlStart + state.workspaceId + "/tasks/" + task;
-        // ApiUtil.Put(url, update.data);
+        const task = update.taskId;
+        const url = urlStart + "1002/tasks/" + task;
+        const after = update.after;
+        ApiUtil.Put(url, update.data, after);
     }
     // -----------------------------put things into octane ------------------------------
 
@@ -131,12 +132,17 @@ export class ApiUtil {
         xmlHttp.open("GET", url, true); // true for asynchronous
         xmlHttp.send(null);
     }
-    private static Put(url: string, data: any) {
-        let answer = null;
-        Axios.default.put(url, data).then((response) => {
-            answer = response.data;
-            return answer;
-        });
+
+    private static Put(url: string, data: any, after?: any, extra?: any) {
+        const xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = () => {
+            if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+                after(xmlHttp, extra);
+            }
+        };
+        xmlHttp.open("PUT", url, true); // true for asynchronous 
+        xmlHttp.setRequestHeader("Content-type", "application/json");
+        xmlHttp.send(data);
     }
 
 }
