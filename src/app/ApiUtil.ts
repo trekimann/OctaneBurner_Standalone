@@ -85,6 +85,49 @@ export class ApiUtil {
             ipcRenderer.send("cSharp", { target: "task", data: Data });
         }
     }
+
+    public static getStoryDetails(response: any, storyId: string, listener: any) {
+        const url = urlStart + "1002/work_items/" + storyId;
+        if (response === null || response === undefined) {
+            ApiUtil.Get(url, this.getStoryDetails, storyId, listener);
+        } else {
+            // pull out task details in this api then pass the details to c# for storage. To save on rendering time
+            const StoryDetails = JSON.parse(response.responseText);
+
+            const data = { source: listener, data: StoryDetails };
+            ipcRenderer.send("internal", data);
+            // send details to C# for storage
+            // const Data = { target: "taskDetails", data: taskToAdd };
+            // ipcRenderer.send("cSharp", { target: "task", data: Data });
+        }
+    }
+
+    public static getComments(response: any, storyId: string, listener: string) {
+        const url = urlStart + "1002/work_items/" + storyId + "?fields=comments";
+        if (response === null || response === undefined) {
+            ApiUtil.Get(url, this.getComments, storyId, listener);
+        } else {
+            const commentObject = JSON.parse(response.responseText).comments.data;
+            if (commentObject.length > 0) {
+                for (const c of commentObject) {
+                    ApiUtil.getSingleComment(null, c.id, listener);
+                }
+            }
+        }
+    }
+
+    public static getSingleComment(response: any, commentId: string, listener: string) {
+        const url = urlStart + "1002/comments/" + commentId;
+        if (response === null || response === undefined) {
+            ApiUtil.Get(url, this.getSingleComment, commentId, listener);
+        } else {
+            const commentObject = JSON.parse(response.responseText);
+            const data = { source: listener, data: commentObject };
+            ipcRenderer.send("internal", data);
+        }
+    }
+
+
     // -----------------------------get octane details ------------------------------
 
     // -----------------------------put things into octane ------------------------------

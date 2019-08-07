@@ -71,10 +71,14 @@ export class Tasks extends React.Component<{}, {
     private userTaskDetails = (event: any, value: any) => {
         // the value is an object containing the details of the task.
         // Use this to make a new task component and add it to the array.
+        // TODO: look at a timer to update tasks automaticaly
         // Could arrange tasks here by number so the new ones are at the top
         this.setState((state) => {
             // cant mutate state so need to replace it
             const UserTasksDetails = state.UserTasksDetails.concat(value);
+            UserTasksDetails.sort((a, b) => {
+                return Number(a.id) < Number(b.id);
+            });
             return { UserTasksDetails };
         });
         if (!this.state.TasksLoaded) {
