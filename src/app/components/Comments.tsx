@@ -59,7 +59,8 @@ export class Comments extends React.Component<
         return <div>
             <Button Style={this.bsStyle} onClick={this.ToggleComments} Text={text} onDblclick={this.getComments}
                 HoverText="Double click to update Comments" />
-            <div style={this.state.ShowComments ? null : { display: "none" }}>
+            <div style={this.state.ShowComments ? {maxHeight: "40vh",
+        overflow: "auto" } : { display: "none"}}>
                 {(this.state.RetrievedComments || []).map((value) => {
                     return <Comment key={value.id} Details={value} />;
                 })}

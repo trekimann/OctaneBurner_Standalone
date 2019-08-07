@@ -15,7 +15,7 @@ export class Task extends React.Component<{
     ShowTask: boolean,
 }> {
     public tStyle = {
-        backgroundColor: "rgba(0, 125, 255, 0.1)",
+        backgroundColor: "rgba(0, 125, 255, 0.2)",
     };
 
     public btStyle = {
@@ -59,7 +59,7 @@ export class Task extends React.Component<{
                 ActualHours: newTotal,
                 RemainingHours: newRemaining,
             });
-            const changes = { invested_hours: newTotal, remaining_hours: newRemaining  };
+            const changes = { invested_hours: newTotal, remaining_hours: newRemaining };
             const toSend = JSON.stringify(changes);
             const update = { taskId: this.id, data: toSend, after: this.taskUpdated };
             ApiUtil.updateTask(update);
@@ -87,6 +87,7 @@ export class Task extends React.Component<{
                 <Timer updateActualHours={this.updateTask}
                     TaskUpdate={this.props.TaskUpdate}
                     AssociatedTask={this.id} />
+                <br></br>
             </div>
         </div>;
     }
