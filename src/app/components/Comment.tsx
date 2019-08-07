@@ -1,4 +1,5 @@
 import * as React from "react";
+import { User } from "./User";
 
 export class Comment extends React.Component<{ Details: any }, { hasError: boolean }> {
     public static getDerivedStateFromError(error: any) {
@@ -30,10 +31,11 @@ export class Comment extends React.Component<{ Details: any }, { hasError: boole
         text = text.replace("</html>", "");
         text = text.replace("<body>", "");
         text = text.replace("</body>", "");
+        text = text.replace(/style=/g, "");
 
         return <div style={this.bsStyle}>
-            <p>Author: {commentDetails.author.id}</p>
-            <p>Created: {commentDetails.creation_time}</p>
+            <User UserId={commentDetails.author.id} UniqueId={commentDetails.id}/>
+            <div>Created: {commentDetails.creation_time}</div>
             <div dangerouslySetInnerHTML={{ __html: text }}></div>
         </div>;
     }

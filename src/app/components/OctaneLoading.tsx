@@ -4,7 +4,9 @@ import { ApiUtil } from "./../ApiUtil";
 import { Button } from "./Button";
 import { TextInput } from "./TextInput";
 
-export class OctaneLogin extends React.Component {
+export class OctaneLogin extends React.Component<
+    { LoggingIn: any, LoggedIn: any },
+    { userName: string, password: string }> {
 
     public tbStyle = {
         border: "none",
@@ -30,7 +32,7 @@ export class OctaneLogin extends React.Component {
         width: "100%",
     };
 
-    constructor(props) {
+    constructor(props: any) {
         super(props);
         this.openWindow = this.openWindow.bind(this);
         this.state = {
@@ -88,6 +90,7 @@ export class OctaneLogin extends React.Component {
 
     public componentWillUnmount(): void {
         ipcRenderer.removeAllListeners("usernameRetrieve");
+        this.setState({ password: "" });
     }
 
     public render() {
@@ -104,7 +107,7 @@ export class OctaneLogin extends React.Component {
     private onRetrieve = (event: any, value: string) => {
         this.setState({ userName: value });
     }
-    private wait(ms) {
+    private wait(ms: number) {
         const start = Date.now();
         let diff = 0;
         while (diff < ms) {

@@ -5,7 +5,7 @@ import { OctaneLogin } from "./OctaneLoading";
 import { Spinner } from "./spinner";
 import { Tasks } from "./Tasks";
 
-export class TopOptions extends React.Component {
+export class TopOptions extends React.Component<{}, { UserId: any, loggedIn: boolean, loggingIn: boolean }> {
 
     constructor(props: any) {
         super(props);
@@ -22,7 +22,7 @@ export class TopOptions extends React.Component {
     }
 
     public loggedIn = (id: string) => {
-        this.setState({UserId: id});
+        this.setState({ UserId: id });
     }
 
     public render() {
@@ -40,7 +40,8 @@ export class TopOptions extends React.Component {
 
         return <div>
             {this.state.loggedIn ? <Tasks UserId={this.state.UserId} /> : <div>
-                {this.state.loggingIn ? <Spinner /> : <OctaneLogin LoggedIn ={this.loggedIn} LoggingIn={this.LoggingIn} />}
+                {this.state.loggingIn ? <Spinner /> :
+                    <OctaneLogin LoggedIn={this.loggedIn} LoggingIn={this.LoggingIn} />}
             </div>}
         </div>;
     }

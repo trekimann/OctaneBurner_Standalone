@@ -56,8 +56,21 @@ namespace Core {
                         toReturn = findUserId (dets.Username, request.data);
                         break;
                     }
+                case "retrieveUserDetails":
+                    {
+                        toReturn = retrieveUserDetails (request.data.ToString());
+                        break;
+                    }
+
             }
 
+            return toReturn;
+        }
+        public dynamic retrieveUserDetails (string id) {
+            dynamic toReturn = null;
+            if (dets.userList.ContainsKey (id)) {
+                toReturn = dets.userList[id];
+            }
             return toReturn;
         }
         public string findUserId (string target, dynamic userResponse) {
@@ -117,10 +130,10 @@ namespace Core {
                 case "returnTaskList":
                     return taskList;
                 case "totalNumberOfTasks":
-                    NumberOfTasks = Convert.ToInt32(task.data.ToString ());
+                    NumberOfTasks = Convert.ToInt32 (task.data.ToString ());
                     break;
                 case "taskDetails":
-                    return taskDetails(task.data);
+                    return taskDetails (task.data);
                 default:
                     Log.Log ("tasks: no route found for " + target);
                     break;
@@ -128,9 +141,9 @@ namespace Core {
             return null;
         }
 
-        private dynamic taskDetails(dynamic taskDetails){
-            userTasks.Add(taskDetails.id.ToString(),taskDetails);
-            
+        private dynamic taskDetails (dynamic taskDetails) {
+            userTasks.Add (taskDetails.id.ToString (), taskDetails);
+
             return null;
         }
 
@@ -151,7 +164,7 @@ namespace Core {
                     }
                 }
             }
-            if(allTasks.Count >= NumberOfTasks){
+            if (allTasks.Count >= NumberOfTasks) {
                 return taskList;
             }
             return null;

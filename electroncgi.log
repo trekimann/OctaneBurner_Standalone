@@ -1,0 +1,38 @@
+2019-08-07 15:23:01.208 +01:00 [ERR] 
+ElectronCgi.DotNet.HandlerFailedException: Request handler for request of type 'user' failed. ---> System.ArgumentNullException: Value cannot be null.
+Parameter name: key
+   at System.Collections.Generic.Dictionary`2.FindEntry(TKey key)
+   at System.Collections.Generic.Dictionary`2.ContainsKey(TKey key)
+   at Core.userDetails.retrieveUserDetails(String id) in C:\Users\MANNN\source\Electron\react-csharp\core\Core\Program.cs:line 71
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
+   at Core.userDetails.route(Object request) in C:\Users\MANNN\source\Electron\react-csharp\core\Core\Program.cs:line 61
+   at Core.Program.<>c__DisplayClass0_0.<Main>b__4(Object use) in C:\Users\MANNN\source\Electron\react-csharp\core\Core\Program.cs:line 34
+   at ElectronCgi.DotNet.Connection.<>c__DisplayClass16_0`2.<On>b__0(TIn args)
+   at ElectronCgi.DotNet.RequestHandler`2.HandleRequestAsync(Guid id, Object arguments)
+   at ElectronCgi.DotNet.RequestExecutor.<>c__DisplayClass5_0.<<ExecuteAsync>b__0>d.MoveNext()
+   --- End of inner exception stack trace ---
+   at ElectronCgi.DotNet.ResponseDispatcher.<>c__DisplayClass3_0.<<StartAsync>b__0>d.MoveNext()
+2019-08-07 15:26:20.396 +01:00 [ERR] 
+ElectronCgi.DotNet.HandlerFailedException: Request handler for request of type 'user' failed. ---> Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: The best overloaded method match for 'Core.userDetails.retrieveUserDetails(string)' has some invalid arguments
+   at CallSite.Target(Closure , CallSite , userDetails , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
+   at Core.userDetails.route(Object request) in C:\Users\MANNN\source\Electron\react-csharp\core\Core\Program.cs:line 61
+   at Core.Program.<>c__DisplayClass0_0.<Main>b__4(Object use) in C:\Users\MANNN\source\Electron\react-csharp\core\Core\Program.cs:line 34
+   at ElectronCgi.DotNet.Connection.<>c__DisplayClass16_0`2.<On>b__0(TIn args)
+   at ElectronCgi.DotNet.RequestHandler`2.HandleRequestAsync(Guid id, Object arguments)
+   at ElectronCgi.DotNet.RequestExecutor.<>c__DisplayClass5_0.<<ExecuteAsync>b__0>d.MoveNext()
+   --- End of inner exception stack trace ---
+   at ElectronCgi.DotNet.ResponseDispatcher.<>c__DisplayClass3_0.<<StartAsync>b__0>d.MoveNext()
+2019-08-07 15:29:52.352 +01:00 [ERR] 
+ElectronCgi.DotNet.HandlerFailedException: Request handler for request of type 'user' failed. ---> Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: The best overloaded method match for 'System.Collections.Generic.Dictionary<string,object>.ContainsKey(string)' has some invalid arguments
+   at CallSite.Target(Closure , CallSite , Dictionary`2 , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
+   at Core.userDetails.retrieveUserDetails(Object id) in C:\Users\MANNN\source\Electron\react-csharp\core\Core\Program.cs:line 71
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
+   at Core.userDetails.route(Object request) in C:\Users\MANNN\source\Electron\react-csharp\core\Core\Program.cs:line 61
+   at Core.Program.<>c__DisplayClass0_0.<Main>b__4(Object use) in C:\Users\MANNN\source\Electron\react-csharp\core\Core\Program.cs:line 34
+   at ElectronCgi.DotNet.Connection.<>c__DisplayClass16_0`2.<On>b__0(TIn args)
+   at ElectronCgi.DotNet.RequestHandler`2.HandleRequestAsync(Guid id, Object arguments)
+   at ElectronCgi.DotNet.RequestExecutor.<>c__DisplayClass5_0.<<ExecuteAsync>b__0>d.MoveNext()
+   --- End of inner exception stack trace ---
+   at ElectronCgi.DotNet.ResponseDispatcher.<>c__DisplayClass3_0.<<StartAsync>b__0>d.MoveNext()

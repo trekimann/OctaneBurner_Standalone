@@ -13,16 +13,6 @@ export class Comments extends React.Component<
         RetrievedComments: [],
     }> {
     public timer: NodeJS.Timeout;
-    private bsStyle = {
-        backgroundColor: "#2767b0",
-        border: "none",
-        color: "#eee",
-        cursor: "pointer",
-        marginBottom: "2px",
-        marginTop: "2px",
-        padding: "2px",
-        width: "100%",
-    };
     constructor(props: any) {
         super(props);
         this.state = {
@@ -57,7 +47,7 @@ export class Comments extends React.Component<
     public render() {
         const text = String(this.state.RetrievedComments.length) + " comments found on story";
         return <div>
-            <Button Style={this.bsStyle} onClick={this.ToggleComments} Text={text} onDblclick={this.getComments}
+            <Button onClick={this.ToggleComments} Text={text} onDblclick={this.getComments}
                 HoverText="Double click to update Comments" />
             <div style={this.state.ShowComments ? {maxHeight: "40vh",
         overflow: "auto" } : { display: "none"}}>

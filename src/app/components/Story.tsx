@@ -15,16 +15,6 @@ export class Story extends React.Component<
         StoryName: string,
         LastUpdated: Date,
     }> {
-    private bsStyle = {
-        backgroundColor: "#2767b0",
-        border: "none",
-        color: "#eee",
-        cursor: "pointer",
-        marginBottom: "2px",
-        marginTop: "2px",
-        padding: "2px",
-        width: "100%",
-    };
 
     private sStyle = {
         backgroundColor: "rgba(125, 125, 255, 0.1)",
@@ -95,7 +85,6 @@ export class Story extends React.Component<
         return <div>
             <Button onDblclick={this.getStoryDetails}
                 onClick={this.showStory}
-                Style={this.bsStyle}
                 Text={linkedStory}
                 HoverText="Double click to refresh story details" />
             <div style={this.state.ShowStory ? this.sStyle : { display: "none" }}>
