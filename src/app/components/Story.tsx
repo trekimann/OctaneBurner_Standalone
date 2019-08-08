@@ -80,7 +80,7 @@ export class Story extends React.Component<
     public render() {
         let linkedStory = "Associated " + this.props.StoryType + ": " + this.props.StoryId;
         if (this.state.StoryRetrieved === true) {
-            linkedStory = this.state.StoryName;
+            linkedStory = this.props.StoryId + ": " + this.state.StoryName;
         }
         return <div>
             <Button onDblclick={this.getStoryDetails}

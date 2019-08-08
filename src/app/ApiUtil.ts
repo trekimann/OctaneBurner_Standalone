@@ -1,8 +1,5 @@
-import * as Axios from "axios";
-import { BrowserWindow, ipcRenderer } from "electron";
-import * as React from "react";
+import { ipcRenderer } from "electron";
 
-const { ConnectionBuilder } = require("electron-cgi");
 const urlStart = "https://almoctane-eur.saas.microfocus.com/api/shared_spaces/146003/workspaces/";
 
 export class ApiUtil {
@@ -13,9 +10,18 @@ export class ApiUtil {
         if (response === undefined || response === null) {
             ApiUtil.Get(url, ApiUtil.getWorkspaceId);
         } else {
-            // pull out id
-            const id = JSON.parse(response.responseText).data[0].id;
-            ipcRenderer.send("cSharp", { target: "details", data: { property: "WorkspaceId", value: id } });
+            // check status
+            if (response.status !== 200) {
+                // login has failed, try again
+                const arg = { source: "workspaceFail", data: { fail: true } };
+                ipcRenderer.send("internal", arg);
+            } else {
+                // pull out id
+                const id = JSON.parse(response.responseText).data[0].id;
+                ipcRenderer.send("cSharp", { target: "details", data: { property: "WorkspaceId", value: id } });
+                const arg = { source: "workspaceSuccess", data: { workspaceId: id } };
+                ipcRenderer.send("internal", arg);
+            }
         }
     }
 
@@ -169,6 +175,8 @@ export class ApiUtil {
         const xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = () => {
             if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+                after(xmlHttp, extra, extra2);
+            } else if (xmlHttp.readyState === 4 && xmlHttp.status !== 200) {
                 after(xmlHttp, extra, extra2);
             }
         };

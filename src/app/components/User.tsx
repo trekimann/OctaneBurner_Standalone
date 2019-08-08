@@ -1,4 +1,4 @@
-import { ipcRenderer, SegmentedControlSegment } from "electron";
+import { ipcRenderer } from "electron";
 import * as React from "react";
 import { Button } from "./Button";
 

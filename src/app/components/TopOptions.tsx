@@ -1,6 +1,5 @@
 import { remote, ipcRenderer } from "electron";
 import * as React from "react";
-import { Button } from "./Button";
 import { OctaneLogin } from "./OctaneLoading";
 import { Spinner } from "./spinner";
 import { Tasks } from "./Tasks";
@@ -40,8 +39,10 @@ export class TopOptions extends React.Component<{}, { UserId: any, loggedIn: boo
 
         return <div>
             {this.state.loggedIn ? <Tasks UserId={this.state.UserId} /> : <div>
-                {this.state.loggingIn ? <Spinner /> :
-                    <OctaneLogin LoggedIn={this.loggedIn} LoggingIn={this.LoggingIn} />}
+                {this.state.loggingIn ? <Spinner /> : null}
+                <div style={this.state.loggingIn ? { display: "none" } : null}>
+                    <OctaneLogin LoggedIn={this.loggedIn} LoggingIn={this.LoggingIn} />
+                </div>
             </div>}
         </div>;
     }

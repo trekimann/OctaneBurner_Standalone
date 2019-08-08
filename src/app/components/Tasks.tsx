@@ -4,7 +4,7 @@ import { ApiUtil } from "./../ApiUtil";
 import { Spinner } from "./spinner";
 import { Task } from "./Task";
 
-export class Tasks extends React.Component<{}, {
+export class Tasks extends React.Component<{UserId: string}, {
     TaskRequested: boolean,
     TaskInProgress: string,
     TasksLoaded: boolean,
