@@ -3,12 +3,14 @@ import * as React from "react";
 import { ApiUtil } from "./../ApiUtil";
 import { Spinner } from "./spinner";
 import { Task } from "./Task";
+import { Story } from "./Story";
 
-export class Tasks extends React.Component<{UserId: string}, {
+export class Tasks extends React.Component<{ UserId: string }, {
     TaskRequested: boolean,
     TaskInProgress: string,
     TasksLoaded: boolean,
     UserTasksDetails: [],
+    GroupedTasks: object,
 }> {
     // send api request to get all tasks with only owner details
     // use that data to request task specifics for each one
@@ -16,6 +18,7 @@ export class Tasks extends React.Component<{UserId: string}, {
     constructor(props: any) {
         super(props);
         this.state = {
+            GroupedTasks: {},
             TaskInProgress: "none",
             TaskRequested: false,
             TasksLoaded: false,
@@ -44,9 +47,17 @@ export class Tasks extends React.Component<{UserId: string}, {
 
     public render() {
         return <div id="tasksContainer">
-            {this.state.TasksLoaded ? <div>{(this.state.UserTasksDetails || []).map((value) => {
+            {this.state.TasksLoaded ? <div>
+            {/* {(this.state.UserTasksDetails || []).map((value) => {
                 return <Task key={value.id} Details={value} TaskUpdate={this.updateTimedTask} />;
-            })}</div> : <Spinner />}
+            })} */}
+                {Object.keys(this.state.GroupedTasks).reverse().map((story) => {
+                    return <Story key={story}
+                    StoryId ={story}
+                    LinkedTasks = {this.state.GroupedTasks[story]}
+                    TaskInFlight = {this.updateTimedTask}/>;
+                })}
+            </div> : <Spinner />}
         </div>;
     }
 
@@ -81,6 +92,19 @@ export class Tasks extends React.Component<{UserId: string}, {
                 });
                 return { UserTasksDetails };
             });
+
+            // group the tasks here by story to be able to make stories as the top level
+            const grouped = this.state.GroupedTasks;
+            const storyId = value.story.id;
+            // if the story isnt in the gorouping yet, add it.
+            if (grouped[storyId] === null || grouped[storyId] === undefined) {
+                grouped[storyId] = [value];
+            } else {
+                // if it is, add it
+                const tasks = grouped[storyId];
+                tasks.push(value);
+            }
+            this.setState({ GroupedTasks: grouped });
 
             if (!this.state.TasksLoaded) {
                 this.setState({ TasksLoaded: true });

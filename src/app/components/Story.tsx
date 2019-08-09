@@ -3,10 +3,24 @@ import * as React from "react";
 import { ApiUtil } from "../ApiUtil";
 import { Button } from "./Button";
 import { Comments } from "./Comments";
+import { Task } from "./Task";
+
+const bsStyle = {
+    backgroundColor: "#2767b0",
+    border: "none",
+    color: "#eee",
+    cursor: "pointer",
+    fontSize: "18px",
+    marginBottom: "2px",
+    marginTop: "2px",
+    padding: "18px",
+    width: "100%",
+};
 
 export class Story extends React.Component<
-    { StoryId: string, StoryType: string },
+    { StoryId: string, StoryType?: string, LinkedTasks?: [], TaskInFlight?: any },
     {
+        ExpandStory: boolean,
         Frequency: number,
         FrequencyMultiplier: number,
         ShowStory: boolean,
@@ -28,6 +42,7 @@ export class Story extends React.Component<
     constructor(props: any) {
         super(props);
         this.state = {
+            ExpandStory: false,
             Frequency: 60000,
             FrequencyMultiplier: 5,
             LastUpdated: null,
@@ -50,6 +65,10 @@ export class Story extends React.Component<
         const ChangeTo = !this.state.ShowStory;
         this.setState({ ShowStory: ChangeTo });
     }
+    public expandStory = () => {
+        const ChangeTo = !this.state.ExpandStory;
+        this.setState({ ExpandStory: ChangeTo });
+    }
 
     public updateStory = (event: any, value: any) => {
         // story details come in here, use this to put them into state to refresh the story element
@@ -62,6 +81,7 @@ export class Story extends React.Component<
             description = description.replace("</html>", "");
             description = description.replace("<body>", "");
             description = description.replace("</body>", "");
+            description = description.replace(/style=/g, "");
 
             this.setState({ StoryRetrieved: true, StoryDetails: description, StoryName: name, LastUpdated: updated });
 
@@ -84,15 +104,25 @@ export class Story extends React.Component<
         }
         return <div>
             <Button onDblclick={this.getStoryDetails}
-                onClick={this.showStory}
+                Style={bsStyle}
+                onClick={this.expandStory}
                 Text={linkedStory}
                 HoverText="Double click to refresh story details" />
-            <div style={this.state.ShowStory ? this.sStyle : { display: "none" }}>
+            <div style={this.state.ExpandStory ? this.sStyle : { display: "none" }}>
                 {this.state.StoryRetrieved ?
-                    <div style={this.sdStyle} dangerouslySetInnerHTML={{ __html: this.state.StoryDetails }} >
+                    <div>
+                        <Button onClick={this.showStory} Text="Story Description" />
+                        <div style={this.state.ShowStory ? null : { display: "none" }}>
+                            <div style={this.sdStyle} dangerouslySetInnerHTML={{ __html: this.state.StoryDetails }} >
+                            </div>
+                        </div>
                     </div> : "Story Goes Here"}
+                <Comments WorkId={this.props.StoryId} />
+                {(this.props.LinkedTasks || []).map((value) => {
+                    return <Task key={value.id} Details={value} TaskUpdate={this.props.TaskInFlight} />;
+                })}
+                <br></br>
             </div>
-            <Comments WorkId={this.props.StoryId} />
         </div>;
     }
 

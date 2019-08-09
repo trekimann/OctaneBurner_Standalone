@@ -33,7 +33,14 @@ export class Button extends React.Component<
             styling = this.props.Style;
         }
 
-        // tslint:disable-next-line: max-line-length
-        return <button style={styling} onClick={this.props.onClick} onDoubleClick={this.props.onDblclick} onMouseUp={this.props.MouseUp} src={this.props.Src} onMouseDown={this.props.MouseDown} title={hover}>{this.props.Text}</button>;
+        return <button style={styling}
+        onClick={this.props.onClick}
+        onDoubleClick={this.props.onDblclick}
+        onMouseUp={this.props.MouseUp}
+        src={this.props.Src}
+        onMouseDown={this.props.MouseDown}
+        title={hover}>
+        {this.props.Text}
+        </button>;
     }
 }
