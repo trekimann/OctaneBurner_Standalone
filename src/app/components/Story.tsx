@@ -4,6 +4,7 @@ import { ApiUtil } from "../ApiUtil";
 import { Button } from "./Button";
 import { Comments } from "./Comments";
 import { Task } from "./Task";
+import { User } from "./User";
 
 const bsStyle = {
     backgroundColor: "#2767b0",
@@ -23,6 +24,7 @@ export class Story extends React.Component<
         ExpandStory: boolean,
         Frequency: number,
         FrequencyMultiplier: number,
+        FullStory: any,
         ShowStory: boolean,
         StoryRetrieved: boolean,
         StoryDetails: any,
@@ -45,6 +47,7 @@ export class Story extends React.Component<
             ExpandStory: false,
             Frequency: 60000,
             FrequencyMultiplier: 5,
+            FullStory: null,
             LastUpdated: null,
             ShowStory: false,
             StoryDetails: null,
@@ -83,7 +86,13 @@ export class Story extends React.Component<
             description = description.replace("</body>", "");
             description = description.replace(/style=/g, "");
 
-            this.setState({ StoryRetrieved: true, StoryDetails: description, StoryName: name, LastUpdated: updated });
+            this.setState({
+                FullStory: story,
+                LastUpdated: updated,
+                StoryDetails: description,
+                StoryName: name,
+                StoryRetrieved: true,
+            });
 
             ipcRenderer.send("balloon",
                 {
@@ -113,6 +122,15 @@ export class Story extends React.Component<
                     <div>
                         <Button onClick={this.showStory} Text="Story Description" />
                         <div style={this.state.ShowStory ? null : { display: "none" }}>
+                            <User
+                                UserId={this.state.FullStory.author.id}
+                                UniqueId={this.props.StoryId + "author"}
+                                AdditionalDescription="Author" />
+                            {this.state.FullStory.owner !== null && this.state.FullStory.owner !== undefined ?
+                                <User
+                                    UserId={this.state.FullStory.owner.id}
+                                    UniqueId={this.props.StoryId + "owner"}
+                                    AdditionalDescription="Owner" /> : null}
                             <div style={this.sdStyle} dangerouslySetInnerHTML={{ __html: this.state.StoryDetails }} >
                             </div>
                         </div>
@@ -123,7 +141,7 @@ export class Story extends React.Component<
                 })}
                 <br></br>
             </div>
-        </div>;
+        </div >;
     }
 
 
