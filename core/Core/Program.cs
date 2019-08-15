@@ -58,7 +58,7 @@ namespace Core {
                     }
                 case "retrieveUserDetails":
                     {
-                        toReturn = retrieveUserDetails (request.data.ToString());
+                        toReturn = retrieveUserDetails (request.data.ToString ());
                         break;
                     }
 
@@ -173,9 +173,14 @@ namespace Core {
 
     class Logger {
         private string logpath { get; set; }
-        private bool shouldLog { get; set; } = false;
+        public bool shouldLog { get; private set; } = true;
         public Logger (string LogPath) {
             this.logpath = LogPath;
+        }
+
+
+        public void setLog(Boolean log){
+            this.shouldLog = log;
         }
 
         public void Log (string contents) {
@@ -291,16 +296,19 @@ namespace Core {
             foreach (string prop in properties) {
                 string[] contents = prop.Split (":");
                 try {
-                    Log.Log ("loadFromFile: " + contents[0] + " - " + contents[1]);
+                    Log.Log ("loadFromFile: " + contents[0] + " - " + contents[1].Trim());
                 } catch (Exception e) {
                     e.ToString ();
                 };
                 if (contents[0] == "USERNAME") {
-                    Username = contents[1];
+                    Username = contents[1].Trim();
                 } else if (contents[0] == "WORKSPACEID") {
-                    WorkspaceId = contents[1];
+                    WorkspaceId = contents[1].Trim();
                 } else if (contents[0] == "USERID") {
-                    UserId = contents[1];
+                    UserId = contents[1].Trim();
+                } else if (contents[0] == "VERBOSELOGGING") {
+                    // update logging option
+                    Log.setLog(bool.Parse(contents[1].Trim()));
                 };
             }
             Log.Log ("loadFromFile: Finished");
@@ -310,9 +318,10 @@ namespace Core {
             Log.Log ("SaveDetails: starting");
             // use reflection properly but for now just do it manually to test
 
-            string text = "USERNAME:" + Username + "," + Environment.NewLine;
-            text = text + "WORKSPACEID:" + WorkspaceId + "," + Environment.NewLine;
+            string text = "USERNAME:" + Username + ",";
+            text = text + "WORKSPACEID:" + WorkspaceId + ",";
             text = text + "USERID:" + UserId + ",";
+            text = text + "VERBOSELOGGING:"+Log.shouldLog+",";
 
             System.IO.File.WriteAllText (userCache, text);
             Log.Log ("loadFromFile: Finished");

@@ -39,8 +39,8 @@ export class User extends React.Component<
         this.setState({ ShowUser: show });
     }
 
-    public componentDidCatch(error: any, info: any){
-        this.setState({error: true});
+    public componentDidCatch(error: any, info: any) {
+        this.setState({ error: true });
     }
 
     public render() {
