@@ -2,15 +2,16 @@ import { ipcRenderer } from "electron";
 import * as React from "react";
 import { ApiUtil } from "./../ApiUtil";
 import { Spinner } from "./spinner";
-import { Task } from "./Task";
 import { Story } from "./Story";
+import { Task } from "./Task";
 
-export class Tasks extends React.Component<{ UserId: string }, {
+export class Tasks extends React.Component<{}, {
     TaskRequested: boolean,
     TaskInProgress: string,
     TasksLoaded: boolean,
     UserTasksDetails: [],
     GroupedTasks: object,
+    UserId: string,
 }> {
     // send api request to get all tasks with only owner details
     // use that data to request task specifics for each one
@@ -23,6 +24,7 @@ export class Tasks extends React.Component<{ UserId: string }, {
             TaskRequested: false,
             TasksLoaded: false,
             UserTasksDetails: [],
+            UserId: "",
         };
     }
 
@@ -48,14 +50,15 @@ export class Tasks extends React.Component<{ UserId: string }, {
     public render() {
         return <div id="tasksContainer">
             {this.state.TasksLoaded ? <div>
-            {/* {(this.state.UserTasksDetails || []).map((value) => {
+                {/* {(this.state.UserTasksDetails || []).map((value) => {
                 return <Task key={value.id} Details={value} TaskUpdate={this.updateTimedTask} />;
             })} */}
                 {Object.keys(this.state.GroupedTasks).reverse().map((story) => {
                     return <Story key={story}
-                    StoryId ={story}
-                    LinkedTasks = {this.state.GroupedTasks[story]}
-                    TaskInFlight = {this.updateTimedTask}/>;
+                        StoryId={story}
+                        LinkedTasks={this.state.GroupedTasks[story]}
+                        TaskInFlight={this.updateTimedTask}
+                        userId={this.state.UserId} />;
                 })}
             </div> : <Spinner />}
         </div>;
@@ -66,7 +69,7 @@ export class Tasks extends React.Component<{ UserId: string }, {
         if (!this.state.TaskRequested) {
             ipcRenderer.send("balloon", { "title": "Tasks", "contents": "Fetching Tasks" });
             ApiUtil.getAllTasks(null, value);
-            this.setState({ TaskRequested: true })
+            this.setState({ TaskRequested: true, UserId: value });
         } else {
             // if value is not null then it should be the list of user tasks
             if (value !== null && value !== undefined) {

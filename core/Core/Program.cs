@@ -164,9 +164,9 @@ namespace Core {
                     }
                 }
             }
-            if (allTasks.Count >= NumberOfTasks) {
-                //return taskList;
-            }
+            // if (allTasks.Count >= NumberOfTasks) {
+            //     //return taskList; Done in ApiUtil now for efficenty
+            // }
             return null;
         }
     }

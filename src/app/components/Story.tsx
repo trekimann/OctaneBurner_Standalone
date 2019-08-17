@@ -19,7 +19,7 @@ const bsStyle = {
 };
 
 export class Story extends React.Component<
-    { StoryId: string, StoryType?: string, LinkedTasks?: [], TaskInFlight?: any },
+    { StoryId: string, userId: string, StoryType?: string, LinkedTasks?: [], TaskInFlight?: any },
     {
         ExpandStory: boolean,
         Frequency: number,
@@ -135,7 +135,7 @@ export class Story extends React.Component<
                             </div>
                         </div>
                     </div> : "Story Goes Here"}
-                <Comments WorkId={this.props.StoryId} />
+                <Comments WorkId={this.props.StoryId} UserId={this.props.userId} />
                 {(this.props.LinkedTasks || []).map((value) => {
                     return <Task key={value.id} Details={value} TaskUpdate={this.props.TaskInFlight} />;
                 })}

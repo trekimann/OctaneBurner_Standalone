@@ -83,7 +83,6 @@ export class OctaneLogin extends React.Component<
             this.wait(3000);
             loginWindow.close();
             ApiUtil.getWorkspaceId(null);
-            // TODO: Make this check the success of the login. Could use workspaceId check to look for a 401 error
         });
     }
 

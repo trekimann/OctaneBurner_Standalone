@@ -3,14 +3,19 @@ import * as React from "react";
 import { ApiUtil } from "../ApiUtil";
 import { Button } from "./Button";
 import { Comment } from "./Comment";
+import { NewComment } from "./NewComment";
 
 export class Comments extends React.Component<
-    { WorkId: string },
+    {
+        WorkId: string,
+        UserId: string,
+    },
     {
         Frequency: number,
         FrequencyMultiplier: number,
         ShowComments: boolean,
         RetrievedComments: [],
+        NewComment: string,
     }> {
     public timer: NodeJS.Timeout;
     constructor(props: any) {
@@ -18,6 +23,7 @@ export class Comments extends React.Component<
         this.state = {
             Frequency: 60000,
             FrequencyMultiplier: 5,
+            NewComment: "",
             RetrievedComments: [],
             ShowComments: false,
         };
@@ -30,6 +36,7 @@ export class Comments extends React.Component<
 
     public componentDidMount() {
         ipcRenderer.on("comments" + this.props.WorkId, this.updateComments);
+        ipcRenderer.on(this.props.WorkId + "postComment", this.commentSuccessful);
         this.timer = setInterval(() => this.getComments(), (this.state.Frequency) * this.state.FrequencyMultiplier);
         // this.balloon("Comments", "Mounted");
     }
@@ -44,16 +51,42 @@ export class Comments extends React.Component<
         ApiUtil.getComments(null, this.props.WorkId, "comments" + this.props.WorkId);
     }
 
+    public commentUpdate = (update: any) => {
+        this.setState({ NewComment: update.target.value });
+    }
+
+    public submitNewComment = () => {
+        if (this.state.NewComment !== "") {
+            ApiUtil.PostComment(null, this.state.NewComment, this.props.UserId, this.props.WorkId);
+        } else {
+            this.balloon("Error", "New comment was empty");
+        }
+    }
+
+    public commentSuccessful = (event: any, value: any) => {
+        if (value.status === "Created") {
+            this.setState({ NewComment: "" });
+            this.getComments();
+        } else {
+            this.balloon("Comment", "Error Posting Comment");
+        }
+    }
+
     public render() {
         const text = String(this.state.RetrievedComments.length) + " comments found on story";
         return <div>
             <Button onClick={this.ToggleComments} Text={text} onDblclick={this.getComments}
                 HoverText="Double click to update Comments" />
-            <div style={this.state.ShowComments ? {maxHeight: "40vh",
-        overflow: "auto" } : { display: "none"}}>
+            <div style={this.state.ShowComments ? {
+                maxHeight: "40vh",
+                overflow: "auto",
+            } : { display: "none" }}>
                 {(this.state.RetrievedComments || []).map((value) => {
-                    return <Comment key={value.id} Details={value} />;
+                    return <Comment key={value.id} Details={value} userId={this.props.UserId} />;
                 })}
+                <NewComment commentUpdate={this.commentUpdate}
+                    commentValue={this.state.NewComment}
+                    submitComment={this.submitNewComment} />
             </div>
         </div>;
     }
@@ -76,5 +109,13 @@ export class Comments extends React.Component<
 
     private balloon(title: string, contents: string) {
         ipcRenderer.send("balloon", { "title": title, "contents": contents });
+    }
+
+    private wait(ms: number) {
+        const start = Date.now();
+        let diff = 0;
+        while (diff < ms) {
+            diff = Date.now() - start;
+        }
     }
 }

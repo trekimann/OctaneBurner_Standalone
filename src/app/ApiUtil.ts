@@ -167,26 +167,49 @@ export class ApiUtil {
         ApiUtil.Put(url, update.data, after);
     }
 
-    public static PostComment(commentText: string, userId: string, workspaceItemId: string) {
-        const toPost = {
-            data: [
-                {
-                    author: {
-                        id: userId,
-                        type: "workspace_user",
+    public static PostComment(response: any, commentText: string, userId: string, workspaceItemId: string) {
+        if (response === null || response === undefined) {
+            const toPost = {
+                data: [
+                    {
+                        author: {
+                            id: userId,
+                            type: "workspace_user",
+                        },
+                        owner_work_item: {
+                            id: workspaceItemId,
+                            type: "work_item",
+                        },
+                        text: commentText,
                     },
-                    owner_work_item: {
-                        id: workspaceItemId,
-                        type: "work_item",
-                    },
-                    text: commentText,
-                }
-            ]
+                ],
+            };
+            const json = JSON.stringify(toPost);
+            const url = urlStart + "1002/comments";
+            ApiUtil.Push(url, json, ApiUtil.PostComment, commentText, userId, workspaceItemId);
+        } else {
+            // signal posting status
+            const arg = {
+                data: { status: response.statusText, all: response },
+                source: workspaceItemId + "postComment",
+            };
+            ipcRenderer.send("internal", arg);
         }
-
     }
     // -----------------------------put things into octane ------------------------------
 
+    // -----------------------------Remove things into octane ------------------------------
+    public static DeleteComment(response: any, targetCommentId: string) {
+        if (response === null || response === undefined) {
+            // send delete request here
+            const url = urlStart + "1002/comments/" + targetCommentId;
+            ApiUtil.Delete(url, this.DeleteComment, targetCommentId);
+        } else {
+            // send confirmation of delete here
+        }
+    }
+
+    // -----------------------------Remove things into octane ------------------------------
 
     // -----------------------------put things into store ------------------------------
     public static updateUsername(username: string) {
@@ -238,4 +261,31 @@ export class ApiUtil {
         xmlHttp.send(data);
     }
 
+    private static Push(url: string, data: string, after?: any, extra?: any, extra2?: any, extra3?: any) {
+        const xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = () => {
+            if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+                after(xmlHttp, extra, extra2, extra3);
+            } else if (xmlHttp.readyState === 4 && xmlHttp.status !== 200) {
+                after(xmlHttp, extra, extra2, extra3);
+            }
+        };
+        xmlHttp.open("POST", url, true); // true for asynchronous 
+        xmlHttp.setRequestHeader("Content-type", "application/json");
+        xmlHttp.send(data);
+    }
+
+    private static Delete(url: string, after?: any, extra?: any, extra2?: any, extra3?: any) {
+        const xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = () => {
+            if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+                after(xmlHttp, extra, extra2, extra3);
+            } else if (xmlHttp.readyState === 4 && xmlHttp.status !== 200) {
+                after(xmlHttp, extra, extra2, extra3);
+            }
+        };
+        xmlHttp.open("DELETE", url, true); // true for asynchronous 
+        xmlHttp.setRequestHeader("Content-type", "application/json");
+        xmlHttp.send();
+    }
 }
