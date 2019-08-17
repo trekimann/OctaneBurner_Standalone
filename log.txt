@@ -190,3 +190,15 @@
 16:06:39.6460577	--	loadFromFile: WORKSPACEID - 1002
 16:06:39.6490586	--	loadFromFile: USERID - 4008
 16:06:39.6490586	--	loadFromFile: VERBOSELOGGING - False
+16:20:32.5831838	--	--------------Starting new process--------------
+16:20:32.5991854	--	loadFromFile: Starting
+16:20:32.6071862	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+16:20:32.6111866	--	loadFromFile: WORKSPACEID - 1002
+16:20:32.6141869	--	loadFromFile: USERID - 4008
+16:20:32.6151870	--	loadFromFile: VERBOSELOGGING - False
+16:23:18.8458084	--	--------------Starting new process--------------
+16:23:18.8608099	--	loadFromFile: Starting
+16:23:18.8688107	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+16:23:18.8718110	--	loadFromFile: WORKSPACEID - 1002
+16:23:18.8748113	--	loadFromFile: USERID - 4008
+16:23:18.8748113	--	loadFromFile: VERBOSELOGGING - False
