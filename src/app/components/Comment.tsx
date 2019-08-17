@@ -32,10 +32,13 @@ export class Comment extends React.Component<{ Details: any }, { hasError: boole
         text = text.replace("<body>", "");
         text = text.replace("</body>", "");
         text = text.replace(/style=/g, "");
+        const ms = new Date(Date.parse(commentDetails.creation_time));
+
+        const creation = ms.toLocaleDateString("en-GB") + " " + ms.toLocaleTimeString();
 
         return <div style={this.bsStyle}>
-            <User UserId={commentDetails.author.id} UniqueId={commentDetails.id}/>
-            <div>Created: {commentDetails.creation_time}</div>
+            <User UserId={commentDetails.author.id} UniqueId={commentDetails.id} />
+            <div>Created: {creation}</div>
             <div dangerouslySetInnerHTML={{ __html: text }}></div>
         </div>;
     }

@@ -165,7 +165,7 @@ namespace Core {
                 }
             }
             if (allTasks.Count >= NumberOfTasks) {
-                return taskList;
+                //return taskList;
             }
             return null;
         }

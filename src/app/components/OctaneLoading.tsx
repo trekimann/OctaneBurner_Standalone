@@ -56,7 +56,7 @@ export class OctaneLogin extends React.Component<
     }
 
     public openWindow() {
-        this.setState({failedLogin: false});
+        this.setState({ failedLogin: false });
         this.props.LoggingIn(true, false);
         const mainWindow = remote.BrowserWindow.getFocusedWindow();
         window.open("https://login.software.microfocus.com/msg/actions/showLogin", "_blank");
@@ -110,7 +110,7 @@ export class OctaneLogin extends React.Component<
     }
 
     public loginFail = (event: any, value: any) => {
-        this.setState({failedLogin: true});
+        this.setState({ failedLogin: true });
         ipcRenderer.send("balloon", { "title": "Error", "contents": "Could not log in" });
         this.props.LoggingIn(false, false);
     }
@@ -120,10 +120,10 @@ export class OctaneLogin extends React.Component<
         const pw = "password";
         return <div style={allStyle}>
             <TextInput Style={tbStyle} Placeholder={ph} Change={this.username} Text={this.state.userName} />
-            <TextInput Style={tbStyle} Placeholder={pw} Type={pw} Change={this.pass} />
+            <TextInput Style={tbStyle} Placeholder={pw} Type={pw} Change={this.pass} OnEnter={this.openWindow} />
             {this.state.failedLogin ?
-            <div style = {errorStyle}>Login Failed, Please check username and password</div> :
-            null}
+                <div style={errorStyle}>Login Failed, Please check username and password</div> :
+                null}
             {this.state.password !== "" && this.state.userName !== "" ?
                 <Button onClick={this.openWindow} Text="Log in" Style={bStyle} /> : null}
         </div >;

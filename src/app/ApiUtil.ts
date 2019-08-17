@@ -36,14 +36,17 @@ export class ApiUtil {
         }
     }
 
-    public static getAllTasks(response: any, userId?: string, offset?: string) {
+    public static getAllTasks(response: any, userId?: string, offset?: string, currentTasks?: []) {
         // get all the tasks but just with owner details and phase
         let url = urlStart + "1002/tasks?fields=owner,phase&limit=9000";
         if (offset !== undefined && offset !== null) {
             url = url + "&offset=" + offset;
         }
+        if (currentTasks === null || currentTasks === undefined) {
+            currentTasks = [];
+        }
         if (response === undefined || response === null) {
-            ApiUtil.Get(url, ApiUtil.getAllTasks, userId, offset);
+            ApiUtil.Get(url, ApiUtil.getAllTasks, userId, offset, currentTasks);
         } else {
             // Pull out all the tasks with the user as the owner.
             // pass that info the c# and then start getting full details for each task
@@ -51,6 +54,7 @@ export class ApiUtil {
             // fetch each task detail from C#
             const responseObject = JSON.parse(response.responseText);
             const totalNumberOfTasks = responseObject.total_count;
+            const newList = currentTasks.concat(responseObject.data);
             // pass the number of tasks to C# so it can signal when its done
             if (offset === null || offset === undefined) {// so its only sends on the first call.
                 const Data = { target: "totalNumberOfTasks", data: totalNumberOfTasks };
@@ -66,14 +70,33 @@ export class ApiUtil {
                 }
                 if (Number(totalNumberOfTasks) > (Number(offset) + responseObject.data.length)) {
                     offset = String(Number(offset) + 9000);
-                    ApiUtil.getAllTasks(null, userId, offset);
+                    ApiUtil.getAllTasks(null, userId, offset, newList);
                 } else {
                     // all tasks have been loaded so signal that here
                     ipcRenderer.send("balloon",
                         { "title": "Tasks", "contents": totalNumberOfTasks + " Retrieved\nGetting details" });
+                    // use ts to filter task list to increase speed
+                    ApiUtil.filterTasks(newList, userId);
                 }
             }
         }
+    }
+
+    public static filterTasks(tasks: [], userId: string) {
+        const taskList = new Array();
+        for (const task of tasks) {
+            if (task.owner !== null && task.owner !== undefined) {
+                const owner = task.owner;
+                const ownerId = owner.id;
+                if ((ownerId === userId) &&
+                    !taskList.includes(task.id) && (task.phase.id !== "phase.task.completed")) {
+                    taskList.push(task.id);
+                }
+            }
+        }
+        // send task list to the corect component
+        const data = { source: "allTasks", data: taskList };
+        ipcRenderer.send("internal", data);
     }
 
     public static getTaskDetails(response: any, taskId: string) {
@@ -143,6 +166,25 @@ export class ApiUtil {
         const after = update.after;
         ApiUtil.Put(url, update.data, after);
     }
+
+    public static PostComment(commentText: string, userId: string, workspaceItemId: string) {
+        const toPost = {
+            data: [
+                {
+                    author: {
+                        id: userId,
+                        type: "workspace_user",
+                    },
+                    owner_work_item: {
+                        id: workspaceItemId,
+                        type: "work_item",
+                    },
+                    text: commentText,
+                }
+            ]
+        }
+
+    }
     // -----------------------------put things into octane ------------------------------
 
 
@@ -171,11 +213,11 @@ export class ApiUtil {
 
     // -----------------------------HTTP methods------------------------------
 
-    private static Get(url: string, after: any, extra?: any, extra2?: any) {
+    private static Get(url: string, after: any, extra?: any, extra2?: any, extra3?: any) {
         const xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = () => {
             if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-                after(xmlHttp, extra, extra2);
+                after(xmlHttp, extra, extra2, extra3);
             } else if (xmlHttp.readyState === 4 && xmlHttp.status !== 200) {
                 after(xmlHttp, extra, extra2);
             }
