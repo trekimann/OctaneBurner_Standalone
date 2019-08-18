@@ -96,7 +96,11 @@ export class Comments extends React.Component<
     }
 
     public render() {
-        const text = String(this.state.RetrievedComments.length) + " comments found on story";
+        let endText = " comments";
+        if (Number(this.state.RetrievedComments.length) === 1) {
+            endText = " comment";
+        }
+        const text = String(this.state.RetrievedComments.length) + endText + " found on story";
         return <div>
             <Button Style={{ backgroundColor: "#2732b0" }} onClick={this.ToggleComments}
                 Text={text} onDblclick={this.getComments}

@@ -4,26 +4,12 @@ import { Button } from "./Button";
 
 const startStyle = {
     backgroundColor: "#2c85aa",
-    border: "none",
-    color: "#eee",
-    cursor: "pointer",
-    fontFamily: "inherit",
     fontSize: "16px",
-    marginBottom: "2px",
-    marginTop: "2px",
-    padding: "2px",
 };
 
 const stopStyle = {
     backgroundColor: "#de2253",
-    border: "none",
-    color: "#eee",
-    cursor: "pointer",
-    fontFamily: "inherit",
     fontSize: "16px",
-    marginBottom: "2px",
-    marginTop: "2px",
-    padding: "2px",
 };
 
 const containterStyle = {
