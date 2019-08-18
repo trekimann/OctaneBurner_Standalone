@@ -53,7 +53,7 @@ export class Comment extends React.Component<
     private deleteOption() {
         return <div>
             <Button Style={{backgroundColor: "Red", color: "black"}}
-            Text={this.props.Details.id} onClick={this.props.DeleteComment(this.props.Details.id)} />
+            Text="Delete Comment" onClick={() => this.props.DeleteComment(this.props.Details.id)} />
         </div>;
     }
 }

@@ -76,13 +76,13 @@ export class Comments extends React.Component<
         const r = confirm("Are you sure you want to delete?");
         if (r === true) {
             ApiUtil.DeleteComment(null, id);
-            for (const com in this.state.RetrievedComments) {
+            for (const com of this.state.RetrievedComments) {
                 if (com.id === id) {
+                    console.log("comment to remove found");
                     this.setState((state) => {
                         // cant mutate state so need to replace it
-                        let RetrievedComments = state.RetrievedComments;
-                        RetrievedComments.filter((ele) => {
-                            return ele !== com;
+                        const RetrievedComments = state.RetrievedComments.filter((ele) => {
+                            return ele.id !== com.id;
                         });
                         RetrievedComments.sort((a, b) => {
                             return new Date(b.creation_time).getTime() - new Date(a.creation_time).getTime();

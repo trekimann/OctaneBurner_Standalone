@@ -4,9 +4,6 @@ import { ApiUtil } from "./../ApiUtil";
 import { Button } from "./Button";
 import { TextInput } from "./TextInput";
 
-const tbStyle = {
-    backgroundColor: "Red",
-};
 const bStyle = {
     fontSize: "18px",
     padding: "18px",
