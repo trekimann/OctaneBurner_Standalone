@@ -89,8 +89,8 @@ export class Story extends React.Component<
 
             ipcRenderer.send("balloon",
                 {
-                    "title": "Story",
-                    "contents": "Story " + id + " Has been updated",
+                    contents: "Story " + id + " Has been updated",
+                    title: "Story",
                 });
         }
     }

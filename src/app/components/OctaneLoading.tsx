@@ -109,7 +109,7 @@ export class OctaneLogin extends React.Component<
         const ph = "Email@hastingsdirect.com";
         const pw = "password";
         return <div style={allStyle}>
-            <TextInput Style={tbStyle} Placeholder={ph} Change={this.username} Text={this.state.userName} />
+            <TextInput Placeholder={ph} Change={this.username} Text={this.state.userName} />
             <TextInput Placeholder={pw} Type={pw} Change={this.pass} OnEnter={this.openWindow} />
             {this.state.failedLogin ?
                 <div style={errorStyle}>Login Failed, Please check username and password</div> :
