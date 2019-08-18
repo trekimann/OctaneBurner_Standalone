@@ -18,8 +18,17 @@ export class TextArea extends React.Component<
     public render() {
         let displayStyle = defaultStyle;
         if (this.props.Style !== null && this.props.Style !== undefined) {
-            displayStyle = this.props.Style;
+            displayStyle = this.desiredStyle();
         }
         return <textarea style={displayStyle} value={this.props.Value} onChange={this.props.OnChange}></textarea>;
+    }
+
+    private desiredStyle() {
+        const outputStyle = defaultStyle;
+        // tslint:disable-next-line: forin
+        for (const inStyle in this.props.Style) {
+            outputStyle[inStyle] = this.props.Style[inStyle];
+        }
+        return outputStyle;
     }
 }

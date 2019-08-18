@@ -12,13 +12,8 @@ const tbStyle = {
     width: "99.6%",
 };
 const bStyle = {
-    backgroundColor: "#2767b0",
-    border: "none",
-    color: "#eee",
-    cursor: "pointer",
     fontSize: "18px",
     padding: "18px",
-    width: "100%",
 };
 
 const allStyle = {

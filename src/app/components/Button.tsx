@@ -30,17 +30,27 @@ export class Button extends React.Component<
         }
         let styling = defaultStyle;
         if (this.props.Style !== null && this.props.Style !== undefined) {
-            styling = this.props.Style;
+            styling = this.desiredStyle();
         }
 
         return <button style={styling}
-        onClick={this.props.onClick}
-        onDoubleClick={this.props.onDblclick}
-        onMouseUp={this.props.MouseUp}
-        src={this.props.Src}
-        onMouseDown={this.props.MouseDown}
-        title={hover}>
-        {this.props.Text}
+            onClick={this.props.onClick}
+            onDoubleClick={this.props.onDblclick}
+            onMouseUp={this.props.MouseUp}
+            src={this.props.Src}
+            onMouseDown={this.props.MouseDown}
+            title={hover}>
+            {this.props.Text}
         </button>;
+    }
+
+    private desiredStyle() {
+        // if there is a style submitted, compare it here to the default and only change any values which are different
+        const outputStyle = defaultStyle;
+        // tslint:disable-next-line: forin
+        for (const inStyle in this.props.Style) {
+                outputStyle[inStyle] = this.props.Style[inStyle];
+        }
+        return outputStyle;
     }
 }

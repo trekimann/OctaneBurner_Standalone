@@ -7,15 +7,8 @@ import { Task } from "./Task";
 import { User } from "./User";
 
 const bsStyle = {
-    backgroundColor: "#2767b0",
-    border: "none",
-    color: "#eee",
-    cursor: "pointer",
     fontSize: "18px",
-    marginBottom: "2px",
-    marginTop: "2px",
     padding: "18px",
-    width: "100%",
 };
 
 export class Story extends React.Component<

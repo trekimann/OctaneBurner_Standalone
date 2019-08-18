@@ -1,7 +1,7 @@
 import * as React from "react";
+import { ApiUtil } from "../ApiUtil";
 import { Button } from "./Button";
 import { User } from "./User";
-import { ApiUtil } from "../ApiUtil";
 
 export class Comment extends React.Component<{ Details: any, userId: string }, { hasError: boolean }> {
     public static getDerivedStateFromError(error: any) {
@@ -55,7 +55,8 @@ export class Comment extends React.Component<{ Details: any, userId: string }, {
 
     private deleteOption() {
         return <div>
-            <Button Text={this.props.Details.id} onClick={this.deleteComment} />
+            <Button Style={backgroundColor: "Red"; color: "black"}
+            Text={this.props.Details.id} onClick={this.deleteComment} />
         </div>;
     }
 }

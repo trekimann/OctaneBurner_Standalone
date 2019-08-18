@@ -93,6 +93,9 @@ export class Comments extends React.Component<
 
     private updateComments = (event: any, value: any) => {
         // comments come in here individually, store them im an array and create a react element for each one.
+
+        // tslint:disable-next-line: max-line-length
+        // TODO: change from an array to an object so that comments can be removed easily. OR loop though each one and look for the id to remove it
         if (!(this.state.RetrievedComments.filter((e) => e.id === value.id).length > 0)) {
             // should try to store them in creation order
             this.setState((state) => {

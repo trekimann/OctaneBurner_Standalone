@@ -10,9 +10,9 @@ namespace Core {
     class Program {
         static void Main (string[] args) {
             var log = new Logger (Directory.GetCurrentDirectory () + @"\log.txt");
-            log.Log ("--------------Starting new process--------------");
             var octaneApi = new octaneApi ();
             var store = new Details (log);
+            log.Log ("--------------Starting new process--------------");
             var tasks = new Tasks (log, store);
             var user = new userDetails (log, store);
 
@@ -173,7 +173,7 @@ namespace Core {
 
     class Logger {
         private string logpath { get; set; }
-        public bool shouldLog { get; private set; } = true;
+        public bool shouldLog { get; private set; } = false;
         public Logger (string LogPath) {
             this.logpath = LogPath;
         }
@@ -291,7 +291,7 @@ namespace Core {
         public void loadFromFile () {
             Log.Log ("loadFromFile: Starting");
             string raw = System.IO.File.ReadAllText (userCache);
-            // user reflection to read this in, for now just hardcoded
+            // use reflection to read this in, for now just hardcoded
             var properties = raw.Split (",");
             foreach (string prop in properties) {
                 string[] contents = prop.Split (":");
