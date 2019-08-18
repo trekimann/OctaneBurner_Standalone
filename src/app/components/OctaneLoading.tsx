@@ -5,11 +5,7 @@ import { Button } from "./Button";
 import { TextInput } from "./TextInput";
 
 const tbStyle = {
-    border: "none",
-    fontSize: "18px",
-    left: "0px",
-    marginTop: "2px",
-    width: "99.6%",
+    backgroundColor: "Red",
 };
 const bStyle = {
     fontSize: "18px",
@@ -114,7 +110,7 @@ export class OctaneLogin extends React.Component<
         const pw = "password";
         return <div style={allStyle}>
             <TextInput Style={tbStyle} Placeholder={ph} Change={this.username} Text={this.state.userName} />
-            <TextInput Style={tbStyle} Placeholder={pw} Type={pw} Change={this.pass} OnEnter={this.openWindow} />
+            <TextInput Placeholder={pw} Type={pw} Change={this.pass} OnEnter={this.openWindow} />
             {this.state.failedLogin ?
                 <div style={errorStyle}>Login Failed, Please check username and password</div> :
                 null}

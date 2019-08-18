@@ -3,7 +3,11 @@ import { ApiUtil } from "../ApiUtil";
 import { Button } from "./Button";
 import { User } from "./User";
 
-export class Comment extends React.Component<{ Details: any, userId: string }, { hasError: boolean }> {
+export class Comment extends React.Component<
+{DeleteComment: any,
+    Details: any,
+    userId: string },
+    { hasError: boolean }> {
     public static getDerivedStateFromError(error: any) {
         // Update state so the next render will show the fallback UI.
         return { hasError: true };
@@ -46,17 +50,10 @@ export class Comment extends React.Component<{ Details: any, userId: string }, {
         </div>;
     }
 
-    private deleteComment = () => {
-        const r = confirm("Are you sure you want to delete?");
-        if (r === true) {
-            ApiUtil.DeleteComment(null, this.props.Details.id);
-        }
-    }
-
     private deleteOption() {
         return <div>
-            <Button Style={backgroundColor: "Red"; color: "black"}
-            Text={this.props.Details.id} onClick={this.deleteComment} />
+            <Button Style={{backgroundColor: "Red", color: "black"}}
+            Text={this.props.Details.id} onClick={this.props.DeleteComment(this.props.Details.id)} />
         </div>;
     }
 }

@@ -46,7 +46,7 @@ export class Button extends React.Component<
 
     private desiredStyle() {
         // if there is a style submitted, compare it here to the default and only change any values which are different
-        const outputStyle = defaultStyle;
+        const outputStyle = Object.assign({}, defaultStyle);
         // tslint:disable-next-line: forin
         for (const inStyle in this.props.Style) {
                 outputStyle[inStyle] = this.props.Style[inStyle];

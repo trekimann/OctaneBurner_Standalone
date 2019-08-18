@@ -72,6 +72,29 @@ export class Comments extends React.Component<
         }
     }
 
+    public removeComment = (id: string) => {
+        const r = confirm("Are you sure you want to delete?");
+        if (r === true) {
+            ApiUtil.DeleteComment(null, id);
+            for (const com in this.state.RetrievedComments) {
+                if (com.id === id) {
+                    this.setState((state) => {
+                        // cant mutate state so need to replace it
+                        let RetrievedComments = state.RetrievedComments;
+                        RetrievedComments.filter((ele) => {
+                            return ele !== com;
+                        });
+                        RetrievedComments.sort((a, b) => {
+                            return new Date(b.creation_time).getTime() - new Date(a.creation_time).getTime();
+                        });
+                        return { RetrievedComments };
+                    });
+                    break;
+                }
+            }
+        }
+    }
+
     public render() {
         const text = String(this.state.RetrievedComments.length) + " comments found on story";
         return <div>
@@ -82,7 +105,10 @@ export class Comments extends React.Component<
                 overflow: "auto",
             } : { display: "none" }}>
                 {(this.state.RetrievedComments || []).map((value) => {
-                    return <Comment key={value.id} Details={value} userId={this.props.UserId} />;
+                    return <Comment key={value.id}
+                    Details={value}
+                    userId={this.props.UserId}
+                    DeleteComment={this.removeComment} />;
                 })}
                 <NewComment commentUpdate={this.commentUpdate}
                     commentValue={this.state.NewComment}
@@ -94,8 +120,6 @@ export class Comments extends React.Component<
     private updateComments = (event: any, value: any) => {
         // comments come in here individually, store them im an array and create a react element for each one.
 
-        // tslint:disable-next-line: max-line-length
-        // TODO: change from an array to an object so that comments can be removed easily. OR loop though each one and look for the id to remove it
         if (!(this.state.RetrievedComments.filter((e) => e.id === value.id).length > 0)) {
             // should try to store them in creation order
             this.setState((state) => {
@@ -112,13 +136,5 @@ export class Comments extends React.Component<
 
     private balloon(title: string, contents: string) {
         ipcRenderer.send("balloon", { "title": title, "contents": contents });
-    }
-
-    private wait(ms: number) {
-        const start = Date.now();
-        let diff = 0;
-        while (diff < ms) {
-            diff = Date.now() - start;
-        }
     }
 }
