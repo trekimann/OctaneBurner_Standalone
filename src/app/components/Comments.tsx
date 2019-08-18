@@ -73,12 +73,12 @@ export class Comments extends React.Component<
     }
 
     public removeComment = (id: string) => {
+        // TODO: some form of check for when comments are retireved to see if there are any that have been removed.
         const r = confirm("Are you sure you want to delete?");
         if (r === true) {
             ApiUtil.DeleteComment(null, id);
             for (const com of this.state.RetrievedComments) {
                 if (com.id === id) {
-                    console.log("comment to remove found");
                     this.setState((state) => {
                         // cant mutate state so need to replace it
                         const RetrievedComments = state.RetrievedComments.filter((ele) => {
@@ -98,7 +98,8 @@ export class Comments extends React.Component<
     public render() {
         const text = String(this.state.RetrievedComments.length) + " comments found on story";
         return <div>
-            <Button onClick={this.ToggleComments} Text={text} onDblclick={this.getComments}
+            <Button Style={{ backgroundColor: "#2732b0" }} onClick={this.ToggleComments}
+                Text={text} onDblclick={this.getComments}
                 HoverText="Double click to update Comments" />
             <div style={this.state.ShowComments ? {
                 maxHeight: "40vh",
@@ -106,9 +107,9 @@ export class Comments extends React.Component<
             } : { display: "none" }}>
                 {(this.state.RetrievedComments || []).map((value) => {
                     return <Comment key={value.id}
-                    Details={value}
-                    userId={this.props.UserId}
-                    DeleteComment={this.removeComment} />;
+                        Details={value}
+                        userId={this.props.UserId}
+                        DeleteComment={this.removeComment} />;
                 })}
                 <NewComment commentUpdate={this.commentUpdate}
                     commentValue={this.state.NewComment}

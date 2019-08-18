@@ -113,7 +113,8 @@ export class Story extends React.Component<
             <div style={this.state.ExpandStory ? this.sStyle : { display: "none" }}>
                 {this.state.StoryRetrieved ?
                     <div>
-                        <Button onClick={this.showStory} Text="Story Description" />
+                        <Button Style={{ backgroundColor: "#0046b0" }}
+                        onClick={this.showStory} Text="Story Description" />
                         <div style={this.state.ShowStory ? null : { display: "none" }}>
                             <User
                                 UserId={this.state.FullStory.author.id}

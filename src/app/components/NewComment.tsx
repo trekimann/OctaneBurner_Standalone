@@ -20,7 +20,7 @@ export class NewComment extends React.Component<{
     }
     public render() {
         return <div>
-            <Button Text="Add new Comment" onClick = {this.toggle}/>
+            <Button Style={{backgroundColor: "rgb(53,147,255)"}} Text="Add new Comment" onClick = {this.toggle}/>
             <div style={this.state.showTextbox ? null : { display: "none" }}>
                 <TextArea Value={this.props.commentValue} OnChange={this.props.commentUpdate} />
                 <Button Text="Submit" onClick={this.props.submitComment}/>

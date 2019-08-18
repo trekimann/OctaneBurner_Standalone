@@ -53,7 +53,8 @@ export class User extends React.Component<
             {this.state.UserDetails === null ?
                 <div>User: {this.props.UserId}</div> :
                 <div>
-                    <Button onClick={this.toggleVisiblity} Text={buttonText} />
+                    <Button Style={{backgroundColor: "rgb(40,115,21)"}}
+                    onClick={this.toggleVisiblity} Text={buttonText} />
                     <div style={this.state.ShowUser ? styling : { display: "none" }}>
                         <div>Email: {this.state.UserDetails.email}</div>
                     </div>

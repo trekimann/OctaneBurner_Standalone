@@ -74,7 +74,7 @@ export class Task extends React.Component<{
     public render() {
         const taskText = this.id + ": " + this.task.name;
         return <div>
-            <Button onClick={this.showTask} Text={taskText} />
+            <Button Style={{ backgroundColor: "#2700b0" }} onClick={this.showTask} Text={taskText} />
             <div style={this.state.ShowTask ? this.tStyle : { display: "none" }}>
                 {/* <Story StoryId={this.task.story.id} StoryType={this.task.story.type} /> */}
                 <div>Task Name: {this.task.name}</div>
