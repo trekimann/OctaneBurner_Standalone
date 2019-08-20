@@ -1,5 +1,6 @@
 import { desktopCapturer, DesktopCapturerSource, ipcRenderer } from "electron";
 import * as React from "react";
+import { Button } from "./Button";
 
 
 
@@ -17,7 +18,8 @@ export class VideoCapture extends React.Component<{}, {}> {
 
     public render() {
         return <div>Video Recording Goes here
-            <video autoplay="autoplay"></video>{this.thing()}
+            <video autoplay="autoplay"></video>{}
+            <Button Text="start Video" onClick={this.thing} />
         </div>;
     }
 
@@ -42,16 +44,20 @@ export class VideoCapture extends React.Component<{}, {}> {
             }
             const video: HTMLVideoElement | null = document.querySelector("video");
             for (const src of srcs) {
-                navigator.mediaDevices.getUserMedia({
-                    video: {
-                        deviceId: src.id,
-                    },
-                }).then((stream: MediaStream) => {
-                    if (video) {
-                        video.srcObject = stream;
-                        video.play();
-                    }
-                });
+                if (src.name === "Screen 1") {
+                    navigator.mediaDevices.getUserMedia(
+                        {
+                            video: {
+                                deviceId: src.id,
+                            },
+                        }).then((stream: MediaStream) => {
+                            if (video) {
+                                video.srcObject = stream;
+                                video.play();
+                            }
+                        });
+                    return;
+                }
             }
         });
     }
