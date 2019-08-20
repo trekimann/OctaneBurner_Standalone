@@ -1,4 +1,4 @@
-import { remote, ipcRenderer } from "electron";
+// import { remote, ipcRenderer } from "electron";
 import * as React from "react";
 import { OctaneLogin } from "./OctaneLoading";
 import { Spinner } from "./spinner";
@@ -46,4 +46,20 @@ export class TopOptions extends React.Component<{}, { UserId: any, loggedIn: boo
             </div>}
         </div>;
     }
+
+    // private printPDF() {
+    //     const fs = require("fs");
+    //     remote.BrowserWindow.getFocusedWindow().webContents.printToPDF(
+    //         { printBackground: true }, (error: any, data: any) => {
+    //             if (error) { throw error }
+    //             fs.writeFile("/tmp/print.pdf", data, (error2: any) => {
+    //                 if (error2) { throw error2 }
+    //                 console.log("Write PDF successfully.")
+    //             });
+    //         });
+    // }
+
+    // private printPrinter() {
+    //     remote.BrowserWindow.getFocusedWindow().webContents.print({ printBackground: true });
+    // }
 }

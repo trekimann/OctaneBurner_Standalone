@@ -10,8 +10,7 @@ const defaultStyle = {
     padding: "2px",
     width: "100%",
 };
-export class Button extends React.Component<
-    {
+export class Button extends React.Component<{
         Style?: any,
         onClick?: any,
         Text?: string,

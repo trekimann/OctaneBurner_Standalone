@@ -3,7 +3,6 @@ import * as React from "react";
 import { ApiUtil } from "./../ApiUtil";
 import { Spinner } from "./spinner";
 import { Story } from "./Story";
-import { Task } from "./Task";
 
 export class Tasks extends React.Component<{ UserId: string}, {
     TaskRequested: boolean,
@@ -50,9 +49,6 @@ export class Tasks extends React.Component<{ UserId: string}, {
     public render() {
         return <div id="tasksContainer">
             {this.state.TasksLoaded ? <div>
-                {/* {(this.state.UserTasksDetails || []).map((value) => {
-                return <Task key={value.id} Details={value} TaskUpdate={this.updateTimedTask} />;
-            })} */}
                 {Object.keys(this.state.GroupedTasks).reverse().map((story) => {
                     return <Story key={story}
                         StoryId={story}

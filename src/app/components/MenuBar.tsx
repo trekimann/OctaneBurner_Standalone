@@ -3,9 +3,10 @@ import * as React from "react";
 import closeIcon from "./../assets/close.png";
 import maxIcon from "./../assets/maximise.png";
 import minIcon from "./../assets/minimise2.png";
-import octIcon from "./../assets/octaneIcon.png";
-import vidIcon from "./../assets/Video.png";
-import vidIconRec from "./../assets/Video_recording.png";
+// import octIcon from "./../assets/octaneIcon.png";
+// import vidIcon from "./../assets/Video.png";
+// import vidIconRec from "./../assets/Video_recording.png";
+import printIcon from "./../assets/Print.png";
 import { MenuIcon } from "./MenuIcon";
 
 const menuStyle = {
@@ -59,18 +60,23 @@ export class MenuBar extends React.Component {
       click: this.minWindow,
       src: minIcon,
     },
+    // {
+    //   alt: "Octane",
+    //   click: () => {
+    //     window.open("https://almoctane-eur.saas.microfocus.com/ui/?p=146003", "_blank");
+    //     remote.BrowserWindow.getFocusedWindow();
+    //   },
+    //   src: octIcon,
+    // },
+    // {
+    //   alt: "Capture Video",
+    //   altSrc: vidIconRec,
+    //   src: vidIcon,
+    // },
     {
-      alt: "Octane Login",
-      click: () => {
-        window.open("https://login.software.microfocus.com/msg/actions/showLogin", "_blank");
-        remote.BrowserWindow.getFocusedWindow().maximize();
-      },
-      src: octIcon,
-    },
-    {
-      alt: "Capture Video",
-      altSrc: vidIconRec,
-      src: vidIcon,
+      alt: "Print",
+      click: () => { remote.BrowserWindow.getFocusedWindow().webContents.print({ printBackground: true }); },
+      src: printIcon,
     },
   ];
 
@@ -86,7 +92,7 @@ export class MenuBar extends React.Component {
   public closeWindow() {
     remote.BrowserWindow.getFocusedWindow().hide();
     ipcRenderer.send("balloon",
-    { title: "Notificaiton", contents: "Still Running. To close fully right click and select quit" });
+      { title: "Notificaiton", contents: "Still Running. To close fully right click and select quit" });
   }
 
   public maxWindow() {
@@ -95,7 +101,7 @@ export class MenuBar extends React.Component {
   }
 
   public render(): React.ReactNode {
-    return (<header style={menuStyle}>Octane Burner
+    return <header style={menuStyle}>Octane Burner
       <nav style={navStyle}>
         <ul style={ulStyle}>
           {this.buttons.map((value, index) => {
@@ -105,6 +111,7 @@ export class MenuBar extends React.Component {
           })}
         </ul>
       </nav>
-    </header>);
+    </header>;
   }
+
 }

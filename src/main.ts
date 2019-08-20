@@ -1,5 +1,6 @@
 const url = require("url");
 const path = require("path");
+const os = require("os")
 const { ipcMain } = require('electron');
 const { ConnectionBuilder } = require("electron-cgi");
 const iconpath = path.join(__dirname + "/assets", 'octaneIcon.png');
@@ -38,6 +39,10 @@ const createWindow = () => {
   });
 
   createTray();
+
+  // BrowserWindow.addDevToolsExtension(
+  //   path.join(os.homedir(),
+  //   "AppData/Local/Google/Chrome/User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.0.5_0"));
 };
 
 let appIcon: Tray = null;
@@ -62,7 +67,7 @@ const createTray = () => {
     label: "Last message",
     click() {
       balloon("Last message", lastBalloonMessage);
-    }
+    },
   },
   ]);
 

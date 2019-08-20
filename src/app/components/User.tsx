@@ -1,7 +1,6 @@
 import { ipcRenderer } from "electron";
 import * as React from "react";
 import { Button } from "./Button";
-import { string } from "prop-types";
 
 const styling = {
     background: "rgba(10, 10, 10, 0.5)",

@@ -39,7 +39,7 @@ export class TextInput extends React.Component
     }
 
     private enterKey = (e: any) => {
-        if (e.keyCode === 13) {
+        if (e.keyCode === 13 && this.props.OnEnter !== undefined && this.props.OnEnter !== null) {
             this.props.OnEnter();
         }
     }
