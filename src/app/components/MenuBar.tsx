@@ -4,8 +4,9 @@ import closeIcon from "./../assets/close.png";
 import maxIcon from "./../assets/maximise.png";
 import minIcon from "./../assets/minimise2.png";
 import octIcon from "./../assets/octaneIcon.png";
+import vidIcon from "./../assets/Video.png";
+import vidIconRec from "./../assets/Video_recording.png";
 import { MenuIcon } from "./MenuIcon";
-
 
 const menuStyle = {
   "-webkit-app-region": "drag",
@@ -64,8 +65,12 @@ export class MenuBar extends React.Component {
         window.open("https://login.software.microfocus.com/msg/actions/showLogin", "_blank");
         remote.BrowserWindow.getFocusedWindow().maximize();
       },
-      // click: this.loginWindow,
       src: octIcon,
+    },
+    {
+      alt: "Capture Video",
+      altSrc: vidIconRec,
+      src: vidIcon,
     },
   ];
 

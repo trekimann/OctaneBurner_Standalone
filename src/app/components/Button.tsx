@@ -20,7 +20,7 @@ export class Button extends React.Component<
         MouseDown?: any,
         onDblclick?: any,
         HoverText?: string,
-    }> {
+    }, {}> {
 
 
     public render() {
@@ -49,7 +49,7 @@ export class Button extends React.Component<
         const outputStyle = Object.assign({}, defaultStyle);
         // tslint:disable-next-line: forin
         for (const inStyle in this.props.Style) {
-                outputStyle[inStyle] = this.props.Style[inStyle];
+            outputStyle[inStyle] = this.props.Style[inStyle];
         }
         return outputStyle;
     }

@@ -318,10 +318,10 @@ namespace Core {
             Log.Log ("SaveDetails: starting");
             // use reflection properly but for now just do it manually to test
 
-            string text = "USERNAME:" + Username + ",";
+            string text = "VERBOSELOGGING:"+Log.shouldLog+",";
+            text = text + "USERNAME:" + Username + ",";
             text = text + "WORKSPACEID:" + WorkspaceId + ",";
             text = text + "USERID:" + UserId + ",";
-            text = text + "VERBOSELOGGING:"+Log.shouldLog+",";
 
             System.IO.File.WriteAllText (userCache, text);
             Log.Log ("loadFromFile: Finished");
