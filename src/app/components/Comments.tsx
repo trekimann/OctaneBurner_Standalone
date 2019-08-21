@@ -109,15 +109,15 @@ export class Comments extends React.Component<
                 maxHeight: "40vh",
                 overflow: "auto",
             } : { display: "none" }}>
+                <NewComment commentUpdate={this.commentUpdate}
+                    commentValue={this.state.NewComment}
+                    submitComment={this.submitNewComment} />
                 {(this.state.RetrievedComments || []).map((value) => {
                     return <Comment key={value.id}
                         Details={value}
                         userId={this.props.UserId}
                         DeleteComment={this.removeComment} />;
                 })}
-                <NewComment commentUpdate={this.commentUpdate}
-                    commentValue={this.state.NewComment}
-                    submitComment={this.submitNewComment} />
             </div>
         </div>;
     }

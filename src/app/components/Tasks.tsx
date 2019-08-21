@@ -63,7 +63,7 @@ export class Tasks extends React.Component<{ UserId: string}, {
     private allTasks = (event: any, value: any) => {
         // this should be all the details for the tasks in JSON form
         if (!this.state.TaskRequested) {
-            ipcRenderer.send("balloon", { "title": "Tasks", "contents": "Fetching Tasks" });
+            ipcRenderer.send("balloon", { title: "Tasks", contents: "Fetching Tasks" });
             ApiUtil.getAllTasks(null, value);
             this.setState({ TaskRequested: true, UserId: value });
         } else {

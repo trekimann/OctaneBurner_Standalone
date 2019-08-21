@@ -44,18 +44,23 @@ export class User extends React.Component<
 
     public render() {
         let buttonText = this.state.UserName;
+        let hRef = "";
         if (this.props.AdditionalDescription !== null && this.props.AdditionalDescription !== undefined) {
             buttonText = this.props.AdditionalDescription + ": " + this.state.UserName;
+        }
+        if (this.state.UserDetails !== null) {
+            hRef = "mailto:" + this.state.UserDetails.email;
         }
 
         return <div>
             {this.state.UserDetails === null ?
                 <div>User: {this.props.UserId}</div> :
                 <div>
-                    <Button Style={{backgroundColor: "rgb(40,115,21)"}}
-                    onClick={this.toggleVisiblity} Text={buttonText} />
+                    <Button Style={{ backgroundColor: "rgb(40,115,21)" }}
+                        onClick={this.toggleVisiblity} Text={buttonText} />
                     <div style={this.state.ShowUser ? styling : { display: "none" }}>
-                        <div>Email: {this.state.UserDetails.email}</div>
+                        <div>Email: <a style={{ color: "inherit" }} href={hRef}>{this.state.UserDetails.email}</a>
+                        </div>
                     </div>
                 </div>
             }

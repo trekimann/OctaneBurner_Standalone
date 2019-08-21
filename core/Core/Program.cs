@@ -143,7 +143,6 @@ namespace Core {
 
         private dynamic taskDetails (dynamic taskDetails) {
             userTasks.Add (taskDetails.id.ToString (), taskDetails);
-
             return null;
         }
 

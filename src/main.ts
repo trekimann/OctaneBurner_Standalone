@@ -34,13 +34,14 @@ const createWindow = () => {
   });
 
   window.on("minimize", (event: any) => {
-    event.preventDefault()
+    event.preventDefault();
     window.hide();
   });
 
   createTray();
 
   // BrowserWindow.addDevToolsExtension(
+  // BrowserWindow.removeDevToolsExtension(
   //   path.join(os.homedir(),
   //   "AppData/Local/Google/Chrome/User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.0.5_0"));
 };

@@ -1,4 +1,4 @@
-import { ipcRenderer, remote } from "electron";
+import { ipcRenderer, remote, inAppPurchase } from "electron";
 import * as React from "react";
 import { ApiUtil } from "./../ApiUtil";
 import { Button } from "./Button";
@@ -10,6 +10,7 @@ export class Task extends React.Component<{
     TaskUpdate: any,
 }, {
     ActualHours: number,
+    Completed: boolean,
     RemainingHours: number,
     ShowTask: boolean,
 }> {
@@ -31,11 +32,12 @@ export class Task extends React.Component<{
     // pull apart task details here
     private id = this.props.Details.id;
     private task = this.props.Details;
-    private status = this.task.phase.id.split(".").pop();
+    private status = this.task.phase.name;
     constructor(props: any) {
         super(props);
         this.state = {
             ActualHours: Number(this.task.invested_hours),
+            Completed: false,
             RemainingHours: Number(this.task.remaining_hours),
             ShowTask: false,
         };
@@ -58,7 +60,19 @@ export class Task extends React.Component<{
                 ActualHours: newTotal,
                 RemainingHours: newRemaining,
             });
-            const changes = { invested_hours: newTotal, remaining_hours: newRemaining };
+            let Phase: { id: string; type: string; } = null;
+            if (this.status === "New") {
+                Phase = {
+                    id: "phase.task.inprogress",
+                    type: "phase",
+                };
+            }
+            const changes = {
+                invested_hours: newTotal,
+                phase: (Phase !== null ? Phase : undefined),
+                remaining_hours: newRemaining,
+            };
+
             const toSend = JSON.stringify(changes);
             const update = { taskId: this.id, data: toSend, after: this.taskUpdated };
             ApiUtil.updateTask(update);
@@ -67,8 +81,17 @@ export class Task extends React.Component<{
         }
     }
 
+    public taskCompleted = () => {
+        const changes = {
+            phase: { id: "phase.task.completed", type: "phase" },
+        };
+        const toSend = JSON.stringify(changes);
+        const update = { taskId: this.id, data: toSend, after: this.taskUpdated };
+        ApiUtil.updateTask(update);
+    }
+
     public taskUpdated = (update: any) => {
-        this.balloon("Tasks", "Hours updated");
+        this.balloon("Tasks", "Task updated");
     }
 
     public render() {
@@ -80,10 +103,14 @@ export class Task extends React.Component<{
                 <div>Estimated hours:   {this.task.estimated_hours}</div>
                 <div>Invested Hours:    {this.state.ActualHours}</div>
                 <div>Remaining hours:   {this.state.RemainingHours}</div>
-                <div>Task Phase: {this.status}</div>
-                <Timer updateActualHours={this.updateTask}
-                    TaskUpdate={this.props.TaskUpdate}
-                    AssociatedTask={this.id} />
+                <div>Task Phase: {this.status} {this.status === "In Progress" ?
+                    <Button Style={{backgroundColor:"#039c0d", borderRadius:"5px", maxWidth: "100%", width: null, paddingLeft: "5px", paddingRight: "5px" }}
+                        Text="Move to completed" onClick={this.taskCompleted} /> : null}</div>
+                {this.state.Completed ? null :
+                    <Timer updateActualHours={this.updateTask}
+                        TaskUpdate={this.props.TaskUpdate}
+                        AssociatedTask={this.id} />
+                }
                 <br></br>
             </div>
         </div>;

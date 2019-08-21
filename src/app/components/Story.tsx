@@ -5,6 +5,7 @@ import { Button } from "./Button";
 import { Comments } from "./Comments";
 import { Task } from "./Task";
 import { User } from "./User";
+import { Attachments } from "./Attachments";
 
 const bsStyle = {
     fontSize: "18px",
@@ -14,6 +15,7 @@ const bsStyle = {
 export class Story extends React.Component<
     { StoryId: string, userId: string, StoryType?: string, LinkedTasks?: [], TaskInFlight?: any },
     {
+        Attachments: [],
         ExpandStory: boolean,
         Frequency: number,
         FrequencyMultiplier: number,
@@ -37,6 +39,7 @@ export class Story extends React.Component<
     constructor(props: any) {
         super(props);
         this.state = {
+            Attachments: null,
             ExpandStory: false,
             Frequency: 60000,
             FrequencyMultiplier: 5,
@@ -79,7 +82,13 @@ export class Story extends React.Component<
             description = description.replace("</body>", "");
             description = description.replace(/style=/g, "");
 
+            // // check for attachments
+            // if (story.attachments !== undefined) {
+            //     this.setState({ Attachments: story.attachments });
+            // }
+
             this.setState({
+                Attachments: story.attachments,
                 FullStory: story,
                 LastUpdated: updated,
                 StoryDetails: description,
@@ -101,8 +110,10 @@ export class Story extends React.Component<
 
     public render() {
         let linkedStory = "Associated " + this.props.StoryType + ": " + this.props.StoryId;
+        let StoryText = "Description";
         if (this.state.StoryRetrieved === true) {
             linkedStory = this.props.StoryId + ": " + this.state.StoryName;
+            StoryText = this.state.FullStory.subtype_label + " Description";
         }
         return <div>
             <Button onDblclick={this.getStoryDetails}
@@ -114,12 +125,13 @@ export class Story extends React.Component<
                 {this.state.StoryRetrieved ?
                     <div>
                         <Button Style={{ backgroundColor: "#0046b0" }}
-                        onClick={this.showStory} Text="Story Description" />
+                            onClick={this.showStory} Text={StoryText} />
                         <div style={this.state.ShowStory ? null : { display: "none" }}>
                             <User
                                 UserId={this.state.FullStory.author.id}
                                 UniqueId={this.props.StoryId + "author"}
-                                AdditionalDescription="Author" />
+                                AdditionalDescription="Author"
+                            />
                             {this.state.FullStory.owner !== null && this.state.FullStory.owner !== undefined ?
                                 <User
                                     UserId={this.state.FullStory.owner.id}
@@ -128,6 +140,7 @@ export class Story extends React.Component<
                             <div style={this.sdStyle} dangerouslySetInnerHTML={{ __html: this.state.StoryDetails }} >
                             </div>
                         </div>
+                        {this.state.Attachments !== null ? <Attachments Details={this.state.Attachments} /> : null}
                     </div> : "Story Goes Here"}
                 <Comments WorkId={this.props.StoryId} UserId={this.props.userId} />
                 {(this.props.LinkedTasks || []).map((value) => {
