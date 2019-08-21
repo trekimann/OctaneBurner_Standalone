@@ -12,7 +12,6 @@ namespace Core {
             var log = new Logger (Directory.GetCurrentDirectory () + @"\log.txt");
             var octaneApi = new octaneApi ();
             var store = new Details (log);
-            log.Log ("--------------Starting new process--------------");
             var tasks = new Tasks (log, store);
             var user = new userDetails (log, store);
 
@@ -23,6 +22,7 @@ namespace Core {
             // load up cached values from a file if it exists
             store.loadFromFile ();
 
+            log.Log ("--------------Starting new process--------------");
             connection.On<string, string> ("greeting", name => "Hello " + name);
 
             connection.On<dynamic, dynamic> ("octaneApi", data => octaneApi.route (data));
@@ -290,6 +290,7 @@ namespace Core {
 
         public void loadFromFile () {
             Log.Log ("loadFromFile: Starting");
+            if(File.Exists(userCache)){
             string raw = System.IO.File.ReadAllText (userCache);
             // use reflection to read this in, for now just hardcoded
             var properties = raw.Split (",");
@@ -312,6 +313,9 @@ namespace Core {
                 };
             }
             Log.Log ("loadFromFile: Finished");
+            } else{
+                saveDetails();
+            }
         }
 
         private string saveDetails () {

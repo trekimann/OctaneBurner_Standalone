@@ -7,3 +7,4 @@ core/Core/bin
 core/Core/obj
 .vs
 electron-demo-win32-x64/
+release-builds

@@ -106,6 +106,8 @@ export class OctaneLogin extends React.Component<
         const ph = "Email@hastingsdirect.com";
         const pw = "password";
         return <div style={allStyle}>
+            This tool loads stories from Octane based on Tasks with you as the Owner.
+            If there are no tasks with you as the Owner, nothing will be displayed
             <TextInput Placeholder={ph} Change={this.username} Text={this.state.userName} />
             <TextInput Placeholder={pw} Type={pw} Change={this.pass} OnEnter={this.openWindow} />
             {this.state.failedLogin ?
