@@ -1,0 +1,768 @@
+14:36:08.5173413	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+14:36:08.5263413	--	loadFromFile: WORKSPACEID - 1002
+14:36:08.5283413	--	loadFromFile: USERID - 4008
+14:36:08.5613413	--	loadFromFile: Finished
+14:36:08.5643413	--	--------------Starting new process--------------
+14:36:08.7453413	--	retrieve values: Starting
+14:36:08.7583413	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+14:36:27.7103413	--	updating values: Starting
+14:36:27.7153413	--	updating values: Starting
+14:36:27.7313413	--	updating values:	Username - nicholasmann@hastingsdirect.com
+14:36:27.7373413	--	SaveDetails: starting
+14:36:27.7383413	--	loadFromFile: Finished
+14:36:27.7393413	--	updating values: Finished
+14:36:28.2243413	--	updating values: Starting
+14:36:28.2283413	--	updating values:	UserId - 4008
+14:36:28.2283413	--	SaveDetails: starting
+14:36:28.2303413	--	loadFromFile: Finished
+14:36:28.2313413	--	updating values: Finished
+14:36:28.2323413	--	updating values: Starting
+14:36:28.2343413	--	updating values:	UserList - System.Collections.Generic.Dictionary`2[System.String,System.Object]
+14:36:28.2353413	--	SaveDetails: starting
+14:36:28.2363413	--	loadFromFile: Finished
+14:36:28.2363413	--	updating values: Finished
+14:36:29.6263413	--	Task Route: totalNumberOfTasks
+14:36:41.9473413	--	Task Route: filterOwnerTasks
+14:36:53.9603413	--	Task Route: filterOwnerTasks
+14:36:56.8703413	--	Task Route: taskDetails
+14:36:56.8703413	--	Task Route: taskDetails
+14:36:56.8703413	--	Task Route: taskDetails
+14:36:56.8723413	--	Task Route: filterOwnerTasks
+14:42:36.0723413	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+14:42:36.0803413	--	loadFromFile: WORKSPACEID - 1002
+14:42:36.0823413	--	loadFromFile: USERID - 4008
+14:42:36.1103413	--	loadFromFile: Finished
+14:42:36.1123413	--	--------------Starting new process--------------
+14:42:36.2943413	--	retrieve values: Starting
+14:42:36.3083413	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+14:42:55.2813413	--	updating values: Starting
+14:42:55.2863413	--	updating values: Starting
+14:42:55.2913413	--	updating values:	Username - nicholasmann@hastingsdirect.com
+14:42:55.2963413	--	SaveDetails: starting
+14:42:55.3013413	--	loadFromFile: Finished
+14:42:55.3043413	--	updating values: Finished
+14:42:55.8253413	--	updating values: Starting
+14:42:55.8293413	--	updating values:	UserId - 4008
+14:42:55.8303413	--	SaveDetails: starting
+14:42:55.8313413	--	loadFromFile: Finished
+14:42:55.8323413	--	updating values: Finished
+14:42:55.8343413	--	updating values: Starting
+14:42:55.8373413	--	updating values:	UserList - System.Collections.Generic.Dictionary`2[System.String,System.Object]
+14:42:55.8383413	--	SaveDetails: starting
+14:42:55.8403413	--	loadFromFile: Finished
+14:42:55.8413413	--	updating values: Finished
+14:42:59.1063413	--	Task Route: totalNumberOfTasks
+14:43:11.3983413	--	Task Route: filterOwnerTasks
+14:43:23.0733413	--	Task Route: filterOwnerTasks
+14:43:25.9043413	--	Task Route: taskDetails
+14:43:25.9043413	--	Task Route: taskDetails
+14:43:25.9063413	--	Task Route: taskDetails
+14:43:25.9133413	--	Task Route: filterOwnerTasks
+14:48:47.6053413	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+14:48:47.6143413	--	loadFromFile: WORKSPACEID - 1002
+14:48:47.6173413	--	loadFromFile: USERID - 4008
+14:48:47.6463413	--	loadFromFile: Finished
+14:48:47.6483413	--	--------------Starting new process--------------
+14:48:47.8493413	--	retrieve values: Starting
+14:48:47.8633413	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+14:49:01.6633413	--	updating values: Starting
+14:49:01.6843413	--	updating values:	WorkspaceId - 1002
+14:49:01.6903413	--	SaveDetails: starting
+14:49:01.6953413	--	loadFromFile: Finished
+14:49:01.6953413	--	updating values: Finished
+14:49:01.7203413	--	updating values: Starting
+14:49:01.7213413	--	updating values:	Username - nicholasmann@hastingsdirect.com
+14:49:01.7223413	--	SaveDetails: starting
+14:49:01.7263413	--	loadFromFile: Finished
+14:49:01.7283413	--	updating values: Finished
+14:49:02.5863413	--	updating values: Starting
+14:49:02.5903413	--	updating values:	UserId - 4008
+14:49:02.5913413	--	SaveDetails: starting
+14:49:02.5933413	--	loadFromFile: Finished
+14:49:02.5943413	--	updating values: Finished
+14:49:02.5963413	--	updating values: Starting
+14:49:02.5983413	--	updating values:	UserList - System.Collections.Generic.Dictionary`2[System.String,System.Object]
+14:49:02.5993413	--	SaveDetails: starting
+14:49:02.6013413	--	loadFromFile: Finished
+14:49:02.6023413	--	updating values: Finished
+14:49:03.9543413	--	Task Route: totalNumberOfTasks
+14:49:16.1443413	--	Task Route: filterOwnerTasks
+14:49:28.3893413	--	Task Route: filterOwnerTasks
+14:49:31.6373413	--	Task Route: taskDetails
+14:49:31.6383413	--	Task Route: taskDetails
+14:49:31.6473413	--	Task Route: filterOwnerTasks
+14:50:15.1083413	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+14:50:15.1173413	--	loadFromFile: WORKSPACEID - 1002
+14:50:15.1203413	--	loadFromFile: USERID - 4008
+14:50:15.1533413	--	loadFromFile: Finished
+14:50:15.1553413	--	--------------Starting new process--------------
+14:50:15.3423413	--	retrieve values: Starting
+14:50:15.3563413	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+14:50:38.0953413	--	updating values: Starting
+14:50:38.1013413	--	updating values: Starting
+14:50:38.1183413	--	updating values:	Username - nicholasmann@hastingsdirect.com
+14:50:38.1293413	--	SaveDetails: starting
+14:50:38.1313413	--	loadFromFile: Finished
+14:50:38.1313413	--	updating values: Finished
+14:50:38.9873413	--	updating values: Starting
+14:50:38.9903413	--	updating values:	UserId - 4008
+14:50:38.9913413	--	SaveDetails: starting
+14:50:38.9933413	--	loadFromFile: Finished
+14:50:38.9933413	--	updating values: Finished
+14:50:38.9953413	--	updating values: Starting
+14:50:38.9973413	--	updating values:	UserList - System.Collections.Generic.Dictionary`2[System.String,System.Object]
+14:50:38.9983413	--	SaveDetails: starting
+14:50:39.0003413	--	loadFromFile: Finished
+14:50:39.0013413	--	updating values: Finished
+14:50:40.4363413	--	Task Route: totalNumberOfTasks
+14:50:52.9313413	--	Task Route: filterOwnerTasks
+14:51:04.7673413	--	Task Route: filterOwnerTasks
+14:51:07.7413413	--	Task Route: taskDetails
+14:51:07.7433413	--	Task Route: filterOwnerTasks
+14:51:09.9343413	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+14:51:09.9433413	--	loadFromFile: WORKSPACEID - 1002
+14:51:09.9453413	--	loadFromFile: USERID - 4008
+14:51:09.9723413	--	loadFromFile: Finished
+14:51:09.9743413	--	--------------Starting new process--------------
+14:54:40.6483413	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+14:54:40.6573413	--	loadFromFile: WORKSPACEID - 1002
+14:54:40.6593413	--	loadFromFile: USERID - 4008
+14:54:40.6903413	--	loadFromFile: Finished
+14:54:40.6933413	--	--------------Starting new process--------------
+14:54:40.8773413	--	retrieve values: Starting
+14:54:40.8923413	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+14:54:56.0273413	--	updating values: Starting
+14:54:56.0293413	--	updating values: Starting
+14:54:56.0383413	--	updating values:	Username - nicholasmann@hastingsdirect.com
+14:54:56.0413413	--	loadFromFile: Finished
+14:54:56.0413413	--	updating values: Finished
+14:54:56.0423413	--	loadFromFile: Finished
+14:54:56.0423413	--	updating values: Finished
+14:54:56.5503413	--	updating values: Starting
+14:54:56.5533413	--	updating values:	UserId - 4008
+14:54:56.5543413	--	SaveDetails: starting
+14:54:56.5563413	--	loadFromFile: Finished
+14:54:56.5563413	--	updating values: Finished
+14:54:56.5573413	--	updating values: Starting
+14:54:56.5593413	--	updating values:	UserList - System.Collections.Generic.Dictionary`2[System.String,System.Object]
+14:54:56.5603413	--	SaveDetails: starting
+14:54:56.5623413	--	loadFromFile: Finished
+14:54:56.5633413	--	updating values: Finished
+14:54:59.4773413	--	Task Route: totalNumberOfTasks
+14:55:11.7023413	--	Task Route: filterOwnerTasks
+14:55:23.6583413	--	Task Route: filterOwnerTasks
+14:55:26.5783413	--	Task Route: taskDetails
+14:55:26.5783413	--	Task Route: taskDetails
+14:55:26.5823413	--	Task Route: filterOwnerTasks
+14:57:16.7493413	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+14:57:16.7583413	--	loadFromFile: WORKSPACEID - 1002
+14:57:16.7613413	--	loadFromFile: USERID - 4008
+14:57:16.7883413	--	loadFromFile: Finished
+14:57:16.7903413	--	--------------Starting new process--------------
+14:57:16.9693413	--	retrieve values: Starting
+14:57:16.9833413	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+14:57:30.1133413	--	updating values: Starting
+14:57:30.1293413	--	updating values:	WorkspaceId - 1002
+14:57:30.1333413	--	SaveDetails: starting
+14:57:30.1393413	--	loadFromFile: Finished
+14:57:30.1453413	--	updating values: Finished
+14:57:30.1843413	--	updating values: Starting
+14:57:30.1853413	--	updating values:	Username - nicholasmann@hastingsdirect.com
+14:57:30.1863413	--	SaveDetails: starting
+14:57:30.1923413	--	loadFromFile: Finished
+14:57:30.1953413	--	updating values: Finished
+14:57:30.6503413	--	updating values: Starting
+14:57:30.6573413	--	updating values:	UserId - 4008
+14:57:30.6583413	--	SaveDetails: starting
+14:57:30.6593413	--	loadFromFile: Finished
+14:57:30.6593413	--	updating values: Finished
+14:57:30.6613413	--	updating values: Starting
+14:57:30.6623413	--	updating values:	UserList - System.Collections.Generic.Dictionary`2[System.String,System.Object]
+14:57:30.6633413	--	SaveDetails: starting
+14:57:30.6653413	--	loadFromFile: Finished
+14:57:30.6653413	--	updating values: Finished
+14:57:32.2383413	--	Task Route: totalNumberOfTasks
+14:57:44.4533413	--	Task Route: filterOwnerTasks
+14:57:56.4103413	--	Task Route: filterOwnerTasks
+14:57:59.3503413	--	Task Route: taskDetails
+14:57:59.3583413	--	Task Route: filterOwnerTasks
+14:58:23.7663413	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+14:58:23.7763413	--	loadFromFile: WORKSPACEID - 1002
+14:58:23.7783413	--	loadFromFile: USERID - 4008
+14:58:23.8123413	--	loadFromFile: Finished
+14:58:23.8163413	--	--------------Starting new process--------------
+14:58:24.0263413	--	retrieve values: Starting
+14:58:24.0443413	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+14:58:47.9093413	--	updating values: Starting
+14:58:47.9143413	--	updating values: Starting
+14:58:47.9203413	--	SaveDetails: starting
+14:58:47.9303413	--	loadFromFile: Finished
+14:58:47.9313413	--	updating values: Finished
+14:58:48.6843413	--	updating values: Starting
+14:58:48.6863413	--	updating values:	UserId - 4008
+14:58:48.6873413	--	SaveDetails: starting
+14:58:48.6883413	--	loadFromFile: Finished
+14:58:48.6893413	--	updating values: Finished
+14:58:48.6903413	--	updating values: Starting
+14:58:48.6923413	--	updating values:	UserList - System.Collections.Generic.Dictionary`2[System.String,System.Object]
+14:58:48.6933413	--	SaveDetails: starting
+14:58:48.6943413	--	loadFromFile: Finished
+14:58:48.6943413	--	updating values: Finished
+14:58:50.0653413	--	Task Route: totalNumberOfTasks
+14:59:02.4703413	--	Task Route: filterOwnerTasks
+14:59:14.4683413	--	Task Route: filterOwnerTasks
+14:59:17.3443413	--	Task Route: taskDetails
+14:59:17.3453413	--	Task Route: taskDetails
+14:59:17.3503413	--	Task Route: filterOwnerTasks
+15:08:34.9283413	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+15:08:34.9373413	--	loadFromFile: WORKSPACEID - 1002
+15:08:34.9403413	--	loadFromFile: USERID - 4008
+15:08:34.9713413	--	loadFromFile: Finished
+15:08:34.9743413	--	--------------Starting new process--------------
+15:08:35.1833413	--	retrieve values: Starting
+15:08:35.2003413	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+15:08:58.8073413	--	updating values: Starting
+15:08:58.8073413	--	updating values: Starting
+15:08:58.8173413	--	SaveDetails: starting
+15:08:58.8213413	--	loadFromFile: Finished
+15:08:58.8213413	--	updating values: Finished
+15:08:59.5633413	--	updating values: Starting
+15:08:59.5663413	--	updating values:	UserId - 4008
+15:08:59.5663413	--	SaveDetails: starting
+15:08:59.5683413	--	loadFromFile: Finished
+15:08:59.5683413	--	updating values: Finished
+15:08:59.5703413	--	updating values: Starting
+15:08:59.5723413	--	updating values:	UserList - System.Collections.Generic.Dictionary`2[System.String,System.Object]
+15:08:59.5733413	--	SaveDetails: starting
+15:08:59.5753413	--	loadFromFile: Finished
+15:08:59.5753413	--	updating values: Finished
+15:09:00.9393413	--	Task Route: totalNumberOfTasks
+15:09:13.1503413	--	Task Route: filterOwnerTasks
+15:09:25.2103413	--	Task Route: filterOwnerTasks
+15:09:28.2943413	--	Task Route: taskDetails
+15:09:28.2973413	--	Task Route: taskDetails
+15:09:28.2983413	--	Task Route: filterOwnerTasks
+15:10:45.3313413	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+15:10:45.3403413	--	loadFromFile: WORKSPACEID - 1002
+15:10:45.3423413	--	loadFromFile: USERID - 4008
+15:10:45.3723413	--	loadFromFile: Finished
+15:10:45.3753413	--	--------------Starting new process--------------
+15:10:45.5693413	--	retrieve values: Starting
+15:10:45.5833413	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+15:11:21.7043413	--	updating values: Starting
+15:11:21.7153413	--	updating values: Starting
+15:11:21.7193413	--	updating values:	WorkspaceId - 1002
+15:11:21.7233413	--	SaveDetails: starting
+15:11:21.7313413	--	loadFromFile: Finished
+15:11:21.7323413	--	updating values: Finished
+15:11:22.6803413	--	updating values: Starting
+15:11:22.6833413	--	updating values:	UserId - 4008
+15:11:22.6833413	--	SaveDetails: starting
+15:11:22.6853413	--	loadFromFile: Finished
+15:11:22.6863413	--	updating values: Finished
+15:11:22.6873413	--	updating values: Starting
+15:11:22.6893413	--	updating values:	UserList - System.Collections.Generic.Dictionary`2[System.String,System.Object]
+15:11:22.6903413	--	SaveDetails: starting
+15:11:22.6923413	--	loadFromFile: Finished
+15:11:22.6923413	--	updating values: Finished
+15:11:24.3793413	--	Task Route: totalNumberOfTasks
+15:11:36.8823413	--	Task Route: filterOwnerTasks
+15:11:48.7853413	--	Task Route: filterOwnerTasks
+15:11:51.7133413	--	Task Route: taskDetails
+15:11:51.7203413	--	Task Route: filterOwnerTasks
+15:13:38.3633413	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+15:13:38.3713413	--	loadFromFile: WORKSPACEID - 1002
+15:13:38.3743413	--	loadFromFile: USERID - 4008
+15:13:38.4033413	--	loadFromFile: Finished
+15:13:38.4053413	--	--------------Starting new process--------------
+15:13:38.5873413	--	retrieve values: Starting
+15:13:38.6013413	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+15:13:53.6263413	--	updating values: Starting
+15:13:53.6313413	--	updating values: Starting
+15:13:53.6353413	--	updating values:	Username - nicholasmann@hastingsdirect.com
+15:13:53.6403413	--	SaveDetails: starting
+15:13:53.6413413	--	loadFromFile: Finished
+15:13:53.6423413	--	updating values: Finished
+15:13:54.3843413	--	updating values: Starting
+15:13:54.3873413	--	updating values:	UserId - 4008
+15:13:54.3893413	--	SaveDetails: starting
+15:13:54.3903413	--	loadFromFile: Finished
+15:13:54.3903413	--	updating values: Finished
+15:13:54.3923413	--	updating values: Starting
+15:13:54.3933413	--	updating values:	UserList - System.Collections.Generic.Dictionary`2[System.String,System.Object]
+15:13:54.3943413	--	SaveDetails: starting
+15:13:54.3953413	--	loadFromFile: Finished
+15:13:54.3953413	--	updating values: Finished
+15:13:55.7143413	--	Task Route: totalNumberOfTasks
+15:14:08.1853413	--	Task Route: filterOwnerTasks
+15:14:20.2773413	--	Task Route: filterOwnerTasks
+15:14:23.1673413	--	Task Route: taskDetails
+15:14:23.1713413	--	Task Route: filterOwnerTasks
+15:14:58.7993413	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+15:14:58.8083413	--	loadFromFile: WORKSPACEID - 1002
+15:14:58.8113413	--	loadFromFile: USERID - 4008
+15:14:58.8393413	--	loadFromFile: Finished
+15:14:58.8423413	--	--------------Starting new process--------------
+15:14:59.0263413	--	retrieve values: Starting
+15:14:59.0403413	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+15:15:15.3883413	--	updating values: Starting
+15:15:15.3943413	--	updating values: Starting
+15:15:15.4053413	--	updating values:	Username - nicholasmann@hastingsdirect.com
+15:15:15.4113413	--	SaveDetails: starting
+15:15:15.4163413	--	loadFromFile: Finished
+15:15:15.4173413	--	updating values: Finished
+15:15:16.1203413	--	updating values: Starting
+15:15:16.1233413	--	updating values:	UserId - 4008
+15:15:16.1233413	--	SaveDetails: starting
+15:15:16.1253413	--	loadFromFile: Finished
+15:15:16.1263413	--	updating values: Finished
+15:15:16.1273413	--	updating values: Starting
+15:15:16.1293413	--	updating values:	UserList - System.Collections.Generic.Dictionary`2[System.String,System.Object]
+15:15:16.1303413	--	SaveDetails: starting
+15:15:16.1323413	--	loadFromFile: Finished
+15:15:16.1333413	--	updating values: Finished
+15:15:17.4463413	--	Task Route: totalNumberOfTasks
+15:15:29.5743413	--	Task Route: filterOwnerTasks
+15:15:41.1983413	--	Task Route: filterOwnerTasks
+15:15:44.0663413	--	Task Route: taskDetails
+15:15:44.0683413	--	Task Route: filterOwnerTasks
+15:18:53.1653413	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+15:18:53.1733413	--	loadFromFile: WORKSPACEID - 1002
+15:18:53.1763413	--	loadFromFile: USERID - 4008
+15:18:53.2063413	--	loadFromFile: Finished
+15:18:53.2083413	--	--------------Starting new process--------------
+15:18:53.3893413	--	retrieve values: Starting
+15:18:53.4023413	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+15:19:03.4213413	--	updating values: Starting
+15:19:03.4243413	--	updating values: Starting
+15:19:03.4323413	--	updating values:	Username - nicholasmann@hastingsdirect.com
+15:19:03.4353413	--	SaveDetails: starting
+15:19:03.4463413	--	loadFromFile: Finished
+15:19:03.4463413	--	updating values: Finished
+15:19:04.2423413	--	updating values: Starting
+15:19:04.2463413	--	updating values:	UserId - 4008
+15:19:04.2473413	--	SaveDetails: starting
+15:19:04.2493413	--	loadFromFile: Finished
+15:19:04.2503413	--	updating values: Finished
+15:19:04.2513413	--	updating values: Starting
+15:19:04.2543413	--	updating values:	UserList - System.Collections.Generic.Dictionary`2[System.String,System.Object]
+15:19:04.2553413	--	SaveDetails: starting
+15:19:04.2573413	--	loadFromFile: Finished
+15:19:04.2583413	--	updating values: Finished
+15:19:05.5363413	--	Task Route: totalNumberOfTasks
+15:19:18.1493413	--	Task Route: filterOwnerTasks
+15:19:30.6773413	--	Task Route: filterOwnerTasks
+15:19:33.7373413	--	Task Route: taskDetails
+15:19:33.7473413	--	Task Route: taskDetails
+15:26:22.1803413	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+15:26:22.1893413	--	loadFromFile: WORKSPACEID - 1002
+15:26:22.1913413	--	loadFromFile: USERID - 4008
+15:26:22.2193413	--	loadFromFile: Finished
+15:26:22.2223413	--	--------------Starting new process--------------
+15:26:22.4073413	--	retrieve values: Starting
+15:26:22.4213413	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+15:26:35.4493413	--	updating values: Starting
+15:26:35.4503413	--	updating values: Starting
+15:26:35.4593413	--	updating values:	Username - nicholasmann@hastingsdirect.com
+15:26:35.4623413	--	SaveDetails: starting
+15:26:35.4653413	--	loadFromFile: Finished
+15:26:35.4653413	--	updating values: Finished
+15:26:36.1183413	--	updating values: Starting
+15:26:36.1223413	--	updating values:	UserId - 4008
+15:26:36.1243413	--	SaveDetails: starting
+15:26:36.1263413	--	loadFromFile: Finished
+15:26:36.1263413	--	updating values: Finished
+15:26:36.1293413	--	updating values: Starting
+15:26:36.1313413	--	updating values:	UserList - System.Collections.Generic.Dictionary`2[System.String,System.Object]
+15:26:36.1313413	--	SaveDetails: starting
+15:26:36.1343413	--	loadFromFile: Finished
+15:26:36.1343413	--	updating values: Finished
+15:26:38.4133413	--	Task Route: totalNumberOfTasks
+15:26:50.4963413	--	Task Route: filterOwnerTasks
+15:27:02.3123413	--	Task Route: filterOwnerTasks
+15:27:05.1843413	--	Task Route: taskDetails
+15:27:05.1863413	--	Task Route: filterOwnerTasks
+15:29:53.8933413	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+15:29:53.9023413	--	loadFromFile: WORKSPACEID - 1002
+15:29:53.9043413	--	loadFromFile: USERID - 4008
+15:29:53.9333413	--	loadFromFile: Finished
+15:29:53.9363413	--	--------------Starting new process--------------
+15:29:54.1213413	--	retrieve values: Starting
+15:29:54.1483413	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+15:30:36.0723413	--	updating values: Starting
+15:30:36.0853413	--	updating values: Starting
+15:30:36.0953413	--	updating values:	Username - nicholasmann@hastingsdirect.com
+15:30:36.0983413	--	SaveDetails: starting
+15:30:36.1003413	--	loadFromFile: Finished
+15:30:36.1013413	--	updating values: Finished
+15:30:37.0853413	--	updating values: Starting
+15:30:37.0883413	--	updating values:	UserId - 4008
+15:30:37.0903413	--	SaveDetails: starting
+15:30:37.0913413	--	loadFromFile: Finished
+15:30:37.0923413	--	updating values: Finished
+15:30:37.0933413	--	updating values: Starting
+15:30:37.0953413	--	updating values:	UserList - System.Collections.Generic.Dictionary`2[System.String,System.Object]
+15:30:37.0963413	--	SaveDetails: starting
+15:30:37.1003413	--	loadFromFile: Finished
+15:30:37.1023413	--	updating values: Finished
+15:30:38.8243413	--	Task Route: totalNumberOfTasks
+15:30:51.6313413	--	Task Route: filterOwnerTasks
+15:31:03.5323413	--	Task Route: filterOwnerTasks
+15:31:06.3783413	--	Task Route: taskDetails
+15:31:06.3823413	--	Task Route: filterOwnerTasks
+15:36:55.0554596	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+15:36:55.0644605	--	loadFromFile: WORKSPACEID - 1002
+15:36:55.0674608	--	loadFromFile: USERID - 4008
+15:36:55.0974638	--	loadFromFile: Finished
+15:36:55.1004641	--	--------------Starting new process--------------
+15:36:55.2804821	--	retrieve values: Starting
+15:36:55.2934834	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+15:40:18.3637884	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+15:40:18.3727893	--	loadFromFile: WORKSPACEID - 1002
+15:40:18.3747895	--	loadFromFile: USERID - 4008
+15:40:18.4017922	--	loadFromFile: Finished
+15:40:18.4047925	--	--------------Starting new process--------------
+15:40:18.5818102	--	retrieve values: Starting
+15:40:18.5948115	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+15:42:40.2479754	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+15:42:40.2569763	--	loadFromFile: WORKSPACEID - 1002
+15:42:40.2599766	--	loadFromFile: USERID - 4008
+15:42:40.2879794	--	loadFromFile: Finished
+15:42:40.2909797	--	--------------Starting new process--------------
+15:42:40.5190025	--	retrieve values: Starting
+15:42:40.5350041	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+15:44:07.9587456	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+15:44:07.9667464	--	loadFromFile: WORKSPACEID - 1002
+15:44:07.9697467	--	loadFromFile: USERID - 4008
+15:44:07.9977495	--	loadFromFile: Finished
+15:44:07.9997497	--	--------------Starting new process--------------
+15:44:08.1907688	--	retrieve values: Starting
+15:44:08.2057703	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+15:44:25.4124908	--	updating values: Starting
+15:44:25.4224918	--	updating values: Starting
+15:44:25.4294925	--	updating values:	Username - nicholasmann@hastingsdirect.com
+15:44:25.4344930	--	SaveDetails: starting
+15:44:25.4534949	--	loadFromFile: Finished
+15:44:25.4534949	--	updating values: Finished
+15:44:30.6710166	--	updating values: Starting
+15:44:30.6740169	--	updating values:	UserId - 4008
+15:44:30.6750170	--	SaveDetails: starting
+15:44:30.6760171	--	loadFromFile: Finished
+15:44:30.6760171	--	updating values: Finished
+15:44:30.6780173	--	updating values: Starting
+15:44:30.6800175	--	updating values:	UserList - System.Collections.Generic.Dictionary`2[System.String,System.Object]
+15:44:30.6800175	--	SaveDetails: starting
+15:44:30.6820177	--	loadFromFile: Finished
+15:44:30.6820177	--	updating values: Finished
+15:44:33.1252620	--	Task Route: totalNumberOfTasks
+15:44:45.5325026	--	Task Route: filterOwnerTasks
+15:44:57.3456838	--	Task Route: filterOwnerTasks
+15:45:00.4119904	--	Task Route: taskDetails
+15:45:00.4139906	--	Task Route: filterOwnerTasks
+15:48:02.3513413	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+15:48:02.3603413	--	loadFromFile: WORKSPACEID - 1002
+15:48:02.3643413	--	loadFromFile: USERID - 4008
+15:48:02.4003413	--	loadFromFile: Finished
+15:48:02.4033413	--	--------------Starting new process--------------
+15:48:02.6043413	--	retrieve values: Starting
+15:48:02.6183413	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+15:51:38.5573413	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+15:51:38.5663413	--	loadFromFile: WORKSPACEID - 1002
+15:51:38.5703413	--	loadFromFile: USERID - 4008
+15:51:38.5983413	--	loadFromFile: Finished
+15:51:38.6003413	--	--------------Starting new process--------------
+15:51:38.7913413	--	retrieve values: Starting
+15:51:38.8063413	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+15:52:46.7883413	--	retrieve values: Starting
+15:52:46.7883413	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+15:52:58.4013413	--	updating values: Starting
+15:52:58.4063413	--	updating values: Starting
+15:52:58.4093413	--	updating values:	Username - nicholasmann@hastingsdirect.com
+15:52:58.4143413	--	loadFromFile: Finished
+15:52:58.4133413	--	SaveDetails: starting
+15:52:58.4153413	--	updating values: Finished
+15:52:58.4153413	--	loadFromFile: Finished
+15:52:58.4153413	--	updating values: Finished
+15:52:59.0323413	--	updating values: Starting
+15:52:59.0353413	--	updating values:	UserId - 4008
+15:52:59.0373413	--	SaveDetails: starting
+15:52:59.0403413	--	loadFromFile: Finished
+15:52:59.0403413	--	updating values: Finished
+15:52:59.0423413	--	updating values: Starting
+15:52:59.0463413	--	updating values:	UserList - System.Collections.Generic.Dictionary`2[System.String,System.Object]
+15:52:59.0483413	--	SaveDetails: starting
+15:52:59.0503413	--	loadFromFile: Finished
+15:52:59.0503413	--	updating values: Finished
+15:53:00.3413413	--	Task Route: totalNumberOfTasks
+15:53:12.8443413	--	Task Route: filterOwnerTasks
+15:53:25.1603413	--	Task Route: filterOwnerTasks
+15:53:28.1813413	--	Task Route: taskDetails
+15:53:28.1853413	--	Task Route: filterOwnerTasks
+16:00:48.3943413	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+16:00:48.4033413	--	loadFromFile: WORKSPACEID - 1002
+16:00:48.4053413	--	loadFromFile: USERID - 4008
+16:00:48.4343413	--	loadFromFile: Finished
+16:00:48.4363413	--	--------------Starting new process--------------
+16:00:48.6153413	--	retrieve values: Starting
+16:00:48.6293413	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+16:00:58.8253413	--	updating values: Starting
+16:00:58.8333413	--	updating values:	WorkspaceId - 1002
+16:00:58.8363413	--	SaveDetails: starting
+16:00:58.8413413	--	loadFromFile: Finished
+16:00:58.8423413	--	updating values: Finished
+16:00:59.6203413	--	updating values: Starting
+16:00:59.6233413	--	updating values:	UserId - 4008
+16:00:59.6243413	--	SaveDetails: starting
+16:00:59.6253413	--	loadFromFile: Finished
+16:00:59.6263413	--	updating values: Finished
+16:00:59.6283413	--	updating values: Starting
+16:00:59.6303413	--	updating values:	UserList - System.Collections.Generic.Dictionary`2[System.String,System.Object]
+16:00:59.6303413	--	SaveDetails: starting
+16:00:59.6313413	--	loadFromFile: Finished
+16:00:59.6323413	--	updating values: Finished
+16:01:00.8483413	--	Task Route: totalNumberOfTasks
+16:01:13.3103413	--	Task Route: filterOwnerTasks
+16:01:25.9763413	--	Task Route: filterOwnerTasks
+16:01:28.9253413	--	Task Route: taskDetails
+16:01:28.9263413	--	Task Route: taskDetails
+16:01:28.9333413	--	Task Route: filterOwnerTasks
+16:01:52.4233413	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+16:01:52.4313413	--	loadFromFile: WORKSPACEID - 1002
+16:01:52.4343413	--	loadFromFile: USERID - 4008
+16:01:52.4603413	--	loadFromFile: Finished
+16:01:52.4633413	--	--------------Starting new process--------------
+16:01:52.6413413	--	retrieve values: Starting
+16:01:52.6543413	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+16:02:42.9293413	--	updating values: Starting
+16:02:42.9373413	--	updating values:	WorkspaceId - 1002
+16:02:42.9413413	--	updating values:	Username - nicholasmann@hastingsdirect.com
+16:02:42.9473413	--	SaveDetails: starting
+16:02:42.9483413	--	loadFromFile: Finished
+16:02:42.9483413	--	updating values: Finished
+16:02:43.5893413	--	updating values: Starting
+16:02:43.5923413	--	updating values:	UserId - 4008
+16:02:43.5923413	--	SaveDetails: starting
+16:02:43.5973413	--	loadFromFile: Finished
+16:02:43.5973413	--	updating values: Finished
+16:02:43.5993413	--	updating values: Starting
+16:02:43.6013413	--	updating values:	UserList - System.Collections.Generic.Dictionary`2[System.String,System.Object]
+16:02:43.6013413	--	SaveDetails: starting
+16:02:43.6053413	--	loadFromFile: Finished
+16:02:43.6053413	--	updating values: Finished
+16:02:44.9413413	--	Task Route: totalNumberOfTasks
+16:02:57.6383413	--	Task Route: filterOwnerTasks
+16:03:09.8133413	--	Task Route: filterOwnerTasks
+16:03:12.7143413	--	Task Route: taskDetails
+16:03:12.7163413	--	Task Route: filterOwnerTasks
+16:04:06.6743413	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+16:04:06.6833413	--	loadFromFile: WORKSPACEID - 1002
+16:04:06.6863413	--	loadFromFile: USERID - 4008
+16:04:06.7133413	--	loadFromFile: Finished
+16:04:06.7153413	--	--------------Starting new process--------------
+16:04:06.8983413	--	retrieve values: Starting
+16:04:06.9123413	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+16:04:53.8693413	--	updating values: Starting
+16:04:53.8803413	--	updating values: Starting
+16:04:53.8883413	--	updating values:	Username - nicholasmann@hastingsdirect.com
+16:04:53.8933413	--	SaveDetails: starting
+16:04:53.8963413	--	loadFromFile: Finished
+16:04:53.8983413	--	updating values: Finished
+16:04:55.1063413	--	updating values: Starting
+16:04:55.1093413	--	updating values:	UserId - 4008
+16:04:55.1123413	--	SaveDetails: starting
+16:04:55.1153413	--	loadFromFile: Finished
+16:04:55.1153413	--	updating values: Finished
+16:04:55.1173413	--	updating values: Starting
+16:04:55.1183413	--	updating values:	UserList - System.Collections.Generic.Dictionary`2[System.String,System.Object]
+16:04:55.1183413	--	SaveDetails: starting
+16:04:55.1213413	--	loadFromFile: Finished
+16:04:55.1213413	--	updating values: Finished
+16:04:56.5543413	--	Task Route: totalNumberOfTasks
+16:05:08.8983413	--	Task Route: filterOwnerTasks
+16:05:21.0583413	--	Task Route: filterOwnerTasks
+16:05:24.0173413	--	Task Route: taskDetails
+16:05:24.0233413	--	Task Route: filterOwnerTasks
+16:09:48.1383413	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+16:09:48.1473413	--	loadFromFile: WORKSPACEID - 1002
+16:09:48.1493413	--	loadFromFile: USERID - 4008
+16:09:48.1793413	--	loadFromFile: Finished
+16:09:48.1813413	--	--------------Starting new process--------------
+16:09:48.3733413	--	retrieve values: Starting
+16:09:48.3893413	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+16:10:02.7463413	--	updating values: Starting
+16:10:02.7573413	--	updating values: Starting
+16:10:02.7643413	--	updating values:	WorkspaceId - 1002
+16:10:02.7673413	--	SaveDetails: starting
+16:10:02.7733413	--	loadFromFile: Finished
+16:10:02.7743413	--	updating values: Finished
+16:10:03.6133413	--	updating values: Starting
+16:10:03.6163413	--	updating values:	UserId - 4008
+16:10:03.6183413	--	SaveDetails: starting
+16:10:03.6203413	--	loadFromFile: Finished
+16:10:03.6213413	--	updating values: Finished
+16:10:03.6223413	--	updating values: Starting
+16:10:03.6233413	--	updating values:	UserList - System.Collections.Generic.Dictionary`2[System.String,System.Object]
+16:10:03.6243413	--	SaveDetails: starting
+16:10:03.6253413	--	loadFromFile: Finished
+16:10:03.6253413	--	updating values: Finished
+16:10:05.1353413	--	Task Route: totalNumberOfTasks
+16:11:59.3204798	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+16:11:59.3324810	--	loadFromFile: WORKSPACEID - 1002
+16:11:59.3344812	--	loadFromFile: USERID - 4008
+16:11:59.3684846	--	loadFromFile: Finished
+16:11:59.3714849	--	--------------Starting new process--------------
+16:11:59.5915069	--	retrieve values: Starting
+16:11:59.6055083	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+16:12:58.3833855	--	updating values: Starting
+16:12:58.3923864	--	updating values:	WorkspaceId - 1002
+16:12:58.4123884	--	SaveDetails: starting
+16:12:58.4163888	--	loadFromFile: Finished
+16:12:58.4173889	--	updating values: Finished
+16:12:59.1654637	--	updating values: Starting
+16:12:59.1714643	--	updating values:	UserId - 4008
+16:12:59.1724644	--	SaveDetails: starting
+16:12:59.1744646	--	loadFromFile: Finished
+16:12:59.1754647	--	updating values: Finished
+16:12:59.1784650	--	updating values: Starting
+16:12:59.1824654	--	updating values:	UserList - System.Collections.Generic.Dictionary`2[System.String,System.Object]
+16:12:59.1834655	--	SaveDetails: starting
+16:12:59.1864658	--	loadFromFile: Finished
+16:12:59.1874659	--	updating values: Finished
+16:13:00.4195891	--	Task Route: totalNumberOfTasks
+16:13:12.8658336	--	Task Route: filterOwnerTasks
+16:13:25.0820551	--	Task Route: filterOwnerTasks
+16:13:28.0793548	--	Task Route: filterOwnerTasks
+16:13:28.0853554	--	Task Route: taskDetails
+16:16:14.6490101	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+16:16:14.6580110	--	loadFromFile: WORKSPACEID - 1002
+16:16:14.6600112	--	loadFromFile: USERID - 4008
+16:16:14.6890141	--	loadFromFile: Finished
+16:16:14.6910143	--	--------------Starting new process--------------
+16:16:14.8750327	--	retrieve values: Starting
+16:16:14.8890341	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+16:16:55.6213413	--	updating values: Starting
+16:16:55.6273413	--	updating values: Starting
+16:16:55.6323413	--	updating values:	Username - nicholasmann@hastingsdirect.com
+16:16:55.6343413	--	SaveDetails: starting
+16:16:55.6363413	--	loadFromFile: Finished
+16:16:55.6363413	--	updating values: Finished
+16:16:56.2983413	--	updating values: Starting
+16:16:56.3013413	--	updating values:	UserId - 4008
+16:16:56.3033413	--	SaveDetails: starting
+16:16:56.3043413	--	loadFromFile: Finished
+16:16:56.3053413	--	updating values: Finished
+16:16:56.3063413	--	updating values: Starting
+16:16:56.3073413	--	updating values:	UserList - System.Collections.Generic.Dictionary`2[System.String,System.Object]
+16:16:56.3083413	--	SaveDetails: starting
+16:16:56.3093413	--	loadFromFile: Finished
+16:16:56.3103413	--	updating values: Finished
+16:16:57.6253413	--	Task Route: totalNumberOfTasks
+16:17:09.8453413	--	Task Route: filterOwnerTasks
+16:17:21.7143413	--	Task Route: filterOwnerTasks
+16:17:24.7193413	--	Task Route: taskDetails
+16:17:24.7203413	--	Task Route: taskDetails
+16:17:24.7263413	--	Task Route: filterOwnerTasks
+16:19:37.4813413	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+16:19:37.4903413	--	loadFromFile: WORKSPACEID - 1002
+16:19:37.4943413	--	loadFromFile: USERID - 4008
+16:19:37.5233413	--	loadFromFile: Finished
+16:19:37.5263413	--	--------------Starting new process--------------
+16:19:37.7173413	--	retrieve values: Starting
+16:19:37.7333413	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+16:19:56.7693413	--	updating values: Starting
+16:19:56.7753413	--	updating values: Starting
+16:19:56.7783413	--	updating values:	WorkspaceId - 1002
+16:19:56.7813413	--	SaveDetails: starting
+16:19:56.7853413	--	loadFromFile: Finished
+16:19:56.7853413	--	updating values: Finished
+16:19:57.5113413	--	updating values: Starting
+16:19:57.5153413	--	updating values:	UserId - 4008
+16:19:57.5173413	--	SaveDetails: starting
+16:19:57.5183413	--	loadFromFile: Finished
+16:19:57.5183413	--	updating values: Finished
+16:19:57.5203413	--	updating values: Starting
+16:19:57.5223413	--	updating values:	UserList - System.Collections.Generic.Dictionary`2[System.String,System.Object]
+16:19:57.5223413	--	SaveDetails: starting
+16:19:57.5243413	--	loadFromFile: Finished
+16:19:57.5243413	--	updating values: Finished
+16:19:58.9933413	--	Task Route: totalNumberOfTasks
+16:20:11.2863413	--	Task Route: filterOwnerTasks
+16:20:23.3833413	--	Task Route: filterOwnerTasks
+16:20:26.3313413	--	Task Route: taskDetails
+16:20:26.3343413	--	Task Route: taskDetails
+16:22:51.0443413	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+16:22:51.0523413	--	loadFromFile: WORKSPACEID - 1002
+16:22:51.0553413	--	loadFromFile: USERID - 4008
+16:22:51.0823413	--	loadFromFile: Finished
+16:22:51.0853413	--	--------------Starting new process--------------
+16:22:51.2663413	--	retrieve values: Starting
+16:22:51.2803413	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+16:23:35.9283413	--	updating values: Starting
+16:23:35.9343413	--	updating values: Starting
+16:23:35.9403413	--	SaveDetails: starting
+16:23:35.9443413	--	loadFromFile: Finished
+16:23:35.9453413	--	updating values: Finished
+16:23:36.6113413	--	updating values: Starting
+16:23:36.6143413	--	updating values:	UserId - 4008
+16:23:36.6153413	--	SaveDetails: starting
+16:23:36.6163413	--	loadFromFile: Finished
+16:23:36.6173413	--	updating values: Finished
+16:23:36.6183413	--	updating values: Starting
+16:23:36.6203413	--	updating values:	UserList - System.Collections.Generic.Dictionary`2[System.String,System.Object]
+16:23:36.6203413	--	SaveDetails: starting
+16:23:36.6353413	--	loadFromFile: Finished
+16:23:36.6353413	--	updating values: Finished
+16:23:38.0533413	--	Task Route: totalNumberOfTasks
+16:23:49.9863413	--	Task Route: filterOwnerTasks
+16:24:01.4673413	--	Task Route: filterOwnerTasks
+16:24:04.3483413	--	Task Route: taskDetails
+16:24:04.3493413	--	Task Route: taskDetails
+16:24:04.3533413	--	Task Route: taskDetails
+16:24:04.3563413	--	Task Route: filterOwnerTasks
+16:26:44.0853413	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+16:26:44.0953413	--	loadFromFile: WORKSPACEID - 1002
+16:26:44.0983413	--	loadFromFile: USERID - 4008
+16:26:44.1343413	--	loadFromFile: Finished
+16:26:44.1373413	--	--------------Starting new process--------------
+16:26:44.3593413	--	retrieve values: Starting
+16:26:44.3763413	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+16:26:56.1303413	--	updating values: Starting
+16:26:56.1363413	--	updating values: Starting
+16:26:56.1393413	--	updating values:	Username - nicholasmann@hastingsdirect.com
+16:26:56.1433413	--	SaveDetails: starting
+16:26:56.1433413	--	loadFromFile: Finished
+16:26:56.1463413	--	updating values: Finished
+16:26:56.1493413	--	loadFromFile: Finished
+16:26:56.1503413	--	updating values: Finished
+16:26:56.8813413	--	updating values: Starting
+16:26:56.8843413	--	updating values:	UserId - 4008
+16:26:56.8843413	--	SaveDetails: starting
+16:26:56.8863413	--	loadFromFile: Finished
+16:26:56.8863413	--	updating values: Finished
+16:26:56.8883413	--	updating values: Starting
+16:26:56.8903413	--	updating values:	UserList - System.Collections.Generic.Dictionary`2[System.String,System.Object]
+16:26:56.8903413	--	SaveDetails: starting
+16:26:56.8923413	--	loadFromFile: Finished
+16:26:56.8933413	--	updating values: Finished
+16:26:58.3273413	--	Task Route: totalNumberOfTasks
+16:27:10.2233413	--	Task Route: filterOwnerTasks
+16:27:21.6783413	--	Task Route: filterOwnerTasks
+16:27:24.5673413	--	Task Route: taskDetails
+16:27:24.5673413	--	Task Route: taskDetails
+16:27:24.5693413	--	Task Route: taskDetails
+16:27:24.5703413	--	Task Route: filterOwnerTasks
+16:27:24.5733413	--	Task Route: taskDetails
+16:30:47.6043413	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+16:30:47.6123413	--	loadFromFile: WORKSPACEID - 1002
+16:30:47.6153413	--	loadFromFile: USERID - 4008
+16:30:47.6443413	--	loadFromFile: Finished
+16:30:47.6463413	--	--------------Starting new process--------------
+16:30:47.8253413	--	retrieve values: Starting
+16:30:47.8403413	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com
+16:31:24.7773413	--	loadFromFile: USERNAME - nicholasmann@hastingsdirect.com
+16:31:24.7853413	--	loadFromFile: WORKSPACEID - 1002
+16:31:24.7883413	--	loadFromFile: USERID - 4008
+16:31:24.8183413	--	loadFromFile: Finished
+16:31:24.8213413	--	--------------Starting new process--------------
+16:31:25.0403413	--	retrieve values: Starting
+16:31:25.0583413	--	retrieve values: retrieved USERNAME - nicholasmann@hastingsdirect.com

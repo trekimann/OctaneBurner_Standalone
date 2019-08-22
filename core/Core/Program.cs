@@ -177,8 +177,7 @@ namespace Core {
             this.logpath = LogPath;
         }
 
-
-        public void setLog(Boolean log){
+        public void setLog (Boolean log) {
             this.shouldLog = log;
         }
 
@@ -191,7 +190,7 @@ namespace Core {
                         sw.WriteLine (fullLog);
                     }
                 } catch (Exception e) {
-                    System.Console.WriteLine (e.ToString ());
+                    e.ToString ();
                 }
             }
         }
@@ -289,45 +288,48 @@ namespace Core {
 
         public void loadFromFile () {
             Log.Log ("loadFromFile: Starting");
-            if(File.Exists(userCache)){
-            string raw = System.IO.File.ReadAllText (userCache);
-            // use reflection to read this in, for now just hardcoded
-            var properties = raw.Split (",");
-            foreach (string prop in properties) {
-                string[] contents = prop.Split (":");
-                try {
-                    Log.Log ("loadFromFile: " + contents[0] + " - " + contents[1].Trim());
-                } catch (Exception e) {
-                    e.ToString ();
-                };
-                if (contents[0] == "USERNAME") {
-                    Username = contents[1].Trim();
-                } else if (contents[0] == "WORKSPACEID") {
-                    WorkspaceId = contents[1].Trim();
-                } else if (contents[0] == "USERID") {
-                    UserId = contents[1].Trim();
-                } else if (contents[0] == "VERBOSELOGGING") {
-                    // update logging option
-                    Log.setLog(bool.Parse(contents[1].Trim()));
-                };
-            }
-            Log.Log ("loadFromFile: Finished");
-            } else{
-                saveDetails();
+            if (File.Exists (userCache)) {
+                string raw = System.IO.File.ReadAllText (userCache);
+                // use reflection to read this in, for now just hardcoded
+                var properties = raw.Split (",");
+                foreach (string prop in properties) {
+                    string[] contents = prop.Split (":");
+                    try {
+                        Log.Log ("loadFromFile: " + contents[0] + " - " + contents[1].Trim ());
+                    } catch (Exception e) {
+                        e.ToString ();
+                    };
+                    if (contents[0] == "USERNAME") {
+                        Username = contents[1].Trim ();
+                    } else if (contents[0] == "WORKSPACEID") {
+                        WorkspaceId = contents[1].Trim ();
+                    } else if (contents[0] == "USERID") {
+                        UserId = contents[1].Trim ();
+                    } else if (contents[0] == "VERBOSELOGGING") {
+                        // update logging option
+                        Log.setLog (bool.Parse (contents[1].Trim ()));
+                    };
+                }
+                Log.Log ("loadFromFile: Finished");
+            } else {
+                saveDetails ();
             }
         }
 
         private string saveDetails () {
-            Log.Log ("SaveDetails: starting");
-            // use reflection properly but for now just do it manually to test
+            try {
+                Log.Log ("SaveDetails: starting");
+                // use reflection properly but for now just do it manually to test
+                string text = "VERBOSELOGGING:" + Log.shouldLog + ",";
+                text = text + "USERNAME:" + Username + ",";
+                text = text + "WORKSPACEID:" + WorkspaceId + ",";
+                text = text + "USERID:" + UserId + ",";
 
-            string text = "VERBOSELOGGING:"+Log.shouldLog+",";
-            text = text + "USERNAME:" + Username + ",";
-            text = text + "WORKSPACEID:" + WorkspaceId + ",";
-            text = text + "USERID:" + UserId + ",";
-
-            System.IO.File.WriteAllText (userCache, text);
-            Log.Log ("loadFromFile: Finished");
+                System.IO.File.WriteAllText (userCache, text);
+                Log.Log ("loadFromFile: Finished");
+            } catch (Exception e) {
+                e.ToString ();
+            }
             return null;
         }
 

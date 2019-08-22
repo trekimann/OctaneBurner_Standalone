@@ -61,7 +61,8 @@ export class User extends React.Component<
                         onDblclick={this.props.DoubleClick !== undefined ? () =>
                             this.props.DoubleClick(this.state.UserDetails.email, this.state.UserName) : null}
                         HoverText={this.props.DoubleClick !== undefined ?
-                        "Double Click to reply to this user" : buttonText} />
+                        "Double Click to reply to this user" : buttonText}
+                        DropDown={true}/>
                     <div style={this.state.ShowUser ? styling : { display: "none" }}>
                         <div>Email: <a style={{ color: "inherit" }} href={hRef}>{this.state.UserDetails.email}</a>
                         </div>

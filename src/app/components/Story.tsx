@@ -15,7 +15,6 @@ const bsStyle = {
 export class Story extends React.Component<
     { StoryId: string, userId: string, StoryType?: string, LinkedTasks?: [], TaskInFlight?: any },
     {
-        Attachments: [],
         ExpandStory: boolean,
         Frequency: number,
         FrequencyMultiplier: number,
@@ -39,7 +38,6 @@ export class Story extends React.Component<
     constructor(props: any) {
         super(props);
         this.state = {
-            Attachments: null,
             ExpandStory: false,
             Frequency: 60000,
             FrequencyMultiplier: 5,
@@ -82,13 +80,7 @@ export class Story extends React.Component<
             description = description.replace("</body>", "");
             description = description.replace(/style=/g, "");
 
-            // // check for attachments
-            // if (story.attachments !== undefined) {
-            //     this.setState({ Attachments: story.attachments });
-            // }
-
             this.setState({
-                Attachments: story.attachments,
                 FullStory: story,
                 LastUpdated: updated,
                 StoryDetails: description,
@@ -113,19 +105,20 @@ export class Story extends React.Component<
         let StoryText = "Description";
         if (this.state.StoryRetrieved === true) {
             linkedStory = this.props.StoryId + ": " + this.state.StoryName;
-            StoryText = this.state.FullStory.subtype_label + " Description";
+            StoryText = this.Cap(this.state.FullStory.subtype) + " Description";
         }
         return <div>
             <Button onDblclick={this.getStoryDetails}
                 Style={bsStyle}
                 onClick={this.expandStory}
                 Text={linkedStory}
-                HoverText="Double click to refresh story details" />
+                HoverText="Double click to refresh story details"
+                DropDown={true}/>
             <div style={this.state.ExpandStory ? this.sStyle : { display: "none" }}>
                 {this.state.StoryRetrieved ?
                     <div>
                         <Button Style={{ backgroundColor: "#0046b0" }}
-                            onClick={this.showStory} Text={StoryText} />
+                            onClick={this.showStory} Text={StoryText} DropDown={true} />
                         <div style={this.state.ShowStory ? null : { display: "none" }}>
                             <User
                                 UserId={this.state.FullStory.author.id}
@@ -140,7 +133,7 @@ export class Story extends React.Component<
                             <div style={this.sdStyle} dangerouslySetInnerHTML={{ __html: this.state.StoryDetails }} >
                             </div>
                         </div>
-                        {this.state.Attachments !== null ? <Attachments Details={this.state.Attachments} /> : null}
+                        <Attachments StoryId={this.state.FullStory.id} />
                     </div> : "Story Goes Here"}
                 <Comments WorkId={this.props.StoryId} UserId={this.props.userId} />
                 {(this.props.LinkedTasks || []).map((value) => {
@@ -149,5 +142,9 @@ export class Story extends React.Component<
                 <br></br>
             </div>
         </div >;
+    }
+
+    private Cap(input: string) {
+        return input.charAt(0).toUpperCase() + input.slice(1);
     }
 }

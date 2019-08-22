@@ -131,6 +131,28 @@ export class ApiUtil {
         }
     }
 
+    public static getStoryAttachments(response: any, storyId: string, listener: string) {
+        const url = urlStart + "1002/work_items/" + storyId + "?fields=attachments";
+        if (response === null || response === undefined) {
+            ApiUtil.Get(url, this.getStoryAttachments, storyId, listener);
+        } else {
+            const AttachDetails = JSON.parse(response.responseText);
+            const data = { source: listener, data: AttachDetails.attachments.data };
+            ipcRenderer.send("internal", data);
+        }
+    }
+
+    public static getAttachmentDetails(response: any, attachmentId: string, listener: string) {
+        const url = urlStart + "1002/attachments/" + attachmentId;
+        if (response === null || response === undefined) {
+            ApiUtil.Get(url, this.getAttachmentDetails, attachmentId, listener);
+        } else {
+            const AttachDetails = JSON.parse(response.responseText);
+            const data = { source: listener, data: AttachDetails };
+            ipcRenderer.send("internal", data);
+        }
+    }
+
     public static getComments(response: any, storyId: string, listener: string) {
         const url = urlStart + "1002/work_items/" + storyId + "?fields=comments";
         if (response === null || response === undefined) {
@@ -246,6 +268,7 @@ export class ApiUtil {
             }
         };
         xmlHttp.open("GET", url, true); // true for asynchronous
+        xmlHttp.setRequestHeader("accept", "application/json");
         xmlHttp.send(null);
     }
 
@@ -256,7 +279,7 @@ export class ApiUtil {
                 after(xmlHttp, extra);
             }
         };
-        xmlHttp.open("PUT", url, true); // true for asynchronous 
+        xmlHttp.open("PUT", url, true); // true for asynchronous
         xmlHttp.setRequestHeader("Content-type", "application/json");
         xmlHttp.send(data);
     }

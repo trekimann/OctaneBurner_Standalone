@@ -11,29 +11,36 @@ const defaultStyle = {
     width: "100%",
 };
 export class Button extends React.Component<{
-        Style?: any,
-        onClick?: any,
-        Text?: string,
-        MouseUp?: any,
-        Src?: any,
-        MouseDown?: any,
-        onDblclick?: any,
-        HoverText?: string,
-    }, {}> {
+    Style?: any,
+    onClick?: any,
+    Text?: string,
+    MouseUp?: any,
+    Src?: any,
+    MouseDown?: any,
+    onDblclick?: any,
+    HoverText?: string,
+    DropDown?: boolean,
+}, { Style: any, Expanded: boolean }> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            Expanded: false,
+            Style: defaultStyle,
+        };
+    }
 
-
+    public componentDidMount() {
+        if (this.props.Style !== null && this.props.Style !== undefined) {
+            this.desiredStyle(this.props.Style);
+        }
+    }
     public render() {
         let hover = this.props.Text;
         if (this.props.HoverText !== null && this.props.HoverText !== undefined) {
             hover = this.props.HoverText;
         }
-        let styling = defaultStyle;
-        if (this.props.Style !== null && this.props.Style !== undefined) {
-            styling = this.desiredStyle();
-        }
-
-        return <button style={styling}
-            onClick={this.props.onClick}
+        return <button style={this.state.Style}
+            onClick={(this.click)}
             onDoubleClick={this.props.onDblclick}
             onMouseUp={this.props.MouseUp}
             src={this.props.Src}
@@ -43,13 +50,29 @@ export class Button extends React.Component<{
         </button>;
     }
 
-    private desiredStyle() {
-        // if there is a style submitted, compare it here to the default and only change any values which are different
-        const outputStyle = Object.assign({}, defaultStyle);
-        // tslint:disable-next-line: forin
-        for (const inStyle in this.props.Style) {
-            outputStyle[inStyle] = this.props.Style[inStyle];
+    private click = () => {
+        if (this.props.DropDown !== null && this.props.DropDown !== undefined) {
+            if (this.props.DropDown) {
+                // change style to add curved edge for top of button if expanded, flatten if not
+                if (this.state.Expanded) {
+                    this.desiredStyle({ borderRadius: null });
+                } else {
+                    this.desiredStyle({ borderRadius: "15px 15px 0px 0px" });
+                }
+                this.setState({ Expanded: !this.state.Expanded });
+            }
         }
-        return outputStyle;
+        this.props.onClick();
+        document.activeElement.blur();
+    }
+
+    private desiredStyle(inputStyle: any) {
+        // if there is a style submitted, compare it here to the default and only change any values which are different
+        const outputStyle = Object.assign({}, this.state.Style);
+        // tslint:disable-next-line: forin
+        for (const inStyle in inputStyle) {
+            outputStyle[inStyle] = inputStyle[inStyle];
+        }
+        this.setState({ Style: outputStyle });
     }
 }

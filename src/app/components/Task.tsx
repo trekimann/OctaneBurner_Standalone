@@ -97,14 +97,22 @@ export class Task extends React.Component<{
     public render() {
         const taskText = this.id + ": " + this.task.name;
         return <div>
-            <Button Style={{ backgroundColor: "#2700b0" }} onClick={this.showTask} Text={taskText} />
+            <Button Style={{ backgroundColor: "#2700b0" }} onClick={this.showTask} Text={taskText} DropDown={true} />
             <div style={this.state.ShowTask ? this.tStyle : { display: "none" }}>
                 <div>Task Name: {this.task.name}</div>
                 <div>Estimated hours:   {this.task.estimated_hours}</div>
                 <div>Invested Hours:    {this.state.ActualHours}</div>
                 <div>Remaining hours:   {this.state.RemainingHours}</div>
                 <div>Task Phase: {this.status} {this.status === "In Progress" ?
-                    <Button Style={{backgroundColor:"#039c0d", borderRadius:"5px", maxWidth: "100%", width: null, paddingLeft: "5px", paddingRight: "5px" }}
+                    <Button
+                        Style={{
+                            backgroundColor: "#039c0d",
+                            borderRadius: "5px",
+                            maxWidth: "100%",
+                            paddingLeft: "5px",
+                            paddingRight: "5px",
+                            width: null,
+                        }}
                         Text="Move to completed" onClick={this.taskCompleted} /> : null}</div>
                 {this.state.Completed ? null :
                     <Timer updateActualHours={this.updateTask}

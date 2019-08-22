@@ -104,7 +104,8 @@ export class Comments extends React.Component<
         return <div>
             <Button Style={{ backgroundColor: "#2732b0" }} onClick={this.ToggleComments}
                 Text={text} onDblclick={this.getComments}
-                HoverText="Double click to update Comments" />
+                HoverText="Double click to update Comments"
+                DropDown={true}/>
             <div style={this.state.ShowComments ? {
                 maxHeight: "40vh",
                 overflow: "auto",
