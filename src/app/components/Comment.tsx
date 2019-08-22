@@ -5,7 +5,8 @@ import { User } from "./User";
 export class Comment extends React.Component<
 {DeleteComment: any,
     Details: any,
-    userId: string },
+    userId: string,
+    ReplyToComment?: any },
     { hasError: boolean }> {
     public static getDerivedStateFromError(error: any) {
         // Update state so the next render will show the fallback UI.
@@ -42,7 +43,9 @@ export class Comment extends React.Component<
         const creation = ms.toLocaleDateString("en-GB") + " " + ms.toLocaleTimeString();
 
         return <div style={this.bsStyle}>
-            <User UserId={commentDetails.author.id} UniqueId={commentDetails.id} />
+            <User DoubleClick ={this.props.ReplyToComment}
+            UserId={commentDetails.author.id}
+            UniqueId={commentDetails.id} />
             <div>Created: {creation}</div>
             <div dangerouslySetInnerHTML={{ __html: text }}></div>
             {commentDetails.author.id === this.props.userId ? this.deleteOption() : null}

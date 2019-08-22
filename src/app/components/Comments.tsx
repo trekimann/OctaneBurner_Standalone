@@ -116,10 +116,17 @@ export class Comments extends React.Component<
                     return <Comment key={value.id}
                         Details={value}
                         userId={this.props.UserId}
-                        DeleteComment={this.removeComment} />;
+                        DeleteComment={this.removeComment}
+                        ReplyToComment={this.replyToUser} />;
                 })}
             </div>
         </div>;
+    }
+
+    private replyToUser = (email: string, name: string) => {
+        const mailTo = "mailto:" + email;
+        const reply = "<a href=\"" + mailTo + "\">" + name + "</a>";
+        this.setState({ NewComment: reply });
     }
 
     private updateComments = (event: any, value: any) => {

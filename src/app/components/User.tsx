@@ -7,7 +7,7 @@ const styling = {
 };
 
 export class User extends React.Component<
-    { UserId: string, UniqueId: string, AdditionalDescription?: string },
+    { UserId: string, UniqueId: string, AdditionalDescription?: string, DoubleClick?: any },
     { error: boolean, UserName: string, UserDetails: any, ShowUser: boolean }> {
     constructor(props: any) {
         super(props);
@@ -57,7 +57,11 @@ export class User extends React.Component<
                 <div>User: {this.props.UserId}</div> :
                 <div>
                     <Button Style={{ backgroundColor: "rgb(40,115,21)" }}
-                        onClick={this.toggleVisiblity} Text={buttonText} />
+                        onClick={this.toggleVisiblity} Text={buttonText}
+                        onDblclick={this.props.DoubleClick !== undefined ? () =>
+                            this.props.DoubleClick(this.state.UserDetails.email, this.state.UserName) : null}
+                        HoverText={this.props.DoubleClick !== undefined ?
+                        "Double Click to reply to this user" : buttonText} />
                     <div style={this.state.ShowUser ? styling : { display: "none" }}>
                         <div>Email: <a style={{ color: "inherit" }} href={hRef}>{this.state.UserDetails.email}</a>
                         </div>

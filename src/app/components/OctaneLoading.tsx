@@ -23,13 +23,14 @@ const errorStyle = {
 
 export class OctaneLogin extends React.Component<
     { LoggingIn: any, LoggedIn: any },
-    { userName: string, password: string, failedLogin: boolean }> {
+    { userName: string, password: string, failedLogin: boolean, failedReason: any }> {
 
     constructor(props: any) {
         super(props);
         this.openWindow = this.openWindow.bind(this);
         this.state = {
             failedLogin: false,
+            failedReason: null,
             password: "",
             userName: "",
         };
@@ -51,8 +52,6 @@ export class OctaneLogin extends React.Component<
         const loginWindow = remote.BrowserWindow.getFocusedWindow();
         loginWindow.hide();
         mainWindow.focus();
-        const password = "";
-        const userName = "";
         let usernameJs = "document.getElementById('federateLoginName')";
         usernameJs += ".value='" + this.state.userName + "';";
         usernameJs += "document.getElementById('fed-submit').click();";
