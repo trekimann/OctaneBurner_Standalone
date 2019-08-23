@@ -7,3 +7,5 @@ https://malcoded.com/posts/react-http-requests-axios/
 npm run build:react && npm run build && npm run start
 
 use .Net attach for debugging the c# process. The process is Core.exe
+
+promic in type script https://blog.bitsrc.io/keep-your-promises-in-typescript-using-async-await-7bdc57041308

@@ -5,8 +5,10 @@ const { ipcMain } = require('electron');
 const { ConnectionBuilder } = require("electron-cgi");
 const iconpath = path.join(__dirname + "/assets", "octaneIcon.png");
 import { app, BrowserWindow, Menu, nativeImage, Tray } from "electron";
+import { NewSharp } from "./app/NewSharp";
 
 let window: BrowserWindow | null;
+let newSharp: NewSharp;
 
 const createWindow = () => {
   window = new BrowserWindow({
@@ -44,6 +46,14 @@ const createWindow = () => {
   // BrowserWindow.removeDevToolsExtension(
   //   path.join(os.homedir(),
   //   "AppData/Local/Google/Chrome/User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.0.5_0"));
+
+  newSharp = new NewSharp();
+  newSharp.route("details", { target: "loadFile", data: "" });
+  const username = newSharp.route("details", { target: "retrieve", data: { target: "USERNAME" } });
+  newSharp.route("details", {
+    target: "update", data:
+      { target: "USERID", value: "1001" }
+  });
 };
 
 let appIcon: Tray = null;
@@ -131,6 +141,14 @@ ipcMain.on("balloon", (event: any, arg: any) => {
 
 // Handle requests from React for the c# stuff
 ipcMain.on("cSharp", (event: any, arg: any) => {
+
+  const ret = newSharp.route(arg.target, arg.data).then(() => {
+    // pass
+  }, () => {
+    //rejected
+  });
+  // need to make this return a promise so that the response can be sent out after the async
+
   connection.send(arg.target, arg.data, (response: any) => {
     // balloon("From sharp", response);
     if (arg.source !== undefined && arg.source !== null) {
