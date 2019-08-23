@@ -1,9 +1,9 @@
 const url = require("url");
 const path = require("path");
-const os = require("os")
+// const os = require("os")
 const { ipcMain } = require('electron');
 const { ConnectionBuilder } = require("electron-cgi");
-const iconpath = path.join(__dirname + "/assets", 'octaneIcon.png');
+const iconpath = path.join(__dirname + "/assets", "octaneIcon.png");
 import { app, BrowserWindow, Menu, nativeImage, Tray } from "electron";
 
 let window: BrowserWindow | null;
@@ -13,11 +13,11 @@ const createWindow = () => {
     frame: false,
     height: 600,
     icon: iconpath,
-    minWidth: 334,
+    minWidth: 340,
     webPreferences: {
       nodeIntegration: true,
     },
-    width: 334,
+    width: 340,
   });
 
   window.loadURL(

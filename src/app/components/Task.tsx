@@ -43,8 +43,7 @@ export class Task extends React.Component<{
     }
 
     public showTask = () => {
-        const ChangeTo = !this.state.ShowTask;
-        this.setState({ ShowTask: ChangeTo });
+        this.setState({ ShowTask: !this.state.ShowTask });
     }
 
     public updateTask = (updated: number) => {
