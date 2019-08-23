@@ -194,7 +194,6 @@ namespace Core {
                 }
             }
         }
-
     }
 
     class Details {

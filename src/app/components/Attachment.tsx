@@ -1,11 +1,12 @@
-import * as React from "react";
-import { Button } from "./Button";
 import { ipcRenderer } from "electron";
+import * as React from "react";
 import { ApiUtil } from "../ApiUtil";
+import { Button } from "./Button";
 import { User } from "./User";
 
 const toggleStyle = {
-    backgroundColor: "#0069ff",
+    backgroundColor: "rgba(19, 144, 179, 0.2)",
+    borderRadius: "20px 20px 0px 0px",
 };
 
 export class Attachment extends React.Component<{ AttachementId: string }, { Detail: any, showAttachment: boolean }> {
@@ -36,9 +37,8 @@ export class Attachment extends React.Component<{ AttachementId: string }, { Det
                 <div>
                     <Button Text={this.state.Detail.name}
                         onClick={this.toggleVisibilty}
-                        Style={toggleStyle}
                         DropDown={true} />
-                    <div style={this.state.showAttachment ? null : { display: "none" }}>
+                    <div style={this.state.showAttachment ? toggleStyle : { display: "none" }}>
                         {this.state.Detail.description !== null ? this.state.Detail.description : ""}
                         <User UserId={this.state.Detail.author.id}
                             UniqueId={this.state.Detail.id + this.state.Detail.author.id}

@@ -13,6 +13,7 @@ export class Task extends React.Component<{
     Completed: boolean,
     RemainingHours: number,
     ShowTask: boolean,
+    Status: string,
 }> {
     public tStyle = {
         backgroundColor: "rgba(0, 125, 255, 0.2)",
@@ -29,17 +30,15 @@ export class Task extends React.Component<{
         padding: "18px",
         width: "100%",
     };
-    // pull apart task details here
-    private id = this.props.Details.id;
-    private task = this.props.Details;
-    private status = this.task.phase.name;
+
     constructor(props: any) {
         super(props);
         this.state = {
-            ActualHours: Number(this.task.invested_hours),
+            ActualHours: Number(this.props.Details.invested_hours),
             Completed: false,
-            RemainingHours: Number(this.task.remaining_hours),
+            RemainingHours: Number(this.props.Details.remaining_hours),
             ShowTask: false,
+            Status: this.taskStatus(this.props.Details.phase.id),
         };
     }
 
@@ -61,7 +60,7 @@ export class Task extends React.Component<{
                 RemainingHours: newRemaining,
             });
             let Phase: { id: string; type: string; } = null;
-            if (this.status === "New") {
+            if (this.state.Status === "New") {
                 Phase = {
                     id: "phase.task.inprogress",
                     type: "phase",
@@ -74,7 +73,7 @@ export class Task extends React.Component<{
             };
 
             const toSend = JSON.stringify(changes);
-            const update = { taskId: this.id, data: toSend, after: this.taskUpdated };
+            const update = { taskId: this.props.Details.id, data: toSend, after: this.taskUpdated };
             ApiUtil.updateTask(update);
         } else {
             this.balloon("Tasks", "Less than 6 minutes was tracked, the task was not updated");
@@ -86,7 +85,7 @@ export class Task extends React.Component<{
             phase: { id: "phase.task.completed", type: "phase" },
         };
         const toSend = JSON.stringify(changes);
-        const update = { taskId: this.id, data: toSend, after: this.taskUpdated };
+        const update = { taskId: this.props.Details.id, data: toSend, after: this.taskUpdated };
         ApiUtil.updateTask(update);
     }
 
@@ -95,15 +94,15 @@ export class Task extends React.Component<{
     }
 
     public render() {
-        const taskText = this.id + ": " + this.task.name;
+        const taskText = this.props.Details.id + ": " + this.props.Details.name;
         return <div>
             <Button Style={{ backgroundColor: "#2700b0" }} onClick={this.showTask} Text={taskText} DropDown={true} />
             <div style={this.state.ShowTask ? this.tStyle : { display: "none" }}>
-                <div>Task Name: {this.task.name}</div>
-                <div>Estimated hours:   {this.task.estimated_hours}</div>
+                <div>Task Name: {this.props.Details.name}</div>
+                <div>Estimated hours:   {this.props.Details.estimated_hours}</div>
                 <div>Invested Hours:    {this.state.ActualHours}</div>
                 <div>Remaining hours:   {this.state.RemainingHours}</div>
-                <div>Task Phase: {this.status} {this.status === "In Progress" ?
+                <div>Task Phase: {this.state.Status} {this.state.Status === "In Progress" ?
                     <Button
                         Style={{
                             backgroundColor: "#039c0d",
@@ -117,7 +116,7 @@ export class Task extends React.Component<{
                 {this.state.Completed ? null :
                     <Timer updateActualHours={this.updateTask}
                         TaskUpdate={this.props.TaskUpdate}
-                        AssociatedTask={this.id} />
+                        AssociatedTask={this.props.Details.id} />
                 }
                 <br></br>
             </div>
@@ -130,5 +129,16 @@ export class Task extends React.Component<{
                 "title": title,
                 "contents": contents,
             });
+    }
+
+    private taskStatus(status: string) {
+        switch (status) {
+            case "phase.task.inprogress":
+                return "In Progress";
+            case "phase.task.new":
+                return "New";
+            default:
+                return status;
+        }
     }
 }

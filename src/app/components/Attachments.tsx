@@ -1,8 +1,8 @@
+import { ipcRenderer } from "electron";
 import * as React from "react";
 import { ApiUtil } from "../ApiUtil";
 import { Attachment } from "./Attachment";
 import { Button } from "./Button";
-import { ipcRenderer } from "electron";
 
 export class Attachments extends React.Component<{ StoryId: string }, { AttachmentDetails: [], visible: boolean }> {
 
@@ -29,8 +29,11 @@ export class Attachments extends React.Component<{ StoryId: string }, { Attachme
     public render() {
         return <div>{this.state.AttachmentDetails === null ? "Attachment Details" :
             <div>
-                <Button Text="Attachments" onClick={this.toggleVisibilty} DropDown={true}/>
-                <div style={this.state.visible ? { backgroundColor: "#1390b380" } : { display: "none" }}>
+                <Button Text="Attachments" onClick={this.toggleVisibilty} DropDown={true} />
+                <div style={this.state.visible ? {
+                    backgroundColor: "#1390b34d",
+                    borderRadius: "20px 20px 0px 0px",
+                } : { display: "none" }}>
                     {(this.state.AttachmentDetails || []).map((value) => {
                         return <Attachment key={value.id} AttachementId={value.id} />;
                     })}
