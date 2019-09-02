@@ -34,6 +34,7 @@ export class Button extends React.Component<{
             this.desiredStyle(this.props.Style);
         }
     }
+
     public render() {
         let hover = this.props.Text;
         if (this.props.HoverText !== null && this.props.HoverText !== undefined) {
@@ -51,6 +52,9 @@ export class Button extends React.Component<{
     }
 
     private click = () => {
+        if (this.props.Style !== null && this.props.Style !== null) {
+            this.desiredStyle(this.props.Style);
+        }
         if (this.props.DropDown !== null && this.props.DropDown !== undefined) {
             if (this.props.DropDown) {
                 // change style to add curved edge for top of button if expanded, flatten if not

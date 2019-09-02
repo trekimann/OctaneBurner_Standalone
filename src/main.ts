@@ -1,8 +1,6 @@
 const url = require("url");
 const path = require("path");
-// const os = require("os")
 const { ipcMain } = require('electron');
-const { ConnectionBuilder } = require("electron-cgi");
 const iconpath = path.join(__dirname + "/assets", "octaneIcon.png");
 import { app, BrowserWindow, Menu, nativeImage, Tray } from "electron";
 import { NewSharp } from "./app/NewSharp";
@@ -31,7 +29,7 @@ const createWindow = () => {
   );
 
   window.on("closed", () => {
-    connection.close();
+    // connection.close();
     window = null;
   });
 
@@ -49,11 +47,7 @@ const createWindow = () => {
 
   newSharp = new NewSharp();
   newSharp.route("details", { target: "loadFile", data: "" });
-  // const username = newSharp.route("details", { target: "retrieve", data: { target: "USERNAME" } });
-  // newSharp.route("details", {
-  //   target: "update", data:
-  //     { target: "USERID", value: "1001" }
-  // });
+
 };
 
 let appIcon: Tray = null;
@@ -70,7 +64,6 @@ const createTray = () => {
   {
     label: "Quit",
     click() {
-      connection.close();
       app.quit();
     },
   },
@@ -98,28 +91,6 @@ function balloon(displayTitle: string, contents: string) {
   }
 }
 
-let connection = new ConnectionBuilder()
-  .connectTo("dotnet", "run", "--project", "./core/Core")
-  .build();
-
-connection.onDisconnect = () => {
-  // tslint:disable-next-line: no-console
-  console.log("c# conection lost, retrying connection");
-  balloon("Warning", "c# conection lost, retrying connection");
-  connectToSharp();
-};
-function connectToSharp() {
-  connection = new ConnectionBuilder()
-    .connectTo("dotnet", "run", "--project", "./core/Core")
-    .build();
-  balloon("Notification", "Reconnected");
-  console.log("Reconnected");
-}
-
-// connection.send("greeting", "Mom from C#", (response: any) => {
-//   window.webContents.send("greeting", response);
-// });
-
 app.on("ready", createWindow);
 
 app.on("window-all-closed", () => {
@@ -139,8 +110,8 @@ ipcMain.on("balloon", (event: any, arg: any) => {
 });
 
 
-// Handle requests from React for the c# stuff
-ipcMain.on("cSharp", (event: any, arg: any) => {
+// Handle requests from React
+ipcMain.on("tsUtil", (event: any, arg: any) => {
 
   const prom = new Promise((resolve, reject) => {
     const answer = newSharp.route(arg.target, arg.data);
@@ -158,14 +129,9 @@ ipcMain.on("cSharp", (event: any, arg: any) => {
   }).catch((res) => {
     console.log("I was not called successfully");
     console.log(res);
+    console.log(arg.target);
+    console.log(arg.data);
   });
-
-  // connection.send(arg.target, arg.data, (response: any) => {
-  //   // balloon("From sharp", response);
-  //   if (arg.source !== undefined && arg.source !== null) {
-  //     window.webContents.send(arg.source, response);
-  //   }
-  // });
 });
 
 // handle requests from react to react

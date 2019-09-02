@@ -8,6 +8,8 @@ export class NewSharp {
     private Tasks = new Tasks(this.Logger, this.Details);
     private User = new UserDetails(this.Logger, this.Details);
 
+    constructor() {
+    }
     public route = (target: string, data: any) => {
         switch (target) {
             case "details": {
@@ -181,7 +183,7 @@ class Details {
 
 // tslint:disable-next-line: max-classes-per-file
 class Logger {
-    public shouldLog = false;
+    public shouldLog = true;
     private logPath = "";
 
     constructor(LogPath: string) {
@@ -228,7 +230,7 @@ class Tasks {
                 return this.userTaskList;
             case "totalNumberOfTasks":
                 this.NumberOfTasks = Number(data.data);
-                break;
+                return true;
             case "taskDetails":
                 return this.taskDetails(data.data);
             default:
@@ -239,6 +241,7 @@ class Tasks {
 
     public taskDetails = (taskDetails: any) => {
         this.userTasks.set(taskDetails.id, taskDetails);
+        return true;
     }
 
     public filterOwnerTasks = (data: any) => {

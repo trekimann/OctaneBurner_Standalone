@@ -77,7 +77,7 @@ export class OctaneLogin extends React.Component<
         ipcRenderer.on("usernameRetrieve", this.onRetrieve);
         ipcRenderer.on("workspaceSuccess", this.logInSuccess);
         ipcRenderer.on("workspaceFail", this.loginFail);
-        ipcRenderer.send("cSharp", { source: "usernameRetrieve", target: "details", data: { target: "retrieve", data:{target:"USERNAME"} } });
+        ipcRenderer.send("tsUtil", { source: "usernameRetrieve", target: "details", data: { target: "retrieve", data:{target:"USERNAME"} } });
     }
 
     public componentWillUnmount(): void {

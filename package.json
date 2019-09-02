@@ -1,5 +1,5 @@
 {
-    "name": "electron-demo",
+    "name": "octane-burner",
     "version": "1.0.0",
     "description": "",
     "main": "dist/main.js",
@@ -7,7 +7,7 @@
         "build:react": "webpack --mode development --config webpack.react.config.js",
         "build": "webpack --mode development",
         "start": "electron ./dist/main.js",
-        "package-win": "electron-packager . octane-burner --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/octaneIcon.iso --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Octane Burner\""
+        "package-win": "electron-packager . octane-burner --overwrite  --platform=win32 --arch=ia32 --icon=assets/icons/win/octaneIcon.iso --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Octane Burner\""
     },
     "keywords": [],
     "author": "Nicholas Mann",
@@ -20,22 +20,21 @@
         "@babel/preset-env": "^7.5.5",
         "@babel/preset-react": "^7.0.0",
         "@babel/preset-typescript": "^7.3.3",
-        "@types/node": "^12.7.2",
+        "@types/node": "^12.7.3",
         "@types/react": "^16.9.2",
         "@types/react-dom": "^16.9.0",
         "babel-loader": "^8.0.5",
         "babel-plugin-transform-runtime": "^6.23.0",
-        "electron": "^4.2.9",
-        "electron-cgi": "0.0.2",
+        "electron": "^4.2.10",
         "electron-packager": "^13.1.1",
         "file-loader": "^4.2.0",
         "html-webpack-plugin": "^3.2.0",
         "image-webpack-loader": "^5.0.0",
         "prettier": "^1.16.4",
         "tslint": "^5.19.0",
-        "typescript": "^3.3.3333",
+        "typescript": "^3.6.2",
         "url-loader": "^2.1.0",
-        "webpack": "^4.39.2",
+        "webpack": "^4.39.3",
         "webpack-cli": "^3.3.7"
     },
     "dependencies": {

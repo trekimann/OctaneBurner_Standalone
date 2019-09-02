@@ -21,7 +21,7 @@ export class User extends React.Component<
     public componentDidMount() {
         const listen = "userRetrieve" + this.props.UserId + this.props.UniqueId;
         ipcRenderer.on(listen, this.onRetrieve);
-        ipcRenderer.send("cSharp",
+        ipcRenderer.send("tsUtil",
             { source: listen, target: "user", data: { target: "retrieveUserDetails", data: this.props.UserId } });
     }
 

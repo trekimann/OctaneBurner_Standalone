@@ -18,7 +18,7 @@ export class ApiUtil {
             } else {
                 // pull out id
                 const id = JSON.parse(response.responseText).data[0].id;
-                ipcRenderer.send("cSharp", { target: "details", data: { target:"update", property: "WorkspaceId", value: id } });
+                ipcRenderer.send("tsUtil", { target: "details", data: { target:"update", property: "WorkspaceId", value: id } });
                 const arg = { source: "workspaceSuccess", data: { workspaceId: id } };
                 ipcRenderer.send("internal", arg);
             }
@@ -32,7 +32,7 @@ export class ApiUtil {
         } else {
             // pass response to c# to pull out the desired ID
             const Data = { target: "findUserId", data: response.responseText };
-            ipcRenderer.send("cSharp", { source: listener, target: "user", data: Data });
+            ipcRenderer.send("tsUtil", { source: listener, target: "user", data: Data });
         }
     }
 
@@ -58,12 +58,12 @@ export class ApiUtil {
             // pass the number of tasks to C# so it can signal when its done
             if (offset === null || offset === undefined) {// so its only sends on the first call.
                 const Data = { target: "totalNumberOfTasks", data: totalNumberOfTasks };
-                ipcRenderer.send("cSharp", { source: "allTasks", target: "task", data: Data });
+                ipcRenderer.send("tsUtil", { source: "allTasks", target: "task", data: Data });
             }
 
             if (responseObject.data != null) {
                 const Data = { target: "filterOwnerTasks", data: response.responseText };
-                ipcRenderer.send("cSharp", { source: "allTasks", target: "task", data: Data });
+                ipcRenderer.send("tsUtil", { source: "allTasks", target: "task", data: Data });
                 // need to run the API call again and offset the results by 9000 to get the next set of tasks
                 if (offset === undefined || offset === null) {
                     offset = "0";
@@ -111,7 +111,7 @@ export class ApiUtil {
             ipcRenderer.send("internal", data);
             // send details to C# for storage
             const Data = { target: "taskDetails", data: taskToAdd };
-            ipcRenderer.send("cSharp", { target: "task", data: Data });
+            ipcRenderer.send("tsUtil", { target: "task", data: Data });
         }
     }
 
@@ -127,7 +127,7 @@ export class ApiUtil {
             ipcRenderer.send("internal", data);
             // send details to C# for storage
             // const Data = { target: "taskDetails", data: taskToAdd };
-            // ipcRenderer.send("cSharp", { target: "task", data: Data });
+            // ipcRenderer.send("tsUtil", { target: "task", data: Data });
         }
     }
 
@@ -239,7 +239,7 @@ export class ApiUtil {
     }
 
     public static updateToBack(update: any) {
-        ipcRenderer.send("cSharp", { target: "details", data: update });
+        ipcRenderer.send("tsUtil", { target: "details", data: update });
     }
     // -----------------------------put things into store ------------------------------
 
@@ -247,7 +247,7 @@ export class ApiUtil {
     // -----------------------------get things from store ------------------------------
     public static retrieve(property: string, RequestSource: string) {
         ipcRenderer.on("retrieveFromStore", this.returnToSender);
-        ipcRenderer.send("cSharp", { source: "retrieveFromStore", target: "retrieve", data: { target: property } });
+        ipcRenderer.send("tsUtil", { source: "retrieveFromStore", target: "retrieve", data: { target: property } });
     }
 
     private static returnToSender = (event: any, value: any) => {

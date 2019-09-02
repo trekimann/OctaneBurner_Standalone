@@ -10,7 +10,7 @@ export class FindUser extends React.Component {
 
     public render() {
         function boxFocus() {
-            ipcRenderer.send("cSharp", { target: "octaneApi", data: { endpoint: "workspaceId" }, source: "FindUser" });
+            ipcRenderer.send("tsUtil", { target: "octaneApi", data: { endpoint: "workspaceId" }, source: "FindUser" });
         }
 
         return <div>
