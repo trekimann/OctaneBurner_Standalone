@@ -18,7 +18,7 @@ export class ApiUtil {
             } else {
                 // pull out id
                 const id = JSON.parse(response.responseText).data[0].id;
-                ipcRenderer.send("cSharp", { target: "details", data: { property: "WorkspaceId", value: id } });
+                ipcRenderer.send("cSharp", { target: "details", data: { target:"update", property: "WorkspaceId", value: id } });
                 const arg = { source: "workspaceSuccess", data: { workspaceId: id } };
                 ipcRenderer.send("internal", arg);
             }
@@ -76,7 +76,7 @@ export class ApiUtil {
                     ipcRenderer.send("balloon",
                         { "title": "Tasks", "contents": totalNumberOfTasks + " Retrieved\nGetting details" });
                     // use ts to filter task list to increase speed
-                    ApiUtil.filterTasks(newList, userId);
+                    // ApiUtil.filterTasks(newList, userId);
                 }
             }
         }
@@ -235,7 +235,7 @@ export class ApiUtil {
 
     // -----------------------------put things into store ------------------------------
     public static updateUsername(username: string) {
-        this.updateToBack({ property: "Username", value: username });
+        this.updateToBack({target:"update", property: "Username", value: username });
     }
 
     public static updateToBack(update: any) {

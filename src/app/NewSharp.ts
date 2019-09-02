@@ -6,22 +6,98 @@ export class NewSharp {
     private Logger = new Logger(this.path + "\\log.log");
     private Details = new Details(this.path, this.Logger);
     private Tasks = new Tasks(this.Logger, this.Details);
+    private User = new UserDetails(this.Logger, this.Details);
 
-    public route = (target: string, data: any) => new Promise<any>(() => {
+    public route = (target: string, data: any) => {
         switch (target) {
             case "details": {
                 return this.Details.route(data);
             }
-            case "tasks": {
+            case "task": {
                 return this.Tasks.route(data);
             }
+            case "user": {
+                return this.User.route(data);
+            }
         }
-    })
+    }
+}
+
+// tslint:disable-next-line: max-classes-per-file
+class UserDetails {
+    private Logger: Logger;
+    private Details: Details;
+
+    constructor(log: Logger, deets: Details) {
+        this.Logger = log;
+        this.Details = deets;
+    }
+
+    public route = (data: any) => {
+        const target = data.target;
+        let toReturn = null;
+        switch (target) {
+            case "findUserId": {
+                toReturn = this.findUserId(this.Details.retrieve("Username"), data.data);
+                break;
+            }
+            case "retrieveUserDetails": {
+                toReturn = this.retrieveUserDetails(data.data);
+                break;
+            }
+        }
+
+        return toReturn;
+    }
+
+    public retrieveUserDetails = (id: string) => {
+        let toReturn = null;
+        const userList: Map<string, any> = this.Details.retrieve("userList");
+        if (userList.has(id)) {
+            toReturn = userList.get(id);
+        }
+        return toReturn;
+    }
+
+    public findUserId = (target: string, userResponse: any) => {
+        const userList = new Map<string, object>();
+
+        let toReturn = "";
+        // Pull apart the json message from octane into objects.
+        const UserInfo = JSON.parse(userResponse);
+        const users = UserInfo.data;
+        // look though each one for the user who logged in. 
+        // while here create in memory list of users. Dictionary with id as key. user object as value
+        // tslint:disable-next-line: forin
+        for (const person of users) {
+            const email = person.email;
+            const ID = person.id;
+            if (email === target) {
+                toReturn = ID;
+            }
+            userList.set(ID, person);
+        }
+
+        // update the data store with the ID
+        let update = {};
+        update.property = "USERID";
+        update.value = toReturn;
+        this.Details.update(update);
+
+        update = {};
+        update.property = "USERLIST";
+        update.value = userList;
+        this.Details.update(update);
+
+        // return the userId
+
+        return toReturn;
+    }
 }
 
 // tslint:disable-next-line: max-classes-per-file
 class Details {
-    private dataStore = new Map<string, string>();
+    private dataStore = new Map<string, any>();
     private userList = new Map<string, any>();
     private userCache = "";
     private Logger: Logger;
@@ -32,7 +108,7 @@ class Details {
         this.Logger = logger;
     }
 
-    public route = (data: any) => new Promise<any>(() => {
+    public route = (data: any) => {
         const target = data.target;
         switch (target) {
             case "update": {
@@ -48,27 +124,28 @@ class Details {
                 return this.getUserDetails(data);
             }
         }
-    })
+    }
 
-    public getUserDetails = (data: any) => new Promise<any>(() => {
+    public getUserDetails = (data: any) => {
         this.Logger.Log("In getUserDetails");
         if (data.data.operation === "update") {
             // update user details here
         } else if (data.data.operation === "retrieve") {
             return this.userList.get(data.data.target);
         }
-    })
+    }
 
-    public update = (data: any) => new Promise<any>(() => {
+    public update = (data: any) => {
         this.Logger.Log("In update");
-        this.dataStore.set(data.data.target, data.data.value);
+        this.dataStore.set(data.property.toUpperCase(), data.value);
         this.saveDetails();
-    })
+        return true;
+    }
 
-    public retrieve = (data: string) => new Promise<any>(() => {
+    public retrieve = (data: string) => {
         this.Logger.Log("In retrieve");
-        return this.dataStore.get(data);
-    })
+        return this.dataStore.get(data.toUpperCase());
+    }
 
     public loadFromFile = () => {
         this.Logger.Log("In loadFromFile");
@@ -91,12 +168,14 @@ class Details {
     }
 
     private saveDetails() {
-        this.Logger.Log("In saveDetails");
-        let text = "";
-        for (const key of this.dataStore.keys()) {
-            text = text + key + ":" + this.dataStore.get(key) + ",";
-        }
-        fs.writeFileSync(this.userCache, text);
+        try {
+            this.Logger.Log("In saveDetails");
+            let text = "";
+            for (const key of this.dataStore.keys()) {
+                text = text + key + ":" + this.dataStore.get(key) + ",";
+            }
+            fs.writeFileSync(this.userCache, text);
+        } catch{ }
     }
 }
 
@@ -110,14 +189,18 @@ class Logger {
     }
 
     public Log = (contents: string) => {
-        const time = Date.now().toLocaleString();
-        const log = time + "\t--\t" + contents;
-        if (this.shouldLog) {
-            if (fs.existsSync(this.logPath)) {
-                fs.appendFileSync(this.logPath, log);
-            } else {
-                fs.writeFileSync(this.logPath, log);
+        try {
+            const time = Date.now().toLocaleString();
+            const log = time + "\t--\t" + contents;
+            if (this.shouldLog) {
+                if (fs.existsSync(this.logPath)) {
+                    fs.appendFileSync(this.logPath, log);
+                } else {
+                    fs.writeFileSync(this.logPath, log);
+                }
             }
+        } catch{
+
         }
     }
 }
@@ -141,25 +224,29 @@ class Tasks {
         switch (target) {
             case "filterOwnerTasks":
                 return this.filterOwnerTasks(data.data);
-            // case "returnTaskList":
-            //     return taskList;
-            // case "totalNumberOfTasks":
-            //     NumberOfTasks = Convert.ToInt32(data.data.ToString());
-            //     break;
-            // case "taskDetails":
-            //     return taskDetails(data.data);
+            case "returnTaskList":
+                return this.userTaskList;
+            case "totalNumberOfTasks":
+                this.NumberOfTasks = Number(data.data);
+                break;
+            case "taskDetails":
+                return this.taskDetails(data.data);
             default:
                 this.Logger.Log("tasks: no route found for " + target);
                 break;
         }
     }
 
+    public taskDetails = (taskDetails: any) => {
+        this.userTasks.set(taskDetails.id, taskDetails);
+    }
+
     public filterOwnerTasks = (data: any) => {
-        const taskJson = data.data.Tasks;
-        const taskObjects = JSON.parse(taskJson);
+        const taskJson = JSON.parse(data);
+        const taskObjects = taskJson.data;
         const userId = this.Store.retrieve("USERID");
 
-        for (const task of taskObjects.data) {
+        for (const task of taskObjects) {
             const owner = task.owner;
             if (!this.allTasks.has(task.id)) {
                 this.allTasks.set(task.id, task);
