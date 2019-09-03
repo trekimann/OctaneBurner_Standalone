@@ -29,7 +29,6 @@ const createWindow = () => {
   );
 
   window.on("closed", () => {
-    // connection.close();
     window = null;
   });
 

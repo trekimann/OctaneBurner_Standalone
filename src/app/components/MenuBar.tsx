@@ -4,9 +4,9 @@ import closeIcon from "./../assets/close.png";
 import maxIcon from "./../assets/maximise.png";
 import minIcon from "./../assets/minimise2.png";
 // import octIcon from "./../assets/octaneIcon.png";
-// import vidIcon from "./../assets/Video.png";
-// import vidIconRec from "./../assets/Video_recording.png";
 import printIcon from "./../assets/Print.png";
+import vidIcon from "./../assets/Video.png";
+import vidIconRec from "./../assets/Video_recording.png";
 import { MenuIcon } from "./MenuIcon";
 
 const menuStyle = {
@@ -68,11 +68,12 @@ export class MenuBar extends React.Component {
     //   },
     //   src: octIcon,
     // },
-    // {
-    //   alt: "Capture Video",
-    //   altSrc: vidIconRec,
-    //   src: vidIcon,
-    // },
+    {
+      alt: "Capture Video",
+      altSrc: vidIconRec,
+      click: this.toggleVideo.bind(this),
+      src: vidIcon,
+    },
     {
       alt: "Print",
       click: () => { remote.BrowserWindow.getFocusedWindow().webContents.print({ printBackground: true }); },
@@ -80,6 +81,9 @@ export class MenuBar extends React.Component {
     },
   ];
 
+  public toggleVideo() {
+
+  }
   public loginWindow() {
     window.open("https://login.software.microfocus.com/msg/actions/showLogin", "_blank");
   }
@@ -107,7 +111,8 @@ export class MenuBar extends React.Component {
           {this.buttons.map((value, index) => {
             return <MenuIcon key={value.alt} imgSrc={value.src}
               onClick={() => value.click()} liStyle={value.liStyle}
-              buttonStyle={value.buttonStyle} altText={value.alt} />;
+              buttonStyle={value.buttonStyle} altText={value.alt}
+              altSrc={value.altSrc} />;
           })}
         </ul>
       </nav>

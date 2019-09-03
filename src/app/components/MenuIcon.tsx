@@ -11,13 +11,28 @@ const defaultStyle = {
 };
 
 export class MenuIcon extends React.Component<{
-    liStyle?: any,
+    altSrc?: any,
+    altText?: string,
     buttonStyle?: any,
     imgSrc?: any,
+    liStyle?: any,
     onClick?: any,
-    altText?: string,
-    altSrc?: any,
-}, {}> {
+}, {
+    imgSrc: any,
+}> {
+
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            imgSrc: null,
+        };
+    }
+
+    public componentDidMount() {
+        if (this.props.imgSrc !== undefined && this.props.imgSrc !== null) {
+            this.setState({ imgSrc: this.props.imgSrc });
+        }
+    }
     public render() {
         let styling = defaultStyle;
         if (this.props.buttonStyle !== null && this.props.buttonStyle !== undefined) {
@@ -25,12 +40,28 @@ export class MenuIcon extends React.Component<{
         }
         return <li style={this.props.liStyle ? this.props.liStyle : liStyle}>
             <input style={styling}
-                type="image" src={this.props.imgSrc}
+                type="image"
+                src={this.state.imgSrc}
                 alt={this.props.altText}
-                onClick={this.props.onClick}
+                onClick={this.click}
                 title={this.props.altText} />
         </li>;
     }
+
+    private click = () => {
+        document.activeElement.blur();
+        if (this.props.altSrc !== undefined && this.props.altSrc !== null) {
+            if (this.state.imgSrc === this.props.imgSrc) {
+                this.setState({ imgSrc: this.props.altSrc });
+            } else {
+                this.setState({ imgSrc: this.props.imgSrc });
+            }
+        }
+        if (this.props.onClick !== undefined && this.props.onClick !== null) {
+            this.props.onClick();
+        }
+    }
+
 
     private desiredStyle() {
         // if there is a style submitted, compare it here to the default and only change any values which are different

@@ -35,10 +35,15 @@ export class Comments extends React.Component<
     }
 
     public componentDidMount() {
-        ipcRenderer.on("comments" + this.props.WorkId, this.updateComments);
-        ipcRenderer.on(this.props.WorkId + "postComment", this.commentSuccessful);
+
         this.timer = setInterval(() => this.getComments(), (this.state.Frequency) * this.state.FrequencyMultiplier);
         // this.balloon("Comments", "Mounted");
+    }
+
+    public componentWillMount() {
+        ipcRenderer.on("comments" + this.props.WorkId, this.updateComments);
+        ipcRenderer.on(this.props.WorkId + "postComment", this.commentSuccessful);
+        this.getComments();
     }
 
     public componentWillUnmount() {
@@ -105,7 +110,7 @@ export class Comments extends React.Component<
             <Button Style={{ backgroundColor: "#2732b0" }} onClick={this.ToggleComments}
                 Text={text} onDblclick={this.getComments}
                 HoverText="Double click to update Comments"
-                DropDown={true}/>
+                DropDown={true} />
             <div style={this.state.ShowComments ? {
                 maxHeight: "40vh",
                 overflow: "auto",
