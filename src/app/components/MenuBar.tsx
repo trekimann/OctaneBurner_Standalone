@@ -68,12 +68,12 @@ export class MenuBar extends React.Component {
     //   },
     //   src: octIcon,
     // },
-    {
-      alt: "Capture Video",
-      altSrc: vidIconRec,
-      click: this.toggleVideo.bind(this),
-      src: vidIcon,
-    },
+    // {
+    //   alt: "Capture Video",
+    //   altSrc: vidIconRec,
+    //   click: this.toggleVideo.bind(this),
+    //   src: vidIcon,
+    // },
     {
       alt: "Print",
       click: () => { remote.BrowserWindow.getFocusedWindow().webContents.print({ printBackground: true }); },

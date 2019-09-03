@@ -77,7 +77,11 @@ export class OctaneLogin extends React.Component<
         ipcRenderer.on("usernameRetrieve", this.onRetrieve);
         ipcRenderer.on("workspaceSuccess", this.logInSuccess);
         ipcRenderer.on("workspaceFail", this.loginFail);
-        ipcRenderer.send("tsUtil", { source: "usernameRetrieve", target: "details", data: { target: "retrieve", data:{target:"USERNAME"} } });
+        ipcRenderer.send("tsUtil",
+            {
+                source: "usernameRetrieve", target: "details", data:
+                    { target: "retrieve", data: { target: "USERNAME" } },
+            });
     }
 
     public componentWillUnmount(): void {
@@ -90,14 +94,14 @@ export class OctaneLogin extends React.Component<
     public logInSuccess = (event: any, value: any) => {
         // this sets the state to logged in, put into check success action
         // value should be the workspaceID for the user.
-        ipcRenderer.send("balloon", { "title": "Success", "contents": "Logged in" });
+        ipcRenderer.send("balloon", { title: "Success", contents: "Logged in" });
         ApiUtil.updateUsername(this.state.userName);
         this.props.LoggingIn(false, true);
     }
 
     public loginFail = (event: any, value: any) => {
         this.setState({ failedLogin: true });
-        ipcRenderer.send("balloon", { "title": "Error", "contents": "Could not log in" });
+        ipcRenderer.send("balloon", { title: "Error", contents: "Could not log in" });
         this.props.LoggingIn(false, false);
     }
 

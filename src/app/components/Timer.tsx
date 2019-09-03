@@ -48,8 +48,8 @@ export class Timer extends React.Component<{
         } else {
             ipcRenderer.send("balloon",
                 {
-                    "title": "Tasks",
-                    "contents": "A task is already being tracked: " + this.props.TaskUpdate(),
+                    title: "Tasks",
+                    contents: "A task is already being tracked: " + this.props.TaskUpdate(),
                 });
         }
     }

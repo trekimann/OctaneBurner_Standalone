@@ -52,6 +52,7 @@ export class Button extends React.Component<{
     }
 
     private click = () => {
+        document.activeElement.blur();
         if (this.props.Style !== null && this.props.Style !== null) {
             this.desiredStyle(this.props.Style);
         }
@@ -67,7 +68,6 @@ export class Button extends React.Component<{
             }
         }
         this.props.onClick();
-        document.activeElement.blur();
     }
 
     private desiredStyle(inputStyle: any) {

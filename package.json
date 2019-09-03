@@ -7,7 +7,7 @@
         "build:react": "webpack --mode development --config webpack.react.config.js",
         "build": "webpack --mode development",
         "start": "electron ./dist/main.js",
-        "package-win": "electron-packager . octane-burner --overwrite  --platform=win32 --arch=ia32 --icon=assets/icons/win/octaneIcon.iso --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Octane Burner\""
+        "package": "electron-packager . octane-burner --overwrite  --platform=win32 --arch=ia32 --icon=assets/icons/win/octaneIcon.iso --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Octane Burner\""
     },
     "keywords": [],
     "author": "Nicholas Mann",

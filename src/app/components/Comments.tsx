@@ -35,7 +35,6 @@ export class Comments extends React.Component<
     }
 
     public componentDidMount() {
-
         this.timer = setInterval(() => this.getComments(), (this.state.Frequency) * this.state.FrequencyMultiplier);
         // this.balloon("Comments", "Mounted");
     }
