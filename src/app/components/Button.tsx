@@ -52,10 +52,10 @@ export class Button extends React.Component<{
     }
 
     private click = () => {
-        document.activeElement.blur();
-        if (this.props.Style !== null && this.props.Style !== null) {
+        if (this.props.Style !== undefined && this.props.Style !== null) {
             this.desiredStyle(this.props.Style);
         }
+        document.activeElement.blur();
         if (this.props.DropDown !== null && this.props.DropDown !== undefined) {
             if (this.props.DropDown) {
                 // change style to add curved edge for top of button if expanded, flatten if not

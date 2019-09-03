@@ -41,9 +41,9 @@ export class Timer extends React.Component<{
     public startTimer = () => {
         if (this.props.TaskUpdate() === "none") {
             this.setState({ startTime: Date.now() });
+            this.setState({ currentStyle: startStyle });
             this.setState({ buttonText: "Stop Tracking" });
             this.setState({ buttonAction: this.stopTimer });
-            this.setState({ currentStyle: startStyle });
             this.props.TaskUpdate(this.props.AssociatedTask);
         } else {
             ipcRenderer.send("balloon",
@@ -56,9 +56,9 @@ export class Timer extends React.Component<{
 
     public stopTimer = () => {
         const endTime = Date.now();
+        this.setState({ currentStyle: stopStyle });
         this.setState({ buttonText: "Start Tracking" });
         this.setState({ buttonAction: this.startTimer });
-        this.setState({ currentStyle: stopStyle });
         this.props.TaskUpdate("none");
 
         let difference = (endTime - this.state.startTime) / 3600000; // in ms. need to change to hour.
@@ -69,7 +69,8 @@ export class Timer extends React.Component<{
     public render() {
         return <div style={containterStyle}>
             <Button Style={this.state.currentStyle}
-                Text={this.state.buttonText} onClick={this.state.buttonAction} />
+                Text={this.state.buttonText}
+                onClick={this.state.buttonAction} />
         </div>;
     }
 }

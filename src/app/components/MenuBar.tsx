@@ -5,8 +5,8 @@ import maxIcon from "./../assets/maximise.png";
 import minIcon from "./../assets/minimise2.png";
 // import octIcon from "./../assets/octaneIcon.png";
 import printIcon from "./../assets/Print.png";
-import vidIcon from "./../assets/Video.png";
-import vidIconRec from "./../assets/Video_recording.png";
+// import vidIcon from "./../assets/Video.png";
+// import vidIconRec from "./../assets/Video_recording.png";
 import { MenuIcon } from "./MenuIcon";
 
 const menuStyle = {

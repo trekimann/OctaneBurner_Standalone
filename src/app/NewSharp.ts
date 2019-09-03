@@ -157,11 +157,12 @@ class Details {
                 // nothing
             }
             const properties = raw.split(",");
-
-            for (const prop of properties) {
-                if (prop !== "") {
-                    const contents = prop.split(":");
-                    this.dataStore.set(contents[0], contents[1]);
+            if (properties.length > 0) {
+                for (const prop of properties) {
+                    if (prop !== "") {
+                        const contents = prop.split(":");
+                        this.dataStore.set(contents[0], contents[1]);
+                    }
                 }
             }
         } else {
