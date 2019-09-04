@@ -108,16 +108,20 @@ export class Story extends React.Component<
             StoryText = this.Cap(this.state.FullStory.subtype) + " Description";
         }
         return <div>
-            <Button onDblclick={this.getStoryDetails}
+            <Button
+                key={"story" + this.props.StoryId}
+                onDblclick={this.getStoryDetails}
                 Style={bsStyle}
                 onClick={this.expandStory}
                 Text={linkedStory}
                 HoverText="Double click to refresh story details"
-                DropDown={true}/>
+                DropDown={true} />
             <div style={this.state.ExpandStory ? this.sStyle : { display: "none" }}>
                 {this.state.StoryRetrieved ?
                     <div>
-                        <Button Style={{ backgroundColor: "#0046b0" }}
+                        <Button
+                            key={"storyDetail" + this.props.StoryId}
+                            Style={{ backgroundColor: "#0046b0" }}
                             onClick={this.showStory} Text={StoryText} DropDown={true} />
                         <div style={this.state.ShowStory ? null : { display: "none" }}>
                             <User

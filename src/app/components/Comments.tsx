@@ -106,7 +106,9 @@ export class Comments extends React.Component<
         }
         const text = String(this.state.RetrievedComments.length) + endText + " found on story";
         return <div>
-            <Button Style={{ backgroundColor: "#2732b0" }} onClick={this.ToggleComments}
+            <Button
+                key={"comments" + this.props.WorkId}
+                Style={{ backgroundColor: "#2732b0" }} onClick={this.ToggleComments}
                 Text={text} onDblclick={this.getComments}
                 HoverText="Double click to update Comments"
                 DropDown={true} />
@@ -114,11 +116,15 @@ export class Comments extends React.Component<
                 maxHeight: "40vh",
                 overflow: "auto",
             } : { display: "none" }}>
-                <NewComment commentUpdate={this.commentUpdate}
+                <NewComment
+                    commentUpdate={this.commentUpdate}
                     commentValue={this.state.NewComment}
-                    submitComment={this.submitNewComment} />
+                    submitComment={this.submitNewComment}
+                    workId={this.props.WorkId}
+                />
                 {(this.state.RetrievedComments || []).map((value) => {
-                    return <Comment key={value.id}
+                    return <Comment
+                        key={value.id}
                         Details={value}
                         userId={this.props.UserId}
                         DeleteComment={this.removeComment}

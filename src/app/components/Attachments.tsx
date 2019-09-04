@@ -29,7 +29,11 @@ export class Attachments extends React.Component<{ StoryId: string }, { Attachme
     public render() {
         return <div>{this.state.AttachmentDetails === null ? "Attachment Details" :
             <div>
-                <Button Text="Attachments" onClick={this.toggleVisibilty} DropDown={true} />
+                <Button
+                    key={"attachemts" + this.state.AttachmentDetails}
+                    Text="Attachments"
+                    onClick={this.toggleVisibilty}
+                    DropDown={true} />
                 <div style={this.state.visible ? {
                     backgroundColor: "#1390b34d",
                     borderRadius: "20px 20px 0px 0px",

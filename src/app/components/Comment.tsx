@@ -3,10 +3,12 @@ import { Button } from "./Button";
 import { User } from "./User";
 
 export class Comment extends React.Component<
-{DeleteComment: any,
-    Details: any,
-    userId: string,
-    ReplyToComment?: any },
+    {
+        DeleteComment: any,
+        Details: any,
+        userId: string,
+        ReplyToComment?: any
+    },
     { hasError: boolean }> {
     public static getDerivedStateFromError(error: any) {
         // Update state so the next render will show the fallback UI.
@@ -43,9 +45,9 @@ export class Comment extends React.Component<
         const creation = ms.toLocaleDateString("en-GB") + " " + ms.toLocaleTimeString();
 
         return <div style={this.bsStyle}>
-            <User DoubleClick ={this.props.ReplyToComment}
-            UserId={commentDetails.author.id}
-            UniqueId={commentDetails.id} />
+            <User DoubleClick={this.props.ReplyToComment}
+                UserId={commentDetails.author.id}
+                UniqueId={commentDetails.id} />
             <div>Created: {creation}</div>
             <div dangerouslySetInnerHTML={{ __html: text }}></div>
             {commentDetails.author.id === this.props.userId ? this.deleteOption() : null}
@@ -54,8 +56,9 @@ export class Comment extends React.Component<
 
     private deleteOption() {
         return <div>
-            <Button Style={{backgroundColor: "Red", color: "black"}}
-            Text="Delete Comment" onClick={() => this.props.DeleteComment(this.props.Details.id)} />
+            <Button key={this.props.Details.id + "comment"}
+                Style={{ backgroundColor: "Red", color: "black" }}
+                Text="Delete Comment" onClick={() => this.props.DeleteComment(this.props.Details.id)} />
         </div>;
     }
 }

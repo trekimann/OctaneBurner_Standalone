@@ -48,7 +48,6 @@ class UserDetails {
                 break;
             }
         }
-
         return toReturn;
     }
 
@@ -158,6 +157,7 @@ class Details {
             }
             const properties = raw.split(",");
             if (properties.length > 0) {
+
                 for (const prop of properties) {
                     if (prop !== "") {
                         const contents = prop.split(":");

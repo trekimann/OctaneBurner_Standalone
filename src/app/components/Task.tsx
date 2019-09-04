@@ -94,7 +94,11 @@ export class Task extends React.Component<{
     public render() {
         const taskText = this.props.Details.id + ": " + this.props.Details.name;
         return <div>
-            <Button Style={{ backgroundColor: "#2700b0" }} onClick={this.showTask} Text={taskText} DropDown={true} />
+            <Button
+                key={this.props.Details.id + "task"}
+                Style={{ backgroundColor: "#2700b0" }}
+                onClick={this.showTask} Text={taskText}
+                DropDown={true} />
             <div style={this.state.ShowTask ? this.tStyle : { display: "none" }}>
                 <div>Task Name: {this.props.Details.name}</div>
                 <div>Estimated hours:   {this.props.Details.estimated_hours}</div>
@@ -102,6 +106,7 @@ export class Task extends React.Component<{
                 <div>Remaining hours:   {this.state.RemainingHours}</div>
                 <div>Task Phase: {this.state.Status} {this.state.Status === "In Progress" ?
                     <Button
+                        key={this.props.Details.id + "taskCompleted"}
                         Style={{
                             backgroundColor: "#039c0d",
                             borderRadius: "5px",
@@ -110,7 +115,8 @@ export class Task extends React.Component<{
                             paddingRight: "5px",
                             width: null,
                         }}
-                        Text="Move to completed" onClick={this.taskCompleted} /> : null}</div>
+                        Text="Move to completed"
+                        onClick={this.taskCompleted} /> : null}</div>
                 {this.state.Completed ? null :
                     <Timer updateActualHours={this.updateTask}
                         TaskUpdate={this.props.TaskUpdate}

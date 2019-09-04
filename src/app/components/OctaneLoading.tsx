@@ -117,7 +117,11 @@ export class OctaneLogin extends React.Component<
                 <div style={errorStyle}>Login Failed, Please check username and password</div> :
                 null}
             {this.state.password !== "" && this.state.userName !== "" ?
-                <Button onClick={this.openWindow} Text="Log in" Style={bStyle} /> : null}
+                <Button
+                    key={"octaneLogin"}
+                    onClick={this.openWindow}
+                    Text="Log in"
+                    Style={bStyle} /> : null}
         </div >;
     }
 

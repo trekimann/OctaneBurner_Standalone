@@ -56,13 +56,15 @@ export class User extends React.Component<
             {this.state.UserDetails === null ?
                 <div>User: {this.props.UserId}</div> :
                 <div>
-                    <Button Style={{ backgroundColor: "rgb(40,115,21)" }}
+                    <Button
+                        key={this.props.UniqueId + "button"}
+                        Style={{ backgroundColor: "rgb(40,115,21)" }}
                         onClick={this.toggleVisiblity} Text={buttonText}
                         onDblclick={this.props.DoubleClick !== undefined ? () =>
                             this.props.DoubleClick(this.state.UserDetails.email, this.state.UserName) : null}
                         HoverText={this.props.DoubleClick !== undefined ?
-                        "Double Click to reply to this user" : buttonText}
-                        DropDown={true}/>
+                            "Double Click to reply to this user" : buttonText}
+                        DropDown={true} />
                     <div style={this.state.ShowUser ? styling : { display: "none" }}>
                         <div>Email: <a style={{ color: "inherit" }} href={hRef}>{this.state.UserDetails.email}</a>
                         </div>

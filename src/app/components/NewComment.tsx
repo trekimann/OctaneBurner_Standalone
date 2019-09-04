@@ -6,6 +6,7 @@ export class NewComment extends React.Component<{
     commentUpdate: any,
     commentValue: string,
     submitComment: any,
+    workId: string,
 },
     { showTextbox: boolean }> {
 
@@ -20,13 +21,17 @@ export class NewComment extends React.Component<{
     }
     public render() {
         return <div>
-            <Button Style={{ backgroundColor: "rgb(53,147,255)" }}
-            Text="Add new Comment"
-            onClick={this.toggle}
-            DropDown={true}/>
+            <Button
+                key={"newComment" + this.props.workId}
+                Style={{ backgroundColor: "rgb(53,147,255)" }}
+                Text="Add new Comment"
+                onClick={this.toggle}
+                DropDown={true} />
             <div style={this.state.showTextbox ? null : { display: "none" }}>
                 <TextArea Value={this.props.commentValue} OnChange={this.props.commentUpdate} />
-                <Button Text="Submit" onClick={this.props.submitComment} />
+                <Button
+                    key={"newCommentSubmit" + this.props.workId}
+                    Text="Submit" onClick={this.props.submitComment} />
             </div>
         </div>;
     }

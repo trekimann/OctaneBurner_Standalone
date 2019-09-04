@@ -35,12 +35,14 @@ export class Attachment extends React.Component<{ AttachementId: string }, { Det
         return <div>
             {this.state.Detail === null ? "Attachment here" :
                 <div>
-                    <Button Text={this.state.Detail.name}
+                    <Button key={this.state.Detail.id + "button"} Text={this.state.Detail.name}
                         onClick={this.toggleVisibilty}
                         DropDown={true} />
                     <div style={this.state.showAttachment ? toggleStyle : { display: "none" }}>
                         {this.state.Detail.description !== null ? this.state.Detail.description : ""}
-                        <User UserId={this.state.Detail.author.id}
+                        <User
+                            key={this.state.Detail.id + "user"}
+                            UserId={this.state.Detail.author.id}
                             UniqueId={this.state.Detail.id + this.state.Detail.author.id}
                             AdditionalDescription="Created by" />
                         {this.openAttachment()}

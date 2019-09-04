@@ -68,7 +68,9 @@ export class Timer extends React.Component<{
 
     public render() {
         return <div style={containterStyle}>
-            <Button Style={this.state.currentStyle}
+            <Button
+                key={this.props.AssociatedTask + "timer"}
+                Style={this.state.currentStyle}
                 Text={this.state.buttonText}
                 onClick={this.state.buttonAction} />
         </div>;
