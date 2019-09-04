@@ -1,5 +1,5 @@
 import { desktopCapturer, DesktopCapturerSource, ipcRenderer } from "electron";
-const fs = require('fs');
+const fs = require("fs");
 import * as React from "react";
 import { Button } from "./Button";
 
@@ -30,19 +30,26 @@ export class VideoCapture extends React.Component<{}, { DisplayId: string, Scree
 
     public render() {
         return <div>
-            <textarea id="Supported"></textarea>
-            <video controls style={{ maxWidth: "100%" }}></video>{}
-            <Button Text="Start Video Stream" onClick={() => this.thing(this.screenId)} />
+            {/* <textarea id="Supported"></textarea> */}
+            <video controls style={{ maxWidth: "100%" }}></video>
+            <Button Text="Start Video Stream" onClick={() => this.thing()} />
             <Button Text="Stop Video" onClick={this.stopRecording} />
             <Button Text="Start Recording" onClick={this.startRecording} />
             <Button Text="Playback Recording" onClick={this.playBackRecording} />
-            <Button Text="Save Recording" onClick={this.saveRecording} />
+            <Button Text="Save Recording" onClick={this.bigSave} />
         </div >;
     }
 
-    private saveRecording = () => {
-        this.toArrayBuffer(new Blob(recordedChunks, { type: video }), (ab) => {
-            const buffer = this.toBuffer(ab);
+    private bigSave = () => {
+        const blob = new Blob(recordedChunks, { type: video });
+        const fileReader = new FileReader();
+        fileReader.onload = function () {
+            const ab = this.result;
+            const buffer = new Buffer(ab.byteLength);
+            const arr = new Uint8Array(ab);
+            for (let i = 0; i < arr.byteLength; i++) {
+                buffer[i] = arr[i];
+            }
             const file = `./videos/example.webm`;
             fs.writeFile(file, buffer, (err) => {
                 if (err) {
@@ -51,25 +58,8 @@ export class VideoCapture extends React.Component<{}, { DisplayId: string, Scree
                     console.log("Saved video: " + file);
                 }
             });
-        });
-    }
-
-    private toArrayBuffer(blob, cb) {
-        const fileReader = new FileReader();
-        fileReader.onload = () => {
-            const arrayBuffer = this.result;
-            cb(arrayBuffer);
         };
         fileReader.readAsArrayBuffer(blob);
-    }
-
-    private toBuffer(ab) {
-        const buffer = new Buffer(ab.byteLength);
-        const arr = new Uint8Array(ab);
-        for (let i = 0; i < arr.byteLength; i++) {
-            buffer[i] = arr[i];
-        }
-        return buffer;
     }
 
     private stopRecording = () => {
@@ -83,7 +73,9 @@ export class VideoCapture extends React.Component<{}, { DisplayId: string, Scree
 
     private startRecording = () => {
         const options = { mimeType: video + ";" + codec, videoBitsPerSecond: 500000 };
+        recordedChunks.length = 0;
         mediaRecorder = new MediaRecorder(this.state.VideoStream, options);
+        // this.checkSupportedMime();
         mediaRecorder.ondataavailable = this.handleDataAvailable;
         mediaRecorder.start();
     }
@@ -100,8 +92,7 @@ export class VideoCapture extends React.Component<{}, { DisplayId: string, Scree
         video.src = window.URL.createObjectURL(superBuffer);
     }
 
-    private thing(updateState: any) {
-        this.checkSupportedMime();
+    private thing() {
         desktopCapturer.getSources({
             thumbnailSize: {
                 height: 256,
@@ -131,15 +122,10 @@ export class VideoCapture extends React.Component<{}, { DisplayId: string, Scree
                                 this.setState({ VideoStream: stream });
                             }
                         });
-                    // updateState(src.id, src.display_id)
                     return;
                 }
             }
         });
-    }
-
-    private screenId = (screenId: string, displayId: string) => {
-        this.setState({ ScreenId: screenId, DisplayId: displayId });
     }
 
     private checkSupportedMime = () => {
@@ -149,6 +135,7 @@ export class VideoCapture extends React.Component<{}, { DisplayId: string, Scree
             "video/webm;codecs=vp10",
             "video/x-matroska;codecs=avc1",
             "video/mp4;codecs=avc1",
+            "video/mp4",
             "video/invalid"];
         const text = document.getElementById('Supported');
         contentTypes.forEach(contentType => {
