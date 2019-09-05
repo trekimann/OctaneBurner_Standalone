@@ -22,7 +22,7 @@ export class Comments extends React.Component<
         super(props);
         this.state = {
             Frequency: 60000,
-            FrequencyMultiplier: 5,
+            FrequencyMultiplier: 2,
             NewComment: "",
             RetrievedComments: [],
             ShowComments: false,

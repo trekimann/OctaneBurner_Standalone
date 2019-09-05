@@ -1,4 +1,5 @@
 const url = require("url");
+const os = require("os");
 const path = require("path");
 const { ipcMain } = require('electron');
 const iconpath = path.join(__dirname + "/assets", "octaneIcon.png");
@@ -42,7 +43,7 @@ const createWindow = () => {
   // BrowserWindow.addDevToolsExtension(
   // BrowserWindow.removeDevToolsExtension(
   //   path.join(os.homedir(),
-  //   "AppData/Local/Google/Chrome/User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.0.5_0"));
+  //   "AppData/Local/Google/Chrome/User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.0.6_0"));
 
   newSharp = new NewSharp();
   newSharp.route("details", { target: "loadFile", data: "" });

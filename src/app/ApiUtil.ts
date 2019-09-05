@@ -18,7 +18,8 @@ export class ApiUtil {
             } else {
                 // pull out id
                 const id = JSON.parse(response.responseText).data[0].id;
-                ipcRenderer.send("tsUtil", { target: "details", data: { target:"update", property: "WorkspaceId", value: id } });
+                ipcRenderer.send("tsUtil",
+                { target: "details", data: { target:"update", property: "WorkspaceId", value: id } });
                 const arg = { source: "workspaceSuccess", data: { workspaceId: id } };
                 ipcRenderer.send("internal", arg);
             }

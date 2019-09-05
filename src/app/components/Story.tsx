@@ -1,4 +1,4 @@
-import { ipcRenderer } from "electron";
+import { ipcRenderer, shell } from "electron";
 import * as React from "react";
 import { ApiUtil } from "../ApiUtil";
 import { Attachments } from "./Attachments";
@@ -122,7 +122,12 @@ export class Story extends React.Component<
                         <Button
                             key={"storyDetail" + this.props.StoryId}
                             Style={{ backgroundColor: "#0046b0" }}
-                            onClick={this.showStory} Text={StoryText} DropDown={true} />
+                            onClick={this.showStory}
+                            Text={StoryText}
+                            DropDown={true}
+                            HoverText="Double Click to open in Browser"
+                            onDblclick={this.openStory}
+                        />
                         <div style={this.state.ShowStory ? null : { display: "none" }}>
                             <User
                                 UserId={this.state.FullStory.author.id}
@@ -146,6 +151,11 @@ export class Story extends React.Component<
                 <br></br>
             </div>
         </div >;
+    }
+
+    private openStory = () => {
+        const url = "https://almoctane-eur.saas.microfocus.com/ui/entity-navigation?p=146003/1002&entityType=work_item&id=" + this.props.StoryId;
+        shell.openExternal(url);
     }
 
     private Cap(input: string) {

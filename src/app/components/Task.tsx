@@ -85,6 +85,7 @@ export class Task extends React.Component<{
         const toSend = JSON.stringify(changes);
         const update = { taskId: this.props.Details.id, data: toSend, after: this.taskUpdated };
         ApiUtil.updateTask(update);
+        this.setState({ Completed: true });
     }
 
     public taskUpdated = (update: any) => {
@@ -116,7 +117,8 @@ export class Task extends React.Component<{
                             width: null,
                         }}
                         Text="Move to completed"
-                        onClick={this.taskCompleted} /> : null}</div>
+                        onClick={this.taskCompleted}
+                        Dissabled={this.props.TaskUpdate() === "none" ? false : true} /> : null}</div>
                 {this.state.Completed ? null :
                     <Timer updateActualHours={this.updateTask}
                         TaskUpdate={this.props.TaskUpdate}

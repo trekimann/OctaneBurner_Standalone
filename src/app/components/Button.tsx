@@ -1,3 +1,4 @@
+import { clipboard, ipcRenderer } from "electron";
 import * as React from "react";
 
 const defaultStyle = {
@@ -11,15 +12,16 @@ const defaultStyle = {
     width: "100%",
 };
 export class Button extends React.Component<{
-    Style?: any,
-    onClick?: any,
-    Text?: string,
-    MouseUp?: any,
-    Src?: any,
-    MouseDown?: any,
-    onDblclick?: any,
-    HoverText?: string,
+    Dissabled?: boolean,
     DropDown?: boolean,
+    HoverText?: string,
+    MouseDown?: any,
+    MouseUp?: any,
+    onDblclick?: any,
+    onClick?: any,
+    Src?: any,
+    Style?: any,
+    Text?: string,
 }, { Style: any, Expanded: boolean }> {
     constructor(props: any) {
         super(props);
@@ -40,34 +42,50 @@ export class Button extends React.Component<{
         if (this.props.HoverText !== null && this.props.HoverText !== undefined) {
             hover = this.props.HoverText;
         }
+        if (this.props.Dissabled !== undefined) {
+            if (this.props.Dissabled) {
+                hover = "Button Dissabled";
+            }
+        }
         return <button style={this.state.Style}
             onClick={(this.click)}
             onDoubleClick={this.props.onDblclick}
             onMouseUp={this.props.MouseUp}
             src={this.props.Src}
             onMouseDown={this.props.MouseDown}
-            title={hover}>
+            title={hover}
+            dissabled={this.props.Dissabled !== undefined ? this.props.Dissabled.toString() : "false"}
+            onContextMenu={this.rightClick}>
             {this.props.Text}
         </button>;
     }
 
+    private rightClick = () => {
+        clipboard.writeText(this.props.Text);
+        this.balloon("Notice", "Text Copied to clipborad");
+    }
+
     private click = () => {
-        if (this.props.Style !== undefined && this.props.Style !== null) {
-            this.desiredStyle(this.props.Style);
-        }
-        document.activeElement.blur();
-        if (this.props.DropDown !== null && this.props.DropDown !== undefined) {
-            if (this.props.DropDown) {
-                // change style to add curved edge for top of button if expanded, flatten if not
-                if (this.state.Expanded) {
-                    this.desiredStyle({ borderRadius: null });
-                } else {
-                    this.desiredStyle({ borderRadius: "15px 15px 0px 0px" });
-                }
-                this.setState({ Expanded: !this.state.Expanded });
+        if (!this.props.Dissabled) {
+            if (this.props.Style !== undefined && this.props.Style !== null) {
+                this.desiredStyle(this.props.Style);
             }
+            document.activeElement.blur();
+            if (this.props.DropDown !== null && this.props.DropDown !== undefined) {
+                if (this.props.DropDown) {
+                    // change style to add curved edge for top of button if expanded, flatten if not
+                    if (this.state.Expanded) {
+                        this.desiredStyle({ borderRadius: null });
+                    } else {
+                        this.desiredStyle({ borderRadius: "15px 15px 0px 0px" });
+                    }
+                    this.setState({ Expanded: !this.state.Expanded });
+                }
+            }
+            this.props.onClick();
+        } else {
+            this.balloon("Notice", "Button is Dissabled");
         }
-        this.props.onClick();
     }
 
     private desiredStyle(inputStyle: any) {
@@ -78,5 +96,13 @@ export class Button extends React.Component<{
             outputStyle[inStyle] = inputStyle[inStyle];
         }
         this.setState({ Style: outputStyle });
+    }
+
+    private balloon = (t: string, c: string) => {
+        ipcRenderer.send("balloon",
+            {
+                contents: c,
+                title: t,
+            });
     }
 }
