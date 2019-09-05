@@ -68,7 +68,7 @@ export class Comments extends React.Component<
     }
 
     public commentSuccessful = (event: any, value: any) => {
-        if (value.status === "Created") {
+        if (value.status === 201) {
             this.setState({ NewComment: "" });
             this.getComments();
         } else {

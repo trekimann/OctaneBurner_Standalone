@@ -19,7 +19,7 @@ export class ApiUtil {
                 // pull out id
                 const id = JSON.parse(response.responseText).data[0].id;
                 ipcRenderer.send("tsUtil",
-                { target: "details", data: { target:"update", property: "WorkspaceId", value: id } });
+                    { target: "details", data: { target: "update", property: "WorkspaceId", value: id } });
                 const arg = { source: "workspaceSuccess", data: { workspaceId: id } };
                 ipcRenderer.send("internal", arg);
             }
@@ -75,7 +75,7 @@ export class ApiUtil {
                 } else {
                     // all tasks have been loaded so signal that here
                     ipcRenderer.send("balloon",
-                        { "title": "Tasks", "contents": totalNumberOfTasks + " Retrieved\nGetting details" });
+                        { title: "Tasks", contents: totalNumberOfTasks + " Retrieved\nGetting details" });
                     // use ts to filter task list to increase speed
                     // ApiUtil.filterTasks(newList, userId);
                 }
@@ -101,7 +101,7 @@ export class ApiUtil {
     }
 
     public static getTaskDetails(response: any, taskId: string) {
-        let url = urlStart + "1002/tasks/" + taskId;
+        const url = urlStart + "1002/tasks/" + taskId;
         if (response === null || response === undefined) {
             ApiUtil.Get(url, this.getTaskDetails, taskId);
         } else {
@@ -213,7 +213,7 @@ export class ApiUtil {
         } else {
             // signal posting status
             const arg = {
-                data: { status: response.statusText, all: response },
+                data: { status: response.status, all: response },
                 source: workspaceItemId + "postComment",
             };
             ipcRenderer.send("internal", arg);
@@ -236,7 +236,7 @@ export class ApiUtil {
 
     // -----------------------------put things into store ------------------------------
     public static updateUsername(username: string) {
-        this.updateToBack({target:"update", property: "Username", value: username });
+        this.updateToBack({ target: "update", property: "Username", value: username });
     }
 
     public static updateToBack(update: any) {
@@ -294,7 +294,7 @@ export class ApiUtil {
                 after(xmlHttp, extra, extra2, extra3);
             }
         };
-        xmlHttp.open("POST", url, true); // true for asynchronous 
+        xmlHttp.open("POST", url, true); // true for asynchronous
         xmlHttp.setRequestHeader("Content-type", "application/json");
         xmlHttp.send(data);
     }
@@ -308,7 +308,7 @@ export class ApiUtil {
                 after(xmlHttp, extra, extra2, extra3);
             }
         };
-        xmlHttp.open("DELETE", url, true); // true for asynchronous 
+        xmlHttp.open("DELETE", url, true); // true for asynchronous
         xmlHttp.setRequestHeader("Content-type", "application/json");
         xmlHttp.send();
     }

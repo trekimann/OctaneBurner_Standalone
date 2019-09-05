@@ -138,6 +138,8 @@ class Details {
 
     public update = (data: any) => {
         this.Logger.Log("In update");
+        this.Logger.Log("Property: " + data.property.toUpperCase());
+        this.Logger.Log("Value: " + data.value);
         this.dataStore.set(data.property.toUpperCase(), data.value);
         this.saveDetails();
         return true;
@@ -145,6 +147,7 @@ class Details {
 
     public retrieve = (data: string) => {
         this.Logger.Log("In retrieve");
+        this.Logger.Log("Fetching value for: " + data.toUpperCase());
         return this.dataStore.get(data.toUpperCase());
     }
 
@@ -157,11 +160,16 @@ class Details {
             }
             const properties = raw.split(",");
             if (properties.length > 0) {
-
                 for (const prop of properties) {
                     if (prop !== "") {
                         const contents = prop.split(":");
                         this.dataStore.set(contents[0], contents[1]);
+                        this.Logger.Log("Loaded: " + contents[0] + "\t-\t" + contents[1]);
+                        if (contents[0] === "VERBOSELOGGING") {
+                            const log = contents[1].toUpperCase();
+                            const logBool = (log === "TRUE");
+                            this.Logger.shouldLog = logBool;
+                        }
                     }
                 }
             }
@@ -171,6 +179,7 @@ class Details {
     }
 
     private saveDetails() {
+        this.Logger.Log("Saving details");
         try {
             this.Logger.Log("In saveDetails");
             let text = "";
@@ -184,17 +193,18 @@ class Details {
 
 // tslint:disable-next-line: max-classes-per-file
 class Logger {
-    public shouldLog = true;
+    public shouldLog = false;
     private logPath = "";
 
     constructor(LogPath: string) {
         this.logPath = LogPath;
+        this.Log("Started Application");
     }
 
     public Log = (contents: string) => {
         try {
-            const time = Date.now().toLocaleString();
-            const log = time + "\t--\t" + contents;
+            const time = new Date(Date.now()).toLocaleString("en-GB");
+            const log = time + "\t--\t" + contents + "\n";
             if (this.shouldLog) {
                 if (fs.existsSync(this.logPath)) {
                     fs.appendFileSync(this.logPath, log);
@@ -202,9 +212,7 @@ class Logger {
                     fs.writeFileSync(this.logPath, log);
                 }
             }
-        } catch{
-
-        }
+        } catch{ }
     }
 }
 
