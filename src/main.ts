@@ -1,9 +1,8 @@
 const url = require("url");
 const os = require("os");
 const path = require("path");
-const { ipcMain } = require('electron');
 const iconpath = path.join(__dirname + "/assets", "octaneIcon.png");
-import { app, BrowserWindow, Menu, nativeImage, Tray } from "electron";
+import { app, BrowserWindow, ipcMain, Menu, nativeImage, Tray } from "electron";
 import { NewSharp } from "./app/NewSharp";
 
 let window: BrowserWindow | null;

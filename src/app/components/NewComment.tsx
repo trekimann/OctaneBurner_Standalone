@@ -19,6 +19,12 @@ export class NewComment extends React.Component<{
     public toggle = () => {
         this.setState({ showTextbox: !this.state.showTextbox });
     }
+
+    // public componentDidUpdate = () => {
+    //     // got a new update to the comment value, if not showing, expand the comment
+        
+    // }
+
     public render() {
         return <div>
             <Button

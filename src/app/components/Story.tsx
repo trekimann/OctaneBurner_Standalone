@@ -72,6 +72,7 @@ export class Story extends React.Component<
         const story = value;
         const updated = new Date(story.last_modified);
         if (this.state.LastUpdated === null || this.state.LastUpdated < updated) {
+            // should actually check if there are changes so that the specific things can be called out
             const name = story.name;
             const id = story.id;
             let description = story.description.replace("<html>", "");
@@ -80,6 +81,16 @@ export class Story extends React.Component<
             description = description.replace("</body>", "");
             description = description.replace(/style=/g, "");
 
+            if (this.state.LastUpdated !== null && this.state.LastUpdated < updated) {
+                const current = this.state.StoryDetails;
+                if (current !== description) {
+                    ipcRenderer.send("balloon",
+                        {
+                            contents: "Story " + id + " Has been updated",
+                            title: "Story",
+                        });
+                }
+            }
             this.setState({
                 FullStory: story,
                 LastUpdated: updated,
@@ -87,12 +98,6 @@ export class Story extends React.Component<
                 StoryName: name,
                 StoryRetrieved: true,
             });
-
-            ipcRenderer.send("balloon",
-                {
-                    contents: "Story " + id + " Has been updated",
-                    title: "Story",
-                });
         }
     }
 

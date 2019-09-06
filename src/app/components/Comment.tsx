@@ -7,7 +7,7 @@ export class Comment extends React.Component<
         DeleteComment: any,
         Details: any,
         userId: string,
-        ReplyToComment?: any
+        ReplyToComment: any,
     },
     { hasError: boolean }> {
     public static getDerivedStateFromError(error: any) {
@@ -45,7 +45,8 @@ export class Comment extends React.Component<
         const creation = ms.toLocaleDateString("en-GB") + " " + ms.toLocaleTimeString();
 
         return <div style={this.bsStyle}>
-            <User DoubleClick={this.props.ReplyToComment}
+            <User
+                DoubleClick={this.props.ReplyToComment}
                 UserId={commentDetails.author.id}
                 UniqueId={commentDetails.id} />
             <div>Created: {creation}</div>
