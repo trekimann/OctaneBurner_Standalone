@@ -59,7 +59,10 @@ export class User extends React.Component<
                 <div>
                     <Button
                         key={this.props.UniqueId + "button"}
-                        Style={{ backgroundColor: "rgb(40,115,21)" }}
+                        Style={{
+                            backgroundColor: "rgb(40,115,21)",
+                            fontSize: "18px",
+                        }}
                         onClick={this.toggleVisiblity} Text={buttonText}
                         onDblclick={this.props.DoubleClick !== undefined ? () =>
                             this.props.DoubleClick(this.state.UserDetails.email, this.state.UserName) : null}

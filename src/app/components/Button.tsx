@@ -14,8 +14,12 @@ const defaultStyle = {
     padding: "2px",
     width: "100%",
 };
-let imgStyle = {
+const imgStyle = {
+    border: "black",
+    borderRadius: "50%",
+    borderStyle: "double",
     height: "20px",
+    marginRight: "5px",
 };
 
 export class Button extends React.Component<{
