@@ -79,6 +79,7 @@ export class Story extends React.Component<
             description = description.replace("</html>", "");
             description = description.replace("<body>", "");
             description = description.replace("</body>", "");
+            description = description.replace(/<p>&nbsp;/g, "");
             description = description.replace(/style=/g, "");
 
             if (this.state.LastUpdated !== null && this.state.LastUpdated < updated) {
