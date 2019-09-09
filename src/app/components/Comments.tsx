@@ -147,7 +147,7 @@ export class Comments extends React.Component<
             // should try to store them in creation order
             this.setState((state) => {
                 // cant mutate state so need to replace it
-                let RetrievedComments = state.RetrievedComments.concat(value);
+                const RetrievedComments = state.RetrievedComments.concat(value);
                 RetrievedComments.sort((a, b) => {
                     return new Date(b.creation_time).getTime() - new Date(a.creation_time).getTime();
                 });

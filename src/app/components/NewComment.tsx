@@ -20,10 +20,12 @@ export class NewComment extends React.Component<{
         this.setState({ showTextbox: !this.state.showTextbox });
     }
 
-    // public componentDidUpdate = () => {
-    //     // got a new update to the comment value, if not showing, expand the comment
-        
-    // }
+    public componentDidUpdate() {
+        if (this.props.commentValue !== ""
+            && this.state.showTextbox === false) {
+            this.setState({ showTextbox: true });
+        }
+    }
 
     public render() {
         return <div>
@@ -34,7 +36,9 @@ export class NewComment extends React.Component<{
                 onClick={this.toggle}
                 DropDown={true} />
             <div style={this.state.showTextbox ? null : { display: "none" }}>
-                <TextArea Value={this.props.commentValue} OnChange={this.props.commentUpdate} />
+                <TextArea
+                    Value={this.props.commentValue}
+                    OnChange={this.props.commentUpdate} />
                 <Button
                     key={"newCommentSubmit" + this.props.workId}
                     Text="Submit" onClick={this.props.submitComment} />

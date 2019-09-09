@@ -51,6 +51,7 @@ export class User extends React.Component<
         if (this.state.UserDetails !== null) {
             hRef = "mailto:" + this.state.UserDetails.email;
         }
+        const imgSrc = "https://almoctane-eur.saas.microfocus.com/api/shared_spaces/146003/workspaces/1002/workspace_users/" + this.props.UserId + "/avatar";
 
         return <div>
             {this.state.UserDetails === null ?
@@ -64,7 +65,8 @@ export class User extends React.Component<
                             this.props.DoubleClick(this.state.UserDetails.email, this.state.UserName) : null}
                         HoverText={this.props.DoubleClick !== undefined ?
                             "Double Click to reply to this user" : buttonText}
-                        DropDown={true} />
+                        DropDown={true}
+                        LeadImg={imgSrc} />
                     <div style={this.state.ShowUser ? styling : { display: "none" }}>
                         <div>Email: <a style={{ color: "inherit" }} href={hRef}>{this.state.UserDetails.email}</a>
                         </div>

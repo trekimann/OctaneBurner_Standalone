@@ -35,7 +35,7 @@ const navStyle = {
 };
 
 
-export class MenuBar extends React.Component {
+export class MenuBar extends React.Component<{}, { Heading?: string }> {
   private buttons = [
     {
       alt: "Close",
@@ -80,10 +80,19 @@ export class MenuBar extends React.Component {
       src: printIcon,
     },
   ];
-
-  public toggleVideo() {
-
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      Heading: "Octane Burner",
+    };
   }
+
+  public componentDidMount() {
+    // listen for updates on tasking here
+    ipcRenderer.on("updateTimedTask", this.taskUpdate);
+  }
+
+
   public loginWindow() {
     window.open("https://login.software.microfocus.com/msg/actions/showLogin", "_blank");
   }
@@ -105,7 +114,7 @@ export class MenuBar extends React.Component {
   }
 
   public render(): React.ReactNode {
-    return <header style={menuStyle}>Octane Burner
+    return <header style={menuStyle}>{this.state.Heading}
       <nav style={navStyle}>
         <ul style={ulStyle}>
           {this.buttons.map((value, index) => {
@@ -119,4 +128,11 @@ export class MenuBar extends React.Component {
     </header>;
   }
 
+  private taskUpdate = (event: any, task: any) => {
+    let textToShow = "Octane Burner";
+    if (task !== null && task !== undefined && task !== "none") {
+      textToShow = "Task " + task + " tracking";
+    }
+    this.setState({ Heading: textToShow });
+  }
 }

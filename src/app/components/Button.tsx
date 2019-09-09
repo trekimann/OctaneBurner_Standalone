@@ -2,19 +2,27 @@ import { clipboard, ipcRenderer } from "electron";
 import * as React from "react";
 
 const defaultStyle = {
+    alignItems: "center",
     backgroundColor: "#2767b0",
     border: "none",
     color: "#eee",
     cursor: "pointer",
+    display: "flex",
+    justifyContent: "center",
     marginBottom: "2px",
     marginTop: "2px",
     padding: "2px",
     width: "100%",
 };
+let imgStyle = {
+    height: "20px",
+};
+
 export class Button extends React.Component<{
     Dissabled?: boolean,
     DropDown?: boolean,
     HoverText?: string,
+    LeadImg?: string,
     MouseDown?: any,
     MouseUp?: any,
     onDblclick?: any,
@@ -56,6 +64,9 @@ export class Button extends React.Component<{
             title={hover}
             dissabled={this.props.Dissabled !== undefined ? this.props.Dissabled.toString() : "false"}
             onContextMenu={this.rightClick}>
+            {this.props.LeadImg !== undefined ?
+                <img style={imgStyle}
+                    src={this.props.LeadImg}></img> : null}
             {this.props.Text}
         </button>;
     }

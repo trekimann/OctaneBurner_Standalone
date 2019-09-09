@@ -4,7 +4,7 @@ import { ApiUtil } from "./../ApiUtil";
 import { Spinner } from "./spinner";
 import { Story } from "./Story";
 
-export class Tasks extends React.Component<{ UserId: string}, {
+export class Tasks extends React.Component<{ UserId: string }, {
     TaskRequested: boolean,
     TaskInProgress: string,
     TasksLoaded: boolean,
@@ -43,6 +43,9 @@ export class Tasks extends React.Component<{ UserId: string}, {
             return this.state.TaskInProgress;
         } else {
             this.setState({ TaskInProgress: task });
+            // broadcast the task details for other components
+            const arg = { source: "updateTimedTask", data: task };
+            ipcRenderer.send("internal", arg);
         }
     }
 

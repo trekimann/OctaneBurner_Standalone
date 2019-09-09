@@ -1,5 +1,5 @@
 const url = require("url");
-const os = require("os");
+// const os = require("os");
 const path = require("path");
 const iconpath = path.join(__dirname + "/assets", "octaneIcon.png");
 import { app, BrowserWindow, ipcMain, Menu, nativeImage, Tray } from "electron";
@@ -112,7 +112,7 @@ ipcMain.on("balloon", (event: any, arg: any) => {
 // Handle requests from React
 ipcMain.on("tsUtil", (event: any, arg: any) => {
 
-  const prom = new Promise((resolve, reject) => {
+  new Promise((resolve, reject) => {
     const answer = newSharp.route(arg.target, arg.data);
     if (answer !== undefined) {
       resolve(answer);
