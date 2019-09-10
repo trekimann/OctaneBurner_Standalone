@@ -85,7 +85,7 @@ export class Task extends React.Component<{
         const toSend = JSON.stringify(changes);
         const update = { taskId: this.props.Details.id, data: toSend, after: this.taskUpdated };
         ApiUtil.updateTask(update);
-        this.setState({ Completed: true });
+        this.setState({ Completed: true, Status: "Completed" });
     }
 
     public taskUpdated = (update: any) => {
@@ -111,6 +111,7 @@ export class Task extends React.Component<{
                         Style={{
                             backgroundColor: "#039c0d",
                             borderRadius: "5px",
+                            display: "inline",
                             maxWidth: "100%",
                             paddingLeft: "5px",
                             paddingRight: "5px",
