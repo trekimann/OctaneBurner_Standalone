@@ -155,20 +155,19 @@ class Details {
         this.Logger.Log("In loadFromFile");
         if (fs.existsSync(this.userCache)) {
             const raw = fs.readFileSync(this.userCache, "utf-8");
-            while (raw === "") {
-                // nothing
-            }
-            const properties = raw.split(",");
-            if (properties.length > 0) {
-                for (const prop of properties) {
-                    if (prop !== "") {
-                        const contents = prop.split(":");
-                        this.dataStore.set(contents[0], contents[1]);
-                        this.Logger.Log("Loaded: " + contents[0] + "\t-\t" + contents[1]);
-                        if (contents[0] === "VERBOSELOGGING") {
-                            const log = contents[1].toUpperCase();
-                            const logBool = (log === "TRUE");
-                            this.Logger.shouldLog = logBool;
+            if (raw !== "") {
+                const properties = raw.split(",");
+                if (properties.length > 0) {
+                    for (const prop of properties) {
+                        if (prop !== "") {
+                            const contents = prop.split(":");
+                            this.dataStore.set(contents[0], contents[1]);
+                            this.Logger.Log("Loaded: " + contents[0] + "\t-\t" + contents[1]);
+                            if (contents[0] === "VERBOSELOGGING") {
+                                const log = contents[1].toUpperCase();
+                                const logBool = (log === "TRUE");
+                                this.Logger.shouldLog = logBool;
+                            }
                         }
                     }
                 }
