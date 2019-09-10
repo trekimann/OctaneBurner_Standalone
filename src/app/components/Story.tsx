@@ -9,7 +9,16 @@ import { User } from "./User";
 
 const bsStyle = {
     fontSize: "18px",
+    marginBottom: "5px",
+    marginTop: "5px",
     padding: "18px",
+};
+const sStyle = {
+    backgroundColor: "rgba(125, 125, 255, 0.1)",
+};
+const sdStyle = {
+    maxHeight: "40vh",
+    overflow: "auto",
 };
 
 export class Story extends React.Component<
@@ -26,13 +35,6 @@ export class Story extends React.Component<
         LastUpdated: Date,
     }> {
 
-    private sStyle = {
-        backgroundColor: "rgba(125, 125, 255, 0.1)",
-    };
-    private sdStyle = {
-        maxHeight: "40vh",
-        overflow: "auto",
-    };
     private timer: NodeJS.Timeout;
 
     constructor(props: any) {
@@ -122,7 +124,7 @@ export class Story extends React.Component<
                 Text={linkedStory}
                 HoverText="Double click to refresh story details"
                 DropDown={true} />
-            <div style={this.state.ExpandStory ? this.sStyle : { display: "none" }}>
+            <div style={this.state.ExpandStory ? sStyle : { display: "none" }}>
                 {this.state.StoryRetrieved ?
                     <div>
                         <Button
@@ -145,7 +147,7 @@ export class Story extends React.Component<
                                     UserId={this.state.FullStory.owner.id}
                                     UniqueId={this.props.StoryId + "owner"}
                                     AdditionalDescription="Owner" /> : null}
-                            <div style={this.sdStyle} dangerouslySetInnerHTML={{ __html: this.state.StoryDetails }} >
+                            <div style={sdStyle} dangerouslySetInnerHTML={{ __html: this.state.StoryDetails }} >
                             </div>
                         </div>
                         <Attachments StoryId={this.state.FullStory.id} />
