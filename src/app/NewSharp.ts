@@ -80,12 +80,14 @@ class UserDetails {
         }
 
         // update the data store with the ID
-        let update = {};
+        const update: {
+            property: string,
+            value: any,
+        } = { property: "", value: null };
         update.property = "USERID";
         update.value = toReturn;
         this.Details.update(update);
 
-        update = {};
         update.property = "USERLIST";
         update.value = userList;
         this.Details.update(update);
@@ -161,13 +163,13 @@ class Details {
                     for (const prop of properties) {
                         if (prop !== "") {
                             const contents = prop.split(":");
-                            this.dataStore.set(contents[0], contents[1]);
-                            this.Logger.Log("Loaded: " + contents[0] + "\t-\t" + contents[1]);
                             if (contents[0] === "VERBOSELOGGING") {
                                 const log = contents[1].toUpperCase();
                                 const logBool = (log === "TRUE");
                                 this.Logger.shouldLog = logBool;
                             }
+                            this.dataStore.set(contents[0], contents[1]);
+                            this.Logger.Log("Loaded: " + contents[0] + "\t-\t" + contents[1]);
                         }
                     }
                 }
