@@ -156,7 +156,6 @@ export class Story extends React.Component<
                 {(this.props.LinkedTasks || []).map((value) => {
                     return <Task key={value.id} Details={value} TaskUpdate={this.props.TaskInFlight} />;
                 })}
-                <br></br>
             </div>
         </div >;
     }

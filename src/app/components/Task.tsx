@@ -94,7 +94,7 @@ export class Task extends React.Component<{
 
     public render() {
         const taskText = this.props.Details.id + ": " + this.props.Details.name;
-        return <div>
+        return <div style={{ marginBottom: "10px" }}>
             <Button
                 key={this.props.Details.id + "task"}
                 Style={{ backgroundColor: "#2700b0" }}
@@ -125,7 +125,6 @@ export class Task extends React.Component<{
                         TaskUpdate={this.props.TaskUpdate}
                         AssociatedTask={this.props.Details.id} />
                 }
-                <br></br>
             </div>
         </div>;
     }
