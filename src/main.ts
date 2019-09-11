@@ -4,13 +4,15 @@ const path = require("path");
 const iconpath = path.join(__dirname + "/assets", "octaneIcon.png");
 import { app, BrowserWindow, ipcMain, Menu, nativeImage, Tray } from "electron";
 import { NewSharp } from "./app/NewSharp";
-import { createNewWindow } from "./app/WindowManager";
+import { WindowControl } from "./app/WindowManager";
 
-let window: BrowserWindow | null;
+// let window: BrowserWindow | null;
 let newSharp: NewSharp;
+const control = new WindowControl();
+let mainWindowId: number;
 
 const createMainWindow = () => {
-  window = createNewWindow({
+  mainWindowId = control.createNewWindow({
     frame: false,
     height: 600,
     icon: iconpath,
@@ -21,7 +23,7 @@ const createMainWindow = () => {
     width: 340,
   });
 
-  window.loadURL(
+  control.navigateTo(mainWindowId,
     url.format({
       pathname: path.join(__dirname, "index.html"),
       protocol: "file:",
@@ -29,15 +31,16 @@ const createMainWindow = () => {
     }),
   );
 
-  window.on("closed", () => {
+  control.getWindow(mainWindowId).on("closed", () => {
     window = null;
   });
 
-  window.on("minimize", (event: any) => {
+  control.getWindow(mainWindowId).on("minimize", (event: any) => {
     event.preventDefault();
-    window.hide();
+    control.getWindow(mainWindowId).hide();
   });
 
+  // window = control.getWindow(mainWindowId);
   createTray();
 
   // BrowserWindow.addDevToolsExtension(
@@ -57,7 +60,7 @@ const createTray = () => {
 
   const contextMenu = Menu.buildFromTemplate([{
     click() {
-      window.show();
+      control.getWindow(mainWindowId).show();
     },
     label: "Show",
   },
@@ -124,7 +127,7 @@ ipcMain.on("tsUtil", (event: any, arg: any) => {
     // console.log("I was called successfully");
     // console.log(res);
     if (arg.source !== undefined && arg.source !== null) {
-      window.webContents.send(arg.source, res);
+      control.getWindow(mainWindowId).webContents.send(arg.source, res);
     }
   }).catch((res) => {
     console.log("I was not called successfully");
@@ -136,7 +139,7 @@ ipcMain.on("tsUtil", (event: any, arg: any) => {
 
 // handle requests from react to react
 ipcMain.on("internal", (event: any, arg: any) => {
-  window.webContents.send(arg.source, arg.data);
+  control.getWindow(mainWindowId).webContents.send(arg.source, arg.data);
 });
 
 // -------------------------------------- Util Class ------------------------------------
