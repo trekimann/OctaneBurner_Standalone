@@ -4,12 +4,13 @@ const path = require("path");
 const iconpath = path.join(__dirname + "/assets", "octaneIcon.png");
 import { app, BrowserWindow, ipcMain, Menu, nativeImage, Tray } from "electron";
 import { NewSharp } from "./app/NewSharp";
+import { createNewWindow } from "./app/WindowManager";
 
 let window: BrowserWindow | null;
 let newSharp: NewSharp;
 
-const createWindow = () => {
-  window = new BrowserWindow({
+const createMainWindow = () => {
+  window = createNewWindow({
     frame: false,
     height: 600,
     icon: iconpath,
@@ -90,7 +91,7 @@ function balloon(displayTitle: string, contents: string) {
   }
 }
 
-app.on("ready", createWindow);
+app.on("ready", createMainWindow);
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
@@ -100,7 +101,7 @@ app.on("window-all-closed", () => {
 
 app.on("activate", () => {
   if (window === null) {
-    createWindow();
+    createMainWindow();
   }
 });
 

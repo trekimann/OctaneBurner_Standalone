@@ -9,7 +9,8 @@
         "start": "electron ./dist/main.js",
         "package": "electron-packager . octane-burner --overwrite  --platform=win32 --arch=ia32 --icon=assets/icons/win/octaneIcon.iso --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Octane Burner\"",
         "buildStart": "npm run build:react && npm run build && npm run start",
-        "buildPack": "npm run build:react && npm run build && npm run package"
+        "buildPack": "npm run build:react && npm run build && npm run package",
+        "buildAll": "npm run build:react && npm run build"
     },
     "keywords": [],
     "author": "Nicholas Mann",

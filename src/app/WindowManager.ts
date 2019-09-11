@@ -1,5 +1,5 @@
-import { BrowserWindow, } from "electron";
-import Path = require("path");
+import { BrowserWindow, BrowserWindowConstructorOptions } from "electron";
+const Path = require("path");
 const iconpath = Path.join(__dirname + "/assets", "octaneIcon.png");
 const currentWindows: Map<number, BrowserWindow> = new Map();
 
@@ -14,9 +14,11 @@ const notifyUpdateWindowIDs = (excludeId: number) => {
     });
 };
 
-export const createNewWindow = (windowDetails?: any) => {
+
+
+export const createNewWindow = (windowDetails?: object) => {
     let newWindow: BrowserWindow;
-    if (windowDetails === undefined || windowDetails === null)  {
+    if (windowDetails === undefined || windowDetails === null) {
         newWindow = new BrowserWindow({
             frame: false,
             height: 600,
@@ -28,7 +30,7 @@ export const createNewWindow = (windowDetails?: any) => {
             width: 800,
         });
     } else {
-        newWindow = new BrowserWindow({ windowDetails });
+        newWindow = new BrowserWindow(windowDetails as BrowserWindowConstructorOptions);
     }
 
     const windowId = newWindow.id;
@@ -48,4 +50,5 @@ export const createNewWindow = (windowDetails?: any) => {
 
     currentWindows.set(windowId, newWindow);
     notifyUpdateWindowIDs(windowId);
+    return newWindow;
 };
