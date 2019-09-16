@@ -1,6 +1,7 @@
 import { ipcRenderer } from "electron";
 import * as React from "react";
 import { ApiUtil } from "../ApiUtil";
+import { AttachmentPreview } from "./AttachmentPreview";
 import { Button } from "./Button";
 import { User } from "./User";
 
@@ -9,6 +10,8 @@ const toggleStyle = {
     borderRadius: "20px 20px 0px 0px",
 };
 
+const urlStart =
+    "https://almoctane-eur.saas.microfocus.com/api/shared_spaces/146003/workspaces/1002/attachments/";
 export class Attachment extends React.Component<{ AttachementId: string }, { Detail: any, showAttachment: boolean }> {
 
     constructor(props: any) {
@@ -32,6 +35,10 @@ export class Attachment extends React.Component<{ AttachementId: string }, { Det
     }
 
     public render() {
+        let linkUrl = "";
+        if (this.state.Detail !== null) {
+            linkUrl = urlStart + this.state.Detail.id + "/" + this.state.Detail.name;
+        }
         return <div>
             {this.state.Detail === null ? "Attachment here" :
                 <div>
@@ -45,18 +52,15 @@ export class Attachment extends React.Component<{ AttachementId: string }, { Det
                             UserId={this.state.Detail.author.id}
                             UniqueId={this.state.Detail.id + this.state.Detail.author.id}
                             AdditionalDescription="Created by" />
-                        {this.openAttachment()}
+                        <AttachmentPreview AttachementUri={linkUrl} />
+                        {this.openAttachment(linkUrl)}
                     </div>
                 </div>}
         </div>;
     }
 
-    private openAttachment = () => {
-        const urlStart =
-            "https://almoctane-eur.saas.microfocus.com/api/shared_spaces/146003/workspaces/1002/attachments/";
-        const linkUrl = urlStart + this.state.Detail.id + "/" + this.state.Detail.name;
-
-        return <a style={{ color: "inherit", display: "flex", justifyContent: "center" }} href={linkUrl}>Download</a>;
+    private openAttachment = (url: string) => {
+        return <a style={{ color: "inherit", display: "flex", justifyContent: "center" }} href={url}>Download</a>;
     }
 
     private onRetrieve = (event: any, retrieved: any) => {

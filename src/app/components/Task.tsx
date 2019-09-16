@@ -130,11 +130,11 @@ export class Task extends React.Component<{
         </div>;
     }
 
-    private balloon(title: string, contents: string) {
+    private balloon(Title: string, Contents: string) {
         ipcRenderer.send("balloon",
             {
-                "title": title,
-                "contents": contents,
+                contents: Contents,
+                title: Title,
             });
     }
 
