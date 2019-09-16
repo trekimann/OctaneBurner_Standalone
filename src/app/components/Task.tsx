@@ -63,6 +63,7 @@ export class Task extends React.Component<{
                     id: "phase.task.inprogress",
                     type: "phase",
                 };
+                this.setState({Status: "In Progress"});
             }
             const changes = {
                 invested_hours: newTotal,

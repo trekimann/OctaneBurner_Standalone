@@ -6,7 +6,6 @@ import { app, BrowserWindow, ipcMain, Menu, nativeImage, Tray } from "electron";
 import { NewSharp } from "./app/NewSharp";
 import { WindowControl } from "./app/WindowManager";
 
-// let window: BrowserWindow | null;
 let newSharp: NewSharp;
 const control = new WindowControl();
 let mainWindowId: number;
@@ -30,10 +29,6 @@ const createMainWindow = () => {
       slashes: true,
     }),
   );
-
-  control.getWindow(mainWindowId).on("closed", () => {
-    window = null;
-  });
 
   control.getWindow(mainWindowId).on("minimize", (event: any) => {
     event.preventDefault();
