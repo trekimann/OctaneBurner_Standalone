@@ -1,9 +1,9 @@
-import * as React from "react";
 import * as fs from "fs";
+import * as React from "react";
 import { TextArea } from "./TextArea";
 
-const image = ["jpg", "JPG", "PNG", "png"];
-const video = ["mp4"];
+const image = ["JPG", "PNG"];
+const video = ["MP4", "WEBM"];
 const text = ["txt"];
 
 export class AttachmentPreview extends React.Component<
@@ -28,10 +28,11 @@ export class AttachmentPreview extends React.Component<
         // get the file type
         if (this.props.AttachementUri !== undefined) {
             const s = this.props.AttachementUri.split(".");
-            const type = s[s.length - 1];
+            const type = s[s.length - 1].toUpperCase();
 
             image.includes(type) ? this.setState({ PreviewAvailible: true, Type: "Image" }) :
                 video.includes(type) ? this.setState({ PreviewAvailible: true, Type: "Video" }) :
+                    // tslint:disable-next-line: no-unused-expression
                     text.includes(type) ? this.setState({ PreviewAvailible: true, Type: "Text" }) : null;
         }
     }

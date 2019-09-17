@@ -137,10 +137,10 @@ export class VideoCapture extends React.Component<{}, { DisplayId: string, Scree
             "video/mp4;codecs=avc1",
             "video/mp4",
             "video/invalid"];
-        const text = document.getElementById('Supported');
+        const text = document.getElementById("Supported");
         contentTypes.forEach(contentType => {
-            text.value += contentType + ' is ' + (MediaRecorder.isTypeSupported(contentType) ?
-                'supported\n' : 'NOT supported \n');
+            text.value += contentType + " is " + (MediaRecorder.isTypeSupported(contentType) ?
+                "supported\n" : "NOT supported \n");
         });
     }
 }

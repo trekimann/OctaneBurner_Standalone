@@ -1,3 +1,4 @@
+// tslint:disable: no-var-requires
 const url = require("url");
 // const os = require("os");
 const path = require("path");
@@ -75,8 +76,8 @@ const createTray = () => {
 
   appIcon.setContextMenu(contextMenu);
   appIcon.setToolTip("Octane Burner");
-  appIcon.on("double-click", () => { window.show(); });
-  appIcon.on("balloon-click", () => { window.show(); });
+  appIcon.on("double-click", () => { control.getWindow(mainWindowId).show(); });
+  appIcon.on("balloon-click", () => { control.getWindow(mainWindowId).show(); });
   appIcon.setHighlightMode("always");
 };
 
@@ -125,6 +126,7 @@ ipcMain.on("tsUtil", (event: any, arg: any) => {
       control.getWindow(mainWindowId).webContents.send(arg.source, res);
     }
   }).catch((res) => {
+    // tslint:disable: no-console
     console.log("I was not called successfully");
     console.log(res);
     console.log(arg.target);

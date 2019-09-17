@@ -8,8 +8,6 @@ export class NewSharp {
     private Tasks = new Tasks(this.Logger, this.Details);
     private User = new UserDetails(this.Logger, this.Details);
 
-    constructor() {
-    }
     public route = (target: string, data: any) => {
         switch (target) {
             case "details": {
@@ -67,7 +65,7 @@ class UserDetails {
         // Pull apart the json message from octane into objects.
         const UserInfo = JSON.parse(userResponse);
         const users = UserInfo.data;
-        // look though each one for the user who logged in. 
+        // look though each one for the user who logged in.
         // while here create in memory list of users. Dictionary with id as key. user object as value
         // tslint:disable-next-line: forin
         for (const person of users) {
@@ -188,7 +186,8 @@ class Details {
                 text = text + key + ":" + this.dataStore.get(key) + ",";
             }
             fs.writeFileSync(this.userCache, text);
-        } catch{ }
+            // tslint:disable-next-line: no-console
+        } catch { console.log("Could not save"); }
     }
 }
 
@@ -213,7 +212,8 @@ class Logger {
                     fs.writeFileSync(this.logPath, log);
                 }
             }
-        } catch{ }
+        // tslint:disable-next-line: no-console
+        } catch {console.log("Error Logging"); }
     }
 }
 

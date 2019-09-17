@@ -1,4 +1,4 @@
-import { ipcRenderer, remote, inAppPurchase } from "electron";
+import { ipcRenderer } from "electron";
 import * as React from "react";
 import { ApiUtil } from "./../ApiUtil";
 import { Button } from "./Button";
