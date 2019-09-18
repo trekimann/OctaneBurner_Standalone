@@ -63,6 +63,9 @@ export class Story extends React.Component<
     public showStory = () => {
         const ChangeTo = !this.state.ShowStory;
         this.setState({ ShowStory: ChangeTo });
+        // scroll the story to the top of the page
+        // const button = document.activeElement;
+        // button.scrollTop = 0;
     }
     public expandStory = () => {
         const ChangeTo = !this.state.ExpandStory;

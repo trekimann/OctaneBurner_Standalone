@@ -138,7 +138,7 @@ export class VideoCapture extends React.Component<{}, { DisplayId: string, Scree
             "video/mp4",
             "video/invalid"];
         const text = document.getElementById("Supported");
-        contentTypes.forEach(contentType => {
+        contentTypes.forEach((contentType) => {
             text.value += contentType + " is " + (MediaRecorder.isTypeSupported(contentType) ?
                 "supported\n" : "NOT supported \n");
         });
