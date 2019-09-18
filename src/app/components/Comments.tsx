@@ -157,7 +157,7 @@ export class Comments extends React.Component<
         }
     }
 
-    private balloon(title: string, contents: string) {
-        ipcRenderer.send("balloon", { "title": title, "contents": contents });
+    private balloon(Title: string, Contents: string) {
+        ipcRenderer.send("balloon", { title: Title, contents: Contents });
     }
 }

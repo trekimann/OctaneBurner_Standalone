@@ -9,7 +9,7 @@ export class Tasks extends React.Component<{ UserId: string }, {
     TaskInProgress: string,
     TasksLoaded: boolean,
     UserTasksDetails: [],
-    GroupedTasks: object,
+    GroupedTasks: {},
     UserId: string,
 }> {
     // send api request to get all tasks with only owner details
@@ -46,6 +46,8 @@ export class Tasks extends React.Component<{ UserId: string }, {
             // broadcast the task details for other components
             const arg = { source: "updateTimedTask", data: task };
             ipcRenderer.send("internal", arg);
+            // update store with info
+
         }
     }
 
@@ -111,7 +113,7 @@ export class Tasks extends React.Component<{ UserId: string }, {
             if (!this.state.TasksLoaded) {
                 this.setState({ TasksLoaded: true });
             }
-            ipcRenderer.send("balloon", { "title": "Tasks", "contents": "Getting " + value.id + " Task Details" });
+            ipcRenderer.send("balloon", { title: "Tasks", contents: "Getting " + value.id + " Task Details" });
         }
     }
 }
