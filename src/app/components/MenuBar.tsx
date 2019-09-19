@@ -1,6 +1,6 @@
 import { ipcRenderer, remote } from "electron";
 import * as React from "react";
-// import closeIcon from "./../assets/close.png";
+import closeIcon from "./../assets/close.png";
 import maxIcon from "./../assets/maximise.png";
 import minIcon from "./../assets/minimise2.png";
 // import octIcon from "./../assets/octaneIcon.png";
@@ -37,13 +37,8 @@ const navStyle = {
 
 export class MenuBar extends React.Component<{}, { Heading?: string }> {
   private buttons = [
-    // {
-    //   alt: "Close",
-    //   click: this.closeWindow,
-    //   src: closeIcon,
-    // },
     {
-      alt: "Maximize",
+      alt: "Close",
       buttonStyle:
       {
         "-webkit-app-region": "no-drag",
@@ -51,6 +46,11 @@ export class MenuBar extends React.Component<{}, { Heading?: string }> {
         "paddingRight": "12px",
         "paddingTop": "2px",
       },
+      click: () => { this.closeWindow(); },
+      src: closeIcon,
+    },
+    {
+      alt: "Maximize",
       click: this.maxWindow,
       src: maxIcon,
     },
@@ -99,13 +99,23 @@ export class MenuBar extends React.Component<{}, { Heading?: string }> {
 
   public minWindow() {
     remote.BrowserWindow.getFocusedWindow().minimize();
-    ipcRenderer.send("balloon", { title: "Notificaiton", contents: "Still Running in system tray" });
+    this.balloon("Notificaiton", "Still Running in system tray");
   }
 
-  public closeWindow() {
-    remote.BrowserWindow.getFocusedWindow().hide();
-    ipcRenderer.send("balloon",
-      { title: "Notificaiton", contents: "Still Running. To close fully right click and select quit" });
+  public closeWindow = () => {
+    // remote.BrowserWindow.getFocusedWindow().hide();
+    // ipcRenderer.send("balloon",
+    //   { title: "Notificaiton", contents: "Still Running. To close fully right click and select quit" });
+
+    // check if a task is running
+    // if there is, notify the user to stop manually
+    if (this.state.Heading !== "Octane Burner") {
+      // TODO: Make it stop task automatically
+      this.balloon("Warning", "A task is being tracked. Stop tracking before quiting");
+    } else {
+      // if no task then quit the app
+      remote.BrowserWindow.getFocusedWindow().close();
+    }
   }
 
   public maxWindow() {
@@ -126,6 +136,9 @@ export class MenuBar extends React.Component<{}, { Heading?: string }> {
         </ul>
       </nav>
     </header>;
+  }
+  private balloon = (Title: string, Contents: string) => {
+    ipcRenderer.send("balloon", { title: Title, contents: Contents })
   }
 
   private taskUpdate = (event: any, task: any) => {

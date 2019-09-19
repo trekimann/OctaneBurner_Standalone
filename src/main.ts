@@ -46,7 +46,24 @@ const createMainWindow = () => {
 
   newSharp = new NewSharp();
   newSharp.route("details", { target: "loadFile", data: "" });
+  // reset any values which could cause problems
+  newSharp.route("details", {
+    target: "update", property: "ACTIVETASK", value: "none",
+  });
 
+};
+
+const quit = () => {
+  // check if a task is running
+  const task = newSharp.route("details", { target: "retrieve", data: { target: "ACTIVETASK" } });
+  // if there is, notify the user to stop manually
+  if (task !== "none" && task !== null) {
+    // TODO: Make it stop task automatically
+    balloon("Warning", "A task is being tracked. Stop tracking before quiting");
+  } else {
+    // if no task then quit the app
+    app.quit();
+  }
 };
 
 let appIcon: Tray = null;
@@ -63,7 +80,7 @@ const createTray = () => {
   {
     label: "Quit",
     click() {
-      app.quit();
+      quit();
     },
   },
   {

@@ -46,7 +46,9 @@ export class Tasks extends React.Component<{ UserId: string }, {
             // broadcast the task details for other components
             const arg = { source: "updateTimedTask", data: task };
             ipcRenderer.send("internal", arg);
-            // update store with info
+            // update store with info so it can be looked up in the future
+            ipcRenderer.send("tsUtil",
+                    { target: "details", data: { target: "update", property: "ActiveTask", value: task } });
 
         }
     }
