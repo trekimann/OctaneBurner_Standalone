@@ -48,7 +48,7 @@ const createMainWindow = () => {
   newSharp.route("details", { target: "loadFile", data: "" });
   // reset any values which could cause problems
   newSharp.route("details", {
-    target: "update", property: "ACTIVETASK", value: "none",
+    property: "ACTIVETASK", target: "update", value: "none",
   });
 
 };
@@ -72,10 +72,10 @@ const createTray = () => {
   appIcon = new Tray(nativeImage.createFromPath(iconpath).resize({ width: 16, height: 16 }));
 
   const contextMenu = Menu.buildFromTemplate([{
+    label: "Show",
     click() {
       control.getWindow(mainWindowId).show();
     },
-    label: "Show",
   },
   {
     label: "Quit",
