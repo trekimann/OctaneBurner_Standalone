@@ -4,10 +4,10 @@ const url = require("url");
 const path = require("path");
 const iconpath = path.join(__dirname + "/assets", "octaneIcon.png");
 import { app, BrowserWindow, ipcMain, Menu, nativeImage, Tray } from "electron";
-import { NewSharp } from "./app/NewSharp";
+import { UtilRouter } from "./app/UtilRouter";
 import { WindowControl } from "./app/WindowManager";
 
-let newSharp: NewSharp;
+let newSharp: UtilRouter;
 const control = new WindowControl();
 let mainWindowId: number;
 
@@ -44,7 +44,7 @@ const createMainWindow = () => {
   //   path.join(os.homedir(),
   //   "AppData/Local/Google/Chrome/User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.0.6_0"));
 
-  newSharp = new NewSharp();
+  newSharp = new UtilRouter();
   newSharp.route("details", { target: "loadFile", data: "" });
   // reset any values which could cause problems
   newSharp.route("details", {
