@@ -35,7 +35,7 @@ const navStyle = {
 };
 
 
-export class MenuBar extends React.Component<{}, { Heading?: string }> {
+export class MenuBar extends React.Component<{}, { Heading?: string, MinOnce: boolean }> {
   private buttons = [
     {
       alt: "Close",
@@ -57,7 +57,7 @@ export class MenuBar extends React.Component<{}, { Heading?: string }> {
     ,
     {
       alt: "Minimize",
-      click: this.minWindow,
+      click: () => { this.minWindow(); },
       src: minIcon,
     },
     // {
@@ -84,6 +84,7 @@ export class MenuBar extends React.Component<{}, { Heading?: string }> {
     super(props);
     this.state = {
       Heading: "Octane Burner",
+      MinOnce: false,
     };
   }
 
@@ -97,16 +98,15 @@ export class MenuBar extends React.Component<{}, { Heading?: string }> {
     window.open("https://login.software.microfocus.com/msg/actions/showLogin", "_blank");
   }
 
-  public minWindow() {
+  public minWindow = () => {
     remote.BrowserWindow.getFocusedWindow().minimize();
-    this.balloon("Notificaiton", "Still Running in system tray");
+    if (!this.state.MinOnce) {
+      this.balloon("Notificaiton", "Still Running in system tray");
+      this.setState({ MinOnce: true });
+    }
   }
 
   public closeWindow = () => {
-    // remote.BrowserWindow.getFocusedWindow().hide();
-    // ipcRenderer.send("balloon",
-    //   { title: "Notificaiton", contents: "Still Running. To close fully right click and select quit" });
-
     // check if a task is running
     // if there is, notify the user to stop manually
     if (this.state.Heading !== "Octane Burner") {
@@ -138,7 +138,7 @@ export class MenuBar extends React.Component<{}, { Heading?: string }> {
     </header>;
   }
   private balloon = (Title: string, Contents: string) => {
-    ipcRenderer.send("balloon", { title: Title, contents: Contents })
+    ipcRenderer.send("balloon", { title: Title, contents: Contents });
   }
 
   private taskUpdate = (event: any, task: any) => {

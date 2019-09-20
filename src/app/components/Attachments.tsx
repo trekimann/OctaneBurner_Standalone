@@ -29,19 +29,22 @@ export class Attachments extends React.Component<{ StoryId: string }, { Attachme
     public render() {
         return <div>{this.state.AttachmentDetails === null ? "Attachment Details" :
             <div>
-                <Button
-                    key={"attachemts" + this.state.AttachmentDetails}
-                    Text="Attachments"
-                    onClick={this.toggleVisibilty}
-                    DropDown={true} />
-                <div style={this.state.visible ? {
-                    backgroundColor: "#1390b34d",
-                    borderRadius: "20px 20px 0px 0px",
-                } : { display: "none" }}>
-                    {(this.state.AttachmentDetails || []).map((value) => {
-                        return <Attachment key={value.id} AttachementId={value.id} />;
-                    })}
-                </div>
+                {this.state.AttachmentDetails.length === 0 ? null :
+                    <div>
+                        <Button
+                            key={"attachemts" + this.state.AttachmentDetails}
+                            Text="Attachments"
+                            onClick={this.toggleVisibilty}
+                            DropDown={true} />
+                        <div style={this.state.visible ? {
+                            backgroundColor: "#1390b34d",
+                            borderRadius: "20px 20px 0px 0px",
+                        } : { display: "none" }}>
+                            {(this.state.AttachmentDetails || []).map((value) => {
+                                return <Attachment key={value.id} AttachementId={value.id} />;
+                            })}
+                        </div>
+                    </div>}
             </div>}
         </div>;
     }
