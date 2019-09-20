@@ -7,7 +7,7 @@ import { app, ipcMain, Menu, nativeImage, Tray } from "electron";
 import { UtilRouter } from "./BackEnd/UtilRouter";
 import { WindowControl } from "./BackEnd/WindowManager";
 
-let newSharp: UtilRouter;
+let util: UtilRouter;
 const control = new WindowControl();
 let mainWindowId: number;
 
@@ -44,10 +44,10 @@ const createMainWindow = () => {
   //   path.join(os.homedir(),
   //   "AppData/Local/Google/Chrome/User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.0.6_0"));
 
-  newSharp = new UtilRouter();
-  newSharp.route("details", { target: "loadFile", data: "" });
+  util = new UtilRouter();
+  util.route("details", { target: "loadFile", data: "" });
   // reset any values which could cause problems
-  newSharp.route("details", {
+  util.route("details", {
     property: "ACTIVETASK", target: "update", value: "none",
   });
 
@@ -55,7 +55,7 @@ const createMainWindow = () => {
 
 const quit = () => {
   // check if a task is running
-  const task = newSharp.route("details", { target: "retrieve", data: { target: "ACTIVETASK" } });
+  const task = util.route("details", { target: "retrieve", data: { target: "ACTIVETASK" } });
   // if there is, notify the user to stop manually
   if (task !== "none" && task !== null) {
     // TODO: Make it stop task automatically
@@ -130,7 +130,7 @@ ipcMain.on("balloon", (event: any, arg: any) => {
 ipcMain.on("tsUtil", (event: any, arg: any) => {
 
   new Promise((resolve, reject) => {
-    const answer = newSharp.route(arg.target, arg.data);
+    const answer = util.route(arg.target, arg.data);
     if (answer !== undefined) {
       resolve(answer);
     } else {
