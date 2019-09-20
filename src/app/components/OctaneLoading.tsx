@@ -1,6 +1,6 @@
 import { ipcRenderer, remote } from "electron";
 import * as React from "react";
-import { ApiUtil } from "./../ApiUtil";
+import { ApiUtil } from "../../BackEnd/ApiUtil";
 import { Button } from "./Button";
 import { TextInput } from "./TextInput";
 

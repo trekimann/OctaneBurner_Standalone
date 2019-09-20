@@ -1,6 +1,6 @@
 import { ipcRenderer, shell } from "electron";
 import * as React from "react";
-import { ApiUtil } from "../ApiUtil";
+import { ApiUtil } from "../../BackEnd/ApiUtil";
 import { Attachments } from "./Attachments";
 import { Button } from "./Button";
 import { Comments } from "./Comments";
