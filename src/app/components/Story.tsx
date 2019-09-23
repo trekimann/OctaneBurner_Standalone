@@ -1,4 +1,4 @@
-import { ipcRenderer, shell, clipboard } from "electron";
+import { clipboard, ipcRenderer, shell } from "electron";
 import * as React from "react";
 import { ApiUtil } from "../../BackEnd/ApiUtil";
 import { Attachments } from "./Attachments";
