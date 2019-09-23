@@ -3,7 +3,7 @@ const url = require("url");
 const os = require("os");
 const path = require("path");
 const iconpath = path.join(__dirname + "/assets", "octaneIcon.png");
-import { app, BrowserWindow , ipcMain, Menu, nativeImage, Tray } from "electron";
+import { app, BrowserWindow, ipcMain, Menu, nativeImage, Tray } from "electron";
 import { UtilRouter } from "./BackEnd/UtilRouter";
 import { WindowControl } from "./BackEnd/WindowManager";
 
@@ -153,7 +153,39 @@ ipcMain.on("tsUtil", (event: any, arg: any) => {
 
 // handle requests from react to react
 ipcMain.on("internal", (event: any, arg: any) => {
-  control.getWindow(mainWindowId).webContents.send(arg.source, arg.data);
+  let WindowId = mainWindowId;
+  if (arg.windowId !== undefined && arg.windowId !== null) {
+    WindowId = arg.windowId;
+  }
+  control.getWindow(WindowId).webContents.send(arg.source, arg.data);
+});
+
+// handle window requests
+ipcMain.on("window", (event: any, arg: any) => {
+  new Promise((resolve, reject) => {
+    const response = control.route(arg);
+    if (response !== undefined) {
+      resolve(response);
+    } else {
+      reject(undefined);
+    }
+  }).then((res) => {
+    // console.log("I was called successfully");
+    // console.log(res);
+    if (arg.source !== undefined && arg.source !== null) {
+      let WindowId = mainWindowId;
+      if (arg.windowId !== undefined && arg.windowId !== null) {
+        WindowId = arg.windowId;
+      }
+      control.getWindow(WindowId).webContents.send(arg.source, res);
+    }
+  }).catch((res) => {
+    // tslint:disable: no-console
+    console.log("I was not called successfully");
+    console.log(res);
+    console.log(arg.target);
+    console.log(arg.data);
+  });
 });
 
 // -------------------------------------- Util Class ------------------------------------

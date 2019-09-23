@@ -5,6 +5,24 @@ const currentWindows: Map<number, BrowserWindow> = new Map();
 
 export class WindowControl {
 
+    public route = (arg: any) => {
+        const target = arg.target;
+        switch (target) {
+            case "createWindow": {
+                return this.createNewWindow(arg.data);
+            }
+            case "getWindow": {
+                return this.getWindow(arg.data);
+            }
+            case "focusWindow": {
+                return null;
+            }
+            default: {
+                return null;
+            }
+        }
+    }
+
     public createNewWindow = (windowDetails?: object) => {
         let newWindow: BrowserWindow;
         if (windowDetails === undefined || windowDetails === null) {

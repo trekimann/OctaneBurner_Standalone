@@ -3,7 +3,7 @@ import * as React from "react";
 import closeIcon from "./../assets/close.png";
 import maxIcon from "./../assets/maximise.png";
 import minIcon from "./../assets/minimise2.png";
-// import octIcon from "./../assets/octaneIcon.png";
+import octIcon from "./../assets/octaneIcon.png";
 import printIcon from "./../assets/Print.png";
 // import vidIcon from "./../assets/Video.png";
 // import vidIconRec from "./../assets/Video_recording.png";
@@ -59,6 +59,14 @@ export class MenuBar extends React.Component<{}, { Heading?: string, MinOnce: bo
       alt: "Minimize",
       click: () => { this.minWindow(); },
       src: minIcon,
+    },
+    {
+      alt: "New Window",
+      click: () => {
+        window.open("https://almoctane-eur.saas.microfocus.com/ui/?p=146003", "_blank");
+        remote.BrowserWindow.getFocusedWindow();
+      },
+      src: octIcon,
     },
     // {
     //   alt: "Octane",
