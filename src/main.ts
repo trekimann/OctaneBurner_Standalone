@@ -1,9 +1,9 @@
 // tslint:disable: no-var-requires
 const url = require("url");
-// const os = require("os");
+const os = require("os");
 const path = require("path");
 const iconpath = path.join(__dirname + "/assets", "octaneIcon.png");
-import { app, ipcMain, Menu, nativeImage, Tray } from "electron";
+import { app, ipcMain, Menu, nativeImage, Tray, BrowserWindow } from "electron";
 import { UtilRouter } from "./BackEnd/UtilRouter";
 import { WindowControl } from "./BackEnd/WindowManager";
 
@@ -40,9 +40,9 @@ const createMainWindow = () => {
   createTray();
 
   // BrowserWindow.addDevToolsExtension(
-  // BrowserWindow.removeDevToolsExtension(
+  // // BrowserWindow.removeDevToolsExtension(
   //   path.join(os.homedir(),
-  //   "AppData/Local/Google/Chrome/User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.0.6_0"));
+  //   "AppData/Local/Google/Chrome/User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.1.0_0"));
 
   util = new UtilRouter();
   util.route("details", { target: "loadFile", data: "" });

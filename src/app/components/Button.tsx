@@ -30,6 +30,7 @@ export class Button extends React.Component<{
     MouseDown?: any,
     MouseUp?: any,
     onDblclick?: any,
+    onRightClick?: any,
     onClick?: any,
     Src?: any,
     Style?: any,
@@ -76,8 +77,12 @@ export class Button extends React.Component<{
     }
 
     private rightClick = () => {
-        clipboard.writeText(this.props.Text);
-        this.balloon("Notice", "Text Copied to clipborad");
+        if (this.props.onRightClick !== undefined && this.props.onRightClick !== null) {
+            this.props.onRightClick();
+        } else {
+            clipboard.writeText(this.props.Text);
+            this.balloon("Notice", "Text Copied to clipborad");
+        }
     }
 
     private click = () => {

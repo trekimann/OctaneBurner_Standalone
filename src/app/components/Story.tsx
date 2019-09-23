@@ -1,4 +1,4 @@
-import { ipcRenderer, shell } from "electron";
+import { ipcRenderer, shell, clipboard } from "electron";
 import * as React from "react";
 import { ApiUtil } from "../../BackEnd/ApiUtil";
 import { Attachments } from "./Attachments";
@@ -90,11 +90,7 @@ export class Story extends React.Component<
             if (this.state.LastUpdated !== null && this.state.LastUpdated < updated) {
                 const current = this.state.StoryDetails;
                 if (current !== description) {
-                    ipcRenderer.send("balloon",
-                        {
-                            contents: "Story " + id + " Has been updated",
-                            title: "Story",
-                        });
+                    this.balloon("Story " + id + " Has been updated", "Story");
                 }
             }
             this.setState({
@@ -136,8 +132,9 @@ export class Story extends React.Component<
                             onClick={this.showStory}
                             Text={StoryText}
                             DropDown={true}
-                            HoverText="Double Click to open in Browser"
+                            HoverText="Double Click to open in Browser. Right Click to copy link to clipboard"
                             onDblclick={this.openStory}
+                            onRightClick={this.copyLink}
                         />
                         <div style={this.state.ShowStory ? null : { display: "none" }}>
                             <User
@@ -166,6 +163,20 @@ export class Story extends React.Component<
     private openStory = () => {
         const url = "https://almoctane-eur.saas.microfocus.com/ui/entity-navigation?p=146003/1002&entityType=work_item&id=" + this.props.StoryId;
         shell.openExternal(url);
+    }
+
+    private copyLink = () => {
+        const url = "https://almoctane-eur.saas.microfocus.com/ui/entity-navigation?p=146003/1002&entityType=work_item&id=" + this.props.StoryId;
+        clipboard.writeText(url);
+        this.balloon("Notice", "Link Copied to clipborad");
+    }
+
+    private balloon = (t: string, c: string) => {
+        ipcRenderer.send("balloon",
+            {
+                contents: c,
+                title: t,
+            });
     }
 
     private Cap(input: string) {
