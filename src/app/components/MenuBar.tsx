@@ -60,14 +60,14 @@ export class MenuBar extends React.Component<{}, { Heading?: string, MinOnce: bo
       click: () => { this.minWindow(); },
       src: minIcon,
     },
-    {
-      alt: "New Window",
-      click: () => {
-        window.open("https://almoctane-eur.saas.microfocus.com/ui/?p=146003", "_blank");
-        remote.BrowserWindow.getFocusedWindow();
-      },
-      src: octIcon,
-    },
+    // {
+    //   alt: "New Window",
+    //   click: () => {
+    //     window.open("https://almoctane-eur.saas.microfocus.com/ui/?p=146003", "_blank");
+    //     remote.BrowserWindow.getFocusedWindow();
+    //   },
+    //   src: octIcon,
+    // },
     // {
     //   alt: "Octane",
     //   click: () => {

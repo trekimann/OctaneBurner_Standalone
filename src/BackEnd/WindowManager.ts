@@ -14,8 +14,11 @@ export class WindowControl {
             case "getWindow": {
                 return this.getWindow(arg.data);
             }
+            case "navigateTo": {
+                return this.navigateTo(arg.data.windowId, arg.data.uri);
+            }
             case "focusWindow": {
-                return null;
+                return this.focusWindow(arg.data);
             }
             default: {
                 return null;
@@ -23,7 +26,7 @@ export class WindowControl {
         }
     }
 
-    public createNewWindow = (windowDetails?: object) => {
+    public createNewWindow = (windowDetails?: object, filename?: string) => {
         let newWindow: BrowserWindow;
         if (windowDetails === undefined || windowDetails === null) {
             newWindow = new BrowserWindow({
@@ -52,12 +55,22 @@ export class WindowControl {
 
         // The window identifier can be checked from the Renderer side.
         // `win.loadFile` will escape `#` to `%23`, So use `win.loadURL`
-        const filePath = Path.join(__dirname, "index.html");
+        let file = "index.html";
+        if (filename !== undefined && filename !== null) {
+            file = filename;
+        }
+
+        const filePath = Path.join(__dirname, file);
         newWindow.loadURL(`file://${filePath}#${windowId}`);
 
         currentWindows.set(windowId, newWindow);
         this.notifyUpdateWindowIDs(windowId);
         return windowId;
+    }
+
+    public focusWindow = (id: number) => {
+        currentWindows.get(id).focus();
+        return true;
     }
 
     public getWindow = (id: number) => {

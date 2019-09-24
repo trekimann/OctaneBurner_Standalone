@@ -31,7 +31,7 @@ export class ApiUtil {
         if (response === undefined || response === null) {
             ApiUtil.Get(url, ApiUtil.getUserId, listener);
         } else {
-            // pass response to c# to pull out the desired ID
+            // pass response to util to pull out the desired ID
             const Data = { target: "findUserId", data: response.responseText };
             ipcRenderer.send("tsUtil", { source: listener, target: "user", data: Data });
         }
@@ -50,13 +50,13 @@ export class ApiUtil {
             ApiUtil.Get(url, ApiUtil.getAllTasks, userId, offset, currentTasks);
         } else {
             // Pull out all the tasks with the user as the owner.
-            // pass that info the c# and then start getting full details for each task
-            // pass the full details to C# where it can save them.
-            // fetch each task detail from C#
+            // pass that info the util and then start getting full details for each task
+            // pass the full details to util where it can save them.
+            // fetch each task detail from util
             const responseObject = JSON.parse(response.responseText);
             const totalNumberOfTasks = responseObject.total_count;
             const newList = currentTasks.concat(responseObject.data);
-            // pass the number of tasks to C# so it can signal when its done
+            // pass the number of tasks to util so it can signal when its done
             if (offset === null || offset === undefined) {// so its only sends on the first call.
                 const Data = { target: "totalNumberOfTasks", data: totalNumberOfTasks };
                 ipcRenderer.send("tsUtil", { source: "allTasks", target: "task", data: Data });
@@ -105,12 +105,12 @@ export class ApiUtil {
         if (response === null || response === undefined) {
             ApiUtil.Get(url, this.getTaskDetails, taskId);
         } else {
-            // pull out task details in this api then pass the details to c# for storage. To save on rendering time
+            // pull out task details in this api then pass the details to util for storage. To save on rendering time
             const taskToAdd = JSON.parse(response.responseText);
             // "userTaskDetails" <- this is the thing that the tasks component is listening for to make a task component
             const data = { source: "userTaskDetails", data: taskToAdd };
             ipcRenderer.send("internal", data);
-            // send details to C# for storage
+            // send details to util for storage
             const Data = { target: "taskDetails", data: taskToAdd };
             ipcRenderer.send("tsUtil", { target: "task", data: Data });
         }
@@ -121,12 +121,12 @@ export class ApiUtil {
         if (response === null || response === undefined) {
             ApiUtil.Get(url, this.getStoryDetails, storyId, listener);
         } else {
-            // pull out task details in this api then pass the details to c# for storage. To save on rendering time
+            // pull out task details in this api then pass the details to util for storage. To save on rendering time
             const StoryDetails = JSON.parse(response.responseText);
 
             const data = { source: listener, data: StoryDetails };
             ipcRenderer.send("internal", data);
-            // send details to C# for storage
+            // send details to util for storage
             // const Data = { target: "taskDetails", data: taskToAdd };
             // ipcRenderer.send("tsUtil", { target: "task", data: Data });
         }

@@ -184,7 +184,7 @@ ipcMain.on("window", (event: any, arg: any) => {
     console.log("I was not called successfully");
     console.log(res);
     console.log(arg.target);
-    console.log(arg.data);
+    // console.log(arg.data);
   });
 });
 
