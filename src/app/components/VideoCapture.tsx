@@ -40,6 +40,8 @@ export class VideoCapture extends React.Component<{}, { DisplayId: string, Scree
         </div >;
     }
 
+// --------------------------------------------------------------------------------
+
     private bigSave = () => {
         const blob = new Blob(recordedChunks, { type: video });
         const fileReader = new FileReader();

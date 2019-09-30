@@ -42,7 +42,7 @@ const createMainWindow = () => {
   // BrowserWindow.addDevToolsExtension(
   // // BrowserWindow.removeDevToolsExtension(
   //   path.join(os.homedir(),
-  //   "AppData/Local/Google/Chrome/User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.1.0_0"));
+  //   "AppData/Local/Google/Chrome/User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.1.2_0"));
 
   util = new UtilRouter();
   util.route("details", { target: "loadFile", data: "" });
