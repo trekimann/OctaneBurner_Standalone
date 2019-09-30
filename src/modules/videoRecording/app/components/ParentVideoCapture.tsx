@@ -7,7 +7,7 @@ let mediaRecorder: any = null;
 const recordedChunks: any[] = [];
 const codec = " codecs=vp9";
 const video = "video/webm";
-export class VideoCapture extends React.Component<{}, { DisplayId: string, ScreenId: string, VideoStream: any }> {
+export class ParentVideoCapture extends React.Component<{}, { DisplayId: string, ScreenId: string, VideoStream: any }> {
 
     constructor(props: any) {
         super(props);
