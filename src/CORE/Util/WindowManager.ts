@@ -1,4 +1,5 @@
 import { BrowserWindow, BrowserWindowConstructorOptions } from "electron";
+// tslint:disable-next-line: no-var-requires
 const Path = require("path");
 const iconpath = Path.join(__dirname + "/assets", "octaneIcon.png");
 const currentWindows: Map<number, BrowserWindow> = new Map();
@@ -46,6 +47,7 @@ export class WindowControl {
         const windowId = newWindow.id;
         newWindow.on("closed", () => {
             /// #if env == 'DEBUG'
+            // tslint:disable-next-line: no-console
             console.log(`Window was closed, id = ${windowId}`);
             /// #endif
 
