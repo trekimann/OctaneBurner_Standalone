@@ -1,7 +1,7 @@
 import { ipcRenderer } from "electron";
 import * as React from "react";
 import { ApiUtil } from "../../BackEnd/ApiUtil";
-import { Spinner } from "../../../CORE/app/components/spinner";
+import { Spinner } from "./spinner";
 import { Story } from "./Story";
 
 export class Tasks extends React.Component<{ UserId: string }, {

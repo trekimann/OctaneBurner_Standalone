@@ -1,7 +1,7 @@
 // import { remote, ipcRenderer } from "electron";
 import * as React from "react";
 import { OctaneLogin } from "../../../burner/app/components/OctaneLoading";
-import { Spinner } from "./spinner";
+import { Spinner } from "../../../burner/app/components/spinner";
 import { Tasks } from "../../../burner/app/components/Tasks";
 
 export class TopOptions extends React.Component<{}, { UserId: any, loggedIn: boolean, loggingIn: boolean }> {
