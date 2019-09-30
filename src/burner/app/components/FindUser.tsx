@@ -1,7 +1,7 @@
 import { ipcRenderer } from "electron";
 import * as React from "react";
-import { Button } from "./Button";
-import { TextInput } from "./TextInput";
+import { Button } from "../../../CORE/app/components/Button";
+import { TextInput } from "../../../CORE/app/components/TextInput";
 
 export class FindUser extends React.Component {
     // public componentDidMount(): void {

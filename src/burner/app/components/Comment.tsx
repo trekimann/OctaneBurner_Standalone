@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button } from "./Button";
+import { Button } from "../../../CORE/app/components/Button";
 import { User } from "./User";
 
 export class Comment extends React.Component<

@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Button } from "./Button";
-import { TextArea } from "./TextArea";
+import { Button } from "../../../CORE/app/components/Button";
+import { TextArea } from "../../../CORE/app/components/TextArea";
 
 export class NewComment extends React.Component<{
     commentUpdate: any,

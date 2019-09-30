@@ -2,7 +2,7 @@ import { ipcRenderer } from "electron";
 import * as React from "react";
 import { ApiUtil } from "../../BackEnd/ApiUtil";
 import { Attachment } from "./Attachment";
-import { Button } from "./Button";
+import { Button } from "../../../CORE/app/components/Button";
 
 export class Attachments extends React.Component<{ StoryId: string }, { AttachmentDetails: [], visible: boolean }> {
 
