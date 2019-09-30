@@ -1,8 +1,8 @@
 import { ipcRenderer } from "electron";
 import * as React from "react";
+import { Button } from "../../../CORE/app/components/Button";
 import { ApiUtil } from "../../BackEnd/ApiUtil";
 import { Attachment } from "./Attachment";
-import { Button } from "../../../CORE/app/components/Button";
 
 export class Attachments extends React.Component<{ StoryId: string }, { AttachmentDetails: [], visible: boolean }> {
 
@@ -40,7 +40,7 @@ export class Attachments extends React.Component<{ StoryId: string }, { Attachme
                             backgroundColor: "#1390b34d",
                             borderRadius: "20px 20px 0px 0px",
                         } : { display: "none" }}>
-                            {(this.state.AttachmentDetails || []).map((value) => {
+                            {(this.state.AttachmentDetails || []).map((value: any) => {
                                 return <Attachment key={value.id} AttachementId={value.id} />;
                             })}
                         </div>
