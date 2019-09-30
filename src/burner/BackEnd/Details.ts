@@ -1,5 +1,5 @@
 import * as fs from "fs";
-import { Logger } from "./Logger";
+import { Logger } from "../../CORE/Util/Logger";
 export class Details {
     private dataStore = new Map<string, any>();
     private userList = new Map<string, any>();

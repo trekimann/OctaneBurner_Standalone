@@ -1,5 +1,5 @@
+import { Logger } from "../../CORE/Util/Logger";
 import { Details } from "./Details";
-import { Logger } from "./Logger";
 // tslint:disable-next-line: max-classes-per-file
 export class Tasks {
     private Logger: Logger;

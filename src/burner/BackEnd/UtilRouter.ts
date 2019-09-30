@@ -1,6 +1,6 @@
 import { app } from "electron";
+import { Logger } from "../../CORE/Util/Logger";
 import { Details } from "./Details";
-import { Logger } from "./Logger";
 import { Tasks } from "./Tasks";
 import { UserDetails } from "./UserDetails";
 
@@ -10,6 +10,11 @@ export class UtilRouter {
     private Details = new Details(this.path, this.Logger);
     private Tasks = new Tasks(this.Logger, this.Details);
     private User = new UserDetails(this.Logger, this.Details);
+
+    constructor(log: Logger, path: string) {
+        this.Logger = log;
+        this.path = path;
+    }
 
     public route = (target: string, data: any) => {
         switch (target) {

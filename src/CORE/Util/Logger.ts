@@ -2,6 +2,7 @@ import * as fs from "fs";
 export class Logger {
     public shouldLog = false;
     private logPath = "";
+
     constructor(LogPath: string) {
         this.logPath = LogPath;
         this.Log("Started Application");

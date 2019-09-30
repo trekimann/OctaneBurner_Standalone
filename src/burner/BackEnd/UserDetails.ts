@@ -1,5 +1,5 @@
+import { Logger } from "../../CORE/Util/Logger";
 import { Details } from "./Details";
-import { Logger } from "./Logger";
 
 export class UserDetails {
     private Logger: Logger;

@@ -5,11 +5,13 @@ const path = require("path");
 const iconpath = path.join(__dirname + "/assets", "octaneIcon.png");
 import { app, BrowserWindow, ipcMain, Menu, nativeImage, Tray } from "electron";
 import { UtilRouter } from "./burner/BackEnd/UtilRouter";
+import { Logger } from "./CORE/Util/Logger";
 import { WindowControl } from "./CORE/Util/WindowManager";
 
 let util: UtilRouter;
 const control = new WindowControl();
 let mainWindowId: number;
+let logger: Logger;
 
 const createMainWindow = () => {
   mainWindowId = control.createNewWindow({
@@ -44,7 +46,10 @@ const createMainWindow = () => {
   //   path.join(os.homedir(),
   //   "AppData/Local/Google/Chrome/User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.1.2_0"));
 
-  util = new UtilRouter();
+  const Path = app.getAppPath();
+  logger = new Logger(Path + "\\log.log");
+
+  util = new UtilRouter(logger, Path);
   util.route("details", { target: "loadFile", data: "" });
   // reset any values which could cause problems
   util.route("details", {
