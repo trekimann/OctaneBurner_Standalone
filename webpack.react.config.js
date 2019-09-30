@@ -9,7 +9,7 @@ const htmlPlugin = new HtmlWebPackPlugin({
 const config = {
     target: "electron-renderer",
     devtool: "source-map",
-    entry: "./src/app/renderer.tsx",
+    entry: "./src/burner/app/renderer.tsx",
     output: {
         filename: "renderer.js",
         path: path.resolve(__dirname, "dist")
