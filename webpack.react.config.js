@@ -14,6 +14,10 @@ const config = {
         filename: "renderer.js",
         path: path.resolve(__dirname, "dist")
     },
+    // node: {
+    //     __dirname: false,
+    //     __filename: false,
+    // },
     module: {
         rules: [{
                 test: /\.(ts|tsx)$/,

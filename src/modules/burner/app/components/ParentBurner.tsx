@@ -4,7 +4,8 @@ import { OctaneLogin } from "./OctaneLoading";
 import { Spinner } from "./spinner";
 import { Tasks } from "./Tasks";
 
-export class ParentBurner extends React.Component<{}, { UserId: any, loggedIn: boolean, loggingIn: boolean }> {
+export class ParentBurner extends React.Component<{ },
+    { UserId: any, loggedIn: boolean, loggingIn: boolean}> {
 
     constructor(props: any) {
         super(props);

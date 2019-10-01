@@ -7,7 +7,8 @@ let mediaRecorder: any = null;
 const recordedChunks: any[] = [];
 const codec = " codecs=vp9";
 const video = "video/webm";
-export class ParentVideoCapture extends React.Component<{}, { DisplayId: string, ScreenId: string, VideoStream: any }> {
+export class ParentVideoCapture extends React.Component<{},
+    { DisplayId: string, ScreenId: string, VideoStream: any }> {
 
     constructor(props: any) {
         super(props);
@@ -31,21 +32,21 @@ export class ParentVideoCapture extends React.Component<{}, { DisplayId: string,
     public render() {
         return <div>
             {/* <textarea id="Supported"></textarea> */}
-            <video controls style={{ maxWidth: "100%" }}></video>
+            < video controls style={{ maxWidth: "100%" }}></video>
             <Button Text="Start Video Stream" onClick={() => this.thing()} />
             <Button Text="Stop Video" onClick={this.stopRecording} />
             <Button Text="Start Recording" onClick={this.startRecording} />
             <Button Text="Playback Recording" onClick={this.playBackRecording} />
             <Button Text="Save Recording" onClick={this.bigSave} />
-        </div >;
+        </div>;
     }
 
-// --------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------
 
     private bigSave = () => {
         const blob = new Blob(recordedChunks, { type: video });
         const fileReader = new FileReader();
-        fileReader.onload = function() {
+        fileReader.onload = function () {
             const ab = this.result;
             const buffer = new Buffer(ab.byteLength);
             const arr = new Uint8Array(ab);

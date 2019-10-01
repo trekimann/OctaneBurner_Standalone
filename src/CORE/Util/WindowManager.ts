@@ -10,7 +10,7 @@ export class WindowControl {
         const target = arg.target;
         switch (target) {
             case "createWindow": {
-                return this.createNewWindow(arg.data);
+                return this.createNewWindow(arg.data.details, arg.data.filename);
             }
             case "getWindow": {
                 return this.getWindow(arg.data);
@@ -20,6 +20,9 @@ export class WindowControl {
             }
             case "focusWindow": {
                 return this.focusWindow(arg.data);
+            }
+            case "closeWindow": {
+                return this.closeWindow(arg.data);
             }
             default: {
                 return null;
@@ -45,7 +48,15 @@ export class WindowControl {
         }
 
         const windowId = newWindow.id;
-        newWindow.on("closed", () => {
+        newWindow.on("close", () => {
+            if (newWindow.id === 1 && currentWindows.size > 1) {
+                // close all windows
+                // tslint:disable-next-line: prefer-for-of
+                for (let i = currentWindows.size; i > 1; i--) {
+                    this.closeWindow(i);
+                }
+            }
+
             /// #if env == 'DEBUG'
             // tslint:disable-next-line: no-console
             console.log(`Window was closed, id = ${windowId}`);
@@ -58,7 +69,7 @@ export class WindowControl {
         // The window identifier can be checked from the Renderer side.
         // `win.loadFile` will escape `#` to `%23`, So use `win.loadURL`
         let file = "index.html";
-        if (filename !== undefined && filename !== null) {
+        if (filename !== undefined && filename !== null && filename !== file) {
             file = filename;
         }
 
@@ -68,6 +79,10 @@ export class WindowControl {
         currentWindows.set(windowId, newWindow);
         this.notifyUpdateWindowIDs(windowId);
         return windowId;
+    }
+
+    public closeWindow = (id: number) => {
+        currentWindows.get(id).close();
     }
 
     public focusWindow = (id: number) => {

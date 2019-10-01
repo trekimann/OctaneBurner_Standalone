@@ -78,15 +78,16 @@ export class MenuBar extends React.Component<{}, { Heading?: string, MinOnce: bo
     //   },
     //   src: octIcon,
     // },
-    {
-      alt: "Capture Video",
-      altSrc: vidIconRec,
-      click: () => {
-        const arg = { source: "toggleIcon" + "Capture Video" };
-        ipcRenderer.send("internal", arg);
-      },
-      src: vidIcon,
-    },
+    // {
+    //   alt: "Capture Video",
+    //   altSrc: vidIconRec,
+    //   click: () => {
+    //     ipcRenderer.send("internal", { source: "toggleIcon" + "Capture Video" });
+
+    //     ipcRenderer.send("window", { target: "createWindow", data: { details: null, filename: "index.html" } });
+    //   },
+    //   src: vidIcon,
+    // },
     {
       alt: "Print. Right click to save PDF",
       click: () => { remote.BrowserWindow.getFocusedWindow().webContents.print({ printBackground: true }); },

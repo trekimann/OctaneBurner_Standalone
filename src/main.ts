@@ -23,15 +23,8 @@ const createMainWindow = () => {
       nodeIntegration: true,
     },
     width: 340,
-  });
+  }, "index.html");
 
-  control.navigateTo(mainWindowId,
-    url.format({
-      pathname: path.join(__dirname, "index.html"),
-      protocol: "file:",
-      slashes: true,
-    }),
-  );
 
   control.getWindow(mainWindowId).on("minimize", (event: any) => {
     event.preventDefault();
@@ -134,7 +127,7 @@ app.on("activate", () => {
 ipcMain.on("balloon", (event: any, arg: any) => {
   balloon(arg.title, arg.contents);
 });
-
+// Util Requests --------------------------------------------------
 ipcMain.on("tsUtil", (event: any, arg: any) => {
 
   new Promise((resolve, reject) => {
@@ -158,8 +151,9 @@ ipcMain.on("tsUtil", (event: any, arg: any) => {
     console.log(arg.data);
   });
 });
+// Util Requests --------------------------------------------------
 
-// handle requests from react to react
+// handle requests from react to react ----------------------------
 ipcMain.on("internal", (event: any, arg: any) => {
   let WindowId = mainWindowId;
   if (arg.windowId !== undefined && arg.windowId !== null) {
@@ -168,7 +162,9 @@ ipcMain.on("internal", (event: any, arg: any) => {
   control.getWindow(WindowId).webContents.send(arg.source, arg.data);
 });
 
-// handle window requests
+// handle requests from react to react ----------------------------
+
+// handle window requests -----------------------------------------
 ipcMain.on("window", (event: any, arg: any) => {
   new Promise((resolve, reject) => {
     const response = control.route(arg);
@@ -195,5 +191,6 @@ ipcMain.on("window", (event: any, arg: any) => {
     // console.log(arg.data);
   });
 });
+// handle window requests -----------------------------------------
 
 // -------------------------------------- Util Class ------------------------------------
