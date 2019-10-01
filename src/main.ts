@@ -126,12 +126,15 @@ app.on("activate", () => {
   }
 });
 
+
+// ----------------------------------------------------------------
+
+
+// Handle requests from React
 ipcMain.on("balloon", (event: any, arg: any) => {
   balloon(arg.title, arg.contents);
 });
 
-
-// Handle requests from React
 ipcMain.on("tsUtil", (event: any, arg: any) => {
 
   new Promise((resolve, reject) => {

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { ipcRenderer } from "electron";
 
 const liStyle = {
     float: "right",
@@ -12,11 +13,11 @@ const defaultStyle = {
 
 export class MenuIcon extends React.Component<{
     altSrc?: any,
-    altText?: string,
+    altText: string,
     buttonStyle?: any,
-    imgSrc?: any,
+    imgSrc: any,
     liStyle?: any,
-    onClick?: any,
+    onClick: any,
     rightClick?: any,
 }, {
     imgSrc: any,
@@ -33,6 +34,7 @@ export class MenuIcon extends React.Component<{
         if (this.props.imgSrc !== undefined && this.props.imgSrc !== null) {
             this.setState({ imgSrc: this.props.imgSrc });
         }
+        ipcRenderer.on("toggleIcon" + this.props.altText, this.toggleSrc);
     }
     public render() {
         let styling = defaultStyle;
@@ -50,6 +52,16 @@ export class MenuIcon extends React.Component<{
         </li>;
     }
 
+    public toggleSrc = () => {
+        if (this.props.altSrc !== undefined && this.props.altSrc !== null) {
+            if (this.state.imgSrc === this.props.imgSrc) {
+                this.setState({ imgSrc: this.props.altSrc });
+            } else {
+                this.setState({ imgSrc: this.props.imgSrc });
+            }
+        }
+    }
+
     private rightClick = () => {
         if (this.props.rightClick !== undefined) {
             this.props.rightClick();
@@ -60,13 +72,13 @@ export class MenuIcon extends React.Component<{
 
     private click = () => {
         document.activeElement.blur();
-        if (this.props.altSrc !== undefined && this.props.altSrc !== null) {
-            if (this.state.imgSrc === this.props.imgSrc) {
-                this.setState({ imgSrc: this.props.altSrc });
-            } else {
-                this.setState({ imgSrc: this.props.imgSrc });
-            }
-        }
+        // if (this.props.altSrc !== undefined && this.props.altSrc !== null) {
+        //     if (this.state.imgSrc === this.props.imgSrc) {
+        //         this.setState({ imgSrc: this.props.altSrc });
+        //     } else {
+        //         this.setState({ imgSrc: this.props.imgSrc });
+        //     }
+        // }
         if (this.props.onClick !== undefined && this.props.onClick !== null) {
             this.props.onClick();
         }

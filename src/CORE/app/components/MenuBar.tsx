@@ -1,12 +1,12 @@
 import { ipcRenderer, remote } from "electron";
 import * as React from "react";
+import vidIcon from "../../../modules/videoRecording/app/assets/Video.png";
+import vidIconRec from "../../../modules/videoRecording/app/assets/Video_recording.png";
 import closeIcon from "./../assets/close.png";
 import maxIcon from "./../assets/maximise.png";
 import minIcon from "./../assets/minimise2.png";
 // import octIcon from "./../assets/octaneIcon.png";
 import printIcon from "./../assets/Print.png";
-// import vidIcon from "./../assets/Video.png";
-// import vidIconRec from "./../assets/Video_recording.png";
 import { MenuIcon } from "./MenuIcon";
 
 const menuStyle = {
@@ -36,6 +36,8 @@ const navStyle = {
 
 
 export class MenuBar extends React.Component<{}, { Heading?: string, MinOnce: boolean }> {
+
+  // tslint:disable-next-line: member-ordering
   private buttons = [
     {
       alt: "Close",
@@ -76,12 +78,15 @@ export class MenuBar extends React.Component<{}, { Heading?: string, MinOnce: bo
     //   },
     //   src: octIcon,
     // },
-    // {
-    //   alt: "Capture Video",
-    //   altSrc: vidIconRec,
-    //   click: this.toggleVideo.bind(this),
-    //   src: vidIcon,
-    // },
+    {
+      alt: "Capture Video",
+      altSrc: vidIconRec,
+      click: () => {
+        const arg = { source: "toggleIcon" + "Capture Video" };
+        ipcRenderer.send("internal", arg);
+      },
+      src: vidIcon,
+    },
     {
       alt: "Print. Right click to save PDF",
       click: () => { remote.BrowserWindow.getFocusedWindow().webContents.print({ printBackground: true }); },
@@ -156,6 +161,7 @@ export class MenuBar extends React.Component<{}, { Heading?: string, MinOnce: bo
               altText={value.alt}
               altSrc={value.altSrc}
               rightClick={() => value.rightClick()}
+              useAltSrc={value.useAltSrc}
             />;
           })}
         </ul>
