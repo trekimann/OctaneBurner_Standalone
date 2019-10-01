@@ -17,6 +17,7 @@ export class MenuIcon extends React.Component<{
     imgSrc?: any,
     liStyle?: any,
     onClick?: any,
+    rightClick?: any,
 }, {
     imgSrc: any,
 }> {
@@ -44,8 +45,17 @@ export class MenuIcon extends React.Component<{
                 src={this.state.imgSrc}
                 alt={this.props.altText}
                 onClick={this.click}
-                title={this.props.altText} />
+                title={this.props.altText}
+                onContextMenu={this.rightClick} />
         </li>;
+    }
+
+    private rightClick = () => {
+        if (this.props.rightClick !== undefined) {
+            this.props.rightClick();
+        } else {
+
+        }
     }
 
     private click = () => {

@@ -3,7 +3,7 @@ import * as React from "react";
 import closeIcon from "./../assets/close.png";
 import maxIcon from "./../assets/maximise.png";
 import minIcon from "./../assets/minimise2.png";
-import octIcon from "./../assets/octaneIcon.png";
+// import octIcon from "./../assets/octaneIcon.png";
 import printIcon from "./../assets/Print.png";
 // import vidIcon from "./../assets/Video.png";
 // import vidIconRec from "./../assets/Video_recording.png";
@@ -83,8 +83,20 @@ export class MenuBar extends React.Component<{}, { Heading?: string, MinOnce: bo
     //   src: vidIcon,
     // },
     {
-      alt: "Print",
+      alt: "Print. Right click to save PDF",
       click: () => { remote.BrowserWindow.getFocusedWindow().webContents.print({ printBackground: true }); },
+      rightClick: () => {
+        const fs = require("fs");
+        remote.BrowserWindow.getFocusedWindow().webContents.printToPDF(
+          { printBackground: true }, (error: any, data: any) => {
+            if (error) { throw error; }
+            fs.writeFile("/tmp/burner.pdf", data, (error2: any) => {
+              if (error2) { throw error2; }
+              this.balloon("Print", "Print to PDF complete");
+              console.log("WritePDF success");
+            });
+          });
+      },
       src: printIcon,
     },
   ];
@@ -135,11 +147,16 @@ export class MenuBar extends React.Component<{}, { Heading?: string, MinOnce: bo
     return <header style={menuStyle}>{this.state.Heading}
       <nav style={navStyle}>
         <ul style={ulStyle}>
-          {this.buttons.map((value, index) => {
-            return <MenuIcon key={value.alt} imgSrc={value.src}
-              onClick={() => value.click()} liStyle={value.liStyle}
-              buttonStyle={value.buttonStyle} altText={value.alt}
-              altSrc={value.altSrc} />;
+          {this.buttons.map((value: any, index) => {
+            return <MenuIcon key={value.alt}
+              imgSrc={value.src}
+              onClick={() => value.click()}
+              liStyle={value.liStyle}
+              buttonStyle={value.buttonStyle}
+              altText={value.alt}
+              altSrc={value.altSrc}
+              rightClick={() => value.rightClick()}
+            />;
           })}
         </ul>
       </nav>
