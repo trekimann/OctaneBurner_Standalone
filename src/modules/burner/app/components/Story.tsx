@@ -2,7 +2,7 @@ import { clipboard, ipcRenderer, shell } from "electron";
 import * as React from "react";
 import { ApiUtil } from "../../BackEnd/ApiUtil";
 import { Attachments } from "./Attachments";
-import { Button } from "../../../CORE/app/components/Button";
+import { Button } from "../../../../CORE/app/components/Button";
 import { Comments } from "./Comments";
 import { Task } from "./Task";
 import { User } from "./User";

@@ -2,7 +2,7 @@ import { ipcRenderer } from "electron";
 import * as React from "react";
 import { ApiUtil } from "../../BackEnd/ApiUtil";
 import { AttachmentPreview } from "./AttachmentPreview";
-import { Button } from "../../../CORE/app/components/Button";
+import { Button } from "../../../../CORE/app/components/Button";
 import { User } from "./User";
 
 const toggleStyle = {

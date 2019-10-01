@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import {ParentBurner} from "../../burner/app/components/parent_burner";
+import {ParentBurner} from "../../modules/burner/app/components/ParentBurner";
 import {MenuBar} from "./components/MenuBar";
 // import {VideoCapture} from "./components/VideoCapture";
 

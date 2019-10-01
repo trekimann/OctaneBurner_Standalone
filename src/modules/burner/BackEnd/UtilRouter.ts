@@ -1,5 +1,5 @@
 import { app } from "electron";
-import { Logger } from "../../CORE/Util/Logger";
+import { Logger } from "../../../CORE/Util/Logger";
 import { Details } from "./Details";
 import { Tasks } from "./Tasks";
 import { UserDetails } from "./UserDetails";

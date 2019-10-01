@@ -1,7 +1,7 @@
 import { ipcRenderer } from "electron";
 import * as React from "react";
+import { Button } from "../../../../CORE/app/components/Button";
 import { ApiUtil } from "../../BackEnd/ApiUtil";
-import { Button } from "../../../CORE/app/components/Button";
 import { Timer } from "./Timer";
 
 export class Task extends React.Component<{

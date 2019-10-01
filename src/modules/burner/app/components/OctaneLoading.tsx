@@ -1,8 +1,8 @@
 import { ipcRenderer, remote } from "electron";
 import * as React from "react";
+import { Button } from "../../../../CORE/app/components/Button";
+import { TextInput } from "../../../../CORE/app/components/TextInput";
 import { ApiUtil } from "../../BackEnd/ApiUtil";
-import { Button } from "../../../CORE/app/components/Button";
-import { TextInput } from "../../../CORE/app/components/TextInput";
 
 const bStyle = {
     fontSize: "18px",
