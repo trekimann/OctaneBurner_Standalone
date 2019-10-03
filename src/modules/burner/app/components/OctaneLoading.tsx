@@ -3,7 +3,6 @@ import * as React from "react";
 import { Button } from "../../../../CORE/app/components/Button";
 import { TextInput } from "../../../../CORE/app/components/TextInput";
 import { ApiUtil } from "../../BackEnd/ApiUtil";
-
 const bStyle = {
     fontSize: "18px",
     padding: "18px",
@@ -71,6 +70,7 @@ export class OctaneLogin extends React.Component<
             loginWindow.close();
             ApiUtil.getWorkspaceId(null);
         });
+        mainWindow.focus();
     }
 
     public componentDidMount(): void {
@@ -94,14 +94,14 @@ export class OctaneLogin extends React.Component<
     public logInSuccess = (event: any, value: any) => {
         // this sets the state to logged in, put into check success action
         // value should be the workspaceID for the user.
-        ipcRenderer.send("balloon", { title: "Success", contents: "Logged in" });
+        this.balloon("Success", "Logged in");
         ApiUtil.updateUsername(this.state.userName);
         this.props.LoggingIn(false, true);
     }
 
     public loginFail = (event: any, value: any) => {
         this.setState({ failedLogin: true });
-        ipcRenderer.send("balloon", { title: "Error", contents: "Could not log in" });
+        this.balloon("Error", "Could not log in");
         this.props.LoggingIn(false, false);
     }
 
@@ -123,6 +123,10 @@ export class OctaneLogin extends React.Component<
                     Text="Log in"
                     Style={bStyle} /> : null}
         </div >;
+    }
+
+    private balloon = (Title: string, Contents: string) => {
+        ipcRenderer.send("balloon", { title: Title, contents: Contents });
     }
 
     private onRetrieve = (event: any, value: string) => {

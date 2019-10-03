@@ -4,17 +4,33 @@ import * as React from "react";
 import { Button } from "../../../../CORE/app/components/Button";
 
 let mediaRecorder: any = null;
-const recordedChunks: any[] = [];
+let recordedChunks: any[] = [];
 const codec = " codecs=vp9";
 const video = "video/webm";
 export class ParentVideoCapture extends React.Component<{},
-    { DisplayId: string, ScreenId: string, VideoStream: any }> {
+    {
+        ButtonAction: any,
+        ButtonText: string,
+        DisplayId: string,
+        PreviewActive: boolean,
+        Recording: boolean,
+        ScreenId: string,
+        ShowPlayback: boolean,
+        SuperBlob: Blob,
+        VideoStream: any,
+    }> {
 
     constructor(props: any) {
         super(props);
         this.state = {
+            ButtonAction: () => { this.StartCapture(); },
+            ButtonText: "Start Video Preview",
             DisplayId: "",
+            PreviewActive: false,
+            Recording: false,
             ScreenId: "",
+            ShowPlayback: false,
+            SuperBlob: null,
             VideoStream: null,
         };
     }
@@ -30,14 +46,27 @@ export class ParentVideoCapture extends React.Component<{},
     }
 
     public render() {
+        let showStop = false;
+        if (this.state.VideoStream !== undefined && this.state.VideoStream !== null) {
+            showStop = true;
+        }
         return <div>
             {/* <textarea id="Supported"></textarea> */}
-            < video controls style={{ maxWidth: "100%" }}></video>
-            <Button Text="Start Video Stream" onClick={() => this.thing()} />
-            <Button Text="Stop Video" onClick={this.stopRecording} />
-            <Button Text="Start Recording" onClick={this.startRecording} />
-            <Button Text="Playback Recording" onClick={this.playBackRecording} />
-            <Button Text="Save Recording" onClick={this.bigSave} />
+            < video id="videoElement" controls style={{ maxWidth: "100%" }}></video>
+            <Button Text={this.state.ButtonText}
+                onClick={this.state.ButtonAction}
+            />
+            <div style={showStop ? null : { display: "none" }}>
+                <Button Text="Stop Video" onClick={this.stopRecording} />
+            </div>
+            {/* <Button Text="Start Recording" onClick={this.startRecording} /> */}
+            <div style={this.state.ShowPlayback ? null : { display: "none" }}>
+                <Button Text="Playback Recording" onClick={this.playBackRecording} />
+            </div>
+            <div style={this.state.SuperBlob !== null ? null : { display: "none" }}>
+                To save the recording, use the option on the player. This is being worked on currently.
+                {/* <Button Text="Save Recording" onClick={() => { this.bigSave(); }} /> */}
+            </div>
         </div>;
     }
 
@@ -57,8 +86,12 @@ export class ParentVideoCapture extends React.Component<{},
             fs.writeFile(file, buffer, (err) => {
                 if (err) {
                     console.error("Failed to save video " + err);
+                    ipcRenderer.send("balloon", { title: "Video", contents: "Failed to save video" });
+                    ipcRenderer.send("logging", { Log: "Failed to save video: " + err});
                 } else {
                     console.log("Saved video: " + file);
+                    ipcRenderer.send("balloon", { title: "Video", contents: "Saved video: " + file });
+                    ipcRenderer.send("logging", { Log: "Saved video: " + file});
                 }
             });
         };
@@ -66,21 +99,40 @@ export class ParentVideoCapture extends React.Component<{},
     }
 
     private stopRecording = () => {
-        const video: HTMLVideoElement | null = document.querySelector("video");
-        if (video.srcObject !== null) {
-            video.pause();
-            video.srcObject = null;
+        const videoElement: HTMLVideoElement | null = document.getElementById("videoElement");
+        if (videoElement.srcObject !== null) {
+            videoElement.pause();
+            videoElement.srcObject = null;
         }
+        this.setState({
+            ButtonAction: () => { this.StartCapture(); },
+            ButtonText: "Start Video Preview. Will overwrite existing Recordings",
+            ShowPlayback: true,
+            VideoStream: null,
+        });
         mediaRecorder.stop();
+        this.balloon("Video", "Recording Stopped");
     }
 
     private startRecording = () => {
         const options = { mimeType: video + ";" + codec, videoBitsPerSecond: 500000 };
         recordedChunks.length = 0;
+        if (this.state.VideoStream === undefined || this.state.VideoStream === null) {
+            this.StartCapture();
+        }
         mediaRecorder = new MediaRecorder(this.state.VideoStream, options);
         // this.checkSupportedMime();
         mediaRecorder.ondataavailable = this.handleDataAvailable;
         mediaRecorder.start();
+
+        this.setState({
+            ButtonAction: this.stopRecording,
+            ButtonText: "Stop Recording",
+            Recording: true,
+            ShowPlayback: false,
+            SuperBlob: null,
+        });
+        this.balloon("Video", "Started Recording");
     }
 
     private handleDataAvailable(event: any) {
@@ -90,12 +142,14 @@ export class ParentVideoCapture extends React.Component<{},
     }
 
     private playBackRecording = () => {
-        const video: HTMLVideoElement | null = document.querySelector("video");
+        const videoElement: HTMLVideoElement | null = document.getElementById("videoElement");
         const superBuffer = new Blob(recordedChunks);
-        video.src = window.URL.createObjectURL(superBuffer);
+        videoElement.src = window.URL.createObjectURL(superBuffer);
+        this.setState({ SuperBlob: superBuffer });
     }
 
-    private thing() {
+    private StartCapture() {
+        recordedChunks = [];
         desktopCapturer.getSources({
             thumbnailSize: {
                 height: 256,
@@ -106,7 +160,7 @@ export class ParentVideoCapture extends React.Component<{},
             if (error) {
                 throw error;
             }
-            const video: HTMLVideoElement | null = document.querySelector("video");
+            const videoElement: HTMLVideoElement | null = document.getElementById("videoElement");
             for (const src of srcs) {
                 if (src.name === "Screen 1") {
                     navigator.mediaDevices.getUserMedia(
@@ -119,16 +173,26 @@ export class ParentVideoCapture extends React.Component<{},
                                 },
                             },
                         }).then((stream: MediaStream) => {
-                            if (video) {
-                                video.srcObject = stream;
-                                video.play();
-                                this.setState({ VideoStream: stream });
+                            if (videoElement) {
+                                videoElement.srcObject = stream;
+                                videoElement.play();
+                                this.setState({
+                                    ButtonAction: this.startRecording,
+                                    ButtonText: "Start Recording",
+                                    ShowPlayback: false,
+                                    VideoStream: stream,
+                                });
+                                this.balloon("Video", "Started Video preview");
                             }
                         });
                     return;
                 }
             }
         });
+    }
+
+    private balloon = (Title: string, Contents: string) => {
+        ipcRenderer.send("balloon", { title: Title, contents: Contents });
     }
 
     private checkSupportedMime = () => {

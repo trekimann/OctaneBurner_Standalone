@@ -25,6 +25,7 @@ const imgStyle = {
 export class Button extends React.Component<{
     Dissabled?: boolean,
     DropDown?: boolean,
+    Hidden?: boolean,
     HoverText?: string,
     LeadImg?: string,
     MouseDown?: any,

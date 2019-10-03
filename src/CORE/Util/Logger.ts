@@ -1,6 +1,6 @@
 import * as fs from "fs";
 export class Logger {
-    public shouldLog = false;
+    private shouldLog = false;
     private logPath = "";
 
     constructor(LogPath: string) {
@@ -22,5 +22,9 @@ export class Logger {
             // tslint:disable-next-line: no-console
             console.log("Error Logging");
         }
+    }
+
+    public setLogger = (ShouldLog: boolean) => {
+        this.shouldLog = ShouldLog;
     }
 }

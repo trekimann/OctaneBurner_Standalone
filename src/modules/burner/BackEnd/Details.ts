@@ -60,7 +60,7 @@ export class Details {
                             if (contents[0] === "VERBOSELOGGING") {
                                 const log = contents[1].toUpperCase();
                                 const logBool = (log === "TRUE");
-                                this.Logger.shouldLog = logBool;
+                                this.Logger.setLogger(logBool);
                             }
                             this.dataStore.set(contents[0], contents[1]);
                             this.Logger.Log("Loaded: " + contents[0] + "\t-\t" + contents[1]);

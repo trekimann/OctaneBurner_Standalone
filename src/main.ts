@@ -48,6 +48,11 @@ const createMainWindow = () => {
   util.route("details", {
     property: "ACTIVETASK", target: "update", value: "none",
   });
+  // fetch the verbose logging setting
+  // const verbose = util.route("details", {
+  //   property: "VERBOSELOGGING", target: "retrieve", value: "none",
+  // });
+  // logger.setLogger()
 
 };
 
@@ -120,8 +125,15 @@ app.on("activate", () => {
 });
 
 
+
 // ----------------------------------------------------------------
 
+// logger requests ------------------------------------------------
+ipcMain.on("logging", (event: any, arg: any) => {
+  logger.Log(arg.Log);
+});
+
+// logger requests ------------------------------------------------
 
 // Handle requests from React
 ipcMain.on("balloon", (event: any, arg: any) => {
