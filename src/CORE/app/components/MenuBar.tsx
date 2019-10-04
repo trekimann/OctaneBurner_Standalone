@@ -1,11 +1,11 @@
 import { ipcRenderer, remote } from "electron";
 import * as React from "react";
+import octIcon from "../../../modules/burner/app/assets/octaneIcon.png";
 import vidIcon from "../../../modules/videoRecording/app/assets/Video.png";
 import vidIconRec from "../../../modules/videoRecording/app/assets/Video_recording.png";
 import closeIcon from "./../assets/close.png";
 import maxIcon from "./../assets/maximise.png";
 import minIcon from "./../assets/minimise2.png";
-// import octIcon from "./../assets/octaneIcon.png";
 import printIcon from "./../assets/Print.png";
 import { MenuIcon } from "./MenuIcon";
 
@@ -62,14 +62,13 @@ export class MenuBar extends React.Component<{}, { Heading?: string, MinOnce: bo
       click: () => { this.minWindow(); },
       src: minIcon,
     },
-    // {
-    //   alt: "New Window",
-    //   click: () => {
-    //     window.open("https://almoctane-eur.saas.microfocus.com/ui/?p=146003", "_blank");
-    //     remote.BrowserWindow.getFocusedWindow();
-    //   },
-    //   src: octIcon,
-    // },
+    {
+      alt: "Show Devtools",
+      click: () => {
+        this.openDevTools();
+      },
+      src: octIcon,
+    },
     // {
     //   alt: "Octane",
     //   click: () => {
@@ -106,6 +105,8 @@ export class MenuBar extends React.Component<{}, { Heading?: string, MinOnce: bo
       src: printIcon,
     },
   ];
+
+
   constructor(props: any) {
     super(props);
     this.state = {
@@ -169,6 +170,11 @@ export class MenuBar extends React.Component<{}, { Heading?: string, MinOnce: bo
       </nav>
     </header>;
   }
+
+private openDevTools = () => {
+  remote.BrowserWindow.getFocusedWindow().webContents.openDevTools();
+}
+
   private balloon = (Title: string, Contents: string) => {
     ipcRenderer.send("balloon", { title: Title, contents: Contents });
   }

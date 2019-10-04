@@ -43,7 +43,7 @@ export class UserDetails {
         for (const person of users) {
             const email = person.email;
             const ID = person.id;
-            if (email === target) {
+            if (email.toUpperCase() === target.toUpperCase()) {
                 toReturn = ID;
             }
             userList.set(ID, person);
