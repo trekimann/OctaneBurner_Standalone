@@ -138,6 +138,8 @@ ipcMain.on("logging", (event: any, arg: any) => {
 // Handle requests from React
 ipcMain.on("balloon", (event: any, arg: any) => {
   balloon(arg.title, arg.contents);
+  let WindowId = mainWindowId;
+  control.getWindow(WindowId).webContents.send("notification", arg.contents);
 });
 // Util Requests --------------------------------------------------
 ipcMain.on("tsUtil", (event: any, arg: any) => {

@@ -1,8 +1,8 @@
 import { ipcRenderer, remote } from "electron";
 import * as React from "react";
 import octIcon from "../../../modules/burner/app/assets/octaneIcon.png";
-import vidIcon from "../../../modules/videoRecording/app/assets/Video.png";
-import vidIconRec from "../../../modules/videoRecording/app/assets/Video_recording.png";
+// import vidIcon from "../../../modules/videoRecording/app/assets/Video.png";
+// import vidIconRec from "../../../modules/videoRecording/app/assets/Video_recording.png";
 import closeIcon from "./../assets/close.png";
 import maxIcon from "./../assets/maximise.png";
 import minIcon from "./../assets/minimise2.png";

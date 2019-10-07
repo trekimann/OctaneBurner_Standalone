@@ -42,7 +42,7 @@ export class Story extends React.Component<
         this.state = {
             ExpandStory: false,
             Frequency: 60000,
-            FrequencyMultiplier: 5,
+            FrequencyMultiplier: 15,
             FullStory: null,
             LastUpdated: null,
             ShowStory: false,

@@ -1,6 +1,7 @@
 import * as React from "react";
 import styled, { keyframes } from "styled-components";
 import octIcon from "./../assets/octaneIcon.png";
+import { ipcRenderer } from "electron";
 
 const rotate = keyframes`
   from {
@@ -25,8 +26,34 @@ const oStyle = {
   justifyContent: "center",
 };
 
-export class Spinner extends React.Component {
+export class Spinner extends React.Component<{}, { LoadingMessage: string }> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      LoadingMessage: "",
+    };
+  }
+
+  public componentDidMount() {
+    ipcRenderer.on("notification", this.changeMessage);
+  }
+
+  public componentWillUnmount() {
+    ipcRenderer.removeAllListeners("notification");
+  }
+
   public render() {
-    return <div style={oStyle}><Rotate> <img width="100%" src={octIcon} alt="Loading" /></Rotate></div>;
+    return <React.Fragment>
+      <div style={oStyle}>
+        <Rotate>
+          <img width="100%" src={octIcon} alt="Loading" />
+        </Rotate>
+        <div>{this.state.LoadingMessage}</div>
+      </div>
+    </React.Fragment>;
+  }
+
+  private changeMessage = (event: any, message: any) => {
+    this.setState({ LoadingMessage: message });
   }
 }

@@ -44,6 +44,7 @@ export class OctaneLogin extends React.Component<
     }
 
     public openWindow() {
+        this.balloon("Login", "Logging in");
         this.setState({ failedLogin: false });
         this.props.LoggingIn(true, false);
         const mainWindow = remote.BrowserWindow.getFocusedWindow();
