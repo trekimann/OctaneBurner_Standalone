@@ -163,7 +163,6 @@ export class MenuBar extends React.Component<{}, { Heading?: string, MinOnce: bo
               altText={value.alt}
               altSrc={value.altSrc}
               rightClick={() => value.rightClick()}
-              useAltSrc={value.useAltSrc}
             />;
           })}
         </ul>

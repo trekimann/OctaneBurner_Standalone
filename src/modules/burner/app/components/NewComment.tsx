@@ -28,7 +28,7 @@ export class NewComment extends React.Component<{
     }
 
     public render() {
-        return <div>
+        return <React.Fragment>
             <Button
                 key={"newComment" + this.props.workId}
                 Style={{ backgroundColor: "rgb(53,147,255)" }}
@@ -43,6 +43,6 @@ export class NewComment extends React.Component<{
                     key={"newCommentSubmit" + this.props.workId}
                     Text="Submit" onClick={this.props.submitComment} />
             </div>
-        </div>;
+        </React.Fragment>;
     }
 }

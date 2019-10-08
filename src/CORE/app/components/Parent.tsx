@@ -23,7 +23,7 @@ export class AppParent extends React.Component<{}, { ShowBurner: boolean, ShowVi
 
     public render() {
 
-        return <div>
+        return <React.Fragment>
             <div style={{ display: "flex", justifyContent: "center" }}>
                 <Button
                     Text="Octane Burner"
@@ -42,7 +42,7 @@ export class AppParent extends React.Component<{}, { ShowBurner: boolean, ShowVi
             <div style={this.state.ShowVideo ? null : { display: "none" }}>
                 <ParentVideoCapture />
             </div>
-        </div>;
+        </React.Fragment>;
     }
 
     private showBurner = () => {

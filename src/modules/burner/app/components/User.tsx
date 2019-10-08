@@ -53,10 +53,10 @@ export class User extends React.Component<
         }
         const imgSrc = "https://almoctane-eur.saas.microfocus.com/api/shared_spaces/146003/workspaces/1002/workspace_users/" + this.props.UserId + "/avatar";
 
-        return <div>
+        return <React.Fragment>
             {this.state.UserDetails === null ?
                 <div>User: {this.props.UserId}</div> :
-                <div>
+                <React.Fragment>
                     <Button
                         key={this.props.UniqueId + "button"}
                         Style={{
@@ -74,8 +74,8 @@ export class User extends React.Component<
                         <div>Email: <a style={{ color: "inherit" }} href={hRef}>{this.state.UserDetails.email}</a>
                         </div>
                     </div>
-                </div>
+                </React.Fragment>
             }
-        </div>;
+        </React.Fragment>;
     }
 }

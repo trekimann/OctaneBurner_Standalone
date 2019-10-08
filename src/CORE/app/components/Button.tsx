@@ -61,7 +61,8 @@ export class Button extends React.Component<{
                 hover = "Button Dissabled";
             }
         }
-        return <button style={this.state.Style}
+        return <button
+            style={this.state.Style}
             onClick={(this.click)}
             onDoubleClick={this.props.onDblclick}
             onMouseUp={this.props.MouseUp}

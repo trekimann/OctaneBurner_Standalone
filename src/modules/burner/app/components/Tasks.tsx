@@ -55,7 +55,7 @@ export class Tasks extends React.Component<{ UserId: string }, {
 
     public render() {
         return <div id="tasksContainer">
-            {this.state.TasksLoaded ? <div>
+            {this.state.TasksLoaded ? <React.Fragment>
                 {Object.keys(this.state.GroupedTasks).reverse().map((story) => {
                     return <Story key={story}
                         StoryId={story}
@@ -63,7 +63,7 @@ export class Tasks extends React.Component<{ UserId: string }, {
                         TaskInFlight={this.updateTimedTask}
                         userId={this.state.UserId} />;
                 })}
-            </div> : <Spinner />}
+            </React.Fragment> : <Spinner />}
         </div>;
     }
 

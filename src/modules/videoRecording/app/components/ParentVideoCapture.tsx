@@ -50,7 +50,7 @@ export class ParentVideoCapture extends React.Component<{},
         if (this.state.VideoStream !== undefined && this.state.VideoStream !== null) {
             showStop = true;
         }
-        return <div>
+        return <React.Fragment>
             {/* <textarea id="Supported"></textarea> */}
             < video id="videoElement" controls style={{ maxWidth: "100%" }}></video>
             <Button Text={this.state.ButtonText}
@@ -67,7 +67,7 @@ export class ParentVideoCapture extends React.Component<{},
                 To save the recording, use the option on the player. This is being worked on currently.
                 {/* <Button Text="Save Recording" onClick={() => { this.bigSave(); }} /> */}
             </div>
-        </div>;
+        </React.Fragment>;
     }
 
     // --------------------------------------------------------------------------------

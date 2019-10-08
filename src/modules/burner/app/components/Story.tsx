@@ -114,7 +114,7 @@ export class Story extends React.Component<
             linkedStory = this.props.StoryId + ": " + this.state.StoryName;
             StoryText = this.Cap(this.state.FullStory.subtype) + " Description";
         }
-        return <div>
+        return <React.Fragment >
             <Button
                 key={"story" + this.props.StoryId}
                 onDblclick={this.getStoryDetails}
@@ -125,7 +125,7 @@ export class Story extends React.Component<
                 DropDown={true} />
             <div style={this.state.ExpandStory ? sStyle : { display: "none" }}>
                 {this.state.StoryRetrieved ?
-                    <div>
+                    <React.Fragment>
                         <Button
                             key={"storyDetail" + this.props.StoryId}
                             Style={{ backgroundColor: "#0046b0" }}
@@ -151,13 +151,13 @@ export class Story extends React.Component<
                             </div>
                         </div>
                         <Attachments StoryId={this.state.FullStory.id} />
-                    </div> : "Story Goes Here"}
+                    </React.Fragment> : "Story Goes Here"}
                 <Comments WorkId={this.props.StoryId} UserId={this.props.userId} />
                 {(this.props.LinkedTasks || []).map((value) => {
                     return <Task key={value.id} Details={value} TaskUpdate={this.props.TaskInFlight} />;
                 })}
             </div>
-        </div >;
+        </React.Fragment >;
     }
 
     private openStory = () => {

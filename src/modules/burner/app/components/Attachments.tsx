@@ -27,10 +27,10 @@ export class Attachments extends React.Component<{ StoryId: string }, { Attachme
     }
 
     public render() {
-        return <div>{this.state.AttachmentDetails === null ? "Attachment Details" :
-            <div>
+        return <React.Fragment>{this.state.AttachmentDetails === null ? "Attachment Details" :
+            <React.Fragment>
                 {this.state.AttachmentDetails.length === 0 ? null :
-                    <div>
+                    <React.Fragment>
                         <Button
                             key={"attachemts" + this.state.AttachmentDetails}
                             Text="Attachments"
@@ -44,9 +44,9 @@ export class Attachments extends React.Component<{ StoryId: string }, { Attachme
                                 return <Attachment key={value.id} AttachementId={value.id} />;
                             })}
                         </div>
-                    </div>}
-            </div>}
-        </div>;
+                    </React.Fragment>}
+            </React.Fragment>}
+        </React.Fragment>;
     }
 
     private onRetrieve = (eveny: any, retrieved: any) => {

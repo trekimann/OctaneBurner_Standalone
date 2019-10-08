@@ -105,7 +105,7 @@ export class Comments extends React.Component<
             endText = " comment";
         }
         const text = String(this.state.RetrievedComments.length) + endText + " found on story";
-        return <div>
+        return <React.Fragment>
             <Button
                 key={"comments" + this.props.WorkId}
                 Style={{ backgroundColor: "#2732b0" }} onClick={this.ToggleComments}
@@ -131,7 +131,7 @@ export class Comments extends React.Component<
                         ReplyToComment={this.replyToUser} />;
                 })}
             </div>
-        </div>;
+        </React.Fragment>;
     }
 
     private replyToUser = (email: string, name: string) => {

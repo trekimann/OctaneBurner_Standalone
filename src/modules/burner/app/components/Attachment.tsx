@@ -39,7 +39,7 @@ export class Attachment extends React.Component<{ AttachementId: string }, { Det
         if (this.state.Detail !== null) {
             linkUrl = urlStart + this.state.Detail.id + "/" + this.state.Detail.name;
         }
-        return <div>
+        return <React.Fragment>
             {this.state.Detail === null ? "Attachment here" :
                 <div>
                     <Button key={this.state.Detail.id + "button"} Text={this.state.Detail.name}
@@ -56,7 +56,7 @@ export class Attachment extends React.Component<{ AttachementId: string }, { Det
                         {this.openAttachment(linkUrl)}
                     </div>
                 </div>}
-        </div>;
+        </React.Fragment>;
     }
 
     private openAttachment = (url: string) => {

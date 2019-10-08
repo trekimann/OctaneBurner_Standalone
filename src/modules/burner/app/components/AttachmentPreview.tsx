@@ -38,11 +38,11 @@ export class AttachmentPreview extends React.Component<
     }
 
     public render() {
-        return <div>{!this.state.PreviewAvailible ? null :
+        return <React.Fragment>{!this.state.PreviewAvailible ? null :
             <div style={{ display: "flex", alignContent: "center", justifyContent: "center" }}>
                 {this.preview()}
             </div>}
-        </div>;
+        </React.Fragment>;
     }
 
     private preview = () => {

@@ -26,13 +26,13 @@ export class ParentBurner extends React.Component<{ },
     }
 
     public render() {
-        return <div>
+        return <React.Fragment>
             {this.state.loggedIn ? <Tasks UserId={this.state.UserId} /> : <div>
                 {this.state.loggingIn ? <Spinner /> : null}
                 <div style={this.state.loggingIn ? { display: "none" } : null}>
                     <OctaneLogin LoggedIn={this.loggedIn} LoggingIn={this.LoggingIn} />
                 </div>
             </div>}
-        </div>;
+        </React.Fragment>;
     }
 }
