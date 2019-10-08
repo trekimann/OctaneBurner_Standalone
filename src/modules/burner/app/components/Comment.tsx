@@ -92,7 +92,7 @@ export class Comment extends React.Component<
         this.setState({ loggedInUserDetails: value });
         // check if the comment mentions the logged in user
         if (this.props.Details.text.includes("mailto:" + value.email)) {
-            this.balloon("Comment", "You were mentioned in a comment on "+this.props.StoryId);
+            this.balloon("Comment", "You were mentioned in a comment on " + this.props.StoryId);
         }
     }
 }
