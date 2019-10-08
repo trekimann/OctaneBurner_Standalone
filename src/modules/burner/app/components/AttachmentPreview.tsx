@@ -2,9 +2,9 @@ import * as fs from "fs";
 import * as React from "react";
 import { TextArea } from "../../../../CORE/app/components/TextArea";
 
-const image = ["JPG", "PNG"];
+const image = ["JPG", "PNG", "GIF"];
 const video = ["MP4", "WEBM"];
-const text = ["txt"];
+const text = ["PDF"];
 
 export class AttachmentPreview extends React.Component<
     { AttachementUri: string },
@@ -23,7 +23,7 @@ export class AttachmentPreview extends React.Component<
         };
     }
 
-    public componentWillMount() {
+    public componentDidMount() {
         // check if the extension is one that can be previewed
         // get the file type
         if (this.props.AttachementUri !== undefined) {
@@ -64,9 +64,10 @@ export class AttachmentPreview extends React.Component<
 
     private text = () => {
         // turn into a file request
+        // return <iframe src={this.props.AttachementUri}></iframe>
         return null;
-        const raw = fs.readFileSync(this.props.AttachementUri, "utf-8");
-        return <TextArea Style={{ maxHeight: "100px" }} Value={raw} />;
+        // const raw = fs.readFileSync(this.props.AttachementUri, "utf-8");
+        // return <TextArea Style={{ maxHeight: "100px" }} Value={raw} />;
     }
 
     private image = () => {

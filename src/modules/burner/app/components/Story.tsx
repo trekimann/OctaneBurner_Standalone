@@ -126,6 +126,7 @@ export class Story extends React.Component<
             <div style={this.state.ExpandStory ? sStyle : { display: "none" }}>
                 {this.state.StoryRetrieved ?
                     <React.Fragment>
+                        <div>Some Story Details Here</div>
                         <Button
                             key={"storyDetail" + this.props.StoryId}
                             Style={{ backgroundColor: "#0046b0" }}

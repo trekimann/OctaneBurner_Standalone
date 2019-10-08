@@ -21,6 +21,7 @@ const createMainWindow = () => {
     minWidth: 340,
     webPreferences: {
       nodeIntegration: true,
+      plugins: true,
     },
     width: 340,
   }, "index.html");
@@ -34,10 +35,10 @@ const createMainWindow = () => {
   // window = control.getWindow(mainWindowId);
   createTray();
 
-  // BrowserWindow.addDevToolsExtension(
-  // // BrowserWindow.removeDevToolsExtension(
-  //   path.join(os.homedir(),
-  //   "AppData/Local/Google/Chrome/User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.1.2_0"));
+  BrowserWindow.addDevToolsExtension(
+  // BrowserWindow.removeDevToolsExtension(
+    path.join(os.homedir(),
+    "AppData/Local/Google/Chrome/User Data/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.2.0_0"));
 
   const Path = app.getAppPath();
   logger = new Logger(Path + "\\log.log");

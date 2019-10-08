@@ -1,3 +1,4 @@
+import { ipcRenderer } from "electron";
 import * as React from "react";
 import { Button } from "../../../../CORE/app/components/Button";
 import { User } from "./User";
@@ -8,8 +9,12 @@ export class Comment extends React.Component<
         Details: any,
         userId: string,
         ReplyToComment: any,
+        StoryId: string,
     },
-    { hasError: boolean }> {
+    {
+        hasError: boolean,
+        loggedInUserDetails: any,
+    }> {
     public static getDerivedStateFromError(error: any) {
         // Update state so the next render will show the fallback UI.
         return { hasError: true };
@@ -23,7 +28,19 @@ export class Comment extends React.Component<
         super(props);
         this.state = {
             hasError: false,
+            loggedInUserDetails: {},
         };
+    }
+
+    public componentDidMount() {
+        const listen = "userRetrieve" + this.props.userId + this.props.Details.id;
+        ipcRenderer.on(listen, this.onRetrieve);
+        ipcRenderer.send("tsUtil",
+            { source: listen, target: "user", data: { target: "retrieveUserDetails", data: this.props.userId } });
+    }
+
+    public componentWillUnmount() {
+        ipcRenderer.removeAllListeners("userRetrieve" + this.props.userId + this.props.Details.id);
     }
 
     public componentDidCatch(error: any, info: any) {
@@ -61,5 +78,21 @@ export class Comment extends React.Component<
                 Style={{ backgroundColor: "Red", color: "black" }}
                 Text="Delete Comment" onClick={() => this.props.DeleteComment(this.props.Details.id)} />
         </div>;
+    }
+
+    private balloon = (t: string, c: string) => {
+        ipcRenderer.send("balloon",
+            {
+                contents: c,
+                title: t,
+            });
+    }
+
+    private onRetrieve = (event: any, value: any) => {
+        this.setState({ loggedInUserDetails: value });
+        // check if the comment mentions the logged in user
+        if (this.props.Details.text.includes("mailto:" + value.email)) {
+            this.balloon("Comment", "You were mentioned in a comment on "+this.props.StoryId);
+        }
     }
 }

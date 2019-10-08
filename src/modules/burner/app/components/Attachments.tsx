@@ -33,7 +33,7 @@ export class Attachments extends React.Component<{ StoryId: string }, { Attachme
                     <React.Fragment>
                         <Button
                             key={"attachemts" + this.state.AttachmentDetails}
-                            Text="Attachments"
+                            Text={this.AttachmentsText()}
                             onClick={this.toggleVisibilty}
                             DropDown={true} />
                         <div style={this.state.visible ? {
@@ -47,6 +47,14 @@ export class Attachments extends React.Component<{ StoryId: string }, { Attachme
                     </React.Fragment>}
             </React.Fragment>}
         </React.Fragment>;
+    }
+
+    private AttachmentsText = () => {
+        let endText = " Attachments";
+        if (Number(this.state.AttachmentDetails.length) === 1) {
+            endText = " Attachment";
+        }
+        return String(this.state.AttachmentDetails.length) + endText;
     }
 
     private onRetrieve = (eveny: any, retrieved: any) => {

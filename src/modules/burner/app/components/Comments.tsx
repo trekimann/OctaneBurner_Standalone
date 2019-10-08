@@ -35,18 +35,17 @@ export class Comments extends React.Component<
     }
 
     public componentDidMount() {
+        ipcRenderer.on("comments" + this.props.WorkId, this.updateComments);
+        ipcRenderer.on(this.props.WorkId + "postComment", this.commentSuccessful);
+        this.getComments();
         this.timer = setInterval(() => this.getComments(), (this.state.Frequency) * this.state.FrequencyMultiplier);
         // this.balloon("Comments", "Mounted");
     }
 
-    public componentWillMount() {
-        ipcRenderer.on("comments" + this.props.WorkId, this.updateComments);
-        ipcRenderer.on(this.props.WorkId + "postComment", this.commentSuccessful);
-        this.getComments();
-    }
-
     public componentWillUnmount() {
         clearInterval(this.timer);
+        ipcRenderer.removeAllListeners("comments" + this.props.WorkId);
+        ipcRenderer.removeAllListeners(this.props.WorkId + "postComment");
     }
 
     public getComments = () => {
@@ -126,9 +125,11 @@ export class Comments extends React.Component<
                     return <Comment
                         key={value.id}
                         Details={value}
-                        userId={this.props.UserId}
                         DeleteComment={this.removeComment}
-                        ReplyToComment={this.replyToUser} />;
+                        ReplyToComment={this.replyToUser}
+                        StoryId={this.props.WorkId}
+                        userId={this.props.UserId}
+                        />;
                 })}
             </div>
         </React.Fragment>;
