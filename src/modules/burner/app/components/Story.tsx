@@ -1,8 +1,8 @@
 import { clipboard, ipcRenderer, shell } from "electron";
 import * as React from "react";
+import { Button } from "../../../../CORE/app/components/Button";
 import { ApiUtil } from "../../BackEnd/ApiUtil";
 import { Attachments } from "./Attachments";
-import { Button } from "../../../../CORE/app/components/Button";
 import { Comments } from "./Comments";
 import { Task } from "./Task";
 import { User } from "./User";
@@ -153,7 +153,7 @@ export class Story extends React.Component<
                         <Attachments StoryId={this.state.FullStory.id} />
                     </React.Fragment> : "Story Goes Here"}
                 <Comments WorkId={this.props.StoryId} UserId={this.props.userId} />
-                {(this.props.LinkedTasks || []).map((value) => {
+                {(this.props.LinkedTasks || []).map((value: any) => {
                     return <Task key={value.id} Details={value} TaskUpdate={this.props.TaskInFlight} />;
                 })}
             </div>

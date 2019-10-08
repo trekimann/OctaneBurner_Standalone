@@ -1,5 +1,5 @@
-import * as React from "react";
 import { ipcRenderer } from "electron";
+import * as React from "react";
 
 const liStyle = {
     float: "right",
@@ -72,13 +72,6 @@ export class MenuIcon extends React.Component<{
 
     private click = () => {
         document.activeElement.blur();
-        // if (this.props.altSrc !== undefined && this.props.altSrc !== null) {
-        //     if (this.state.imgSrc === this.props.imgSrc) {
-        //         this.setState({ imgSrc: this.props.altSrc });
-        //     } else {
-        //         this.setState({ imgSrc: this.props.imgSrc });
-        //     }
-        // }
         if (this.props.onClick !== undefined && this.props.onClick !== null) {
             this.props.onClick();
         }

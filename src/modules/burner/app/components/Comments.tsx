@@ -85,10 +85,10 @@ export class Comments extends React.Component<
                 if (com.id === id) {
                     this.setState((state) => {
                         // cant mutate state so need to replace it
-                        const RetrievedComments = state.RetrievedComments.filter((ele) => {
+                        const RetrievedComments = state.RetrievedComments.filter((ele: any) => {
                             return ele.id !== com.id;
                         });
-                        RetrievedComments.sort((a, b) => {
+                        RetrievedComments.sort((a: any, b: any) => {
                             return new Date(b.creation_time).getTime() - new Date(a.creation_time).getTime();
                         });
                         return { RetrievedComments };
@@ -122,7 +122,7 @@ export class Comments extends React.Component<
                     submitComment={this.submitNewComment}
                     workId={this.props.WorkId}
                 />
-                {(this.state.RetrievedComments || []).map((value) => {
+                {(this.state.RetrievedComments || []).map((value: any) => {
                     return <Comment
                         key={value.id}
                         Details={value}
@@ -143,12 +143,12 @@ export class Comments extends React.Component<
     private updateComments = (event: any, value: any) => {
         // comments come in here individually, store them im an array and create a react element for each one.
 
-        if (!(this.state.RetrievedComments.filter((e) => e.id === value.id).length > 0)) {
+        if (!(this.state.RetrievedComments.filter((e: any) => e.id === value.id).length > 0)) {
             // should try to store them in creation order
             this.setState((state) => {
                 // cant mutate state so need to replace it
                 const RetrievedComments = state.RetrievedComments.concat(value);
-                RetrievedComments.sort((a, b) => {
+                RetrievedComments.sort((a: any, b: any) => {
                     return new Date(b.creation_time).getTime() - new Date(a.creation_time).getTime();
                 });
                 return { RetrievedComments };

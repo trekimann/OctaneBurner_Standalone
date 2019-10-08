@@ -98,7 +98,7 @@ export class MenuBar extends React.Component<{}, { Heading?: string, MinOnce: bo
             fs.writeFile("/tmp/burner.pdf", data, (error2: any) => {
               if (error2) { throw error2; }
               this.balloon("Print", "Print to PDF complete");
-              console.log("WritePDF success");
+              // console.log("WritePDF success");
             });
           });
       },
