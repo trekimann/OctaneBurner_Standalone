@@ -1,6 +1,5 @@
 import * as fs from "fs";
 import * as React from "react";
-import { TextArea } from "../../../../CORE/app/components/TextArea";
 
 const image = ["JPG", "PNG", "GIF"];
 const video = ["MP4", "WEBM"];

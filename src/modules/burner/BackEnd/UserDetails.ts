@@ -59,7 +59,29 @@ export class UserDetails {
         update.property = "USERLIST";
         update.value = userList;
         this.Details.update(update);
+        update.property = "MENTIONS";
+        update.value = this.createMentions(userList);
+        this.Details.update(update);
         // return the userId
         return toReturn;
+    }
+
+    private createMentions = (userList: Map<string, any>) => {
+        // make an array of mention objects and store it.
+        // loop over every user, create a new array with objects in the form
+        // name: "", link:"", avatar: ""
+
+        const mentions = [];
+
+        for (const id of Array.from(userList.keys())) {
+            const user = userList.get(id);
+            const object = {
+                avatar: "https://almoctane-eur.saas.microfocus.com/api/shared_spaces/146003/workspaces/1002/workspace_users/" + user.id + "/avatar",
+                link: "mailto:" + user.email,
+                name: user.first_name + " " + user.last_name,
+            };
+            mentions.push(object);
+        }
+        return mentions;
     }
 }

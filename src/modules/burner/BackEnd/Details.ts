@@ -1,5 +1,5 @@
 import * as fs from "fs";
-import { Logger } from "../../CORE/Util/Logger";
+import { Logger } from "../../../CORE/Util/Logger";
 export class Details {
     private dataStore = new Map<string, any>();
     private userList = new Map<string, any>();
@@ -78,7 +78,10 @@ export class Details {
             this.Logger.Log("In saveDetails");
             let text = "";
             for (const key of this.dataStore.keys()) {
-                text = text + key + ":" + this.dataStore.get(key) + ",";
+                const toStore = this.dataStore.get(key).toString();
+                if (!toStore.includes("[object")) {
+                    text = text + key + ":" + this.dataStore.get(key) + ",";
+                }
             }
             fs.writeFileSync(this.userCache, text);
         } catch {
