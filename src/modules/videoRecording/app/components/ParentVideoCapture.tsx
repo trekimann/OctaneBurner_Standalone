@@ -64,7 +64,7 @@ export class ParentVideoCapture extends React.Component<{},
                 <Button Text="Playback Recording" onClick={this.playBackRecording} />
             </div>
             <div style={this.state.SuperBlob !== null ? null : { display: "none" }}>
-                To save the recording, use the option on the player. 
+                To save the recording, watch back the video then use the option on the player.
                 The file needs to be saved as either *.webm or *.mp4 to save correctly.
                 This is being worked on currently to allow for instant saving and more file types.
                 {/* <Button Text="Save Recording" onClick={() => { this.bigSave(); }} /> */}

@@ -8,9 +8,11 @@ import * as React from "react";
 // import "../../css/mentionsStyles.css";
 
 const defaultStyle = {
+    borderStyle: "none",
     fontFamily: "Verdana, Geneva, Tahoma, sans-serif",
     height: "100px",
-    width: "98%",
+    padding: "0px",
+    width: "100%",
 };
 export class TextArea extends React.Component<
     {

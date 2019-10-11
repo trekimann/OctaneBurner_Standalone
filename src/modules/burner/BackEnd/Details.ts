@@ -72,6 +72,7 @@ export class Details {
             this.saveDetails();
         }
     }
+    
     private saveDetails() {
         this.Logger.Log("Saving details");
         try {
@@ -79,7 +80,7 @@ export class Details {
             let text = "";
             for (const key of this.dataStore.keys()) {
                 const toStore = this.dataStore.get(key).toString();
-                if (!toStore.includes("[object")) {
+                if (!toStore.includes("[object") && !key.includes("[object")) {
                     text = text + key + ":" + this.dataStore.get(key) + ",";
                 }
             }
