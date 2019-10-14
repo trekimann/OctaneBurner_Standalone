@@ -32,10 +32,10 @@ export class Button extends React.Component<{
     MouseUp?: any,
     onDblclick?: any,
     onRightClick?: any,
-    onClick?: any,
+    onClick: any,
     Src?: any,
     Style?: any,
-    Text?: string,
+    Text: string,
 }, { Style: any, Expanded: boolean }> {
     constructor(props: any) {
         super(props);

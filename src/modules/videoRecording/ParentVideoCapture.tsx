@@ -1,7 +1,7 @@
 import { desktopCapturer, DesktopCapturerSource, ipcRenderer } from "electron";
 const fs = require("fs");
 import * as React from "react";
-import { Button } from "../../../../CORE/app/components/Button";
+import { Button } from "../../CORE/app/components/Button";
 
 let mediaRecorder: any = null;
 let recordedChunks: any[] = [];

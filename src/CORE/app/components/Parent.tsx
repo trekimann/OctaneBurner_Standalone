@@ -1,9 +1,10 @@
 import * as React from "react";
-import { ParentBurner } from "../../../modules/burner/app/components/ParentBurner";
+import { ParentBurner } from "../../../modules/burner/ParentBurner";
 // import { ParentConference } from "../../../modules/conference/ParentConference";
-import { ParentRmDash } from "../../../modules/RmDash/ParentRmDash";
-import { ParentVideoCapture } from "../../../modules/videoRecording/app/components/ParentVideoCapture";
+import { ParentRmDash } from "../../../modules/rmDash/ParentRmDash";
+import { ParentVideoCapture } from "../../../modules/videoRecording/ParentVideoCapture";
 import { Button } from "./Button";
+const fs = require("fs");
 
 const buttonStyle = {
     marginLeft: "1%",
@@ -24,8 +25,21 @@ export class AppParent extends React.Component<{}, { ShowBurner: boolean, ShowVi
         };
     }
 
-    public render() {
+    // loop through module folder, get a list of all folders in there
+    // search in each for a parentXxxXxx component
+    // create a map entry for each which has a button to show them.
+    // loop though the map to make menu/button and div for each.
+    // store modules in a map in the state?
+    public componentDidMount() {
+        const folders = this.getModules();
+    }
 
+    private getModules = () => {
+        return fs.readdirSync("../../../modules");
+    }
+
+    // tslint:disable-next-line: member-ordering
+    public render() {
         return <React.Fragment>
             <div style={{ display: "flex", justifyContent: "center" }}>
                 <Button
