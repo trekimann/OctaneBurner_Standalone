@@ -14,9 +14,11 @@ export class UtilRouter {
     constructor(log: Logger, path: string) {
         this.Logger = log;
         this.path = path;
+        this.Logger.Log("UtilRouter Created");
     }
 
     public route = (target: string, data: any) => {
+        this.Logger.Log("In UtilRouter: " + target);
         switch (target) {
             case "details": {
                 return this.Details.route(data);

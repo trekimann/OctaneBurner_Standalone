@@ -1,4 +1,4 @@
-import { Logger } from "../../CORE/Util/Logger";
+import { Logger } from "../../../CORE/Util/Logger";
 import { Details } from "./Details";
 // tslint:disable-next-line: max-classes-per-file
 export class Tasks {
@@ -11,9 +11,11 @@ export class Tasks {
     constructor(logger: Logger, store: Details) {
         this.Logger = logger;
         this.Store = store;
+        this.Logger.Log("Tasks Created");
     }
     public route(data: any) {
         const target = data.target;
+        this.Logger.Log("Routing Tasks: " + target);
         switch (target) {
             case "filterOwnerTasks":
                 return this.filterOwnerTasks(data.data);

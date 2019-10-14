@@ -8,9 +8,11 @@ export class Details {
     constructor(Path: string, logger: Logger) {
         this.userCache = Path + "\\userDetails.txt";
         this.Logger = logger;
+        this.Logger.Log("Deatils created");
     }
     public route = (data: any) => {
         const target = data.target;
+        this.Logger.Log("In Details: " + target);
         switch (target) {
             case "update": {
                 return this.update(data);
@@ -72,7 +74,7 @@ export class Details {
             this.saveDetails();
         }
     }
-    
+
     private saveDetails() {
         this.Logger.Log("Saving details");
         try {

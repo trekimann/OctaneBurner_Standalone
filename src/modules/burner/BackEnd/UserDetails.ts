@@ -1,4 +1,4 @@
-import { Logger } from "../../CORE/Util/Logger";
+import { Logger } from "../../../CORE/Util/Logger";
 import { Details } from "./Details";
 
 export class UserDetails {
@@ -7,9 +7,11 @@ export class UserDetails {
     constructor(log: Logger, deets: Details) {
         this.Logger = log;
         this.Details = deets;
+        this.Logger.Log("UserDetails Created");
     }
     public route = (data: any) => {
         const target = data.target;
+        this.Logger.Log("Routing UserDetails: " + target);
         let toReturn = null;
         switch (target) {
             case "findUserId": {
@@ -59,9 +61,9 @@ export class UserDetails {
         update.property = "USERLIST";
         update.value = userList;
         this.Details.update(update);
-        update.property = "MENTIONS";
-        update.value = this.createMentions(userList);
-        this.Details.update(update);
+        // update.property = "MENTIONS";
+        // update.value = this.createMentions(userList);
+        // this.Details.update(update);
         // return the userId
         return toReturn;
     }
