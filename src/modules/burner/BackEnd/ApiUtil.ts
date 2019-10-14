@@ -6,6 +6,7 @@ export class ApiUtil {
 
     // -----------------------------get octane details ------------------------------
     public static getWorkspaceId(response: any) {
+        ApiUtil.Log("getWorkspaceId");
         const url = urlStart;
         if (response === undefined || response === null) {
             ApiUtil.Get(url, ApiUtil.getWorkspaceId);
@@ -27,6 +28,7 @@ export class ApiUtil {
     }
 
     public static getUserId(response: any, listener: string) {
+        ApiUtil.Log("getUserId");
         const url = urlStart + "1002/workspace_users";
         if (response === undefined || response === null) {
             ApiUtil.Get(url, ApiUtil.getUserId, listener);
@@ -38,6 +40,7 @@ export class ApiUtil {
     }
 
     public static getAllTasks(response: any, userId?: string, offset?: string, currentTasks?: []) {
+        ApiUtil.Log("getAllTasks");
         // get all the tasks but just with owner details and phase
         let url = urlStart + "1002/tasks?fields=owner,phase&limit=9000";
         if (offset !== undefined && offset !== null) {
@@ -84,6 +87,7 @@ export class ApiUtil {
     }
 
     public static filterTasks(tasks: [], userId: string) {
+        ApiUtil.Log("filterTasks");
         const taskList = new Array();
         for (const task of tasks) {
             if (task.owner !== null && task.owner !== undefined) {
@@ -101,6 +105,7 @@ export class ApiUtil {
     }
 
     public static getTaskDetails(response: any, taskId: string) {
+        ApiUtil.Log("getTaskDetails");
         const url = urlStart + "1002/tasks/" + taskId;
         if (response === null || response === undefined) {
             ApiUtil.Get(url, this.getTaskDetails, taskId);
@@ -117,6 +122,7 @@ export class ApiUtil {
     }
 
     public static getStoryDetails(response: any, storyId: string, listener: any) {
+        ApiUtil.Log("getStoryDetails");
         const url = urlStart + "1002/work_items/" + storyId;
         if (response === null || response === undefined) {
             ApiUtil.Get(url, this.getStoryDetails, storyId, listener);
@@ -133,6 +139,7 @@ export class ApiUtil {
     }
 
     public static getStoryAttachments(response: any, storyId: string, listener: string) {
+        ApiUtil.Log("getStoryAttachmetns");
         const url = urlStart + "1002/work_items/" + storyId + "?fields=attachments";
         if (response === null || response === undefined) {
             ApiUtil.Get(url, this.getStoryAttachments, storyId, listener);
@@ -144,6 +151,7 @@ export class ApiUtil {
     }
 
     public static getAttachmentDetails(response: any, attachmentId: string, listener: string) {
+        ApiUtil.Log("getAttachmentDetails");
         const url = urlStart + "1002/attachments/" + attachmentId;
         if (response === null || response === undefined) {
             ApiUtil.Get(url, this.getAttachmentDetails, attachmentId, listener);
@@ -155,6 +163,7 @@ export class ApiUtil {
     }
 
     public static getComments(response: any, storyId: string, listener: string) {
+        ApiUtil.Log("getComments");
         const url = urlStart + "1002/work_items/" + storyId + "?fields=comments";
         if (response === null || response === undefined) {
             ApiUtil.Get(url, this.getComments, storyId, listener);
@@ -169,6 +178,7 @@ export class ApiUtil {
     }
 
     public static getSingleComment(response: any, commentId: string, listener: string) {
+        ApiUtil.Log("getSingleComment");
         const url = urlStart + "1002/comments/" + commentId;
         if (response === null || response === undefined) {
             ApiUtil.Get(url, this.getSingleComment, commentId, listener);
@@ -255,6 +265,13 @@ export class ApiUtil {
         const whatCameBack = value;
     }
     // -----------------------------get things from store ------------------------------
+
+    // -----------------------------Logging---------------------------------------------
+
+    private static Log(log: string) {
+        ipcRenderer.send("logging", { Log: log });
+    }
+    // -----------------------------Logging---------------------------------------------
 
 
     // -----------------------------HTTP methods------------------------------

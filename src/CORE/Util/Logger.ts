@@ -7,6 +7,7 @@ export class Logger {
         this.logPath = LogPath;
         this.Log("Started Application");
     }
+
     public Log = (contents: string) => {
         try {
             const time = new Date(Date.now()).toLocaleString("en-GB");

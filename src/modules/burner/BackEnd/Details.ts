@@ -87,8 +87,10 @@ export class Details {
                 }
             }
             fs.writeFileSync(this.userCache, text);
-        } catch {
+        } catch (exception) {
             // tslint:disable-next-line: no-console
+            this.Logger.Log("Could not save details");
+            this.Logger.Log(exception);
             console.log("Could not save");
         }
     }
