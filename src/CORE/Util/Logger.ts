@@ -5,7 +5,7 @@ export class Logger {
 
     constructor(LogPath: string) {
         this.logPath = LogPath;
-        this.Log("Started Application");
+        this.Log("---------Started Application---------");
     }
 
     public Log = (contents: string) => {
