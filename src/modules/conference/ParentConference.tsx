@@ -25,5 +25,4 @@ export class ParentConference extends React.Component<{}, {}> {
     // ---PTT as a toggle option per room or per user.
     // ---room owner can mute all excet them to call to attention
 
-
 }
