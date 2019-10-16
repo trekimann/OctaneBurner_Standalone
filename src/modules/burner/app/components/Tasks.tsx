@@ -48,7 +48,7 @@ export class Tasks extends React.Component<{ UserId: string }, {
             ipcRenderer.send("internal", arg);
             // update store with info so it can be looked up in the future
             ipcRenderer.send("tsUtil",
-                    { target: "details", data: { target: "update", property: "ActiveTask", value: task } });
+                { target: "details", data: { target: "update", property: "ActiveTask", value: task } });
 
         }
     }
@@ -70,7 +70,7 @@ export class Tasks extends React.Component<{ UserId: string }, {
     private allTasks = (event: any, value: any) => {
         // this should be all the details for the tasks in JSON form
         if (!this.state.TaskRequested) {
-            ipcRenderer.send("balloon", { title: "Tasks", contents: "Fetching Tasks" });
+            this.balloon("Tasks", "Fetching Tasks");
             ApiUtil.getAllTasks(null, value);
             this.setState({ TaskRequested: true, UserId: value });
         } else {
@@ -81,6 +81,8 @@ export class Tasks extends React.Component<{ UserId: string }, {
                 for (const taskId of value) {
                     ApiUtil.getTaskDetails(null, taskId);
                 }
+            } else {
+                this.balloon("Error", "No Tasks in your name found");
             }
         }
     }
@@ -115,7 +117,15 @@ export class Tasks extends React.Component<{ UserId: string }, {
             if (!this.state.TasksLoaded) {
                 this.setState({ TasksLoaded: true });
             }
-            ipcRenderer.send("balloon", { title: "Tasks", contents: "Getting " + value.id + " Task Details" });
+            this.balloon("Tasks", "Getting " + value.id + " Task Details");
         }
+    }
+
+    private balloon = (t: string, c: string) => {
+        ipcRenderer.send("balloon",
+            {
+                contents: c,
+                title: t,
+            });
     }
 }

@@ -52,6 +52,7 @@ export class Tasks {
             }
         }
         if (this.allTasks.size >= this.NumberOfTasks) {
+            this.Logger.Log(this.userTaskList.length + " User Tasks found");
             return this.userTaskList;
         }
     }
