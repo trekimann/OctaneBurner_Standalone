@@ -1,6 +1,6 @@
 import { ipcRenderer } from "electron";
 import * as React from "React";
-import { ApiUtil } from "../../BackEnd/ApiUtil";
+import { ApiUtil } from "../../Util/ApiUtil";
 import { Spinner } from "./spinner";
 import { Story } from "./Story";
 

@@ -1,7 +1,7 @@
 import { clipboard, ipcRenderer, shell } from "electron";
 import * as React from "React";
 import { Button } from "../../../../CORE/app/Components/Button";
-import { ApiUtil } from "../../BackEnd/ApiUtil";
+import { ApiUtil } from "../../Util/ApiUtil";
 import { Attachments } from "./Attachments";
 import { Comments } from "./Comments";
 import { Task } from "./Task";

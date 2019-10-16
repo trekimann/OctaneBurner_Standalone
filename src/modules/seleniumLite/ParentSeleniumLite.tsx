@@ -1,6 +1,6 @@
 import * as React from "React";
 
-export class ParentSeleniumLite extends React.Component<{},{}> {
+export class ParentSeleniumLite extends React.Component<{}, {}> {
 
     // To start, this module will just act as a front end to the existing API driven seleniumLite back.
     // This is to allow a quick intergration. This will however still leave the issue with needing to open ports.

@@ -6,7 +6,7 @@ const iconpath = path.join(__dirname + "/assets", "octaneIcon.png");
 import { app, BrowserWindow, ipcMain, Menu, nativeImage, Tray } from "electron";
 import { Logger } from "./CORE/Util/Logger";
 import { WindowControl } from "./CORE/Util/WindowManager";
-import { UtilRouter } from "./modules/burner/BackEnd/UtilRouter";
+import { UtilRouter } from "./modules/burner/Util/UtilRouter";
 
 let util: UtilRouter;
 const control = new WindowControl();
