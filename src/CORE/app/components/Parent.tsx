@@ -1,10 +1,9 @@
-import * as React from "react";
+import * as React from "React";
 import { ParentBurner } from "../../../modules/burner/ParentBurner";
 // import { ParentConference } from "../../../modules/conference/ParentConference";
 import { ParentRmDash } from "../../../modules/rmDash/ParentRmDash";
 import { ParentVideoCapture } from "../../../modules/videoRecording/ParentVideoCapture";
 import { Button } from "./Button";
-const fs = require("fs");
 
 const buttonStyle = {
     marginLeft: "1%",
@@ -12,13 +11,59 @@ const buttonStyle = {
     width: "32.5%",
 };
 
-export class AppParent extends React.Component<{}, { ShowBurner: boolean, ShowVideo: boolean, ShowRm: boolean }> {
-    // make buttons span the whole top to a min size. each button shows/hides its coresponding module.
-    // DOES NOT make them not exist.
+// const modules = new Map();
+
+// modules.set(
+//     "burner", {
+//     parent: <ParentBurner />,
+//     visible: true,
+// });
+// modules.set(
+//     "rmDash", {
+//     parent: <ParentRmDash />,
+//     visible: false,
+// });
+// modules.set(
+//     "videoCapture", {
+//     parent: <ParentVideoCapture />,
+//     visible: false,
+// });
+// const mods : Array<moduleObject> = [<ParentBurner />,"Octane Burner" ), <ParentRmDash />, <ParentVideoCapture />];
+// [{ button: JSX.Element; parent: JSX.Element; show: boolean; text: string; }]
+const mods = [
+    {
+        button: null,
+        parent: <ParentBurner />,
+        show: true,
+        text: "Octane Burner",
+    },
+    {
+        button: null,
+        parent: <ParentVideoCapture />,
+        show: true,
+        text: "Video Capture",
+    },
+    {
+        button: null,
+        parent: <ParentRmDash />,
+        show: true,
+        text: "RM Dashboard",
+    },
+];
+
+export class AppParent extends React.Component<{}, {
+    Buttons: [],
+    ShowBurner: boolean,
+    ShowVideo: boolean,
+    ShowRm: boolean,
+    Modules: [],
+}> {
 
     constructor(props: any) {
         super(props);
         this.state = {
+            Buttons: [],
+            Modules: [],
             ShowBurner: true,
             ShowRm: false,
             ShowVideo: false,
@@ -30,12 +75,45 @@ export class AppParent extends React.Component<{}, { ShowBurner: boolean, ShowVi
     // create a map entry for each which has a button to show them.
     // loop though the map to make menu/button and div for each.
     // store modules in a map in the state?
+
     public componentDidMount() {
-        const folders = this.getModules();
+        // loop though modules map
+        if (!(this.state.Buttons.length > 0)) {
+            // to stop from constant rendering, store in temp array then set the state
+            const tempModules = [];
+            const tempButtons = [];
+            for (const module of mods) {
+                // create a react fragment with the buttons and their parent.
+                // put it in the array to be drawn
+                const mod = this.createModuleFragment(module.text, module.parent);
+                const but = this.createButtonFragment(module.text, mod);
+                tempModules.push(mod);
+                tempButtons.push(but);
+            }
+            // set state here to re-render
+        }
     }
 
-    private getModules = () => {
-        return fs.readdirSync("../../../modules");
+    public createModuleFragment = (name: string, parent: JSX.Element) => {
+        return <div id={name + "Module"}>
+            {parent}
+        </div>;
+    }
+
+    // make buttons span the whole top to a min size. each button shows/hides its coresponding module.
+    // DOES NOT make them not exist.
+    public createButtonFragment = (text: string, linkedModule: JSX.Element) => {
+        const w = ((100 / mods.length) - 0.5).toString();
+        const bs = {
+            marginLeft: "1%",
+            marginRight: "1%",
+            width: w + "%",
+        };
+        return <Button
+            Text={text}
+            onClick={() => { console.log("Button Clicked"); }}
+            Style={bs}
+        />;
     }
 
     // tslint:disable-next-line: member-ordering

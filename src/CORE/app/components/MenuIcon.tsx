@@ -1,5 +1,5 @@
 import { ipcRenderer } from "electron";
-import * as React from "react";
+import * as React from "React";
 
 const liStyle = {
     float: "right",

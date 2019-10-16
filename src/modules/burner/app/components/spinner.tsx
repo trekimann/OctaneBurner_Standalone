@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from "React";
 import styled, { keyframes } from "styled-components";
 import octIcon from "./../assets/octaneIcon.png";
 import { ipcRenderer } from "electron";

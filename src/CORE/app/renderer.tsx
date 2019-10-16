@@ -1,8 +1,8 @@
-import * as React from "react";
+import * as React from "React";
 import * as ReactDOM from "react-dom";
 // import { ParentBurner } from "../../modules/burner/app/components/ParentBurner";
-import { MenuBar } from "./components/MenuBar";
-import {AppParent} from "./components/Parent";
+import { MenuBar } from "./Components/MenuBar";
+import {AppParent} from "./Components/Parent";
 // import {VideoCapture} from "./components/VideoCapture";
 
 ReactDOM.render(<MenuBar />, document.getElementById("menuBar"));

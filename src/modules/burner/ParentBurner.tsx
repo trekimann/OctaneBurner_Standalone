@@ -1,5 +1,5 @@
 // import { remote, ipcRenderer } from "electron";
-import * as React from "react";
+import * as React from "React";
 import { OctaneLogin } from "./app/components/OctaneLoading";
 import { Spinner } from "./app/components/spinner";
 import { Tasks } from "./app/components/Tasks";

@@ -1,5 +1,5 @@
 import * as fs from "fs";
-import * as React from "react";
+import * as React from "React";
 
 const image = ["JPG", "PNG", "GIF"];
 const video = ["MP4", "WEBM"];

@@ -3,7 +3,7 @@
 // const createMentionPlugin = require("draft-js-mention-plugin");
 // const defaultSuggestionsFilter = require ("draft-js-mention-plugin")
 // import Editor from "draft-js-plugins-editor";
-import * as React from "react";
+import * as React from "React";
 // import "../../css/Draft.css";
 // import "../../css/mentionsStyles.css";
 

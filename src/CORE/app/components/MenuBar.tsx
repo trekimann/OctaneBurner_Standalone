@@ -1,5 +1,5 @@
 import { ipcRenderer, remote } from "electron";
-import * as React from "react";
+import * as React from "React";
 import octIcon from "../../../modules/burner/app/assets/octaneIcon.png";
 // import vidIcon from "../../../modules/videoRecording/app/assets/Video.png";
 // import vidIconRec from "../../../modules/videoRecording/app/assets/Video_recording.png";
