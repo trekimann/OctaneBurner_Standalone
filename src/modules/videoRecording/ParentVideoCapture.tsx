@@ -160,6 +160,7 @@ export class ParentVideoCapture extends React.Component<{},
             types: ["screen", "window"],
         }, (error: Error, srcs: DesktopCapturerSource[]) => {
             if (error) {
+                console.log(error);
                 throw error;
             }
             const videoElement: HTMLVideoElement | null = document.getElementById("videoElement");

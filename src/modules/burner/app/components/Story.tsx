@@ -80,12 +80,15 @@ export class Story extends React.Component<
             // should actually check if there are changes so that the specific things can be called out
             const name = story.name;
             const id = story.id;
-            let description = story.description.replace("<html>", "");
-            description = description.replace("</html>", "");
-            description = description.replace("<body>", "");
-            description = description.replace("</body>", "");
-            description = description.replace(/<p>&nbsp;/g, "");
-            description = description.replace(/style=/g, "");
+            let description = story.description;
+            if (description !== null) {
+                description.replace("<html>", "");
+                description = description.replace("</html>", "");
+                description = description.replace("<body>", "");
+                description = description.replace("</body>", "");
+                description = description.replace(/<p>&nbsp;/g, "");
+                description = description.replace(/style=/g, "");
+            }
 
             if (this.state.LastUpdated !== null && this.state.LastUpdated < updated) {
                 const current = this.state.StoryDetails;
