@@ -119,7 +119,7 @@ export class AppParent extends React.Component<{}, {
     // tslint:disable-next-line: member-ordering
     public render() {
         return <React.Fragment>
-            <div style={{ display: "flex", justifyContent: "center" }}>
+            <div style={{ display: "flex", justifyContent: "center", position: "fixed", top: "25px", width: "100%", backgroundColor: "rgb(70,70,70)" }}>
                 <Button
                     Text="Octane Burner"
                     Style={buttonStyle}
@@ -136,21 +136,23 @@ export class AppParent extends React.Component<{}, {
                     onClick={this.ShowRm}
                 />
             </div>
-            <div style={this.state.ShowBurner ? null : { display: "none" }}>
-                <ParentBurner />
-            </div>
-            <div style={this.state.ShowVideo ? null : { display: "none" }}>
-                <ParentVideoCapture />
-            </div>
-            <div style={this.state.ShowRm ? null : { display: "none" }}>
-                <ParentRmDash />
+            <div style={{ overflow:"auto", height: "100%" }}>
+                <div style={this.state.ShowBurner ? null : { display: "none" }}>
+                    <ParentBurner />
+                </div>
+                <div style={this.state.ShowVideo ? null : { display: "none" }}>
+                    <ParentVideoCapture />
+                </div>
+                <div style={this.state.ShowRm ? null : { display: "none" }}>
+                    <ParentRmDash />
+                </div>
             </div>
         </React.Fragment>;
     }
 
     private ShowRm = () => {
         this.hideAll();
-        this.setState({ ShowRm: !this.state.ShowRm })
+        this.setState({ ShowRm: !this.state.ShowRm });
     }
 
     private showBurner = () => {
