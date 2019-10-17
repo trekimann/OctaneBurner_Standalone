@@ -54,7 +54,6 @@ const createMainWindow = () => {
   //   property: "VERBOSELOGGING", target: "retrieve", value: "none",
   // });
   // logger.setLogger()
-
 };
 
 const quit = () => {
@@ -99,7 +98,6 @@ const createTray = () => {
   appIcon.setToolTip("Octane Burner");
   appIcon.on("double-click", () => { control.getWindow(mainWindowId).show(); });
   appIcon.on("balloon-click", () => { control.getWindow(mainWindowId).show(); });
-  appIcon.setHighlightMode("always");
 };
 
 function balloon(displayTitle: string, contents: string) {

@@ -11,7 +11,7 @@ import { MenuIcon } from "./MenuIcon";
 
 const menuStyle = {
   "-webkit-app-region": "drag",
-  "backgroundColor": "rgb(65, 64, 64)",
+  "backgroundColor": "rgb(64, 64, 64)",
   "color": "white",
   "fontSize": "20px",
   "left": 0,

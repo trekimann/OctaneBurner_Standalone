@@ -11,6 +11,14 @@ const buttonStyle = {
     width: "32.5%",
 };
 
+const containerStyle = {
+    backgroundColor: "rgb(64,64,64)",
+    display: "flex",
+    justifyContent: "center",
+    position: "fixed",
+    top: "25px",
+    width: "100%",
+};
 // const modules = new Map();
 
 // modules.set(
@@ -119,7 +127,7 @@ export class AppParent extends React.Component<{}, {
     // tslint:disable-next-line: member-ordering
     public render() {
         return <React.Fragment>
-            <div style={{ display: "flex", justifyContent: "center", position: "fixed", top: "25px", width: "100%", backgroundColor: "rgb(70,70,70)" }}>
+            <div style={containerStyle}>
                 <Button
                     Text="Octane Burner"
                     Style={buttonStyle}
@@ -136,7 +144,7 @@ export class AppParent extends React.Component<{}, {
                     onClick={this.ShowRm}
                 />
             </div>
-            <div style={{ overflow:"auto", height: "100%" }}>
+            <div style={{ overflow: "auto", height: "100%" }}>
                 <div style={this.state.ShowBurner ? null : { display: "none" }}>
                     <ParentBurner />
                 </div>
