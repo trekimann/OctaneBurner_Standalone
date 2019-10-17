@@ -18,7 +18,7 @@ const createMainWindow = () => {
     frame: false,
     height: 600,
     icon: iconpath,
-    minWidth: 340,
+    minWidth: 350,
     webPreferences: {
       nodeIntegration: true,
       // plugins: true,
