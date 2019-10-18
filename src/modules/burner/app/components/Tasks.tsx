@@ -1,7 +1,7 @@
 import { ipcRenderer } from "electron";
 import * as React from "React";
 import { ApiUtil } from "../../Util/ApiUtil";
-import { Spinner } from "./spinner";
+import { Spinner } from "./Spinner";
 import { Story } from "./Story";
 
 export class Tasks extends React.Component<{ UserId: string }, {
@@ -91,11 +91,11 @@ export class Tasks extends React.Component<{ UserId: string }, {
         // the value is an object containing the details of the task.
         // Use this to make a new task component and add it to the array.
         // TODO: look at a timer to update tasks automaticaly
-        if (!(this.state.UserTasksDetails.filter((t) => t.id === value.id).length > 0)) {
-            this.setState((state) => {
+        if (!(this.state.UserTasksDetails.filter((t: any) => t.id === value.id).length > 0)) {
+            this.setState((state: any) => {
                 // cant mutate state so need to replace it
                 const UserTasksDetails = state.UserTasksDetails.concat(value);
-                UserTasksDetails.sort((a, b) => {
+                UserTasksDetails.sort((a: any, b: any) => {
                     return Number(a.id) < Number(b.id);
                 });
                 return { UserTasksDetails };

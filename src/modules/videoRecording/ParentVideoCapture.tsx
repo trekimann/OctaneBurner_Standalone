@@ -1,4 +1,5 @@
 import { desktopCapturer, DesktopCapturerSource, ipcRenderer } from "electron";
+const { app, dialog } = require("electron").remote;
 const fs = require("fs");
 import * as React from "React";
 import { Button } from "../../CORE/app/Components/Button";
@@ -64,36 +65,45 @@ export class ParentVideoCapture extends React.Component<{},
                 <Button Text="Playback Recording" onClick={this.playBackRecording} />
             </div>
             <div style={this.state.SuperBlob !== null ? null : { display: "none" }}>
-                To save the recording, watch back the video then use the option on the player.
-                The file needs to be saved as either *.webm or *.mp4 to save correctly.
-                This is being worked on currently to allow for instant saving and more file types.
-                {/* <Button Text="Save Recording" onClick={() => { this.bigSave(); }} /> */}
+                {/* To save the recording, watch back the video then use the option on the player. */}
+                {/* The file needs to be saved as either *.webm or *.mp4 to save correctly. */}
+                This is being worked on currently to allow for more file types.
+                <Button Text="Save Recording" onClick={() => { this.saveLocation(); }} />
             </div>
         </React.Fragment>;
     }
 
     // --------------------------------------------------------------------------------
 
-    private bigSave = () => {
+    private saveLocation = () => {
+        const localPath = app.getPath("desktop");
+        const filter = [{ name: "webm video", extensions: ["webm"] }]
+        const savePath = dialog.showSaveDialogSync({ defaultPath: localPath, filters: filter });
+        if (savePath) {
+            this.bigSave(savePath);
+        }
+    }
+
+    private bigSave = (file: string) => {
         const blob = new Blob(recordedChunks, { type: video });
         const fileReader = new FileReader();
-        fileReader.onload = function() {
+        fileReader.onload = function () {
             const ab = this.result;
             const buffer = new Buffer(ab.byteLength);
             const arr = new Uint8Array(ab);
             for (let i = 0; i < arr.byteLength; i++) {
                 buffer[i] = arr[i];
             }
-            const file = `./videos/example.webm`;
+            // const file = `./videos/example.webm`;
             fs.writeFile(file, buffer, (err) => {
                 if (err) {
                     console.error("Failed to save video " + err);
                     ipcRenderer.send("balloon", { title: "Video", contents: "Failed to save video" });
-                    ipcRenderer.send("logging", { Log: "Failed to save video: " + err});
+                    ipcRenderer.send("logging", { Log: "Failed to save video: " + err });
                 } else {
                     console.log("Saved video: " + file);
                     ipcRenderer.send("balloon", { title: "Video", contents: "Saved video: " + file });
-                    ipcRenderer.send("logging", { Log: "Saved video: " + file});
+                    ipcRenderer.send("logging", { Log: "Saved video: " + file });
                 }
             });
         };

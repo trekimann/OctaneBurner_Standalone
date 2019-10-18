@@ -1,7 +1,7 @@
 // import { remote, ipcRenderer } from "electron";
 import * as React from "React";
 import { OctaneLogin } from "./app/components/OctaneLoading";
-import { Spinner } from "./app/components/spinner";
+import { Spinner } from "./app/components/Spinner";
 import { Tasks } from "./app/components/Tasks";
 
 export class ParentBurner extends React.Component<{ },
