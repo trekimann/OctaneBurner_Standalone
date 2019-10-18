@@ -145,7 +145,7 @@ export class AppParent extends React.Component<{}, {
                 />
             </div>
             <div style={{ overflow: "auto", height: "100%" }}>
-                <div style={this.state.ShowBurner ? { height: "100%" } : { display: "none" }}>
+                <div style={this.state.ShowBurner ? null : { display: "none" }}>
                     <ParentBurner />
                 </div>
                 <div style={this.state.ShowVideo ? { height: "100%" } : { display: "none" }}>
