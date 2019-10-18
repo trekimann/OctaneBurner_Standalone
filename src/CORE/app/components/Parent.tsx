@@ -145,13 +145,13 @@ export class AppParent extends React.Component<{}, {
                 />
             </div>
             <div style={{ overflow: "auto", height: "100%" }}>
-                <div style={this.state.ShowBurner ? null : { display: "none" }}>
+                <div style={this.state.ShowBurner ? { height: "100%" } : { display: "none" }}>
                     <ParentBurner />
                 </div>
-                <div style={this.state.ShowVideo ? null : { display: "none" }}>
+                <div style={this.state.ShowVideo ? { height: "100%" } : { display: "none" }}>
                     <ParentVideoCapture />
                 </div>
-                <div style={this.state.ShowRm ? null : { display: "none" }}>
+                <div style={this.state.ShowRm ? { height: "100%" } : { display: "none" }}>
                     <ParentRmDash />
                 </div>
             </div>
@@ -160,7 +160,7 @@ export class AppParent extends React.Component<{}, {
 
     private ShowRm = () => {
         this.hideAll();
-        this.setState({ ShowRm: !this.state.ShowRm });
+        this.setState({ ShowRm: true });
     }
 
     private showBurner = () => {
