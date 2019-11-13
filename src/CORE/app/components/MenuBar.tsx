@@ -8,6 +8,7 @@ import maxIcon from "./../assets/maximise.png";
 import minIcon from "./../assets/minimise2.png";
 import printIcon from "./../assets/Print.png";
 import { MenuIcon } from "./MenuIcon";
+const { dialog } = require('electron').remote;
 
 const menuStyle = {
   "-webkit-app-region": "drag",
@@ -134,17 +135,28 @@ export class MenuBar extends React.Component<{}, { Heading?: string, MinOnce: bo
   }
 
   public closeWindow = () => {
+
+
     // check if a task is running
     // if there is, notify the user to stop manually
     if (this.state.Heading !== "Octane Burner") {
       // TODO: Make it stop task automatically
       this.balloon("Warning", "A task is being tracked. Stop tracking before quiting");
     } else {
-      // if no task then quit the app
-      remote.BrowserWindow.getFocusedWindow().close();
+      // if no task then ask to quit the app
+      const options = {
+        buttons: ["Yes", "No"],
+        message: "Do you really want to quit?"
+      };
+      const response = dialog.showMessageBoxSync(options);
+      switch (response) {
+        case 0: {
+          remote.BrowserWindow.getFocusedWindow().close();
+        }
+      }
     }
   }
-
+  
   public maxWindow() {
     const window = remote.BrowserWindow.getFocusedWindow();
     window.isMaximized() ? window.restore() : window.maximize();
@@ -170,9 +182,9 @@ export class MenuBar extends React.Component<{}, { Heading?: string, MinOnce: bo
     </header>;
   }
 
-private openDevTools = () => {
-  remote.BrowserWindow.getFocusedWindow().webContents.openDevTools();
-}
+  private openDevTools = () => {
+    remote.BrowserWindow.getFocusedWindow().webContents.openDevTools();
+  }
 
   private balloon = (Title: string, Contents: string) => {
     ipcRenderer.send("balloon", { title: Title, contents: Contents });
