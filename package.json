@@ -12,6 +12,10 @@
         "buildPack": "npm run build:react && npm run build && npm run package",
         "buildAll": "npm run build:react && npm run build"
     },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/trekimann/OctaneBurner_Standalone.git"
+    },
     "keywords": [],
     "author": "Nicholas Mann",
     "license": "MIT",
