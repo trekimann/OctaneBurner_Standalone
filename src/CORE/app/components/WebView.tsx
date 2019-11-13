@@ -8,7 +8,7 @@ const defaultStyle = {
     width: "100%",
 };
 
-export class IFrame extends React.Component<
+export class WebView extends React.Component<
     { Src: string, Style?: any },
     { Style: any }> {
 
@@ -26,8 +26,8 @@ export class IFrame extends React.Component<
     }
     public render() {
         return <React.Fragment>
-            <iframe src={this.props.Src} style={this.state.Style}>
-            </iframe>
+            <webview src={this.props.Src} style={this.state.Style}>
+            </webview>
         </React.Fragment>;
     }
 
