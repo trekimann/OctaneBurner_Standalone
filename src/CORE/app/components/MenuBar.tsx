@@ -68,6 +68,10 @@ export class MenuBar extends React.Component<{}, { Heading?: string, MinOnce: bo
       click: () => {
         this.openDevTools();
       },
+      rightClick: () => {
+        window.open("https://almoctane-eur.saas.microfocus.com/", "_blank");
+        //     remote.BrowserWindow.getFocusedWindow();
+      },
       src: octIcon,
     },
     // {
@@ -156,7 +160,7 @@ export class MenuBar extends React.Component<{}, { Heading?: string, MinOnce: bo
       }
     }
   }
-  
+
   public maxWindow() {
     const window = remote.BrowserWindow.getFocusedWindow();
     window.isMaximized() ? window.restore() : window.maximize();

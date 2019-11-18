@@ -75,7 +75,7 @@ export class ParentVideoCapture extends React.Component<{},
 
     private saveLocation = () => {
         const localPath = app.getPath("desktop");
-        const filter = [{ name: "webm video", extensions: ["webm"] }]
+        const filter = [{ name: "webm video", extensions: ["webm"] }];
         const savePath = dialog.showSaveDialogSync({ defaultPath: localPath, filters: filter });
         if (savePath) {
             this.bigSave(savePath);
