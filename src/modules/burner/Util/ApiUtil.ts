@@ -29,7 +29,7 @@ export class ApiUtil {
 
     public static getUserId(response: any, listener: string) {
         ApiUtil.Log("getUserId");
-        const url = urlStart + "1002/workspace_users";
+        const url = urlStart + "1002/workspace_users?fields=email,first_name,id,last_name";
         if (response === undefined || response === null) {
             ApiUtil.Get(url, ApiUtil.getUserId, listener);
         } else {
