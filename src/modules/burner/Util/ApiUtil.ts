@@ -106,7 +106,7 @@ export class ApiUtil {
 
     public static getTaskDetails(response: any, taskId: string) {
         ApiUtil.Log("getTaskDetails");
-        const url = urlStart + "1002/tasks/" + taskId;
+        const url = urlStart + "1002/tasks/" + taskId + "?fields=author,description,estimated_hours,invested_hours,last_modified,name,phase,remaining_hours,story";
         if (response === null || response === undefined) {
             ApiUtil.Get(url, this.getTaskDetails, taskId);
         } else {
@@ -122,8 +122,46 @@ export class ApiUtil {
     }
 
     public static getStoryDetails(response: any, storyId: string, listener: any) {
+
+        const storyFields = [ // done like this as Octane change their API often so this is easy to edit
+            "actual_story_points",
+            "attachments",
+            "author",
+            "blocked",
+            "blocked_reason",
+            "comments",
+            "creation_time",
+            "defect_phase_udf",
+            "defect_root_level",
+            "defect_type",
+            "defects",
+            "description",
+            "estimated_hours",
+            "has_attachments",
+            "has_children",
+            "has_comments",
+            "id",
+            "initial_estimate",
+            "invested_hours",
+            "last_modified",
+            "name",
+            "owner",
+            "phase",
+            "remaining_hours",
+            "story_points",
+            "subtype",
+            "team"];
+
+        let fields = "";
+        storyFields.forEach((field) => {
+            fields += field;
+            if (storyFields.indexOf(field) !== storyFields.length - 1) {
+                fields += ",";
+            }
+        });
+
         ApiUtil.Log("getStoryDetails");
-        const url = urlStart + "1002/work_items/" + storyId;
+        const url = urlStart + "1002/work_items/" + storyId + "?fields=" + fields;
         if (response === null || response === undefined) {
             ApiUtil.Get(url, this.getStoryDetails, storyId, listener);
         } else {
@@ -139,7 +177,7 @@ export class ApiUtil {
     }
 
     public static getStoryAttachments(response: any, storyId: string, listener: string) {
-        ApiUtil.Log("getStoryAttachmetns");
+        ApiUtil.Log("getStoryAttachments");
         const url = urlStart + "1002/work_items/" + storyId + "?fields=attachments";
         if (response === null || response === undefined) {
             ApiUtil.Get(url, this.getStoryAttachments, storyId, listener);
@@ -152,7 +190,7 @@ export class ApiUtil {
 
     public static getAttachmentDetails(response: any, attachmentId: string, listener: string) {
         ApiUtil.Log("getAttachmentDetails");
-        const url = urlStart + "1002/attachments/" + attachmentId;
+        const url = urlStart + "1002/attachments/" + attachmentId + "?fields=author,creation_time,description,id,last_modified,name,size";
         if (response === null || response === undefined) {
             ApiUtil.Get(url, this.getAttachmentDetails, attachmentId, listener);
         } else {
@@ -179,7 +217,7 @@ export class ApiUtil {
 
     public static getSingleComment(response: any, commentId: string, listener: string) {
         ApiUtil.Log("getSingleComment");
-        const url = urlStart + "1002/comments/" + commentId;
+        const url = urlStart + "1002/comments/" + commentId + "?fields=author,id,last_modified,owner_planning_info,owner_requirement,owner_run,owner_task,owner_test,owner_work_item,text";
         if (response === null || response === undefined) {
             ApiUtil.Get(url, this.getSingleComment, commentId, listener);
         } else {
