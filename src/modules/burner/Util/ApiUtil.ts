@@ -217,7 +217,7 @@ export class ApiUtil {
 
     public static getSingleComment(response: any, commentId: string, listener: string) {
         ApiUtil.Log("getSingleComment");
-        const url = urlStart + "1002/comments/" + commentId + "?fields=author,id,last_modified,owner_planning_info,owner_requirement,owner_run,owner_task,owner_test,owner_work_item,text";
+        const url = urlStart + "1002/comments/" + commentId + "?fields=author,creation_time,id,last_modified,owner_planning_info,owner_requirement,owner_run,owner_task,owner_test,owner_work_item,text";
         if (response === null || response === undefined) {
             ApiUtil.Get(url, this.getSingleComment, commentId, listener);
         } else {
